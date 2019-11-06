@@ -1,0 +1,69 @@
+curl -XDELETE 'search-demo2-sfnxh6bo6x2neciryq2uanasni.us-east-1.es.amazonaws.com/oreso?pretty'
+curl -XPUT 'search-demo2-sfnxh6bo6x2neciryq2uanasni.us-east-1.es.amazonaws.com/oreso?pretty' -H 'Content-Type: application/json' -d'{
+  "mappings": {
+    "help": {
+      "properties": {
+        "name": {
+          "type": "keyword"
+        },
+        "code": {
+          "type": "keyword"
+        }
+      }
+    }
+  },
+  "settings": {
+    "analysis": {
+      "filter": {
+        "ngram_filter": {
+          "type": "ngram",
+          "min_gram": 2,
+          "max_gram": 20
+        }
+      },
+      "analyzer": {
+        "default": {
+          "tokenizer": "keyword",
+          "filter": [
+            "lowercase",
+            "asciifolding"
+          ]
+        },
+        "ngram_analyzer": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": [
+            "lowercase",
+            "ngram_filter"
+          ]
+        }
+      }
+    }
+  }
+}'
+
+
+curl -XPOST search-demo2-sfnxh6bo6x2neciryq2uanasni.us-east-1.es.amazonaws.com/his2/help/_bulk --data-binary "@his.es"
+
+curl -XGET 'search-demo2-sfnxh6bo6x2neciryq2uanasni.us-east-1.es.amazonaws.com/his2/help/_count?pretty'
+curl -XGET 'search-demo2-sfnxh6bo6x2neciryq2uanasni.us-east-1.es.amazonaws.com/his2/help/_search?pretty&default_operator=AND&q=*+partOf:"clinicaSueno"'
+curl -XGET 'search-demo2-sfnxh6bo6x2neciryq2uanasni.us-east-1.es.amazonaws.com/his2/help/_search?pretty&default_operator=AND&q=*+partOf:"maxilofacial"'
+curl -XGET 'demo5.enlanube.io:3000/es/his2/help/_count?pretty'
+
+curl -XGET 'search-demo2-sfnxh6bo6x2neciryq2uanasni.us-east-1.es.amazonaws.com/his2/help/_search?pretty&default_operator=AND&sort=order&q=*+name:tipo-movimiento'
+
+curl -X GET "localhost:9200/_search" -H 'Content-Type: application/json' -d'
+{
+    "query": {
+        "ids" : {
+            "type" : "_doc",
+            "values" : ["1", "4", "100"]
+        }
+    }
+}
+'
+
+-- borrar kpi o dpi
+curl -XDELETE 'https://search-eskhraei-pasmwz7av4lvhqrppuqiszhxdq.us-east-1.es.amazonaws.com/kpi?pretty'
+curl -XDELETE 'https://search-eskhraei-pasmwz7av4lvhqrppuqiszhxdq.us-east-1.es.amazonaws.com/dpi?pretty'
+

@@ -1,0 +1,425 @@
+{{#define type="doc" id="_user"}}
+	{{param defaultDisplay="_name"}}
+	{{param defaultView="lista"}}
+	{{param pageStart="1"}}
+	{{param pagesJustified="true"}}
+	{{param pagesTabsPosition="left"}}
+	{{param pagesTabsWidth="20%"}}
+	{{param pagesTabsMinPadding="false"}}
+	{{param allowAdd="true"}}
+	{{param allowEdit="true"}}
+	{{param allowDirectOperations="true"}}
+	{{param attachSection="adjuntos"}}
+	{{param attachLanguage="es"}}
+	{{param confirmUnSaved="true"}}
+	{{param showChangeHistory="true"}}
+	{{param pdfPageSize="letter"}}
+	{{param startOnOpen="base"}}
+	{{param baseName="Datos Generales"}}
+	{{param displayExpr="base.nombre"}}
+	{{param name="Usuario"}}
+	{{param group="Registro"}}
+	{{param fullWidth="true"}}
+	{{param modalSize="xwide"}}
+	{{param autoOpenEditors="true"}}
+	{{param autoAffect="node-direct"}}
+	{{param bannerTopTemplate="banner1"}}
+	{{action id="subdoc" condition="=false"}}
+	{{action id="subdoc2" condition="=false"}}
+	{{action id="subdoc3" condition="=false"}}
+	{{action id="subdoc4" condition="=false"}}
+	{{action id="tool" condition="=false"}}
+	{{action id="tool2" condition="=false"}}
+	{{action id="tool3" condition="=false"}}
+	{{action id="ver" condition="=false" visibleMode="close"}}
+	{{action id="ver2" condition="=false" visibleMode="close"}}
+	{{action id="copiar" type="copy" label="Copiar" condition="=false"}}
+	{{action id="copiar2" type="copy" label="Copiar" condition="=false"}}
+	{{action id="preliminar" type="report-pdf" label="PDF" report="preliminar" fileName="=_name" visibleMode="close" color="grey"}}
+	{{action id="cancelar" type="cancel-edit" color="grey"}}
+	{{action id="sugerir1" condition="=false" visibleMode="close"}}
+	{{action id="adjuntar" type="attach" label="Adjuntar..." color="grey"}}
+	{{action id="excel" type="openFile" label="Cargar Excel..." color="green" condition="=false"}}
+	{{action id="importarDatos" type="pasteText" label="Importar Datos..." color="green" condition="=false"}}
+	{{action id="eliminar" type="remove" label="Eliminar"}}
+	{{action id="abrir" type="open" label="Editar" condition="=!@_isAffected"}}
+	{{action id="afectar" label="Procesar" type="affect-direct" workflow="afectar"}}
+	{{section id="_options" temp="true"}}
+	{{section id="_params" temp="true"}}
+	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
+		{{#field id="nombre" label="Nombre" type="text" column="A" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="metodoAcceso" label="Metodo Acceso" type="text" recordHide="true" column="A" references="metodoAcceso" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.metodoAcceso" width="100%"}}
+			{{/editor}}
+			{{#onChange refresh="true"}}
+			{{/onChange}}
+		{{/field}}
+		{{#field id="correo" label="Correo Electrónico" type="text" column="A" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+			{{validator type="unique"}}
+		{{/field}}
+		{{#field id="contrasena" label="Contraseña" type="text" recordHide="true" if="esLocal" column="A" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor mode="password" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="nivelAcceso" label="Nivel Acceso" type="text" recordHide="true" column="A" references="userLevel" modalColumn="A" labelModalClass="full-width" defaultValue="'normal'"}}
+			{{#editor type="select" preset="cfg.userLevel" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="rolesAcceso" label="Roles Acceso" type="array" recordHide="true" column="A" references="userRole" modalColumn="B" labelModalClass="full-width"}}
+			{{#editor type="tags" preset="cfg.userRole" searchEnabled="false" searchTimeout="100" showSelectionControls="true" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="subordinados" label="Subordinados" type="array" column="A" references="_user" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor type="tags" source="_user" view="lista" saveSelectedItem="true" searchEnabled="true" width="100%" searchTimeout="100" showSelectionControls="false"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="estatus" label="Estatus" type="text" column="A" references="estatusUsuario" modalColumn="A" labelModalClass="full-width" defaultValue="'activo'"}}
+			{{#editor type="select" preset="cfg.estatusUsuario" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="servicio" label="Servicio" type="array" column="A" modalColumn="A" detach="Ubicación" fieldSetHeader="Ubicación" labelModalClass="full-width"}}
+			{{#editor type="tags" fieldEditEnabled="true" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="sucursal" label="Sucursal" type="text" column="A" references="sucursal" modalColumn="A" detach="Ubicación" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.sucursal" width="100%"}}
+			{{/editor}}
+		{{/field}}
+	{{/section}}
+	{{#section id="prestadorServicios" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
+		{{#field id="clave" label="CURP" type="text" column="A" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor case="upper" width="100%"}}
+			{{/editor}}
+			{{validator type="unique"}}
+			{{validator type="curp"}}
+		{{/field}}
+		{{#field id="genero" label="Género" type="text" column="A" references="genero" modalColumn="A" sameLine="end" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.genero" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="fechaNacimiento" label="Fecha Nacimiento" type="date" format="DD/MMM/YYYY" column="A" modalColumn="A" sameLine="start" labelModalClass="full-width" saveFormat="YYYY-MM-DD"}}
+			{{#editor type="date" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="nacionalidad" label="Nacionalidad" type="text" column="A" references="nacionalidad" modalColumn="A" sameLine="end" labelModalClass="full-width" defaultValue="'108'"}}
+			{{#editor type="lookup" source="ver" view="codeSystem" unlink="true" forceCache="true" searchEnabled="true" width="100%"}}
+				{{param name="'nacionalidad'"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="whatsApp" label="WhatsApp" type="doc" column="A" references="whatsApp" modalColumn="A" sameLine="start" labelModalClass="full-width" source="whatsApp"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="formaContacto" label="Forma Contacto" type="doc" column="A" references="formaContacto" modalColumn="A" sameLine="end" labelModalClass="full-width" source="formaContacto"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="foto" label="Fotografía" type="doc" column="B" references="foto" modalColumn="B" labelModalClass="full-width" source="foto"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="direccion" label="Direcciones" type="docs" column="A" references="direccion" modalColumn="B" labelModalClass="full-width" source="direccion"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="identificacion" label="Identificaciones" type="docs" column="A" references="identificacion" modalColumn="B" labelModalClass="full-width" source="identificacion"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="idioma" label="Idiomas" type="array" column="A" references="idioma" modalColumn="B" labelModalClass="full-width"}}
+			{{#editor type="tags" preset="cfg.idioma" searchEnabled="false" searchTimeout="100" showSelectionControls="false" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="estudios" label="Estudios Académicos" type="docs" column="A" references="prestadorServiciosEstudios" modalColumn="B" labelModalClass="full-width" source="prestadorServiciosEstudios"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="horaInicioDia" label="Hora Inicio Día" type="date" format="hh:mm a" column="A" modalColumn="A" sameLine="start" detach="Agenda" fieldSetHeader="Visualización Agenda" labelModalClass="full-width" saveFormat="YYYY-MM-DDTHH:mm"}}
+			{{#editor type="time" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="horaFinDia" label="Hora Fin Día" type="date" format="hh:mm a" column="A" modalColumn="A" sameLine="end" detach="Agenda" labelModalClass="full-width" saveFormat="YYYY-MM-DDTHH:mm"}}
+			{{#editor type="time" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="agendaPlan" label="Planeación Anual" type="docs" hide="true" column="A" references="agendaPlan" modalColumn="A" detach="Agenda" fieldSetHeader="Planeación" labelModalClass="full-width" source="agendaPlan"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="especialidad" label="Especialidades" type="array" column="A" references="especialidad" modalColumn="A" detach="Especialidades" fieldSetHeader="Especialidades" labelModalClass="full-width"}}
+			{{#editor type="tags" source="ver" view="codeSystem" unlink="true" forceCache="true" searchEnabled="true" width="100%" searchTimeout="100" showSelectionControls="false" saveSelectedItem="true"}}
+				{{param name="'especialidad'"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="permisos" label="Permisos" type="doc" recordHide="true" column="A" references="permisosPrestadorServicios" modalColumn="B" labelModalClass="full-width" source="permisosPrestadorServicios"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="responsable" label="Responsable" type="reference" column="A" references="_user" modalColumn="B" labelModalClass="full-width"}}
+			{{#editor type="lookup" source="_user" view="lista" searchEnabled="true" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="datosEspecialidad" label="Datos Especialidades" type="docs" column="A" references="datosEspecialidad" modalColumn="A" detach="Especialidades" labelModalClass="full-width" source="datosEspecialidad"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+	{{/section}}
+	{{#report id="preliminar-encabezado"}}
+		{{#stack}}
+			{{#columns margin="20" widths="210,150,*"}}
+				{{#column}}
+					{{row image="logo" alignment="left" imageWidth="90" margin="0,-15,0,0"}}
+				{{/column}}
+				{{#column margin="0,-10,0,0"}}
+					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Leibnitz 83-1" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Anzures 11590 CDMX" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
+				{{/column}}
+				{{#column}}
+					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
+					{{/row}}
+				{{/column}}
+			{{/columns}}
+		{{/stack}}
+	{{/report}}
+	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true"}}
+		{{#stack}}
+			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
+		{{/stack}}
+		{{#stack}}
+			{{#record title="Datos Usuario" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+				{{row field="nombre" align="left"}}
+				{{row field="correo" align="left"}}
+				{{row field="subordinados" align="left"}}
+				{{row field="estatus" align="left"}}
+			{{/record}}
+		{{/stack}}
+		{{#stack}}
+			{{#record title="Ubicación" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+				{{row field="servicio" align="left"}}
+				{{row field="sucursal" align="left"}}
+			{{/record}}
+		{{/stack}}
+		{{#stack}}
+			{{#record title="Datos Prestador Servicios" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="prestadorServicios" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+				{{row field="clave" align="left"}}
+				{{row field="genero" align="left"}}
+				{{row field="fechaNacimiento" align="left"}}
+				{{row field="nacionalidad" align="left"}}
+				{{row field="whatsApp" align="left"}}
+				{{row field="formaContacto" align="left"}}
+				{{row field="foto" align="left"}}
+				{{row field="direccion" align="left"}}
+				{{row field="identificacion" align="left"}}
+				{{row field="idioma" align="left"}}
+				{{row field="estudios" align="left"}}
+				{{row field="responsable" align="left"}}
+			{{/record}}
+		{{/stack}}
+		{{#stack}}
+			{{#record title="Agenda" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="prestadorServicios" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+				{{row field="horaInicioDia" align="left"}}
+				{{row field="horaFinDia" align="left"}}
+				{{row field="agendaPlan" align="left"}}
+			{{/record}}
+		{{/stack}}
+		{{#stack}}
+			{{#record title="Especialidades" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="prestadorServicios" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+				{{row field="especialidad" align="left"}}
+				{{row field="datosEspecialidad" align="left"}}
+			{{/record}}
+		{{/stack}}
+	{{/report}}
+	{{#view id="lista" name="Lista"}}
+		{{#find}}
+			{{include field="_name"}}
+			{{search field="_name"}}
+			{{sort field="_id" direction="desc"}}
+		{{/find}}
+		{{editor display="_name"}}
+	{{/view}}
+	{{#browser id="lista" view="lista" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%"}}
+		{{list itemTemplate="lista" allowSearch="true" allowRefresh="true" allowEdit="true" allowInsert="true"}}
+	{{/browser}}
+	{{#workflow id="afectar" start="afectar"}}
+		{{#step id="afectar"}}
+			{{#user}}
+				{{#validate condition="=!_name" error="Nombre Incorrecto"}}
+				{{/validate}}
+				{{#spAffect engine="node"}}
+					{{#update section="base"}}
+						{{set estatus="afectado"}}
+						{{set _estatus="Afectado"}}
+					{{/update}}
+				{{/spAffect}}
+			{{/user}}
+		{{/step}}
+	{{/workflow}}
+	{{#workflow id="cancelar" start="cancelar"}}
+		{{#step id="cancelar"}}
+			{{#user}}
+				{{#spAffect engine="node" action="cancel"}}
+					{{#update section="base"}}
+						{{set estatus="cancelado"}}
+						{{set _estatus="Cancelado"}}
+					{{/update}}
+				{{/spAffect}}
+			{{/user}}
+		{{/step}}
+	{{/workflow}}
+{{/define}}
+{{#markup}}
+	{{#page name="Usuario"}}
+		{{row}}
+		{{row}}
+		{{#row}}
+			{{#zone id="base" modal="base"}}
+				{{#row class="auto-form-row"}}
+					{{#col medium="100%" class="auto-form-col"}}
+						{{#h5 class="auto-form-h5"}}
+							Datos Usuario
+						{{/h5}}
+						{{#with base}}
+							{{record this widths="20%,80%" rows="nombre, correo, subordinados, estatus" class="auto-form-record"}}
+							{{br}}
+						{{/with}}
+					{{/col}}
+				{{/row}}
+				{{#row class="auto-form-row"}}
+					{{#col medium="100%" class="auto-form-col"}}
+						{{#h5 class="auto-form-h5"}}
+							Ubicación
+						{{/h5}}
+						{{#with base}}
+							{{record this widths="20%,80%" rows="servicio, sucursal" class="auto-form-record"}}
+							{{br}}
+						{{/with}}
+					{{/col}}
+				{{/row}}
+			{{/zone}}
+		{{/row}}
+		{{#row}}
+			{{#zone id="prestadorServicios" modal="prestadorServicios"}}
+				{{#row class="auto-form-row"}}
+					{{#col medium="100%" class="auto-form-col"}}
+						{{#h5 class="auto-form-h5"}}
+							Datos Prestador Servicios
+						{{/h5}}
+						{{#with prestadorServicios}}
+							{{#row}}
+								{{#col vertical="80%" medium="80%" class="auto-form-col-a"}}
+									{{record this widths="24%,76%" rows="clave, genero, fechaNacimiento, nacionalidad, whatsApp, formaContacto, direccion, identificacion, idioma, estudios, responsable" class="auto-form-record"}}
+								{{/col}}
+								{{#col vertical="20%" medium="20%" class="auto-form-col-b"}}
+									{{#img class="auto-form-img" src="{{foto.base.url}}"}}
+									{{/img}}
+								{{/col}}
+							{{/row}}
+							{{br}}
+						{{/with}}
+					{{/col}}
+				{{/row}}
+				{{#row class="auto-form-row"}}
+					{{#col medium="100%" class="auto-form-col"}}
+						{{#h5 class="auto-form-h5"}}
+							Agenda
+						{{/h5}}
+						{{#with prestadorServicios}}
+							{{record this widths="24%,76%" rows="horaInicioDia, horaFinDia" class="auto-form-record"}}
+							{{br}}
+						{{/with}}
+					{{/col}}
+				{{/row}}
+				{{#row class="auto-form-row"}}
+					{{#col medium="100%" class="auto-form-col"}}
+						{{#h5 class="auto-form-h5"}}
+							Especialidades
+						{{/h5}}
+						{{#with prestadorServicios}}
+							{{record this widths="24%,76%" rows="especialidad, datosEspecialidad" class="auto-form-record"}}
+							{{br}}
+						{{/with}}
+					{{/col}}
+				{{/row}}
+			{{/zone}}
+		{{/row}}
+	{{/page}}
+	{{#modal base id="base" name="Datos Usuario" size="xwide" next="prestadorServicios"}}
+		{{#col medium="50%" vertical="50%"}}
+			{{#fieldSet}}
+				{{field nombre}}
+				{{field metodoAcceso}}
+				{{field correo}}
+				{{field contrasena}}
+				{{field nivelAcceso}}
+				{{field subordinados}}
+				{{field estatus}}
+			{{/fieldSet}}
+			{{#fieldSet header="Ubicación"}}
+				{{field servicio header="Ubicación"}}
+				{{field sucursal}}
+			{{/fieldSet}}
+		{{/col}}
+		{{#col medium="50%" vertical="50%"}}
+			{{#fieldSet}}
+				{{field rolesAcceso}}
+			{{/fieldSet}}
+		{{/col}}
+	{{/modal}}
+	{{#modal prestadorServicios id="prestadorServicios" name="Datos Prestador Servicios" size="xwide" prev="base"}}
+		{{#col medium="50%" vertical="50%"}}
+			{{#fieldSet}}
+				{{field clave}}
+				{{field genero}}
+				{{field fechaNacimiento}}
+				{{field nacionalidad}}
+				{{field whatsApp}}
+				{{field formaContacto}}
+			{{/fieldSet}}
+			{{#fieldSet header="Visualización Agenda"}}
+				{{field horaInicioDia header="Visualización Agenda"}}
+				{{field horaFinDia}}
+			{{/fieldSet}}
+			{{#fieldSet header="Especialidades"}}
+				{{field especialidad header="Especialidades"}}
+				{{field datosEspecialidad}}
+			{{/fieldSet}}
+		{{/col}}
+		{{#col medium="50%" vertical="50%"}}
+			{{#fieldSet}}
+				{{field foto}}
+				{{field direccion}}
+				{{field identificacion}}
+				{{field idioma}}
+				{{field estudios}}
+				{{field permisos}}
+				{{field responsable}}
+			{{/fieldSet}}
+		{{/col}}
+	{{/modal}}
+	{{#template id="lista"}}
+		<div>{{_name}}</div>
+	{{/template}}
+	{{#template2 id="_user"}}
+		<br>Nombre: {{nombre}}
+		<br>Correo Electrónico: {{correo}}
+		<br>Subordinados: {{_subordinados}}
+		<br>Estatus: {{_estatus}}
+		<br>Servicio: {{_servicio}}
+		<br>Sucursal: {{_sucursal}}
+	{{/template2}}
+	{{#template3 id="_user"}}
+		{{#if nombre}}<br>Nombre: {{nombre}}{{/if}}
+		{{#if correo}}<br>Correo Electrónico: {{correo}}{{/if}}
+		{{#if subordinados}}<br>Subordinados: {{_subordinados}}{{/if}}
+		{{#if estatus}}<br>Estatus: {{_estatus}}{{/if}}
+		{{#if servicio}}<br>Servicio: {{_servicio}}{{/if}}
+		{{#if sucursal}}<br>Sucursal: {{_sucursal}}{{/if}}
+	{{/template3}}
+{{/markup}}

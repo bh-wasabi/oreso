@@ -1,0 +1,31 @@
+{{#define type="doc" id="ver" name="Lista"}}
+  {{#view id="cie10"}}
+    {{editor display="nombre"}}
+    {{search index="salud" type="cie10"}}
+  {{/view}}  
+  {{#view id="cie9"}}
+    {{editor display="nombre"}}
+    {{search index="salud" type="cie9"}}
+  {{/view}}  
+  {{#view id="sepomex2"}}
+    {{editor display="nombre"}}
+    {{search index="salud" type="sepomex2"}}
+  {{/view}}
+  {{#view id="clues"}}
+    {{editor display="nombre"}}
+    {{search index="salud" type="clues"}}
+  {{/view}}  
+  {{#view id="codeSystem" forceCache="true"}}
+    {{define type="param" id="name"}}
+    {{define type="param" id="partOf"}}
+    {{editor value="code" display="display"}}
+    {{#search index="gcp" type="help" limit="25" sort="order"}}
+      {{param name="name"}}
+      {{param partOf="partOf"}}
+    {{/search}}
+  {{/view}}
+  {{#view id="buscarCita"}}
+    {{define type="param" id="body"}}
+    {{slots resourceSource="planAgenda" duration="=(body.esCirugia)?body.duracionCirugia:body.duracionCita" from="=body.desde" days="=body.horizonteCita" area="=body.area" subArea="=body.subArea" resourceTypes="=fn('tipoRecursosRequeridos', body)" cacheKey="=body._doc.id" ttl="60"}}
+  {{/view}}  
+{{/define}}

@@ -1,0 +1,604 @@
+{{#define type="_cfg" id="_cfg"}}
+	{{#config id="board"}}
+		{{item board="clientes" display="Clientes" order="1" service="clientes" serviceName="Clientes" color="primary" docPosition="0.75" type="cliente" view="lista" template="lista"}}
+		{{item board="partners" display="Partners" order="2" service="partners" serviceName="Partners" color="blue" docPosition="0.75" type="partner" view="lista" template="lista"}}
+		{{item board="individuos" display="Individuos" order="3" service="individuos" serviceName="Individuos" color="teal" docPosition="0.75" type="individuo" view="lista" template="lista"}}
+		{{item board="proveedores" display="Proveedores" order="4" service="proveedores" serviceName="Proveedores" color="deep-purple" docPosition="0.75" type="proveedor" view="lista" template="lista"}}
+	{{/config}}
+	{{#config id="widget"}}
+		{{item widget="datosGeneralesPersona" display="Datos Generales" order="1" heightRatio="2" widthRatio="3" userRole="auxiliarAdmision, auxiliarConsultaExterna, bancoSangre, cajero, enfermera, enfermeraCeye, imagenologia, medico, medicoAnestesiologo, medicoObstetrico, patologia, perfusionista, tecnicoSueno, tecnicoQuimioterapia"}}
+		{{item widget="datosNacionalidad" display="Datos Nacionalidad" order="2" editAction="notaDatosNacionalidad" heightRatio="2" widthRatio="2" userRole="auxiliarAdmision, auxiliarConsultaExterna, cajero, enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia"}}
+		{{item widget="datosFinancieros" display="Datos Financieros" order="3" editAction="notaDatosFinancieros" heightRatio="2" widthRatio="2" userRole="cajero, supervisorLaboratorio"}}
+		{{item widget="solicitudesActivas" display="Solicitudes Activas" order="4" heightRatio="4" widthRatio="3" openAction="solicitudes" source="solicitud" view="resumenActivos" id="_id"}}
+		{{item widget="notasActivas" display="Notas Activas" order="5" heightRatio="2" widthRatio="2" source="nota" view="resumenActivos" id="_id"}}
+		{{item widget="resultadosTxDx" display="Resultados TX/DX" order="6" heightRatio="2" widthRatio="4" openAction="resultadosTxDx" source="solicitud" view="resumenTxDx" id="_id"}}
+		{{item widget="porCobrar" display="Cuentas por Cobrar" order="7" heightRatio="2" widthRatio="3" board="cuentaPacienteCaja" source="solicitud" view="resumenPorCobrar" id="_id" userRole="cajero"}}
+		{{item widget="porPagar" display="Cuentas por Pagar" order="8" heightRatio="2" widthRatio="3" board="cuentaPacienteCaja" source="solicitud" view="resumenPorPagar" id="_id" userRole="cajero"}}
+		{{item widget="caja" display="Caja" order="9" heightRatio="2" widthRatio="3" board="tesoreria" source="movSaldo" view="resumenCaja" id="_id"}}
+		{{item widget="inventario" display="Inventario Asignado" order="10" heightRatio="4" widthRatio="3" source="movSaldo" view="resumenInventario" id="_id"}}
+		{{item widget="autopsia" display="Autopsia" order="11" heightRatio="2" widthRatio="2"}}
+		{{item widget="alergia" display="Alergias" order="12" editAction="notaAlergia" heightRatio="2" widthRatio="2" userRole="enfermera, enfermeraCeye, imagenologia, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia"}}
+		{{item widget="riesgoEpidemiologico" display="Riesgo Epidemiológico" order="13" editAction="notaRiesgoEpidemiologico" heightRatio="2" widthRatio="2" userRole="auxiliarAdmision, auxiliarConsultaExterna, bancoSangre, cajero, enfermera, enfermeraCeye, imagenologia, medico, medicoAnestesiologo, medicoObstetrico, patologia, perfusionista, tecnicoSueno, tecnicoQuimioterapia"}}
+		{{item widget="antecedentes" display="Antecedentes" order="14" editAction="notaAntecedentes" heightRatio="4" widthRatio="2" userRole="enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, programadorQuirofanos, tecnicoSueno, tecnicoQuimioterapia"}}
+		{{item widget="atencionesActivas" display="Servicios Activos" order="15" heightRatio="2" widthRatio="2" userRole="bancoSangre, enfermera, enfermeraCeye, imagenologia, medico, medicoAnestesiologo, medicoObstetrico, patologia, perfusionista, programadorQuirofanos, tecnicoSueno, tecnicoQuimioterapia"}}
+		{{item widget="hospitalizacion" display="Hospitalización" order="16" heightRatio="2" widthRatio="2"}}
+		{{item widget="cateterSondaDrenaje" display="Catéteres, Sondas o Drenajes" order="17" heightRatio="2" widthRatio="2" userRole="enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista"}}
+		{{item widget="controlLiquidos" display="Control Liquídos" order="18" editAction="notaControlLiquidos" heightRatio="2" widthRatio="2" userRole="enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista"}}
+		{{item widget="diagnostico" display="Diagnósticos" order="19" heightRatio="2" widthRatio="3" userRole="enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, programadorQuirofanos"}}
+		{{item widget="dieta" display="Dieta" order="20" editAction="notaSolicitudDieta" heightRatio="2" widthRatio="2" userRole="enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista"}}
+		{{item widget="discapacidad" display="Discapacidades" order="21" heightRatio="2" widthRatio="2" userRole="enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia"}}
+		{{item widget="estudioSocioeconomico" display="Estudio Socioeconómico" order="22" editAction="notaEstudioSocioeconomico" heightRatio="2" widthRatio="2" userRole="directorOperaciones, enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, trabajoSocial, trabajoSocialResponsable"}}
+		{{item widget="imagenologia" display="Solicitudes Imagenología" order="23" editAction="notaSolicitudImagenologia" heightRatio="2" widthRatio="2" userRole="enfermera, enfermeraCeye, imagenologia, medico, medicoAnestesiologo, medicoObstetrico, perfusionista"}}
+		{{item widget="inmunizaciones" display="Inmunizaciones" order="24" heightRatio="2" widthRatio="2"}}
+		{{item widget="laboratorio" display="Solicitudes Laboratorio" order="25" editAction="notaSolicitudLaboratorio" heightRatio="2" widthRatio="2" userRole="enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia"}}
+		{{item widget="registroReferencia" display="Datos Referencia" order="26" heightRatio="2" widthRatio="2"}}
+		{{item widget="escala" display="Escalas" order="27" heightRatio="2" widthRatio="2"}}
+		{{item widget="nanda" display="NANDA" order="28" editAction="notaNanda" heightRatio="2" widthRatio="2" userRole="enfermera"}}
+		{{item widget="nic" display="NIC" order="29" editAction="notaNic" heightRatio="2" widthRatio="2" userRole="enfermera"}}
+		{{item widget="noc" display="NOC" order="30" editAction="notaNoc" heightRatio="2" widthRatio="2" userRole="enfermera"}}
+		{{item widget="medicamento" display="Solicitudes Medicamentos" order="31" editAction="notaSolicitudMedicamento" heightRatio="2" widthRatio="2" userRole="enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia"}}
+		{{item widget="solucion" display="Solicitudes Soluciones" order="32" editAction="notaSolicitudSolucion" heightRatio="2" widthRatio="2" userRole="enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia"}}
+		{{item widget="mezcla" display="Solicitudes Mezclas" order="33" editAction="notaSolicitudMezcla" heightRatio="2" widthRatio="2" userRole="enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia"}}
+		{{item widget="medidaGeneral" display="Solicitudes Medidas Generales" order="34" editAction="notaSolicitudMedidaGeneral" heightRatio="2" widthRatio="2" userRole="enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista"}}
+		{{item widget="patologia" display="Solicitudes Patología" order="35" editAction="notaSolicitudPatologia" heightRatio="2" widthRatio="2" userRole="enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, patologia, perfusionista"}}
+		{{item widget="procedimiento" display="Solicitudes Procedimientos" order="36" editAction="notaSolicitudProcedimiento" heightRatio="2" widthRatio="2" userRole="enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista"}}
+		{{item widget="cirugia" display="Solicitudes Cirugías" order="37" editAction="notaSolicitudCirugia" heightRatio="2" widthRatio="4" userRole="enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista"}}
+		{{item widget="bancoSangre" display="Solicitudes Banco de Sangre" order="38" editAction="notaSolicitudBancoSangre" heightRatio="2" widthRatio="2" userRole="bancoSangre, enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista"}}
+		{{item widget="hemocomponente" display="Solicitudes Hemocomponentes" order="39" editAction="notaSolicitudHemocomponente" heightRatio="2" widthRatio="2" userRole="bancoSangre, enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista"}}
+		{{item widget="gasometria" display="Gasometría" order="40" editAction="notaGasometria" heightRatio="2" widthRatio="2" userRole="enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista"}}
+		{{item widget="signosVitales" display="Signos Vitales" order="41" editAction="notaSignosVitales" heightRatio="2" widthRatio="2" userRole="enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia"}}
+		{{item widget="somatometria" display="Somatometría" order="42" editAction="notaSomatometria" heightRatio="2" widthRatio="2" userRole="enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia"}}
+		{{item widget="somatometriaNutricion" display="Somatometría Nutrición" order="43" editAction="notaSomatometriaNutricion" heightRatio="2" widthRatio="2" userRole="enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista"}}
+		{{item widget="adjuntos" display="Adjuntos" order="44" editAction="notaAdjuntos" heightRatio="2" widthRatio="2" userRole="enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista"}}
+		{{item widget="consultaExterna" display="Solicitudes Consultas Externas" order="45" editAction="notaSolicitudConsultaExterna" heightRatio="2" widthRatio="2" userRole="enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista"}}
+		{{item widget="interconsulta" display="Solicitudes Interconsulta" order="46" editAction="notaSolicitudInterconsulta" heightRatio="2" widthRatio="2"}}
+		{{item widget="material" display="Solicitudes Materiales o Insumos" order="47" editAction="notaSolicitudMaterial" heightRatio="4" widthRatio="3" userRole="enfermera, tecnicoSueno, tecnicoQuimioterapia"}}
+		{{item widget="materialCeye" display="Solicitudes Materiales CEYE" order="48" editAction="notaSolicitudMaterialCeye" heightRatio="4" widthRatio="3"}}
+		{{item widget="expedientesFusionados" display="Expedientes Fusionados" order="49" heightRatio="2" widthRatio="2" openAction="expedientesFusionados"}}
+		{{item widget="documentacion" display="Documentación" order="50" heightRatio="2" widthRatio="2"}}
+		{{item widget="contrato" display="Contratos" order="51" heightRatio="2" widthRatio="2"}}
+		{{item widget="lineaCredito" display="Línea Crédito" order="52" heightRatio="2" widthRatio="2"}}
+		{{item widget="cartaCredito" display="Cartas Crédito" order="53" heightRatio="2" widthRatio="2"}}
+		{{item widget="nivelRiesgo" display="Nivel Riesgo" order="54" heightRatio="2" widthRatio="2"}}
+		{{item widget="historialCredito" display="Historial Crédito" order="55" heightRatio="2" widthRatio="2"}}
+		{{item widget="historialVenta" display="Historial Ventas" order="56" heightRatio="2" widthRatio="2"}}
+		{{item widget="referencia" display="Referencias " order="57" heightRatio="2" widthRatio="2"}}
+		{{item widget="asignacion" display="Asignaciones" order="58" heightRatio="2" widthRatio="2"}}
+		{{item widget="clasificacion" display="Clasificación" order="59" heightRatio="2" widthRatio="2"}}
+		{{item widget="sucursal" display="Sucursales" order="60" heightRatio="2" widthRatio="2"}}
+		{{item widget="contacto" display="Contactos" order="61" heightRatio="2" widthRatio="2"}}
+		{{item widget="encuesta" display="Encuestas" order="62" heightRatio="2" widthRatio="2"}}
+		{{item widget="objetivoPersonal" display="Objetivos Personales" order="63" heightRatio="2" widthRatio="2"}}
+		{{item widget="experienciaLaboral" display="Experiencia Laboral" order="64" heightRatio="2" widthRatio="2"}}
+		{{item widget="educacion" display="Educación" order="65" heightRatio="2" widthRatio="2"}}
+		{{item widget="certificacion" display="Certificaciones y Licenciaturas" order="66" heightRatio="2" widthRatio="2"}}
+		{{item widget="voluntario" display="Experiencia como Voluntario" order="67" heightRatio="2" widthRatio="2"}}
+		{{item widget="aptitud" display="Aptitudes" order="68" heightRatio="2" widthRatio="2"}}
+		{{item widget="logro" display="Logros Importantes" order="69" heightRatio="2" widthRatio="2"}}
+		{{item widget="inicitivaPersonal" display="Iniciativas" order="70" heightRatio="2" widthRatio="2"}}
+		{{item widget="inquietudPersonal" display="Inquietudes" order="71" heightRatio="2" widthRatio="2"}}
+		{{item widget="solicitudPersonal" display="Solicitudes" order="72" heightRatio="2" widthRatio="2"}}
+		{{item widget="puntualidad" display="Puntualidad" order="73" heightRatio="2" widthRatio="2"}}
+		{{item widget="sueldoPrestaciones" display="Sueldo y Prestaciones" order="74" heightRatio="2" widthRatio="2"}}
+		{{item widget="pasatiempo" display="Deportes y Pasatiempos" order="75" heightRatio="2" widthRatio="2"}}
+		{{item widget="precioCosto" display="Precios y Costos" order="76" heightRatio="2" widthRatio="2"}}
+		{{item widget="proveedor" display="Proveedores" order="77" heightRatio="2" widthRatio="2"}}
+		{{item widget="porRecibir" display="Por Recibir" order="78" heightRatio="2" widthRatio="2"}}
+		{{item widget="porSurtir" display="por Surtir" order="79" heightRatio="2" widthRatio="2"}}
+		{{item widget="planeacionArticulo" display="Planeación Inventario" order="80" heightRatio="2" widthRatio="2"}}
+		{{item widget="calidadArticulo" display="Control Calidad" order="81" heightRatio="2" widthRatio="2"}}
+		{{item widget="caracteristicasArticulo" display="Características" order="82" heightRatio="2" widthRatio="2"}}
+		{{item widget="opcionesArticulo" display="Opciones" order="83" heightRatio="2" widthRatio="2"}}
+	{{/config}}
+	{{#config id="boardList"}}
+		{{item id="clientes" nombre="Clientes / Clientes"}}
+		{{item id="individuos" nombre="Individuos / Individuos"}}
+		{{item id="partners" nombre="Partners / Partners"}}
+		{{item id="proveedores" nombre="Proveedores / Proveedores"}}
+	{{/config}}
+	{{config id="actionList"}}
+	{{#config id="actividad"}}
+		{{item id="administracion" nombre="Administración"}}
+		{{item id="finanzas" nombre="Finanzas"}}
+		{{item id="produccion" nombre="Producción"}}
+		{{item id="sistemas" nombre="Sistemas"}}
+	{{/config}}
+	{{#config id="area"}}
+		{{item id="inicial" nombre="Inicial"}}
+		{{item id="integridad" nombre="Integridad"}}
+		{{item id="temas" nombre="Temas"}}
+		{{item id="socioeconomico" nombre="Socioecónomico"}}
+		{{item id="aptitudes" nombre="Aptitudes"}}
+		{{item id="final" nombre="Final"}}
+	{{/config}}
+	{{#config id="claseServicio"}}
+		{{item id="obligatorioNoComercial" nombre="Obligatorios No Comerciales"}}
+		{{item id="obligatorioComercial" nombre="Obligatorios Comerciales"}}
+		{{item id="opcional" nombre="Opcional"}}
+	{{/config}}
+	{{#config id="entidad"}}
+		{{item id="BC" nombre="Baja California"}}
+		{{item id="BS" nombre="Baja California Sur"}}
+		{{item id="CC" nombre="Campeche"}}
+		{{item id="CS" nombre="Chiapas"}}
+		{{item id="CH" nombre="Chihuahua"}}
+		{{item id="CL" nombre="Coahuila"}}
+		{{item id="CM" nombre="Colima"}}
+		{{item id="DF" nombre="CDMX"}}
+		{{item id="DG" nombre="Durango"}}
+		{{item id="GT" nombre="Guanajuato"}}
+		{{item id="GR" nombre="Guerrero"}}
+		{{item id="HG" nombre="Hidalgo"}}
+		{{item id="JC" nombre="Jalisco"}}
+		{{item id="MC" nombre="México"}}
+		{{item id="MN" nombre="Michoacan"}}
+		{{item id="MS" nombre="Morelos"}}
+		{{item id="NT" nombre="Nayarit"}}
+		{{item id="NL" nombre="Nuevo León"}}
+		{{item id="OC" nombre="Oaxaca"}}
+		{{item id="PL" nombre="Puebla"}}
+		{{item id="QT" nombre="Querétaro"}}
+		{{item id="QR" nombre="Quintana Roo"}}
+		{{item id="SP" nombre="San Luis Potosí"}}
+		{{item id="SL" nombre="Sinaloa"}}
+		{{item id="SR" nombre="Sonora"}}
+		{{item id="TC" nombre="Tabasco"}}
+		{{item id="TL" nombre="Tlaxcala"}}
+		{{item id="TS" nombre="Tamaulipas"}}
+		{{item id="VZ" nombre="Veracruz"}}
+		{{item id="YN" nombre="Yucatán"}}
+		{{item id="ZS" nombre="Zacatecas"}}
+		{{item id="NE" nombre="Nacido en el Extranjero"}}
+	{{/config}}
+	{{#config id="escolaridad"}}
+		{{item id="ninguna" nombre="Ninguna"}}
+		{{item id="preescolar-incompleto" nombre="Preescolar Incompleto"}}
+		{{item id="preescolar-completo" nombre="Preescolar Completa"}}
+		{{item id="primaria-incompleta" nombre="Primaria Incompleta"}}
+		{{item id="primaria-completa" nombre="Primaria Completa"}}
+		{{item id="secundaria-incompleta" nombre="Secundaria Incompleta"}}
+		{{item id="secundaria-completa" nombre="Secundaria Completa"}}
+		{{item id="preparatoria-incompleta" nombre="Bachillerato o Preparatoria Incompleta"}}
+		{{item id="preparatoria-completa" nombre="Bachillerato o Preparatoria Completa"}}
+		{{item id="licenciatura-incompleta" nombre="Licenciatura o Profesional Incompleto"}}
+		{{item id="licenciatura-completa" nombre="Licenciatura o Profesional Completo"}}
+		{{item id="postgrado-incompleto" nombre="Posgrado Incompleto"}}
+		{{item id="postgrado-completo" nombre="Posgrado Completo"}}
+		{{item id="n/a" nombre="No Aplica"}}
+	{{/config}}
+	{{#config id="especialidad"}}
+		{{item id="chofer" nombre="Chofer"}}
+		{{item id="contador" nombre="Contador"}}
+		{{item id="secretara" nombre="Secretaria"}}
+	{{/config}}
+	{{#config id="estadoCivil"}}
+		{{item id="soltero" nombre="Soltero(a)"}}
+		{{item id="casado" nombre="Casado(a)"}}
+		{{item id="viudo" nombre="Viudo(a)"}}
+		{{item id="divorciado" nombre="Divorciado(a)"}}
+		{{item id="union-libre" nombre="Union Libre"}}
+		{{item id="concubinato" nombre="Concubinato"}}
+		{{item id="otro" nombre="Otro"}}
+	{{/config}}
+	{{#config id="estatusGeneral"}}
+		{{item id="activo" nombre="Activo"}}
+		{{item id="inactivo" nombre="Inactivo"}}
+	{{/config}}
+	{{#config id="estatusUsuario"}}
+		{{item id="activo" nombre="Activo"}}
+		{{item id="inactivo" nombre="Inactivo"}}
+	{{/config}}
+	{{#config id="genero"}}
+		{{item id="hombre" nombre="Hombre"}}
+		{{item id="mujer" nombre="Mujer"}}
+	{{/config}}
+	{{#config id="idioma"}}
+		{{item id="ar" nombre="Arábica"}}
+		{{item id="bn" nombre="Bengalí"}}
+		{{item id="cs" nombre="Checo"}}
+		{{item id="da" nombre="Danés"}}
+		{{item id="de" nombre="Alemán"}}
+		{{item id="el" nombre="Griego"}}
+		{{item id="en" nombre="Inglés"}}
+		{{item id="es" nombre="Español"}}
+		{{item id="fi" nombre="Finlandés"}}
+		{{item id="fr" nombre="Francés"}}
+		{{item id="fy" nombre="Frysian"}}
+	{{/config}}
+	{{#config id="medioComunicacion"}}
+		{{item id="telefono" nombre="Teléfono"}}
+		{{item id="correo" nombre="Correo Electrónico"}}
+		{{item id="sistema" nombre="Sistema"}}
+	{{/config}}
+	{{#config id="metodoAcceso"}}
+		{{item id="local" nombre="Local"}}
+		{{item id="google" nombre="Google"}}
+	{{/config}}
+	{{#config id="nacionalidad"}}
+		{{item id="1" nombre="Afgana"}}
+		{{item id="2" nombre="Albanesa"}}
+		{{item id="3" nombre="Alemana"}}
+		{{item id="4" nombre="Americana"}}
+		{{item id="5" nombre="Andorrana"}}
+		{{item id="6" nombre="Angolesa"}}
+		{{item id="7" nombre="Arabe"}}
+		{{item id="8" nombre="Argeliana"}}
+		{{item id="9" nombre="Argentina"}}
+		{{item id="10" nombre="Australiana"}}
+		{{item id="11" nombre="Austriaca"}}
+		{{item id="12" nombre="Bahameña"}}
+		{{item id="13" nombre="Belga"}}
+		{{item id="14" nombre="Beliceña"}}
+		{{item id="15" nombre="Bhutanesa"}}
+		{{item id="16" nombre="Birmana"}}
+		{{item id="17" nombre="Boliviana"}}
+		{{item id="18" nombre="Botswanesa"}}
+		{{item id="19" nombre="Brasileña"}}
+		{{item id="20" nombre="Britanica"}}
+		{{item id="21" nombre="Bulgara"}}
+		{{item id="22" nombre="Burkina Faso"}}
+		{{item id="23" nombre="Burundesa"}}
+		{{item id="24" nombre="Camboyana"}}
+		{{item id="25" nombre="Camerunesa"}}
+		{{item id="26" nombre="Canadiense"}}
+		{{item id="27" nombre="Centro Africana"}}
+		{{item id="28" nombre="Chadiana"}}
+		{{item id="29" nombre="Checoslovaca"}}
+		{{item id="30" nombre="Chilena"}}
+		{{item id="31" nombre="China"}}
+		{{item id="32" nombre="Chipriota"}}
+		{{item id="33" nombre="Colombiana"}}
+		{{item id="34" nombre="Comorense"}}
+		{{item id="35" nombre="Congolesa"}}
+		{{item id="36" nombre="Costarricense"}}
+		{{item id="37" nombre="Cubana"}}
+		{{item id="38" nombre="Danesa"}}
+		{{item id="39" nombre="De Bahrein"}}
+		{{item id="40" nombre="De Barbados"}}
+		{{item id="41" nombre="De Bennin"}}
+		{{item id="42" nombre="De Cabo Verde"}}
+		{{item id="43" nombre="De Djibouti"}}
+		{{item id="44" nombre="De Santo Tome"}}
+		{{item id="45" nombre="De Seychelles"}}
+		{{item id="46" nombre="De Zimbawi"}}
+		{{item id="47" nombre="Del Qatar"}}
+		{{item id="48" nombre="Del Sahara"}}
+		{{item id="49" nombre="Dominica"}}
+		{{item id="50" nombre="Dominicana"}}
+		{{item id="51" nombre="Egipcia"}}
+		{{item id="52" nombre="Eslovaca"}}
+		{{item id="53" nombre="Eslovaquia"}}
+		{{item id="54" nombre="Eslovenia"}}
+		{{item id="55" nombre="Española"}}
+		{{item id="56" nombre="Estadounidense"}}
+		{{item id="57" nombre="Estonia"}}
+		{{item id="58" nombre="Etiope"}}
+		{{item id="59" nombre="Fijiana"}}
+		{{item id="60" nombre="Filipina"}}
+		{{item id="61" nombre="Finlandesa"}}
+		{{item id="62" nombre="Francesa"}}
+		{{item id="63" nombre="Gabonesa"}}
+		{{item id="64" nombre="Gambiana"}}
+		{{item id="65" nombre="Ghanata"}}
+		{{item id="66" nombre="Granadina"}}
+		{{item id="67" nombre="Griega"}}
+		{{item id="68" nombre="Guatemalteca"}}
+		{{item id="69" nombre="Guinea"}}
+		{{item id="70" nombre="Guinea Ecuatoriana"}}
+		{{item id="71" nombre="Guyanesa"}}
+		{{item id="72" nombre="Haitiana"}}
+		{{item id="73" nombre="Hindu"}}
+		{{item id="74" nombre="Holandesa"}}
+		{{item id="75" nombre="Hondureña"}}
+		{{item id="76" nombre="Hungara"}}
+		{{item id="77" nombre="Indonesa"}}
+		{{item id="78" nombre="Irani"}}
+		{{item id="79" nombre="Iraqui"}}
+		{{item id="80" nombre="Irlandesa"}}
+		{{item id="81" nombre="Islandesa"}}
+		{{item id="82" nombre="Israeli"}}
+		{{item id="83" nombre="Italiana"}}
+		{{item id="84" nombre="Jamaiquina"}}
+		{{item id="85" nombre="Japonesa"}}
+		{{item id="86" nombre="Jordana"}}
+		{{item id="87" nombre="Keniana"}}
+		{{item id="88" nombre="Kirguistan"}}
+		{{item id="89" nombre="Kuwaiti"}}
+		{{item id="90" nombre="Laosiana"}}
+		{{item id="91" nombre="Lesothense"}}
+		{{item id="92" nombre="Libanesa"}}
+		{{item id="93" nombre="Liberiana"}}
+		{{item id="94" nombre="Libia"}}
+		{{item id="95" nombre="Liechtenstense"}}
+		{{item id="96" nombre="Lituania"}}
+		{{item id="97" nombre="Luxemburguesa"}}
+		{{item id="98" nombre="Macedonia"}}
+		{{item id="99" nombre="Malasia"}}
+		{{item id="100" nombre="Malawiana"}}
+		{{item id="101" nombre="Maldiva"}}
+		{{item id="102" nombre="Maliense"}}
+		{{item id="103" nombre="Maltesa"}}
+		{{item id="104" nombre="Marfileña"}}
+		{{item id="105" nombre="Marroqui"}}
+		{{item id="106" nombre="Mauriciana"}}
+		{{item id="107" nombre="Mauritana"}}
+		{{item id="108" nombre="Mexicana"}}
+		{{item id="109" nombre="Micronecia"}}
+		{{item id="110" nombre="Moldovia, Republica de"}}
+		{{item id="111" nombre="Monegasca"}}
+		{{item id="112" nombre="Mongolesa"}}
+		{{item id="113" nombre="Mozambiqueña"}}
+		{{item id="114" nombre="Namibiana"}}
+		{{item id="115" nombre="Nauruana"}}
+		{{item id="116" nombre="Nepalesa"}}
+		{{item id="117" nombre="Nicaraguense"}}
+		{{item id="118" nombre="Nigeriana"}}
+		{{item id="119" nombre="Nigerina"}}
+		{{item id="120" nombre="Norcoreana"}}
+		{{item id="121" nombre="Noruega"}}
+		{{item id="122" nombre="Norvietnamita"}}
+		{{item id="123" nombre="Omanesa"}}
+		{{item id="124" nombre="Pakistani"}}
+		{{item id="125" nombre="Panameña"}}
+		{{item id="126" nombre="Papuense"}}
+		{{item id="127" nombre="Paraguaya"}}
+		{{item id="128" nombre="Peruana"}}
+		{{item id="129" nombre="Portuguesa"}}
+		{{item id="130" nombre="Puertorriqueña"}}
+		{{item id="131" nombre="Reino Unido"}}
+		{{item id="132" nombre="Reino Unido(Brit. del Ext.)"}}
+		{{item id="133" nombre="Reino Unido(C. Brit. del Ext.)"}}
+		{{item id="134" nombre="Reino Unido(Depen. Tet. Brit.)"}}
+		{{item id="135" nombre="Rumana"}}
+		{{item id="136" nombre="Rwandesa"}}
+		{{item id="137" nombre="Salomonesa"}}
+		{{item id="138" nombre="Salvadoreña"}}
+		{{item id="139" nombre="Samoana"}}
+		{{item id="140" nombre="San Marinense"}}
+		{{item id="141" nombre="Santa Luciense"}}
+		{{item id="142" nombre="Senegalesa"}}
+		{{item id="143" nombre="Sierra Leonesa"}}
+		{{item id="144" nombre="Singaporense"}}
+		{{item id="145" nombre="Siria"}}
+		{{item id="146" nombre="Somali"}}
+		{{item id="147" nombre="Sovietica Bielorrusa"}}
+		{{item id="148" nombre="Sovietica Ucraniana"}}
+		{{item id="149" nombre="Sudafricana"}}
+		{{item id="150" nombre="Sudanesa"}}
+		{{item id="151" nombre="Sudcoreana"}}
+		{{item id="152" nombre="Sueca"}}
+		{{item id="153" nombre="Suiza"}}
+		{{item id="154" nombre="Surinamense"}}
+		{{item id="155" nombre="Swazi"}}
+		{{item id="156" nombre="Tailandesa"}}
+		{{item id="157" nombre="Taiwanesa"}}
+		{{item id="158" nombre="Tanzaniana"}}
+		{{item id="159" nombre="Togolesa"}}
+		{{item id="160" nombre="Trinitaria"}}
+		{{item id="161" nombre="Tunecina"}}
+		{{item id="162" nombre="Turca"}}
+		{{item id="163" nombre="Ugandesa"}}
+		{{item id="164" nombre="Uruguaya"}}
+		{{item id="165" nombre="Vaticana"}}
+		{{item id="166" nombre="Venezolana"}}
+		{{item id="167" nombre="Yemeni"}}
+		{{item id="168" nombre="Yugoslava"}}
+		{{item id="169" nombre="Zairana"}}
+		{{item id="170" nombre="Zambiana"}}
+	{{/config}}
+	{{#config id="relevancia"}}
+		{{item id="40" nombre="40"}}
+		{{item id="30" nombre="30"}}
+		{{item id="20" nombre="20"}}
+		{{item id="0" nombre="0"}}
+	{{/config}}
+	{{#config id="tipoAdjunto"}}
+		{{item id="foto" nombre="Foto"}}
+		{{item id="doc" nombre="Documento"}}
+	{{/config}}
+	{{#config id="tipoArticulo"}}
+		{{item id="servicio" nombre="Servicio"}}
+	{{/config}}
+	{{#config id="tipoCertificado"}}
+		{{item id="cedulaProfesional" nombre="Cedula Profesional"}}
+		{{item id="diploma" nombre="Diploma"}}
+	{{/config}}
+	{{#config id="tipoCliente"}}
+		{{item id="facturacionDirecta" nombre="Facturación Directa"}}
+		{{item id="servicioAdministrado" nombre="Servicio Administrado"}}
+	{{/config}}
+	{{#config id="tipoEntidad"}}
+		{{item id="matriz" nombre="Matríz"}}
+		{{item id="sucursal" nombre="Sucursal"}}
+		{{item id="ubicacion" nombre="Ubicación"}}
+		{{item id="franquicia" nombre="Franquicia"}}
+	{{/config}}
+	{{#config id="tipoProducto"}}
+		{{item id="gestion" nombre="Gestión"}}
+		{{item id="reclutamiento" nombre="Reclutamiento"}}
+		{{item id="basico" nombre="Básico"}}
+		{{item id="salida" nombre="Salida"}}
+		{{item id="campusHonesto" nombre="Campus Honesto"}}
+	{{/config}}
+	{{#config id="tipoIdentificacion"}}
+		{{item id="ine" nombre="INE"}}
+		{{item id="pasaporte" nombre="Pasaporte"}}
+		{{item id="cedulaProfesional" nombre="Cédula profesional"}}
+		{{item id="licenciaConducir" nombre="Licencia de conducir"}}
+		{{item id="credencialEscuela" nombre="Credencial de educación pública o privada"}}
+		{{item id="inapam" nombre="INAPM"}}
+		{{item id="documentoMigratorio" nombre="Documento migratorio"}}
+		{{item id="otro" nombre="Otro"}}
+	{{/config}}
+	{{#config id="tipoPartner"}}
+		{{item id="alianza" nombre="Alianza"}}
+		{{item id="distribuidor" nombre="Distribuidor"}}
+		{{item id="referencia" nombre="Referencia"}}
+		{{item id="coordinador" nombre="Coordinador"}}
+		{{item id="academia" nombre="Academia"}}
+		{{item id="regulador" nombre="Regulador"}}
+	{{/config}}
+	{{#config id="tipoPersona"}}
+		{{item id="personaFisica" nombre="Persona Física"}}
+		{{item id="personaMoral" nombre="Persona Moral"}}
+	{{/config}}
+	{{#config id="tipoProveedor"}}
+		{{item id="gastos" nombre="Gastos"}}
+		{{item id="compras" nombre="Compras"}}
+	{{/config}}
+	{{#config id="userLevel"}}
+		{{item id="consulta" nombre="Consulta"}}
+		{{item id="normal" nombre="Normal"}}
+	{{/config}}
+	{{#config id="userRole"}}
+		{{item id="auxiliar" nombre="Auxiliar"}}
+		{{item id="sistemas" nombre="Sistemas"}}
+	{{/config}}
+	{{#config id="usoDireccion"}}
+		{{item id="trabajo" nombre="Trabajo"}}
+		{{item id="casa" nombre="Casa"}}
+		{{item id="postal" nombre="Postal"}}
+		{{item id="temporal" nombre="Temporal"}}
+		{{item id="incorrecta" nombre="Incorrecta"}}
+	{{/config}}
+	{{#config id="usoIdentificacion"}}
+		{{item id="oficial" nombre="Oficial"}}
+		{{item id="secundario" nombre="Secundario"}}
+	{{/config}}
+	{{#config id="tipoAfiliacion"}}
+		{{item id="auditoria" nombre="Auditoria"}}
+		{{item id="voluntaria" nombre="Voluntaría"}}
+	{{/config}}
+	{{#function id="date" paramType="text" returnType="json"}}
+		{{define type="param" id="date"}}
+		{{define type="param" id="type"}}
+		{{define type="param" id="subType"}}
+	{{/function}}
+	{{#function id="board" paramType="text" returnType="json"}}
+		{{define type="param" id="board"}}
+		{{when board="clientes" push="{\"board\":\"clientes\",\"display\":\"Clientes\",\"order\":1,\"service\":\"clientes\",\"serviceName\":\"Clientes\",\"color\":\"primary\",\"docPosition\":0.75,\"type\":\"cliente\",\"view\":\"lista\",\"template\":\"lista\"}"}}
+		{{when board="partners" push="{\"board\":\"partners\",\"display\":\"Partners\",\"order\":2,\"service\":\"partners\",\"serviceName\":\"Partners\",\"color\":\"blue\",\"docPosition\":0.75,\"type\":\"partner\",\"view\":\"lista\",\"template\":\"lista\"}"}}
+		{{when board="individuos" push="{\"board\":\"individuos\",\"display\":\"Individuos\",\"order\":3,\"service\":\"individuos\",\"serviceName\":\"Individuos\",\"color\":\"teal\",\"docPosition\":0.75,\"type\":\"individuo\",\"view\":\"lista\",\"template\":\"lista\"}"}}
+		{{when board="proveedores" push="{\"board\":\"proveedores\",\"display\":\"Proveedores\",\"order\":4,\"service\":\"proveedores\",\"serviceName\":\"Proveedores\",\"color\":\"deep-purple\",\"docPosition\":0.75,\"type\":\"proveedor\",\"view\":\"lista\",\"template\":\"lista\"}"}}
+	{{/function}}
+	{{#function id="boardRole" paramType="text" returnType="json"}}
+		{{define type="param" id="board"}}
+	{{/function}}
+	{{#function id="widget" paramType="text" returnType="json"}}
+		{{define type="param" id="widget"}}
+		{{when widget="datosGeneralesPersona" push="{\"widget\":\"datosGeneralesPersona\",\"display\":\"Datos Generales\",\"order\":1,\"heightRatio\":2,\"widthRatio\":3,\"userRole\":\"auxiliarAdmision, auxiliarConsultaExterna, bancoSangre, cajero, enfermera, enfermeraCeye, imagenologia, medico, medicoAnestesiologo, medicoObstetrico, patologia, perfusionista, tecnicoSueno, tecnicoQuimioterapia\"}"}}
+		{{when widget="datosNacionalidad" push="{\"widget\":\"datosNacionalidad\",\"display\":\"Datos Nacionalidad\",\"order\":2,\"editAction\":\"notaDatosNacionalidad\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"auxiliarAdmision, auxiliarConsultaExterna, cajero, enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia\"}"}}
+		{{when widget="datosFinancieros" push="{\"widget\":\"datosFinancieros\",\"display\":\"Datos Financieros\",\"order\":3,\"editAction\":\"notaDatosFinancieros\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"cajero, supervisorLaboratorio\"}"}}
+		{{when widget="solicitudesActivas" push="{\"widget\":\"solicitudesActivas\",\"display\":\"Solicitudes Activas\",\"order\":4,\"heightRatio\":4,\"widthRatio\":3,\"openAction\":\"solicitudes\",\"source\":\"solicitud\",\"view\":\"resumenActivos\",\"id\":\"_id\"}"}}
+		{{when widget="notasActivas" push="{\"widget\":\"notasActivas\",\"display\":\"Notas Activas\",\"order\":5,\"heightRatio\":2,\"widthRatio\":2,\"source\":\"nota\",\"view\":\"resumenActivos\",\"id\":\"_id\"}"}}
+		{{when widget="resultadosTxDx" push="{\"widget\":\"resultadosTxDx\",\"display\":\"Resultados TX/DX\",\"order\":6,\"heightRatio\":2,\"widthRatio\":4,\"openAction\":\"resultadosTxDx\",\"source\":\"solicitud\",\"view\":\"resumenTxDx\",\"id\":\"_id\"}"}}
+		{{when widget="porCobrar" push="{\"widget\":\"porCobrar\",\"display\":\"Cuentas por Cobrar\",\"order\":7,\"heightRatio\":2,\"widthRatio\":3,\"board\":\"cuentaPacienteCaja\",\"source\":\"solicitud\",\"view\":\"resumenPorCobrar\",\"id\":\"_id\",\"userRole\":\"cajero\"}"}}
+		{{when widget="porPagar" push="{\"widget\":\"porPagar\",\"display\":\"Cuentas por Pagar\",\"order\":8,\"heightRatio\":2,\"widthRatio\":3,\"board\":\"cuentaPacienteCaja\",\"source\":\"solicitud\",\"view\":\"resumenPorPagar\",\"id\":\"_id\",\"userRole\":\"cajero\"}"}}
+		{{when widget="caja" push="{\"widget\":\"caja\",\"display\":\"Caja\",\"order\":9,\"heightRatio\":2,\"widthRatio\":3,\"board\":\"tesoreria\",\"source\":\"movSaldo\",\"view\":\"resumenCaja\",\"id\":\"_id\"}"}}
+		{{when widget="inventario" push="{\"widget\":\"inventario\",\"display\":\"Inventario Asignado\",\"order\":10,\"heightRatio\":4,\"widthRatio\":3,\"source\":\"movSaldo\",\"view\":\"resumenInventario\",\"id\":\"_id\"}"}}
+		{{when widget="autopsia" push="{\"widget\":\"autopsia\",\"display\":\"Autopsia\",\"order\":11,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="alergia" push="{\"widget\":\"alergia\",\"display\":\"Alergias\",\"order\":12,\"editAction\":\"notaAlergia\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, enfermeraCeye, imagenologia, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia\"}"}}
+		{{when widget="riesgoEpidemiologico" push="{\"widget\":\"riesgoEpidemiologico\",\"display\":\"Riesgo Epidemiológico\",\"order\":13,\"editAction\":\"notaRiesgoEpidemiologico\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"auxiliarAdmision, auxiliarConsultaExterna, bancoSangre, cajero, enfermera, enfermeraCeye, imagenologia, medico, medicoAnestesiologo, medicoObstetrico, patologia, perfusionista, tecnicoSueno, tecnicoQuimioterapia\"}"}}
+		{{when widget="antecedentes" push="{\"widget\":\"antecedentes\",\"display\":\"Antecedentes\",\"order\":14,\"editAction\":\"notaAntecedentes\",\"heightRatio\":4,\"widthRatio\":2,\"userRole\":\"enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, programadorQuirofanos, tecnicoSueno, tecnicoQuimioterapia\"}"}}
+		{{when widget="atencionesActivas" push="{\"widget\":\"atencionesActivas\",\"display\":\"Servicios Activos\",\"order\":15,\"editAction\":\"\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"bancoSangre, enfermera, enfermeraCeye, imagenologia, medico, medicoAnestesiologo, medicoObstetrico, patologia, perfusionista, programadorQuirofanos, tecnicoSueno, tecnicoQuimioterapia\"}"}}
+		{{when widget="hospitalizacion" push="{\"widget\":\"hospitalizacion\",\"display\":\"Hospitalización\",\"order\":16,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="cateterSondaDrenaje" push="{\"widget\":\"cateterSondaDrenaje\",\"display\":\"Catéteres, Sondas o Drenajes\",\"order\":17,\"editAction\":\"\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista\"}"}}
+		{{when widget="controlLiquidos" push="{\"widget\":\"controlLiquidos\",\"display\":\"Control Liquídos\",\"order\":18,\"editAction\":\"notaControlLiquidos\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista\"}"}}
+		{{when widget="diagnostico" push="{\"widget\":\"diagnostico\",\"display\":\"Diagnósticos\",\"order\":19,\"heightRatio\":2,\"widthRatio\":3,\"userRole\":\"enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, programadorQuirofanos\"}"}}
+		{{when widget="dieta" push="{\"widget\":\"dieta\",\"display\":\"Dieta\",\"order\":20,\"editAction\":\"notaSolicitudDieta\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista\"}"}}
+		{{when widget="discapacidad" push="{\"widget\":\"discapacidad\",\"display\":\"Discapacidades\",\"order\":21,\"editAction\":\"\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia\"}"}}
+		{{when widget="estudioSocioeconomico" push="{\"widget\":\"estudioSocioeconomico\",\"display\":\"Estudio Socioeconómico\",\"order\":22,\"editAction\":\"notaEstudioSocioeconomico\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"directorOperaciones, enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, trabajoSocial, trabajoSocialResponsable\"}"}}
+		{{when widget="imagenologia" push="{\"widget\":\"imagenologia\",\"display\":\"Solicitudes Imagenología\",\"order\":23,\"editAction\":\"notaSolicitudImagenologia\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, enfermeraCeye, imagenologia, medico, medicoAnestesiologo, medicoObstetrico, perfusionista\"}"}}
+		{{when widget="inmunizaciones" push="{\"widget\":\"inmunizaciones\",\"display\":\"Inmunizaciones\",\"order\":24,\"editAction\":\"\",\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="laboratorio" push="{\"widget\":\"laboratorio\",\"display\":\"Solicitudes Laboratorio\",\"order\":25,\"editAction\":\"notaSolicitudLaboratorio\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia\"}"}}
+		{{when widget="registroReferencia" push="{\"widget\":\"registroReferencia\",\"display\":\"Datos Referencia\",\"order\":26,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="escala" push="{\"widget\":\"escala\",\"display\":\"Escalas\",\"order\":27,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="nanda" push="{\"widget\":\"nanda\",\"display\":\"NANDA\",\"order\":28,\"editAction\":\"notaNanda\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera\"}"}}
+		{{when widget="nic" push="{\"widget\":\"nic\",\"display\":\"NIC\",\"order\":29,\"editAction\":\"notaNic\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera\"}"}}
+		{{when widget="noc" push="{\"widget\":\"noc\",\"display\":\"NOC\",\"order\":30,\"editAction\":\"notaNoc\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera\"}"}}
+		{{when widget="medicamento" push="{\"widget\":\"medicamento\",\"display\":\"Solicitudes Medicamentos\",\"order\":31,\"editAction\":\"notaSolicitudMedicamento\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia\"}"}}
+		{{when widget="solucion" push="{\"widget\":\"solucion\",\"display\":\"Solicitudes Soluciones\",\"order\":32,\"editAction\":\"notaSolicitudSolucion\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia\"}"}}
+		{{when widget="mezcla" push="{\"widget\":\"mezcla\",\"display\":\"Solicitudes Mezclas\",\"order\":33,\"editAction\":\"notaSolicitudMezcla\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia\"}"}}
+		{{when widget="medidaGeneral" push="{\"widget\":\"medidaGeneral\",\"display\":\"Solicitudes Medidas Generales\",\"order\":34,\"editAction\":\"notaSolicitudMedidaGeneral\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista\"}"}}
+		{{when widget="patologia" push="{\"widget\":\"patologia\",\"display\":\"Solicitudes Patología\",\"order\":35,\"editAction\":\"notaSolicitudPatologia\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, patologia, perfusionista\"}"}}
+		{{when widget="procedimiento" push="{\"widget\":\"procedimiento\",\"display\":\"Solicitudes Procedimientos\",\"order\":36,\"editAction\":\"notaSolicitudProcedimiento\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista\"}"}}
+		{{when widget="cirugia" push="{\"widget\":\"cirugia\",\"display\":\"Solicitudes Cirugías\",\"order\":37,\"editAction\":\"notaSolicitudCirugia\",\"heightRatio\":2,\"widthRatio\":4,\"userRole\":\"enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista\"}"}}
+		{{when widget="bancoSangre" push="{\"widget\":\"bancoSangre\",\"display\":\"Solicitudes Banco de Sangre\",\"order\":38,\"editAction\":\"notaSolicitudBancoSangre\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"bancoSangre, enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista\"}"}}
+		{{when widget="hemocomponente" push="{\"widget\":\"hemocomponente\",\"display\":\"Solicitudes Hemocomponentes\",\"order\":39,\"editAction\":\"notaSolicitudHemocomponente\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"bancoSangre, enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista\"}"}}
+		{{when widget="gasometria" push="{\"widget\":\"gasometria\",\"display\":\"Gasometría\",\"order\":40,\"editAction\":\"notaGasometria\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista\"}"}}
+		{{when widget="signosVitales" push="{\"widget\":\"signosVitales\",\"display\":\"Signos Vitales\",\"order\":41,\"editAction\":\"notaSignosVitales\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia\"}"}}
+		{{when widget="somatometria" push="{\"widget\":\"somatometria\",\"display\":\"Somatometría\",\"order\":42,\"editAction\":\"notaSomatometria\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia\"}"}}
+		{{when widget="somatometriaNutricion" push="{\"widget\":\"somatometriaNutricion\",\"display\":\"Somatometría Nutrición\",\"order\":43,\"editAction\":\"notaSomatometriaNutricion\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista\"}"}}
+		{{when widget="adjuntos" push="{\"widget\":\"adjuntos\",\"display\":\"Adjuntos\",\"order\":44,\"editAction\":\"notaAdjuntos\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista\"}"}}
+		{{when widget="consultaExterna" push="{\"widget\":\"consultaExterna\",\"display\":\"Solicitudes Consultas Externas\",\"order\":45,\"editAction\":\"notaSolicitudConsultaExterna\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista\"}"}}
+		{{when widget="interconsulta" push="{\"widget\":\"interconsulta\",\"display\":\"Solicitudes Interconsulta\",\"order\":46,\"editAction\":\"notaSolicitudInterconsulta\",\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="material" push="{\"widget\":\"material\",\"display\":\"Solicitudes Materiales o Insumos\",\"order\":47,\"editAction\":\"notaSolicitudMaterial\",\"heightRatio\":4,\"widthRatio\":3,\"userRole\":\"enfermera, tecnicoSueno, tecnicoQuimioterapia\"}"}}
+		{{when widget="materialCeye" push="{\"widget\":\"materialCeye\",\"display\":\"Solicitudes Materiales CEYE\",\"order\":48,\"editAction\":\"notaSolicitudMaterialCeye\",\"heightRatio\":4,\"widthRatio\":3}"}}
+		{{when widget="expedientesFusionados" push="{\"widget\":\"expedientesFusionados\",\"display\":\"Expedientes Fusionados\",\"order\":49,\"heightRatio\":2,\"widthRatio\":2,\"openAction\":\"expedientesFusionados\"}"}}
+		{{when widget="documentacion" push="{\"widget\":\"documentacion\",\"display\":\"Documentación\",\"order\":50,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="contrato" push="{\"widget\":\"contrato\",\"display\":\"Contratos\",\"order\":51,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="lineaCredito" push="{\"widget\":\"lineaCredito\",\"display\":\"Línea Crédito\",\"order\":52,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="cartaCredito" push="{\"widget\":\"cartaCredito\",\"display\":\"Cartas Crédito\",\"order\":53,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="nivelRiesgo" push="{\"widget\":\"nivelRiesgo\",\"display\":\"Nivel Riesgo\",\"order\":54,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="historialCredito" push="{\"widget\":\"historialCredito\",\"display\":\"Historial Crédito\",\"order\":55,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="historialVenta" push="{\"widget\":\"historialVenta\",\"display\":\"Historial Ventas\",\"order\":56,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="referencia" push="{\"widget\":\"referencia\",\"display\":\"Referencias \",\"order\":57,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="asignacion" push="{\"widget\":\"asignacion\",\"display\":\"Asignaciones\",\"order\":58,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="clasificacion" push="{\"widget\":\"clasificacion\",\"display\":\"Clasificación\",\"order\":59,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="sucursal" push="{\"widget\":\"sucursal\",\"display\":\"Sucursales\",\"order\":60,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="contacto" push="{\"widget\":\"contacto\",\"display\":\"Contactos\",\"order\":61,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="encuesta" push="{\"widget\":\"encuesta\",\"display\":\"Encuestas\",\"order\":62,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="objetivoPersonal" push="{\"widget\":\"objetivoPersonal\",\"display\":\"Objetivos Personales\",\"order\":63,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="experienciaLaboral" push="{\"widget\":\"experienciaLaboral\",\"display\":\"Experiencia Laboral\",\"order\":64,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="educacion" push="{\"widget\":\"educacion\",\"display\":\"Educación\",\"order\":65,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="certificacion" push="{\"widget\":\"certificacion\",\"display\":\"Certificaciones y Licenciaturas\",\"order\":66,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="voluntario" push="{\"widget\":\"voluntario\",\"display\":\"Experiencia como Voluntario\",\"order\":67,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="aptitud" push="{\"widget\":\"aptitud\",\"display\":\"Aptitudes\",\"order\":68,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="logro" push="{\"widget\":\"logro\",\"display\":\"Logros Importantes\",\"order\":69,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="inicitivaPersonal" push="{\"widget\":\"inicitivaPersonal\",\"display\":\"Iniciativas\",\"order\":70,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="inquietudPersonal" push="{\"widget\":\"inquietudPersonal\",\"display\":\"Inquietudes\",\"order\":71,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="solicitudPersonal" push="{\"widget\":\"solicitudPersonal\",\"display\":\"Solicitudes\",\"order\":72,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="puntualidad" push="{\"widget\":\"puntualidad\",\"display\":\"Puntualidad\",\"order\":73,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="sueldoPrestaciones" push="{\"widget\":\"sueldoPrestaciones\",\"display\":\"Sueldo y Prestaciones\",\"order\":74,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="pasatiempo" push="{\"widget\":\"pasatiempo\",\"display\":\"Deportes y Pasatiempos\",\"order\":75,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="precioCosto" push="{\"widget\":\"precioCosto\",\"display\":\"Precios y Costos\",\"order\":76,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="proveedor" push="{\"widget\":\"proveedor\",\"display\":\"Proveedores\",\"order\":77,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="porRecibir" push="{\"widget\":\"porRecibir\",\"display\":\"Por Recibir\",\"order\":78,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="porSurtir" push="{\"widget\":\"porSurtir\",\"display\":\"por Surtir\",\"order\":79,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="planeacionArticulo" push="{\"widget\":\"planeacionArticulo\",\"display\":\"Planeación Inventario\",\"order\":80,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="calidadArticulo" push="{\"widget\":\"calidadArticulo\",\"display\":\"Control Calidad\",\"order\":81,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="caracteristicasArticulo" push="{\"widget\":\"caracteristicasArticulo\",\"display\":\"Características\",\"order\":82,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="opcionesArticulo" push="{\"widget\":\"opcionesArticulo\",\"display\":\"Opciones\",\"order\":83,\"heightRatio\":2,\"widthRatio\":2}"}}
+	{{/function}}
+	{{#function id="notification" paramType="text" returnType="json"}}
+		{{define type="param" id="notification"}}
+	{{/function}}
+	{{#function id="flow" paramType="text" returnType="json"}}
+		{{define type="param" id="document"}}
+		{{define type="param" id="attribute1"}}
+		{{define type="param" id="attribute2"}}
+		{{define type="param" id="attribute3"}}
+	{{/function}}
+	{{#function id="kpi" paramType="text" returnType="json"}}
+		{{define type="param" id="document"}}
+		{{define type="param" id="attribute1"}}
+		{{define type="param" id="attribute2"}}
+		{{define type="param" id="attribute3"}}
+	{{/function}}
+	{{#function id="dpi" paramType="text" returnType="json"}}
+		{{define type="param" id="document"}}
+		{{define type="param" id="attribute1"}}
+		{{define type="param" id="attribute2"}}
+		{{define type="param" id="attribute3"}}
+	{{/function}}
+	{{#function id="mov" paramType="text" returnType="json"}}
+		{{define type="param" id="document"}}
+		{{define type="param" id="attribute1"}}
+		{{define type="param" id="attribute2"}}
+		{{define type="param" id="attribute3"}}
+	{{/function}}
+	{{#function id="edi" paramType="text" returnType="json"}}
+		{{define type="param" id="document"}}
+		{{define type="param" id="service"}}
+	{{/function}}
+{{/define}}

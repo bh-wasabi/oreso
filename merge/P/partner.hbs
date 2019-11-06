@@ -1,0 +1,33 @@
+{{#define id="partner"}}  
+  {{param name="=base.nombre||'Partner'"}}
+  {{action id="eliminar" hide="true"}}
+  {{action id="ver" condition="=true" type="openFolder" label="Adjuntos" items="=adjuntos" color="grey" visibleMode="close"}}
+  {{#view id="lista"}}
+    {{#find}}
+      {{include field="base.nombre"}}
+      {{include field="base.tipoPartner"}}
+      {{sort field="_name" direction="asc"}}
+      {{search field="base.nombre"}}
+    {{/find}}
+  {{/view}}
+  {{#section id="base"}}
+    {{field id="esPersonaMoral" type="expr" value="=@tipoPersona=='personaMoral'"}}
+    {{field id="esPersonaFisica" type="expr" value="=@tipoPersona=='personaFisica'"}}
+  {{/section}}
+  {{#grid id="adjuntos" section="adjuntos" allowRemove="true" allowSort="true" sortBy="orden, fecha"}}
+    {{column field="nombre" width="400"}}
+    {{column field="tipo" width="200"}}
+    {{column field="fecha" width="100" readOnly="true"}}
+    {{column field="ext" width="100" readOnly="true"}}
+    {{column field="tamano" width="100" readOnly="true"}}
+    {{column field="orden" width="60"}}
+  {{/grid}}
+{{/define}}
+{{#markup}}
+  {{#template id="lista"}}
+    <div>
+      {{base.nombre}}
+      <br><span style="font-size:12px;">{{base._tipoPartner}}</span>
+    </div>
+  {{/template}}
+{{/markup}}

@@ -1,0 +1,61 @@
+{{#define id="_user"}}
+  {{param name="=_params.service==='tesoreria'?'Cajero':'Usuario'"}}
+
+  {{action id="eliminar" hide="true"}}
+  {{#action id="ver" condition="=true" label="Ver Planeación" type="view-scheduler" color="cyan"}}
+    {{scheduler type="plan" startDayHour="=prestadorServicios.horaInicioDia" endDayHour="=prestadorServicios.horaFinDia" cellDuration="30" resourceSource="planAgenda" resourceView="agendasActivas" resourceField="schedule" views="month,week,day" currentView="month"}}
+  {{/action}}
+  {{#action id="ver2" condition="=true" label="Ver Agenda" type="view-scheduler" btnSolid="false" color="green"}}
+    {{scheduler type="busy" startDayHour="=prestadorServicios.horaInicioDia" endDayHour="=prestadorServicios.horaFinDia" cellDuration="30" resourceSource="planAgenda" resourceView="agendasActivas" resourceField="schedule" views="month,week,day" currentView="week"}}
+  {{/action}}
+  {{#view id="lista"}}
+    {{#find}}
+      {{include field="_name"}}
+      {{include field="base.clave"}}
+      {{include field="base.estatus"}}
+      {{include field="base.area"}}
+      {{include field="base.correo"}}
+      {{include field="base.especialidad"}}    
+      {{sort field="_name" direction="asc"}}
+      {{search field="_name"}}
+      {{search field="base._especialidad"}}
+    {{/find}}
+  {{/view}}
+  {{#section id="base"}}
+    {{field id="esLocal" type="expr" value="=@metodoAcceso==='local'"}}
+    {{#field id="horaInicioDia"}}
+      {{editor interval="60"}}
+    {{/field}}
+    {{#field id="horaFinDia"}}
+      {{editor interval="60"}}
+    {{/field}}
+  {{/section}}
+  {{#section id="_access"}}
+    {{field id="method" type="expr" value="=base.metodoAcceso"}}
+    {{field id="userId" type="expr" value="=base.correo"}}
+    {{field id="hash" type="expr" value="=calc.sha1(base.contrasena)"}}
+    {{field id="isActive" type="expr" value="=calc.in(base.estatus, ['activo','afectado'])"}}
+    {{field id="name" type="expr" value="=base.nombre"}}
+    {{field id="level" type="expr" value="=base.nivelAcceso"}}
+    {{field id="roles" type="expr" value="=base.rolesAcceso"}}
+    {{field id="branch" type="expr" value="=base.sucursal"}}
+    {{field id="area" type="expr" value="=base.area"}}
+    {{field id="subArea" type="expr" value="=base.subArea"}}
+    {{field id="subordinates" type="expr" value="=base.subordinados"}}
+    {{field id="identification" type="expr" value="=prestadorServicios.identificacion"}}
+    {{field id="_identification" type="expr" value="=prestadorServicios._identificacion"}}
+    {{field id="responsable" type="expr" value="=prestadorServicios.responsable"}}
+    {{field id="_responsable" type="expr" value="=prestadorServicios._responsable"}}
+    {{field id="_responsable" type="expr" value="=prestadorServicios._responsable"}}
+    {{field id="autoPrint" type="expr" value="=calc.isTrue(prestadorServicios.permisos.base.autoImpresion)"}}
+  {{/section}}   
+{{/define}}  
+{{#markup}}
+  {{#template id="lista"}}
+    <div>
+      {{_name}}</br>
+      <span style="font-size:12px;">{{base.correo}}</span>
+      <span style="font-size:12px;float:right;">{{base._area}}</span>
+    </div>    
+  {{/template}}
+{{/markup}}

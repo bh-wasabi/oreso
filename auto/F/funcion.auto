@@ -1,0 +1,213 @@
+{{#define type="doc" id="funcion"}}
+	{{param defaultDisplay="_name"}}
+	{{param defaultView="lista"}}
+	{{param pageStart="1"}}
+	{{param pagesJustified="true"}}
+	{{param pagesTabsPosition="left"}}
+	{{param pagesTabsWidth="20%"}}
+	{{param pagesTabsMinPadding="false"}}
+	{{param allowAdd="true"}}
+	{{param allowEdit="true"}}
+	{{param allowDirectOperations="true"}}
+	{{param attachSection="adjuntos"}}
+	{{param attachLanguage="es"}}
+	{{param confirmUnSaved="true"}}
+	{{param showChangeHistory="true"}}
+	{{param pdfPageSize="letter"}}
+	{{param startOnOpen="base"}}
+	{{param baseName="Datos Generales"}}
+	{{param displayExpr="base.nombre"}}
+	{{param name="Función"}}
+	{{param group="Registro"}}
+	{{param fullWidth="true"}}
+	{{param modalSize="xlong"}}
+	{{param autoOpenEditors="true"}}
+	{{param autoAffect="node-direct"}}
+	{{param bannerTopTemplate="banner1"}}
+	{{action id="subdoc" condition="=false"}}
+	{{action id="subdoc2" condition="=false"}}
+	{{action id="subdoc3" condition="=false"}}
+	{{action id="subdoc4" condition="=false"}}
+	{{action id="tool" condition="=false"}}
+	{{action id="tool2" condition="=false"}}
+	{{action id="tool3" condition="=false"}}
+	{{action id="ver" condition="=false" visibleMode="close"}}
+	{{action id="ver2" condition="=false" visibleMode="close"}}
+	{{action id="copiar" type="copy" label="Copiar" condition="=false"}}
+	{{action id="copiar2" type="copy" label="Copiar" condition="=false"}}
+	{{action id="preliminar" type="report-pdf" label="PDF" report="preliminar" fileName="=_name" visibleMode="close" color="grey"}}
+	{{action id="cancelar" type="cancel-edit" color="grey"}}
+	{{action id="sugerir1" condition="=false" visibleMode="close"}}
+	{{action id="adjuntar" type="attach" label="Adjuntar..." color="grey"}}
+	{{action id="excel" type="openFile" label="Cargar Excel..." color="green" condition="=false"}}
+	{{action id="importarDatos" type="pasteText" label="Importar Datos..." color="green" condition="=false"}}
+	{{action id="eliminar" type="remove" label="Eliminar"}}
+	{{action id="abrir" type="open" label="Editar" condition="=!@_isAffected"}}
+	{{action id="afectar" label="Procesar" type="affect-direct" workflow="afectar"}}
+	{{section id="_options" temp="true"}}
+	{{section id="_params" temp="true"}}
+	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
+		{{#field id="tipoProducto" label="Tipo Producto" type="text" recordHide="true" column="A" references="tipoProducto" modalHide="true" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.tipoProducto" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="nombre" label="Nombre" type="text" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="industria" label="Industria" type="text" column="A" references="app.industria" labelModalClass="full-width"}}
+			{{#editor type="select" preset="app.industria" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="actividad" label="Actividad" type="text" column="A" references="actividad" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.actividad" width="100%"}}
+			{{/editor}}
+		{{/field}}
+	{{/section}}
+	{{#section id="temas" type="array"}}
+		{{#field id="orden" label="Orden" type="number" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="tema" label="Tema" type="reference" column="A" references="tema" labelModalClass="full-width"}}
+			{{#editor type="select" source="tema" view="lista" width="100%"}}
+			{{/editor}}
+		{{/field}}
+	{{/section}}
+	{{#report id="preliminar-encabezado"}}
+		{{#stack}}
+			{{#columns margin="20" widths="210,150,*"}}
+				{{#column}}
+					{{row image="logo" alignment="left" imageWidth="90" margin="0,-15,0,0"}}
+				{{/column}}
+				{{#column margin="0,-10,0,0"}}
+					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Leibnitz 83-1" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Anzures 11590 CDMX" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
+				{{/column}}
+				{{#column}}
+					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
+					{{/row}}
+				{{/column}}
+			{{/columns}}
+		{{/stack}}
+	{{/report}}
+	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true"}}
+		{{#stack}}
+			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
+		{{/stack}}
+		{{#stack}}
+			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+				{{row field="nombre" align="left"}}
+				{{row field="industria" align="left"}}
+				{{row field="actividad" align="left"}}
+			{{/record}}
+		{{/stack}}
+		{{#stack}}
+			{{#row text="Temas" fontSize="10" bold="true"}}
+			{{/row}}
+			{{#table title="Temas" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="temas" headerStyle="field" margin="0,5,10,10" removeEmptyCols="true"}}
+				{{column field="orden"}}
+				{{column field="tema"}}
+			{{/table}}
+		{{/stack}}
+	{{/report}}
+	{{#view id="lista" name="Lista"}}
+		{{#find}}
+			{{include field="_name"}}
+			{{search field="_name"}}
+			{{sort field="_id" direction="desc"}}
+		{{/find}}
+		{{editor display="_name"}}
+	{{/view}}
+	{{#browser id="lista" view="lista" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%"}}
+		{{list itemTemplate="lista" allowSearch="true" allowRefresh="true" allowEdit="true" allowInsert="true"}}
+	{{/browser}}
+	{{#workflow id="afectar" start="afectar"}}
+		{{#step id="afectar"}}
+			{{#user}}
+				{{#validate condition="=!_name" error="Nombre Incorrecto"}}
+				{{/validate}}
+				{{#spAffect engine="node"}}
+					{{#update section="base"}}
+						{{set estatus="afectado"}}
+						{{set _estatus="Afectado"}}
+					{{/update}}
+				{{/spAffect}}
+			{{/user}}
+		{{/step}}
+	{{/workflow}}
+	{{#workflow id="cancelar" start="cancelar"}}
+		{{#step id="cancelar"}}
+			{{#user}}
+				{{#spAffect engine="node" action="cancel"}}
+					{{#update section="base"}}
+						{{set estatus="cancelado"}}
+						{{set _estatus="Cancelado"}}
+					{{/update}}
+				{{/spAffect}}
+			{{/user}}
+		{{/step}}
+	{{/workflow}}
+{{/define}}
+{{#markup}}
+	{{#page name="Función"}}
+		{{row}}
+		{{row}}
+		{{#row}}
+			{{#zone id="base" modal="base"}}
+				{{#row class="auto-form-row"}}
+					{{#col medium="100%" class="auto-form-col"}}
+						{{#h5 class="auto-form-h5"}}
+							Datos Generales
+						{{/h5}}
+						{{#with base}}
+							{{record this widths="20%,80%" rows="nombre, industria, actividad" class="auto-form-record"}}
+							{{br}}
+						{{/with}}
+					{{/col}}
+				{{/row}}
+			{{/zone}}
+		{{/row}}
+		{{#row}}
+			{{#zone id="temas" modalGrid="temas"}}
+				{{#row class="auto-form-row"}}
+					{{#col medium="100%" class="auto-form-col"}}
+						{{#h5 class="auto-form-h5"}}
+							Temas
+						{{/h5}}
+						{{#div}}
+							{{table temas class="auto-form-table" cols="orden, tema" medium="5,80,15" removeEmptyCols="true" unlink="true"}}
+							{{br}}
+						{{/div}}
+					{{/col}}
+				{{/row}}
+			{{/zone}}
+		{{/row}}
+	{{/page}}
+	{{#modal base id="base" name="Datos Generales" size="xlong" next="temas"}}
+		{{#col medium="100%" vertical="100%"}}
+			{{#fieldSet}}
+				{{field tipoProducto hide="true"}}
+				{{field nombre}}
+				{{field industria}}
+				{{field actividad}}
+			{{/fieldSet}}
+		{{/col}}
+	{{/modal}}
+	{{modal temas id="temas" name="Temas" grid="temas" size="xwide" prev="base"}}
+	{{#template id="lista"}}
+		<div>{{_name}}</div>
+	{{/template}}
+	{{#template2 id="funcion"}}
+		<br>Nombre: {{nombre}}
+		<br>Industria: {{_industria}}
+		<br>Actividad: {{_actividad}}
+	{{/template2}}
+	{{#template3 id="funcion"}}
+		{{#if nombre}}<br>Nombre: {{nombre}}{{/if}}
+		{{#if industria}}<br>Industria: {{_industria}}{{/if}}
+		{{#if actividad}}<br>Actividad: {{_actividad}}{{/if}}
+	{{/template3}}
+{{/markup}}

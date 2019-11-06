@@ -1,0 +1,16 @@
+{{#define id="planAgenda"}}
+  {{#view id="agendasActivas"}}    
+    {{define type="param" id="id"}}   {{!-- este id se usa para filtar por actor especifico --}}
+    {{#find limit="-1" flatten="true"}}
+      {{include field="_id" as="id"}}
+      {{include field="base._area" as="area"}}
+      {{include field="base._subArea" as="subArea"}}
+      {{include field="base.color" as="color"}}
+      {{include field="base.tipoRecurso" as="tipoRecurso"}}
+      {{include field="base.tipoServicio" as="tipoServicio"}}
+      {{filter field="base.estatus" eq="'afectado'"}}
+      {{filter condition="=id" field="base.recurso" eq="id"}}
+    {{/find}}
+    {{calc field="text" value="=fn('areaSubArea', @area, @subArea)"}}
+  {{/view}}
+{{/define}}

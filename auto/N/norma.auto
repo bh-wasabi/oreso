@@ -1,0 +1,217 @@
+{{#define type="doc" id="norma"}}
+	{{param defaultDisplay="_name"}}
+	{{param defaultView="lista"}}
+	{{param pageStart="1"}}
+	{{param pagesJustified="true"}}
+	{{param pagesTabsPosition="left"}}
+	{{param pagesTabsWidth="20%"}}
+	{{param pagesTabsMinPadding="false"}}
+	{{param allowAdd="true"}}
+	{{param allowEdit="true"}}
+	{{param allowDirectOperations="true"}}
+	{{param attachSection="adjuntos"}}
+	{{param attachLanguage="es"}}
+	{{param confirmUnSaved="true"}}
+	{{param showChangeHistory="true"}}
+	{{param pdfPageSize="letter"}}
+	{{param startOnOpen="base"}}
+	{{param baseName="Datos Generales"}}
+	{{param displayExpr="base.nombre"}}
+	{{param name="Norma"}}
+	{{param group="Registro"}}
+	{{param fullWidth="true"}}
+	{{param modalSize="long"}}
+	{{param autoOpenEditors="true"}}
+	{{param autoAffect="node-direct"}}
+	{{param bannerTopTemplate="banner1"}}
+	{{action id="subdoc" condition="=false"}}
+	{{action id="subdoc2" condition="=false"}}
+	{{action id="subdoc3" condition="=false"}}
+	{{action id="subdoc4" condition="=false"}}
+	{{action id="tool" condition="=false"}}
+	{{action id="tool2" condition="=false"}}
+	{{action id="tool3" condition="=false"}}
+	{{action id="ver" condition="=false" visibleMode="close"}}
+	{{action id="ver2" condition="=false" visibleMode="close"}}
+	{{action id="copiar" type="copy" label="Copiar" condition="=false"}}
+	{{action id="copiar2" type="copy" label="Copiar" condition="=false"}}
+	{{action id="preliminar" type="report-pdf" label="PDF" report="preliminar" fileName="=_name" visibleMode="close" color="grey"}}
+	{{action id="cancelar" type="cancel-edit" color="grey"}}
+	{{action id="sugerir1" condition="=false" visibleMode="close"}}
+	{{action id="adjuntar" type="attach" label="Adjuntar..." color="grey"}}
+	{{action id="excel" type="openFile" label="Cargar Excel..." color="green" condition="=false"}}
+	{{action id="importarDatos" type="pasteText" label="Importar Datos..." color="green" condition="=false"}}
+	{{action id="eliminar" type="remove" label="Eliminar"}}
+	{{action id="abrir" type="open" label="Editar" condition="=!@_isAffected"}}
+	{{action id="afectar" label="Procesar" type="affect-direct" workflow="afectar"}}
+	{{section id="_options" temp="true"}}
+	{{section id="_params" temp="true"}}
+	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
+		{{#field id="codigo" label="Código" type="text" column="A" labelModalClass="full-width"}}
+			{{#editor case="upper" width="100%"}}
+			{{/editor}}
+			{{validator type="required"}}
+		{{/field}}
+		{{#field id="descripcion" label="Descripción" type="text" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+			{{validator type="required"}}
+		{{/field}}
+		{{#field id="emisor" label="Emisor" type="text" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+			{{validator type="required"}}
+		{{/field}}
+		{{#field id="tipoAfiliacion" label="Tipo Afiliación" type="text" column="A" references="tipoAfiliacion" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.tipoAfiliacion" width="100%"}}
+			{{/editor}}
+			{{validator type="required"}}
+		{{/field}}
+	{{/section}}
+	{{#section id="funciones" type="array"}}
+		{{field id="orden" label="Orden" type="number" column="A"}}
+		{{#field id="funcion" label="Función" type="reference" column="A" references="funcion"}}
+			{{#editor type="select" source="funcion" view="lista"}}
+			{{/editor}}
+		{{/field}}
+	{{/section}}
+	{{#report id="preliminar-encabezado"}}
+		{{#stack}}
+			{{#columns margin="20" widths="210,150,*"}}
+				{{#column}}
+					{{row image="logo" alignment="left" imageWidth="90" margin="0,-15,0,0"}}
+				{{/column}}
+				{{#column margin="0,-10,0,0"}}
+					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Leibnitz 83-1" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Anzures 11590 CDMX" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
+				{{/column}}
+				{{#column}}
+					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
+					{{/row}}
+				{{/column}}
+			{{/columns}}
+		{{/stack}}
+	{{/report}}
+	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true"}}
+		{{#stack}}
+			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
+		{{/stack}}
+		{{#stack}}
+			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+				{{row field="codigo" align="left"}}
+				{{row field="descripcion" align="left"}}
+				{{row field="emisor" align="left"}}
+				{{row field="tipoAfiliacion" align="left"}}
+			{{/record}}
+		{{/stack}}
+		{{#stack}}
+			{{#row text="Funciones" fontSize="10" bold="true"}}
+			{{/row}}
+			{{#table title="Funciones" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="funciones" headerStyle="field" margin="0,5,10,10" removeEmptyCols="true"}}
+				{{column field="orden"}}
+				{{column field="funcion"}}
+			{{/table}}
+		{{/stack}}
+	{{/report}}
+	{{#view id="lista" name="Lista"}}
+		{{#find}}
+			{{include field="_name"}}
+			{{search field="_name"}}
+			{{sort field="_id" direction="desc"}}
+		{{/find}}
+		{{editor display="_name"}}
+	{{/view}}
+	{{#browser id="lista" view="lista" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%"}}
+		{{list itemTemplate="lista" allowSearch="true" allowRefresh="true" allowEdit="true" allowInsert="true"}}
+	{{/browser}}
+	{{#workflow id="afectar" start="afectar"}}
+		{{#step id="afectar"}}
+			{{#user}}
+				{{#validate condition="=!_name" error="Nombre Incorrecto"}}
+				{{/validate}}
+				{{#spAffect engine="node"}}
+					{{#update section="base"}}
+						{{set estatus="afectado"}}
+						{{set _estatus="Afectado"}}
+					{{/update}}
+				{{/spAffect}}
+			{{/user}}
+		{{/step}}
+	{{/workflow}}
+	{{#workflow id="cancelar" start="cancelar"}}
+		{{#step id="cancelar"}}
+			{{#user}}
+				{{#spAffect engine="node" action="cancel"}}
+					{{#update section="base"}}
+						{{set estatus="cancelado"}}
+						{{set _estatus="Cancelado"}}
+					{{/update}}
+				{{/spAffect}}
+			{{/user}}
+		{{/step}}
+	{{/workflow}}
+{{/define}}
+{{#markup}}
+	{{#page name="Norma"}}
+		{{row}}
+		{{row}}
+		{{#row}}
+			{{#zone id="base" modal="base"}}
+				{{#row class="auto-form-row"}}
+					{{#col medium="100%" class="auto-form-col"}}
+						{{#h5 class="auto-form-h5"}}
+							Datos Generales
+						{{/h5}}
+						{{#with base}}
+							{{record this widths="20%,80%" rows="codigo, descripcion, emisor, tipoAfiliacion" class="auto-form-record"}}
+							{{br}}
+						{{/with}}
+					{{/col}}
+				{{/row}}
+			{{/zone}}
+		{{/row}}
+		{{#row}}
+			{{#zone id="funciones" modalGrid="funciones"}}
+				{{#row class="auto-form-row"}}
+					{{#col medium="100%" class="auto-form-col"}}
+						{{#h5 class="auto-form-h5"}}
+							Funciones
+						{{/h5}}
+						{{#div}}
+							{{table funciones class="auto-form-table" cols="orden, funcion" medium="10,90" removeEmptyCols="true" unlink="true"}}
+							{{br}}
+						{{/div}}
+					{{/col}}
+				{{/row}}
+			{{/zone}}
+		{{/row}}
+	{{/page}}
+	{{#modal base id="base" name="Datos Generales" size="long" next="funciones"}}
+		{{#col medium="100%" vertical="100%"}}
+			{{#fieldSet}}
+				{{field codigo}}
+				{{field descripcion}}
+				{{field emisor}}
+				{{field tipoAfiliacion}}
+			{{/fieldSet}}
+		{{/col}}
+	{{/modal}}
+	{{modal funciones id="funciones" name="Funciones" grid="funciones" size="xwide" prev="base"}}
+	{{#template id="lista"}}
+		<div>{{_name}}</div>
+	{{/template}}
+	{{#template2 id="norma"}}
+		<br>Código: {{codigo}}
+		<br>Descripción: {{descripcion}}
+		<br>Emisor: {{emisor}}
+		<br>Tipo Afiliación: {{_tipoAfiliacion}}
+	{{/template2}}
+	{{#template3 id="norma"}}
+		{{#if codigo}}<br>Código: {{codigo}}{{/if}}
+		{{#if descripcion}}<br>Descripción: {{descripcion}}{{/if}}
+		{{#if emisor}}<br>Emisor: {{emisor}}{{/if}}
+		{{#if tipoAfiliacion}}<br>Tipo Afiliación: {{_tipoAfiliacion}}{{/if}}
+	{{/template3}}
+{{/markup}}

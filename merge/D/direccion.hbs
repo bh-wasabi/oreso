@@ -1,0 +1,24 @@
+{{#define id="direccion"}}
+  {{#action id="ayudaDireccion" type="geocomplete" county="mx" center="23.634501,-102.552784"}}
+    {{#update section="base" sourcePath="/"}}
+      {{set nombre="=@name"}}
+      {{set direccion="=formatted_address"}}
+      {{set telefonos="=formatted_phone_number"}}
+      {{set mapaUrl="='https://www.google.com/maps?q='+@geoCode"}}
+      {{set geoReferencia="=@geoCode"}}
+    {{/update}}
+  {{/action}}
+  {{#section id="base"}}
+    {{#field id="sepomex" type="text" label="SEPOMEX"}}
+      {{#editor}}
+        {{#onChange}}
+          {{set codigoPostal="=codigoPostal"}}
+          {{set estado="=estado"}}
+          {{set delegacion="=municipio"}}
+          {{set colonia="=colonia"}}
+          {{!-- {{set pais="=pais"}} --}}
+        {{/onChange}}
+      {{/editor}}
+    {{/field}}
+  {{/section}}
+{{/define}}

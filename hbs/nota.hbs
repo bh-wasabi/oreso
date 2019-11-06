@@ -1,0 +1,158 @@
+{{#define type="doc" id="nota"}}
+  {{#view id="cubo"}}
+    {{#find}}
+      {{include field="_name"}}
+      {{include field="_created"}}
+      {{include field="flujo"}}
+      {{include field="base"}}
+      {{filter field="flujo.categoria" in="ticket,asignacion"}}
+    {{/find}}
+  {{/view}}
+  {{#view id="lista"}}
+    {{#find}}
+      {{include field="_name"}}
+      {{include field="_created"}}
+      {{include field="tablero"}}
+      {{include field="persona"}}
+      {{include field="contexto"}}
+      {{include field="edi"}}
+      {{include field="flujo"}}
+      {{sort field="_created.date" direction="desc"}}
+      {{search field="_name"}}
+      {{search field="contexto._diagnostico"}}
+      {{search field="persona.nombreCompleto"}}
+      {{search field="persona.clave"}}
+      {{filter condition="=id" field="persona.id" eq="=id"}}
+      {{filter condition="=request" field="_created.request" eq="=request"}}
+    {{/find}}
+  {{/view}}
+  {{#cube id="cubo" name="Solicitudes" view="cubo" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
+    {{column field="flujo.nombre" width="150" label="Tipo Solicitud"}}
+    {{column field="flujo.grupo5" width="150" label="Sub Tipo"}}
+    {{row field="flujo.titulo" width="150" label="Cliente"}}
+    {{row field="flujo.grupo1" width="150" label="Proyecto"}}
+    {{row field="flujo.grupo2" width="150" label="Inmueble"}}
+    {{row field="flujo.grupo3" width="150" label="Zona"}}
+    {{row field="flujo.grupo4" width="150" label="Ubicación"}}
+    {{count field="_id" label="Cantidad" format="#"}}
+  {{/cube}}
+
+  {{#view id="resumenPorCliente"}}
+    {{#pipeline}}
+      {{group field="flujo.titulo" as="cliente"}}
+      {{group field="cantidad" type="count" as="cantidad"}}
+      {{filter field="flujo.categoria" in="ticket,asignacion"}}
+    {{/pipeline}}
+  {{/view}}
+  {{#chart id="porCliente" type="pie" view="resumenPorCliente" title="por Cliente" tooltip="true" tooltipFormat="fixedPoint"}}
+    {{legend verticalAlignment="top" horizontalAlignment="center" itemTextPosition="right"}}
+    {{serie argumentField="cliente" valueField="cantidad"}}
+  {{/chart}}  
+  {{#view id="resumenPorProyecto"}}
+    {{#pipeline}}
+      {{group field="flujo.grupo1" as="proyecto"}}
+      {{group field="cantidad" type="count" as="cantidad"}}
+      {{filter field="flujo.categoria" in="ticket,asignacion"}}
+    {{/pipeline}}
+  {{/view}}
+  {{#chart id="porProyecto" type="pie" view="resumenPorProyecto" title="por Proyecto" tooltip="true" tooltipFormat="fixedPoint"}}
+    {{legend verticalAlignment="top" horizontalAlignment="center" itemTextPosition="right"}}
+    {{serie argumentField="proyecto" valueField="cantidad"}}
+  {{/chart}}  
+  {{#view id="resumenPorInmueble"}}
+    {{#pipeline}}
+      {{group field="flujo.grupo2" as="inmueble"}}
+      {{group field="cantidad" type="count" as="cantidad"}}
+      {{filter field="flujo.categoria" in="ticket,asignacion"}}
+    {{/pipeline}}
+  {{/view}}
+  {{#chart id="porInmueble" type="pie" view="resumenPorInmueble" title="por Inmueble" tooltip="true" tooltipFormat="fixedPoint"}}
+    {{legend verticalAlignment="top" horizontalAlignment="center" itemTextPosition="right"}}
+    {{serie argumentField="inmueble" valueField="cantidad"}}
+  {{/chart}}  
+
+  {{#view id="bitacora"}}
+    {{#find}}
+      {{include field="_name"}}
+      {{include field="_created"}}
+      {{include field="tablero"}}
+      {{include field="persona"}}
+      {{include field="edi"}}
+      {{sort field="_created.date" direction="desc"}}
+      {{search field="_name"}}
+      {{search field="persona.nombreCompleto"}}
+      {{search field="persona.clave"}}
+      {{filter field="_created.board" eq="=id"}}
+    {{/find}}
+  {{/view}}
+  {{#view id="pendientes"}}
+    {{#find}}
+      {{include field="_name"}}
+      {{include field="_created"}}
+      {{include field="tablero"}}
+      {{include field="persona"}}
+      {{include field="flujo"}}
+      {{sort field="_created.date" direction="asc"}}
+      {{search field="_name"}}
+      {{search field="persona.nombreCompleto"}}
+      {{search field="persona.clave"}}
+      {{filter field="flujo.estatus" eq="='pendiente'"}}
+      {{filter condition="=categoria" field="flujo.categoria" eq="=categoria"}}
+      {{filter condition="=servicio" field="_created.service" eq="=servicio"}}
+    {{/find}}
+  {{/view}}
+  {{#view id="servicio"}}
+    {{#find}}
+      {{include field="_name"}}
+      {{include field="_created"}}
+      {{include field="tablero"}}
+      {{include field="persona"}}
+      {{include field="flujo"}}
+      {{sort field="_created.date" direction="desc"}}
+      {{search field="_name"}}
+      {{search field="persona.nombreCompleto"}}
+      {{search field="persona.clave"}}
+      {{filter field="flujo.estatus" neq="='pendiente'"}}
+      {{filter condition="=categoria" field="flujo.categoria" eq="=categoria"}}
+      {{filter condition="=servicio" field="_created.service" eq="=servicio"}}
+    {{/find}}
+  {{/view}}
+  {{#view id="resumenActivos"}}
+    {{#find}}
+      {{include field="_created"}}
+      {{include field="flujo"}}
+      {{sort field="_id" direction="asc"}}
+      {{filter field="persona.id" eq="=id"}}
+      {{filter field="flujo.estatus" eq="='pendiente'"}}
+    {{/find}}
+    {{calc field="etiqueta" type="expr" value="=calc.concat(calc.format('date', _created.date, 'DD/MMM/YYYY h:mma'))"}}
+    {{calc field="nombre" type="expr" value="=_name"}}
+  {{/view}}
+
+  {{#browser id="lista" view="lista" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%" color="green"}}
+    {{list itemTemplate="persona" allowSearch="true" allowRefresh="true"}}
+  {{/browser}}  
+
+  {{#browser id="bitacora" view="bitacora" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%" color="indigo"}}
+    {{list itemTemplate="persona" allowSearch="true" allowRefresh="true"}}
+  {{/browser}}  
+  {{#browser id="servicio" view="servicio" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%" color="indigo"}}
+    {{list itemTemplate="persona" allowSearch="true" allowRefresh="true"}}
+  {{/browser}}  
+
+{{/define}}
+
+{{#markup}}  
+  {{#template id="verNotaPendiente"}}
+    <div class="list-material">
+      <li class="has-action-left">
+        <div class="list-action-left"><i class="icon ion-{{flujo.icono}} text-{{flujo.color}}"></i></div>
+        <div class="list-content">
+          <span class="title">{{flujo.titulo}}</span>
+          <span style="font-size:12px;">{{_name}}</span>
+          <span style="font-size:12px;float:right;">{{date _created.date "DD/MMM/YYYY h:mma"}}</span>
+        </div>          
+      </li>
+    </div>
+  {{/template}}  
+{{/markup}}

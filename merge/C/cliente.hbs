@@ -1,0 +1,47 @@
+{{#define id="cliente"}}  
+  {{param name="=base.nombre||'Cliente'"}}
+  {{#view id="lista"}}
+    {{#find}}
+      {{include field="base.nombre"}}
+      {{include field="base.tipoCliente"}}
+      {{sort field="_name" direction="asc"}}
+      {{search field="base.nombre"}}
+    {{/find}}
+  {{/view}}
+
+
+  {{action id="eliminar" hide="true"}}
+  {{action id="tool" condition="=true" type="add-template" source="funcion" title="Funciones" label="Agregar Función..." color="deep-orange" visibleMode="open" btnSolid="true"}}
+  {{action id="ver" condition="=true" type="openFolder" label="Adjuntos" items="=adjuntos" color="grey" visibleMode="close"}}
+  {{#grid id="adjuntos" section="adjuntos" allowRemove="true" allowSort="true" sortBy="orden, fecha"}}
+    {{column field="nombre" width="400"}}
+    {{column field="tipo" width="200"}}
+    {{column field="fecha" width="100" readOnly="true"}}
+    {{column field="ext" width="100" readOnly="true"}}
+    {{column field="tamano" width="100" readOnly="true"}}
+    {{column field="orden" width="60"}}
+  {{/grid}}
+  {{#section id="base"}}
+    {{field id="esPersonaMoral" type="expr" value="=@tipoPersona=='personaMoral'"}}
+    {{field id="esPersonaFisica" type="expr" value="=@tipoPersona=='personaFisica'"}}
+  {{/section}}
+  {{#action id="subdoc" condition="=true" type="sub-link" label="Entidades" color="blue" btnSolid="true" visibleMode="close"}}
+    {{#link href="='/entidad/lista'" name="='Entidades: '+_name" title="=_name"}}
+      {{param cliente="_id"}}
+    {{/link}}
+  {{/action}}  
+  {{!-- {{#transform id="copiar"}}
+    {{#update section="base"}}
+      {{set cliente="=_id"}}
+    {{/update}}
+  {{/transform}}
+  {{action id="notaIncidente" source="notaIncidente" label="Incidente" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" btnSolid="true" onlyPost="true"}} --}}
+{{/define}}
+{{#markup}}
+  {{#template id="lista"}}
+    <div>
+      {{base.nombre}}
+      <br><span style="font-size:12px;">{{base._tipoCliente}}</span>
+    </div>
+  {{/template}}
+{{/markup}}

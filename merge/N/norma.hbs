@@ -1,0 +1,13 @@
+{{#define id="norma"}} 
+  {{#section id="funciones"}}
+    {{#field id="funcion"}}
+      {{#editor}}
+        {{param tipoProducto="='gestion'"}}
+      {{/editor}}
+    {{/field}}
+  {{/section}}
+  {{#grid id="funciones" section="funciones" allowInsert="true" allowRemove="true" allowSort="true"}}
+    {{column field="orden" width="50"}}
+    {{column field="funcion" width="800"}}
+  {{/grid}}
+{{/define}}

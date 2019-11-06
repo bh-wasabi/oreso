@@ -1,0 +1,57 @@
+{{#define id="tema"}} 
+  {{#view id="lista"}}
+    {{#find}}
+      {{include field="base.nombre"}}
+      {{include field="base.area"}}
+      {{sort field="base._area" direction="asc"}}
+      {{sort field="base.nombre" direction="asc"}}
+      {{search field="base.nombre"}}
+      {{search field="base._area"}}
+      {{filter condition="=tipoProducto" field="base.tipoProducto" eq="=tipoProducto"}}
+    {{/find}}
+  {{/view}}
+  {{#section id="base"}}
+    {{field id="tipoProducto" defaultValue="_params.tipoProducto"}}
+    {{field id="tieneIndustria" type="expr" value="=calc.in(area, ['temas','aptitudes'])"}}
+    {{field id="tieneActividad" type="expr" value="=calc.in(area, ['temas','aptitudes'])"}}
+  {{/section}}
+  {{#grid id="preguntas" section="preguntas" allowInsert="true" allowRemove="true" allowSort="true"}}
+    {{column field="orden" width="50"}}
+    {{column field="pregunta" width="800"}}
+    {{column field="relevancia" width="100"}}
+  {{/grid}}
+
+  {{#browser id="gestion" view="lista" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%"}}
+    {{list itemTemplate="lista" allowSearch="true" allowRefresh="true" allowEdit="true" allowInsert="true"}}
+    {{param tipoProducto="gestion"}}
+    {{param _tipoProducto="Gestión"}}
+  {{/browser}}  
+  {{#browser id="reclutamiento" view="lista" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%"}}
+    {{list itemTemplate="lista" allowSearch="true" allowRefresh="true" allowEdit="true" allowInsert="true"}}
+    {{param tipoProducto="reclutamiento"}}
+    {{param _tipoProducto="Reclutamiento"}}
+  {{/browser}}  
+  {{#browser id="basico" view="lista" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%"}}
+    {{list itemTemplate="lista" allowSearch="true" allowRefresh="true" allowEdit="true" allowInsert="true"}}
+    {{param tipoProducto="basico"}}
+    {{param _tipoProducto="Básico"}}
+  {{/browser}}  
+  {{#browser id="salida" view="lista" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%"}}
+    {{list itemTemplate="lista" allowSearch="true" allowRefresh="true" allowEdit="true" allowInsert="true"}}
+    {{param tipoProducto="salida"}}
+    {{param _tipoProducto="Salida"}}
+  {{/browser}}  
+  {{#browser id="campusHonesto" view="lista" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%"}}
+    {{list itemTemplate="lista" allowSearch="true" allowRefresh="true" allowEdit="true" allowInsert="true"}}
+    {{param tipoProducto="campusHonesto"}}
+    {{param _tipoProducto="Campus Honesto"}}
+  {{/browser}}  
+{{/define}}
+{{#markup}}
+  {{#template id="lista"}}
+    <div>
+      {{base.nombre}}
+      <br><span style="font-size:12px;">{{base._area}}</span>
+    </div>
+  {{/template}}
+{{/markup}}

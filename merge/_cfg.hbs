@@ -1,0 +1,80 @@
+{{#define id="_cfg" type="cfg" name="Configuración Interna"}} 
+  {{#function id="folioName"}}
+    {{define type="param" id="name"}}
+    {{define type="param" id="created"}}
+    {{default return="=calc.concat(@name, (@created.board==='telemedicina')?@created._board:'', @created.folio)"}}
+  {{/function}}
+  {{#function id="folioServiceName"}}
+    {{define type="param" id="name"}}
+    {{define type="param" id="created"}}
+    {{default return="=calc.concat(@name, (@created.board==='telemedicina')?@created._board:'', @created._service, @created.folio)"}}
+  {{/function}}
+{{/define}}
+{{#markup}}
+  {{#template id="tarea"}}
+    {{#if descripcion}}<br>Descripción: {{descripcion}}{{/if}}
+    {{#if duracionEstimada}}<br>Duración Estimada (horas): {{duracionEstimada}}{{/if}}
+    {{#if tipoTarea}}<br>Tipo Tarea: {{_tipoTarea}}{{/if}}
+  {{/template}}
+  {{#template id="procesoRealizar"}}
+    {{#if descripcion}}<br>Descripción: {{descripcion}}{{/if}}
+    {{#if tarea}}<br>Tareas: {{_tarea}}{{/if}}
+  {{/template}}
+  {{#template id="formaContacto"}}
+    {{#if telefonoMovil}}<br>Teléfono móvil: {{telefonoMovil}}{{/if}}
+    {{#if telefonoFijo}}<br>Teléfono fijo: {{telefonoFijo}}{{/if}}
+    {{#if correoElectronico}}<br>Correo electrónico: {{correoElectronico}}{{/if}}
+  {{/template}}
+  {{#template id="identificacion"}}
+    {{#if tipoIdentificacion}}<br>Tipo: {{_tipoIdentificacion}}{{/if}}
+    {{#if esOtro}}{{#if otraIdentificacion}}<br>Otro (especifique): {{otraIdentificacion}}{{/if}}{{/if}}
+    {{#if valor}}<br>Número de identificación: {{valor}}{{/if}}
+  {{/template}}
+  {{#template id="permisosPrestadorServicios"}}
+    {{#if autoImpresion}}<br>Auto Impresión: {{_autoImpresion}}{{/if}}
+    {{#if cajero}}<br>Es Cajero: {{_cajero}}{{/if}}
+  {{/template}}
+  {{#template id="contacto"}}
+    {{#if nombreCompleto}}<br>Nombre completo: {{nombreCompleto}}{{/if}}
+    {{#if puestoCargo}}<br>Puesto y/o Cargo: {{puestoCargo}}{{/if}}
+    {{#if area}}<br>Área: {{area}}{{/if}}
+    {{#if subArea}}<br>Sub área: {{subArea}}{{/if}}
+    {{#if formaContacto}}<br>Formas de contacto: {{_formaContacto}}{{/if}}
+    {{#if comentarios}}<br>Comentarios: {{comentarios}}{{/if}}
+  {{/template}}
+  {{#template id="direccion"}}
+    {{#if sepomex}}<br>SEPOMEX: {{_sepomex}}{{/if}}
+    {{#if calle}}<br>Calle: {{calle}}{{/if}}
+    {{#if numeroExterior}}<br>Número Exterior: {{numeroExterior}}{{/if}}
+    {{#if numeroInterior}}<br>Número Interior: {{numeroInterior}}{{/if}}
+    {{#if referenciaUbicacion}}<br>Referencia de ubicación: {{referenciaUbicacion}}{{/if}}
+    {{#if geoLocalizacion}}<br>Geolocalización: {{geoLocalizacion}}{{/if}}
+    {{#if colonia}}<br>Colonia: {{colonia}}{{/if}}
+    {{#if delegacion}}<br>Delegación/Municipio: {{delegacion}}{{/if}}
+    {{#if ciudad}}<br>Ciudad: {{ciudad}}{{/if}}
+    {{#if estado}}<br>Estado: {{estado}}{{/if}}
+    {{#if codigoPostal}}<br>Código postal: {{codigoPostal}}{{/if}}
+    {{#if true}}{{#if pais}}<br>País: {{_pais}}{{/if}}{{/if}}
+    {{#if usoDireccion}}<br>Uso: {{_usoDireccion}}{{/if}}
+  {{/template}}
+  {{#template id="personaFisica"}}
+    {{nombres}} {{apellidoPaterno}} {{apellidoMaterno}}
+  {{/template}}
+  {{#template id="personaMoral"}}
+    {{#if razonSocial}}<br>Razón Social: {{razonSocial}}{{/if}}
+    {{#if rfc}}<br>RFC: {{rfc}}{{/if}}
+    {{#if representanteLegal}}<br>Representante Legal: {{_representanteLegal}}{{/if}}
+  {{/template}}  
+  {{#template id="whatsApp"}}
+    {{#if numero}}<br>Número Móvil: {{numero}}{{/if}}
+    {{#if nombreCompleto}}<br>Nombre: {{nombreCompleto}}{{/if}}
+    {{#if tipoRelacion}}<br>Relación: {{_tipoRelacion}}{{/if}}
+  {{/template}}
+  {{#template id="servicioRealizar"}}
+    {{_articulo}}
+    <br>{{comentarios}}
+  {{/template}}
+  {{#template id="especialidad"}}
+    {{_especialidad}}
+  {{/template}}
+{{/markup}}
