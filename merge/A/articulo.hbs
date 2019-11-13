@@ -1,15 +1,25 @@
-{{#define id="cliente"}}  
+{{#define id="articulo"}}  
   {{param name="=base.nombre||'Cliente'"}}
   {{#view id="lista"}}
     {{#find}}
-      {{include field="base.nombre"}}
-      {{include field="base.tipoCliente"}}
+      {{include field="_name"}}
+      {{include field="base.codigo"}}
+      {{include field="base.marca"}}
+      {{include field="base.estilo"}}
+      {{include field="base.talla"}}
+      {{include field="base.color"}}
       {{sort field="_name" direction="asc"}}
-      {{search field="base.nombre"}}
+      {{search field="_name"}}
+      {{search field="base.codigo"}}
+      {{search field="base._marca"}}
+      {{search field="base._estilo"}}
+      {{search field="base._talla"}}
+      {{search field="base._color"}}
     {{/find}}
   {{/view}}
-
-
+  {{#section id="base"}}
+    {{field id="nombre" type="expr" value="=@descripcion"}}
+  {{/section}}
   {{action id="eliminar" hide="true"}}
   {{action id="ver" condition="=true" type="openFolder" label="Adjuntos" items="=adjuntos" color="grey" visibleMode="close"}}
   {{#grid id="adjuntos" section="adjuntos" allowRemove="true" allowSort="true" sortBy="orden, fecha"}}
@@ -20,16 +30,12 @@
     {{column field="tamano" width="100" readOnly="true"}}
     {{column field="orden" width="60"}}
   {{/grid}}
-  {{#section id="base"}}
-    {{field id="esPersonaMoral" type="expr" value="=@tipoPersona=='personaMoral'"}}
-    {{field id="esPersonaFisica" type="expr" value="=@tipoPersona=='personaFisica'"}}
-  {{/section}}
 {{/define}}
 {{#markup}}
   {{#template id="lista"}}
     <div>
-      {{base.nombre}}
-      <br><span style="font-size:12px;">{{base._tipoCliente}}</span>
+      {{_name}}
+      <br><span style="font-size:12px;">{{base._marca}}</span>
     </div>
   {{/template}}
 {{/markup}}

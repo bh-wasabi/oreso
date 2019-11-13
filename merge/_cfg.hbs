@@ -1,25 +1,26 @@
 {{#define id="_cfg" type="cfg" name="Configuración Interna"}} 
+  {{#function id="dynamicName"}}
+    {{define type="param" id="created"}}
+    {{default return="=calc.concat(@created.name, @created.folio)"}}
+  {{/function}}
   {{#function id="folioName"}}
     {{define type="param" id="name"}}
     {{define type="param" id="created"}}
-    {{default return="=calc.concat(@name, (@created.board==='telemedicina')?@created._board:'', @created.folio)"}}
+    {{default return="=calc.concat(@name, @created.folio)"}}
   {{/function}}
   {{#function id="folioServiceName"}}
     {{define type="param" id="name"}}
     {{define type="param" id="created"}}
-    {{default return="=calc.concat(@name, (@created.board==='telemedicina')?@created._board:'', @created._service, @created.folio)"}}
+    {{default return="=calc.concat(@name, @created._service, @created.folio)"}}
   {{/function}}
+  {{#transform id="copiarPersona"}}
+    {{set id="=_id"}}
+    {{set tipoExpediente="=persona.tipoExpediente"}}
+    {{set nombreCompleto="=persona.nombreCompleto"}}
+    {{set clave="=persona.clave"}}
+  {{/transform}}  
 {{/define}}
 {{#markup}}
-  {{#template id="tarea"}}
-    {{#if descripcion}}<br>Descripción: {{descripcion}}{{/if}}
-    {{#if duracionEstimada}}<br>Duración Estimada (horas): {{duracionEstimada}}{{/if}}
-    {{#if tipoTarea}}<br>Tipo Tarea: {{_tipoTarea}}{{/if}}
-  {{/template}}
-  {{#template id="procesoRealizar"}}
-    {{#if descripcion}}<br>Descripción: {{descripcion}}{{/if}}
-    {{#if tarea}}<br>Tareas: {{_tarea}}{{/if}}
-  {{/template}}
   {{#template id="formaContacto"}}
     {{#if telefonoMovil}}<br>Teléfono móvil: {{telefonoMovil}}{{/if}}
     {{#if telefonoFijo}}<br>Teléfono fijo: {{telefonoFijo}}{{/if}}
@@ -69,12 +70,5 @@
     {{#if numero}}<br>Número Móvil: {{numero}}{{/if}}
     {{#if nombreCompleto}}<br>Nombre: {{nombreCompleto}}{{/if}}
     {{#if tipoRelacion}}<br>Relación: {{_tipoRelacion}}{{/if}}
-  {{/template}}
-  {{#template id="servicioRealizar"}}
-    {{_articulo}}
-    <br>{{comentarios}}
-  {{/template}}
-  {{#template id="especialidad"}}
-    {{_especialidad}}
   {{/template}}
 {{/markup}}

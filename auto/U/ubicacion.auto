@@ -1,4 +1,4 @@
-{{#define type="doc" id="clienteFuncion"}}
+{{#define type="doc" id="ubicacion"}}
 	{{param defaultDisplay="_name"}}
 	{{param defaultView="lista"}}
 	{{param pageStart="1"}}
@@ -12,12 +12,18 @@
 	{{param attachSection="adjuntos"}}
 	{{param attachLanguage="es"}}
 	{{param confirmUnSaved="true"}}
-	{{param showChangeHistory="false"}}
+	{{param showChangeHistory="true"}}
 	{{param pdfPageSize="letter"}}
 	{{param startOnOpen="base"}}
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="base.nombre"}}
-	{{param name="clienteFuncion"}}
+	{{param name="Ubicación"}}
+	{{param group="Registro"}}
+	{{param fullWidth="true"}}
+	{{param modalSize="xlong"}}
+	{{param autoOpenEditors="true"}}
+	{{param autoAffect="node-direct"}}
+	{{param bannerTopTemplate="banner1"}}
 	{{action id="subdoc" condition="=false"}}
 	{{action id="subdoc2" condition="=false"}}
 	{{action id="subdoc3" condition="=false"}}
@@ -37,25 +43,24 @@
 	{{action id="importarDatos" type="pasteText" label="Importar Datos..." color="green" condition="=false"}}
 	{{action id="eliminar" type="remove" label="Eliminar"}}
 	{{action id="abrir" type="open" label="Editar" condition="=!@_isAffected"}}
+	{{action id="afectar" label="Procesar" type="affect-direct" workflow="afectar"}}
 	{{section id="_options" temp="true"}}
 	{{section id="_params" temp="true"}}
 	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
-		{{field id="nombre" label="Nombre" type="text" column="A"}}
-		{{#field id="estatus" label="Estatus" type="text" column="A" references="estatusGeneral" defaultValue="'activo'"}}
-			{{#editor type="select" preset="cfg.estatusGeneral"}}
+		{{#field id="grupo" label="Grupo" type="text" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-	{{/section}}
-	{{#section id="preguntas" type="array"}}
-		{{field id="tema" label="Tema" type="text" column="A"}}
-		{{#field id="area" label="Area" type="text" column="A" references="area"}}
-			{{#editor type="select" preset="cfg.area"}}
+		{{#field id="nombre" label="Nombre" type="text" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{field id="orden" label="Orden" type="number" column="A"}}
-		{{field id="pregunta" label="Pregunta" type="text" column="A"}}
-		{{#field id="relevancia" label="Relevancia" type="text" column="A" references="relevancia"}}
-			{{#editor type="select" preset="cfg.relevancia"}}
+		{{#field id="direccion" label="Dirección" type="doc" column="A" references="direccion" labelModalClass="full-width" source="direccion"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="contacto" label="Contactos" type="docs" column="A" references="contacto" labelModalClass="full-width" source="contacto"}}
+			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
 	{{/section}}
@@ -83,21 +88,12 @@
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+			{{#record title="Ubicación" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+				{{row field="grupo" align="left"}}
 				{{row field="nombre" align="left"}}
-				{{row field="estatus" align="left"}}
+				{{row field="direccion" align="left"}}
+				{{row field="contacto" align="left"}}
 			{{/record}}
-		{{/stack}}
-		{{#stack}}
-			{{#row text="Preguntas" fontSize="10" bold="true"}}
-			{{/row}}
-			{{#table title="Preguntas" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="preguntas" headerStyle="field" margin="0,5,10,10" removeEmptyCols="true"}}
-				{{column field="tema"}}
-				{{column field="area"}}
-				{{column field="orden"}}
-				{{column field="pregunta"}}
-				{{column field="relevancia"}}
-			{{/table}}
 		{{/stack}}
 	{{/report}}
 	{{#view id="lista" name="Lista"}}
@@ -111,9 +107,35 @@
 	{{#browser id="lista" view="lista" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%"}}
 		{{list itemTemplate="lista" allowSearch="true" allowRefresh="true" allowEdit="true" allowInsert="true"}}
 	{{/browser}}
+	{{#workflow id="afectar" start="afectar"}}
+		{{#step id="afectar"}}
+			{{#user}}
+				{{#validate condition="=!_name" error="Nombre Incorrecto"}}
+				{{/validate}}
+				{{#spAffect engine="node"}}
+					{{#update section="base"}}
+						{{set estatus="afectado"}}
+						{{set _estatus="Afectado"}}
+					{{/update}}
+				{{/spAffect}}
+			{{/user}}
+		{{/step}}
+	{{/workflow}}
+	{{#workflow id="cancelar" start="cancelar"}}
+		{{#step id="cancelar"}}
+			{{#user}}
+				{{#spAffect engine="node" action="cancel"}}
+					{{#update section="base"}}
+						{{set estatus="cancelado"}}
+						{{set _estatus="Cancelado"}}
+					{{/update}}
+				{{/spAffect}}
+			{{/user}}
+		{{/step}}
+	{{/workflow}}
 {{/define}}
 {{#markup}}
-	{{#page name="clienteFuncion"}}
+	{{#page name="Ubicación"}}
 		{{row}}
 		{{row}}
 		{{#row}}
@@ -121,50 +143,40 @@
 				{{#row class="auto-form-row"}}
 					{{#col medium="100%" class="auto-form-col"}}
 						{{#h5 class="auto-form-h5"}}
-							Datos Generales
+							Ubicación
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="nombre, estatus" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="grupo, nombre, direccion, contacto" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
 				{{/row}}
 			{{/zone}}
 		{{/row}}
-		{{#row}}
-			{{#zone id="preguntas" modalGrid="preguntas"}}
-				{{#row class="auto-form-row"}}
-					{{#col medium="100%" class="auto-form-col"}}
-						{{#h5 class="auto-form-h5"}}
-							Preguntas
-						{{/h5}}
-						{{#div}}
-							{{table preguntas class="auto-form-table" cols="tema, area, orden, pregunta, relevancia" medium="5,20,10,55,10" removeEmptyCols="true" unlink="true"}}
-							{{br}}
-						{{/div}}
-					{{/col}}
-				{{/row}}
-			{{/zone}}
-		{{/row}}
 	{{/page}}
-	{{#modal base id="base" name="Datos Generales" next="preguntas"}}
+	{{#modal base id="base" name="Ubicación" size="xlong"}}
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
+				{{field grupo}}
 				{{field nombre}}
-				{{field estatus}}
+				{{field direccion}}
+				{{field contacto}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
-	{{modal preguntas id="preguntas" name="Preguntas" grid="preguntas" size="xwide" prev="base"}}
 	{{#template id="lista"}}
 		<div>{{_name}}</div>
 	{{/template}}
-	{{#template2 id="clienteFuncion"}}
+	{{#template2 id="ubicacion"}}
+		<br>Grupo: {{grupo}}
 		<br>Nombre: {{nombre}}
-		<br>Estatus: {{_estatus}}
+		<br>Dirección: {{_direccion}}
+		<br>Contactos: {{_contacto}}
 	{{/template2}}
-	{{#template3 id="clienteFuncion"}}
+	{{#template3 id="ubicacion"}}
+		{{#if grupo}}<br>Grupo: {{grupo}}{{/if}}
 		{{#if nombre}}<br>Nombre: {{nombre}}{{/if}}
-		{{#if estatus}}<br>Estatus: {{_estatus}}{{/if}}
+		{{#if direccion}}<br>Dirección: {{_direccion}}{{/if}}
+		{{#if contacto}}<br>Contactos: {{_contacto}}{{/if}}
 	{{/template3}}
 {{/markup}}

@@ -1,0 +1,35 @@
+{{#define id="notaVenta"}}
+  {{param attribute1="=_created.service"}}
+  {{param removeIfEmptySection="articulos"}}
+  {{param removeIfEmptyField="cantidad"}}
+  {{param startOnOpen="articulos"}}
+
+  {{#section id="articulos"}}
+    {{#field id="aliasArticulo"}}
+      {{#onChange}}
+        {{set articulo="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).articulo"}}
+        {{set _articulo="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id)._articulo"}}
+        {{set valorUnitario="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).precio"}}
+      {{/onChange}}
+    {{/field}}
+    {{#field id="aliasOrigen"}}
+      {{#onChange}}
+        {{set origen="=calc.getPresetPersona('app.aliasUbicacion', aliasOrigen, _doc.persona.id).ubicacion"}}
+        {{set _origen="=calc.getPresetPersona('app.aliasUbicacion', aliasOrigen, _doc.persona.id)._ubicacion"}}
+      {{/onChange}}
+    {{/field}}
+    {{field id="importe" type="calc" value="=valorUnitario*cantidad"}}
+    {{field id="iva" type="calc" value="=importe*(tasaIva/100)"}}
+    {{field id="total" type="calc" value="=importe+iva"}}
+  {{/section}}
+  
+  {{#grid id="articulos" section="articulos" allowInsert="true" allowRemove="true"}}
+    {{column field="aliasArticulo" label="Artículo" width="200"}}
+    {{column field="_articulo" label="Descripción" width="400"}}
+    {{column field="aliasOrigen" label="Origen" width="60" defaultValue="=_params.aliasOrigen"}}
+    {{column field="_origen" label="Ubicación" width="150"}}
+    {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
+    {{column field="valorUnitario" label="Precio Unitario" width="110" type="numeric" format="#,.##"}}
+    {{column field="tasaIva" label="% IVA" width="50" type="numeric" format="#.##" defaultValue="16"}}
+  {{/grid}}
+{{/define}}

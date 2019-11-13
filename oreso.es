@@ -1,29 +1,3 @@
-{"index":{"_id":"actividad/administracion"}}
-{"name":"actividad","code":"administracion","display":"Administración","order":1}
-{"index":{"_id":"actividad/finanzas"}}
-{"name":"actividad","code":"finanzas","display":"Finanzas","order":2}
-{"index":{"_id":"actividad/produccion"}}
-{"name":"actividad","code":"produccion","display":"Producción","order":3}
-{"index":{"_id":"actividad/sistemas"}}
-{"name":"actividad","code":"sistemas","display":"Sistemas","order":4}
-{"index":{"_id":"area/inicial"}}
-{"name":"area","code":"inicial","display":"Inicial","order":1}
-{"index":{"_id":"area/integridad"}}
-{"name":"area","code":"integridad","display":"Integridad","order":2}
-{"index":{"_id":"area/temas"}}
-{"name":"area","code":"temas","display":"Temas","order":3}
-{"index":{"_id":"area/socioeconomico"}}
-{"name":"area","code":"socioeconomico","display":"Socioecónomico","order":4}
-{"index":{"_id":"area/aptitudes"}}
-{"name":"area","code":"aptitudes","display":"Aptitudes","order":5}
-{"index":{"_id":"area/final"}}
-{"name":"area","code":"final","display":"Final","order":6}
-{"index":{"_id":"claseServicio/obligatorioNoComercial"}}
-{"name":"claseServicio","code":"obligatorioNoComercial","display":"Obligatorios No Comerciales","order":1}
-{"index":{"_id":"claseServicio/obligatorioComercial"}}
-{"name":"claseServicio","code":"obligatorioComercial","display":"Obligatorios Comerciales","order":2}
-{"index":{"_id":"claseServicio/opcional"}}
-{"name":"claseServicio","code":"opcional","display":"Opcional","order":3}
 {"index":{"_id":"entidad/BC"}}
 {"name":"entidad","code":"BC","display":"Baja California","order":1}
 {"index":{"_id":"entidad/BS"}}
@@ -3446,14 +3420,6 @@
 {"name":"pais","code":"ZM","display":"Zambia","order":254}
 {"index":{"_id":"pais/ZW"}}
 {"name":"pais","code":"ZW","display":"Zimbabue","order":255}
-{"index":{"_id":"relevancia/40"}}
-{"name":"relevancia","code":"40","display":"40","order":1}
-{"index":{"_id":"relevancia/30"}}
-{"name":"relevancia","code":"30","display":"30","order":2}
-{"index":{"_id":"relevancia/20"}}
-{"name":"relevancia","code":"20","display":"20","order":3}
-{"index":{"_id":"relevancia/0"}}
-{"name":"relevancia","code":"0","display":"0","order":4}
 {"index":{"_id":"tipoAdjunto/foto"}}
 {"name":"tipoAdjunto","code":"foto","display":"Foto","order":1}
 {"index":{"_id":"tipoAdjunto/doc"}}
@@ -3464,28 +3430,12 @@
 {"name":"tipoCertificado","code":"cedulaProfesional","display":"Cedula Profesional","order":1}
 {"index":{"_id":"tipoCertificado/diploma"}}
 {"name":"tipoCertificado","code":"diploma","display":"Diploma","order":2}
-{"index":{"_id":"tipoCliente/facturacionDirecta"}}
-{"name":"tipoCliente","code":"facturacionDirecta","display":"Facturación Directa","order":1}
-{"index":{"_id":"tipoCliente/servicioAdministrado"}}
-{"name":"tipoCliente","code":"servicioAdministrado","display":"Servicio Administrado","order":2}
-{"index":{"_id":"tipoEntidad/matriz"}}
-{"name":"tipoEntidad","code":"matriz","display":"Matríz","order":1}
-{"index":{"_id":"tipoEntidad/sucursal"}}
-{"name":"tipoEntidad","code":"sucursal","display":"Sucursal","order":2}
-{"index":{"_id":"tipoEntidad/ubicacion"}}
-{"name":"tipoEntidad","code":"ubicacion","display":"Ubicación","order":3}
-{"index":{"_id":"tipoEntidad/franquicia"}}
-{"name":"tipoEntidad","code":"franquicia","display":"Franquicia","order":4}
-{"index":{"_id":"tipoProducto/gestion"}}
-{"name":"tipoProducto","code":"gestion","display":"Gestión","order":1}
-{"index":{"_id":"tipoProducto/reclutamiento"}}
-{"name":"tipoProducto","code":"reclutamiento","display":"Reclutamiento","order":2}
-{"index":{"_id":"tipoProducto/basico"}}
-{"name":"tipoProducto","code":"basico","display":"Básico","order":3}
-{"index":{"_id":"tipoProducto/salida"}}
-{"name":"tipoProducto","code":"salida","display":"Salida","order":4}
-{"index":{"_id":"tipoProducto/campusHonesto"}}
-{"name":"tipoProducto","code":"campusHonesto","display":"Campus Honesto","order":5}
+{"index":{"_id":"tipoCliente/cadena"}}
+{"name":"tipoCliente","code":"cadena","display":"Cadena","order":1}
+{"index":{"_id":"tipoCliente/tienda"}}
+{"name":"tipoCliente","code":"tienda","display":"Tienda","order":2}
+{"index":{"_id":"tipoCliente/publicoGeneral"}}
+{"name":"tipoCliente","code":"publicoGeneral","display":"Publico General","order":3}
 {"index":{"_id":"tipoIdentificacion/ine"}}
 {"name":"tipoIdentificacion","code":"ine","display":"INE","order":1}
 {"index":{"_id":"tipoIdentificacion/pasaporte"}}
@@ -3502,18 +3452,6 @@
 {"name":"tipoIdentificacion","code":"documentoMigratorio","display":"Documento migratorio","order":7}
 {"index":{"_id":"tipoIdentificacion/otro"}}
 {"name":"tipoIdentificacion","code":"otro","display":"Otro","order":8}
-{"index":{"_id":"tipoPartner/alianza"}}
-{"name":"tipoPartner","code":"alianza","display":"Alianza","order":1}
-{"index":{"_id":"tipoPartner/distribuidor"}}
-{"name":"tipoPartner","code":"distribuidor","display":"Distribuidor","order":2}
-{"index":{"_id":"tipoPartner/referencia"}}
-{"name":"tipoPartner","code":"referencia","display":"Referencia","order":3}
-{"index":{"_id":"tipoPartner/coordinador"}}
-{"name":"tipoPartner","code":"coordinador","display":"Coordinador","order":4}
-{"index":{"_id":"tipoPartner/academia"}}
-{"name":"tipoPartner","code":"academia","display":"Academia","order":5}
-{"index":{"_id":"tipoPartner/regulador"}}
-{"name":"tipoPartner","code":"regulador","display":"Regulador","order":6}
 {"index":{"_id":"tipoPersona/personaFisica"}}
 {"name":"tipoPersona","code":"personaFisica","display":"Persona Física","order":1}
 {"index":{"_id":"tipoPersona/personaMoral"}}
@@ -3544,7 +3482,41 @@
 {"name":"usoIdentificacion","code":"oficial","display":"Oficial","order":1}
 {"index":{"_id":"usoIdentificacion/secundario"}}
 {"name":"usoIdentificacion","code":"secundario","display":"Secundario","order":4}
-{"index":{"_id":"tipoAfiliacion/auditoria"}}
-{"name":"tipoAfiliacion","code":"auditoria","display":"Auditoria","order":1}
-{"index":{"_id":"tipoAfiliacion/voluntaria"}}
-{"name":"tipoAfiliacion","code":"voluntaria","display":"Voluntaría","order":2}
+{"index":{"_id":"marca/maidenform"}}
+{"name":"marca","code":"maidenform","display":"Maiden Form","order":1}
+{"index":{"_id":"marca/selfExpression"}}
+{"name":"marca","code":"selfExpression","display":"Self Expression","order":2}
+{"index":{"_id":"marca/piqueNique"}}
+{"name":"marca","code":"piqueNique","display":"Pique Nique","order":3}
+{"index":{"_id":"marca/thatsIt"}}
+{"name":"marca","code":"thatsIt","display":"That´s it","order":4}
+{"index":{"_id":"marca/icon"}}
+{"name":"marca","code":"icon","display":"Icon","order":5}
+{"index":{"_id":"temporada/B15"}}
+{"name":"temporada","code":"B15","display":"Back to School 2015","order":1}
+{"index":{"_id":"temporada/S15"}}
+{"name":"temporada","code":"S15","display":"Spring 2015","order":2}
+{"index":{"_id":"temporada/B16"}}
+{"name":"temporada","code":"B16","display":"Back to School 2016","order":3}
+{"index":{"_id":"temporada/S16"}}
+{"name":"temporada","code":"S16","display":"Spring 2015","order":4}
+{"index":{"_id":"temporada/B17"}}
+{"name":"temporada","code":"B17","display":"Back to School 2017","order":5}
+{"index":{"_id":"temporada/S17"}}
+{"name":"temporada","code":"S17","display":"Spring 2017","order":6}
+{"index":{"_id":"temporada/B18"}}
+{"name":"temporada","code":"B18","display":"Back to School 2018","order":7}
+{"index":{"_id":"temporada/S18"}}
+{"name":"temporada","code":"S18","display":"Spring 2018","order":8}
+{"index":{"_id":"temporada/B19"}}
+{"name":"temporada","code":"B19","display":"Back to School 2019","order":9}
+{"index":{"_id":"temporada/S19"}}
+{"name":"temporada","code":"S19","display":"Spring 2019","order":10}
+{"index":{"_id":"temporada/B20"}}
+{"name":"temporada","code":"B20","display":"Back to School 2020","order":11}
+{"index":{"_id":"temporada/S20"}}
+{"name":"temporada","code":"S20","display":"Spring 2020","order":12}
+{"index":{"_id":"temporada/B21"}}
+{"name":"temporada","code":"B21","display":"Back to School 2021","order":13}
+{"index":{"_id":"temporada/S21"}}
+{"name":"temporada","code":"S21","display":"Spring 2021","order":14}

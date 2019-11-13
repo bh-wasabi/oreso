@@ -1,0 +1,80 @@
+{{#define type="doc" id="mov"}}
+  {{#view id="inv"}}
+    {{#pipeline}}
+      {{filter field="aux" eq="='inv'"}}
+      {{filter condition="=id" field="='cuenta'" eq="=id"}}
+      {{group field="cuenta"}}
+      {{group field="_cuenta"}}
+      {{group field="codigo"}}
+      {{!-- {{group field="descripcion"}} --}}
+      {{group field="lote"}}
+      {{group field="vencimiento"}}
+      {{group field="cantidadFactor" type="sum" as="cantidad"}}
+      {{group field="importeFactor" type="sum" as="importe"}}
+      {{match field="cantidad" neq="=0"}}
+    {{/pipeline}}
+    {{join source="articulo" as="articulo" view="lista" id="codigo"}}
+    {{join source="persona" as="ubicacion" view="lista" id="cuenta"}}
+    {{calc field="_lote" value="=calc.concat(lote, calc.format('date', vencimiento, 'DD/MMM/YYYY'))"}}
+  {{/view}}
+  {{#cube id="inv" name="Inventario" view="inv" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
+    {{column field="ubicacion.persona.grupo" label="Grupo"}}
+    {{column field="_cuenta" label="Ubicación"}}
+    {{row field="articulo.base._marca" label="Marca" width="100"}}  
+    {{row field="articulo.base._talla" label="Talla" width="100"}}  
+    {{row field="articulo.base._color" label="Color" width="100"}}      
+    {{row field="articulo._name" label="Descripción" width="100"}}  
+    {{row field="_lote" label="Lote"}}
+    {{sum field="cantidad" label="Cantidad" format="#,"}}
+    {{sum field="importe" label="Importe" format="currency"}}
+  {{/cube}}
+
+  {{#view id="cxc"}}
+    {{#pipeline}}
+      {{filter field="aux" eq="='cxc'"}}
+      {{filter condition="=id" field="='cuenta'" eq="=id"}}
+      {{group field="cuenta"}}
+      {{group field="_cuenta"}}
+      {{group field="codigo"}}
+      {{!-- {{group field="descripcion"}} --}}
+      {{group field="lote"}}
+      {{group field="vencimiento"}}
+      {{group field="importeFactor" type="sum" as="importe"}}
+      {{match field="importe" neq="=0"}}
+    {{/pipeline}}
+  {{/view}}
+  {{#cube id="cxc" name="Cuentas por Cobrar" view="cxc" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
+    {{column field="vencimiento" type="date" label="Año" groupInterval="year"}}
+    {{column field="vencimiento" type="date" label="Mes" groupInterval="month"}}
+    {{column field="vencimiento" type="date" label="Día" groupInterval="day"}}
+    {{row field="_cuenta" label="Cliente" width="200"}}
+    {{row field="lote" label="Referencia" width="100"}}
+    {{sum field="importe" label="Importe" format="currency"}}
+  {{/cube}}
+
+  {{#view id="resumenInventario"}}
+    {{#pipeline}}
+      {{filter field="aux" eq="='inv'"}}
+      {{filter condition="=id" field="='cuenta'" eq="=id"}}
+      {{group field="codigo"}}
+      {{group field="descripcion"}}
+      {{group field="lote"}}
+      {{group field="vencimiento"}}
+      {{group field="cantidadFactor" type="sum" as="cantidad"}}
+      {{match field="cantidad" neq="=0"}}
+    {{/pipeline}}
+    {{calc field="etiqueta" type="expr" value="=codigo"}}
+    {{calc field="nombre" type="expr" value="=calc.concat(calc.format('number', cantidad, '#,'), @lote||@descripcion, @vencimiento&&calc.format('date', @vencimiento, 'DD/MMM/YYYY'))"}}
+  {{/view}}
+  {{#view id="resumenCaja"}}
+    {{#pipeline}}
+      {{filter field="aux" eq="='caja'"}}
+      {{filter condition="=id" field="='cuenta'" eq="=id"}}
+      {{group field="descripcion"}}
+      {{group field="importeFactor" type="sum" as="importe"}}
+      {{match field="importe" neq="=0"}}
+    {{/pipeline}}
+    {{calc field="etiqueta" type="expr" value="=descripcion"}}
+    {{calc field="nombre" type="expr" value="=calc.format('number', importe, 'currency')"}}
+  {{/view}}
+{{/define}}

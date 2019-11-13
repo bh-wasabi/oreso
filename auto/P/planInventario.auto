@@ -1,4 +1,4 @@
-{{#define type="doc" id="norma"}}
+{{#define type="doc" id="planInventario"}}
 	{{param defaultDisplay="_name"}}
 	{{param defaultView="lista"}}
 	{{param pageStart="1"}}
@@ -12,18 +12,12 @@
 	{{param attachSection="adjuntos"}}
 	{{param attachLanguage="es"}}
 	{{param confirmUnSaved="true"}}
-	{{param showChangeHistory="true"}}
+	{{param showChangeHistory="false"}}
 	{{param pdfPageSize="letter"}}
 	{{param startOnOpen="base"}}
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="base.nombre"}}
-	{{param name="Norma"}}
-	{{param group="Registro"}}
-	{{param fullWidth="true"}}
-	{{param modalSize="long"}}
-	{{param autoOpenEditors="true"}}
-	{{param autoAffect="node-direct"}}
-	{{param bannerTopTemplate="banner1"}}
+	{{param name="planInventario"}}
 	{{action id="subdoc" condition="=false"}}
 	{{action id="subdoc2" condition="=false"}}
 	{{action id="subdoc3" condition="=false"}}
@@ -43,35 +37,17 @@
 	{{action id="importarDatos" type="pasteText" label="Importar Datos..." color="green" condition="=false"}}
 	{{action id="eliminar" type="remove" label="Eliminar"}}
 	{{action id="abrir" type="open" label="Editar" condition="=!@_isAffected"}}
-	{{action id="afectar" label="Procesar" type="affect-direct" workflow="afectar"}}
 	{{section id="_options" temp="true"}}
 	{{section id="_params" temp="true"}}
 	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
-		{{#field id="codigo" label="Código" type="text" column="A" labelModalClass="full-width"}}
-			{{#editor case="upper" width="100%"}}
-			{{/editor}}
-			{{validator type="required"}}
-		{{/field}}
-		{{#field id="descripcion" label="Descripción" type="text" column="A" labelModalClass="full-width"}}
-			{{#editor width="100%"}}
-			{{/editor}}
-			{{validator type="required"}}
-		{{/field}}
-		{{#field id="emisor" label="Emisor" type="text" column="A" labelModalClass="full-width"}}
-			{{#editor width="100%"}}
-			{{/editor}}
-			{{validator type="required"}}
-		{{/field}}
-		{{#field id="tipoAfiliacion" label="Tipo Afiliación" type="text" column="A" references="tipoAfiliacion" labelModalClass="full-width"}}
-			{{#editor type="select" preset="cfg.tipoAfiliacion" width="100%"}}
-			{{/editor}}
-			{{validator type="required"}}
-		{{/field}}
-	{{/section}}
-	{{#section id="funciones" type="array"}}
-		{{field id="orden" label="Orden" type="number" column="A"}}
-		{{#field id="funcion" label="Función" type="reference" column="A" references="funcion"}}
-			{{#editor type="select" source="funcion" view="lista"}}
+		{{field id="descripcion" label="Artículo" type="text" column="A"}}
+		{{field id="_cuenta" label="Ubicación" type="text" column="A"}}
+		{{field id="salida" label="Salida" type="number" format="#," column="A"}}
+		{{field id="entrada" label="Entrada" type="number" format="#," column="A"}}
+		{{field id="costoUnitario" label="Costo Unitario" type="number" format="currency" column="A"}}
+		{{field id="lote" label="Lote" type="text" column="A"}}
+		{{#field id="vencimiento" label="Vencimiento" type="date" format="DD/MMM/YYYY" column="A" saveFormat="YYYY-MM-DD"}}
+			{{#editor type="date"}}
 			{{/editor}}
 		{{/field}}
 	{{/section}}
@@ -99,20 +75,15 @@
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
-				{{row field="codigo" align="left"}}
+			{{#record title="planInventario" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
 				{{row field="descripcion" align="left"}}
-				{{row field="emisor" align="left"}}
-				{{row field="tipoAfiliacion" align="left"}}
+				{{row field="_cuenta" align="left"}}
+				{{row field="salida" align="left"}}
+				{{row field="entrada" align="left"}}
+				{{row field="costoUnitario" align="left"}}
+				{{row field="lote" align="left"}}
+				{{row field="vencimiento" align="left"}}
 			{{/record}}
-		{{/stack}}
-		{{#stack}}
-			{{#row text="Funciones" fontSize="10" bold="true"}}
-			{{/row}}
-			{{#table title="Funciones" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="funciones" headerStyle="field" margin="0,5,10,10" removeEmptyCols="true"}}
-				{{column field="orden"}}
-				{{column field="funcion"}}
-			{{/table}}
 		{{/stack}}
 	{{/report}}
 	{{#view id="lista" name="Lista"}}
@@ -126,35 +97,9 @@
 	{{#browser id="lista" view="lista" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%"}}
 		{{list itemTemplate="lista" allowSearch="true" allowRefresh="true" allowEdit="true" allowInsert="true"}}
 	{{/browser}}
-	{{#workflow id="afectar" start="afectar"}}
-		{{#step id="afectar"}}
-			{{#user}}
-				{{#validate condition="=!_name" error="Nombre Incorrecto"}}
-				{{/validate}}
-				{{#spAffect engine="node"}}
-					{{#update section="base"}}
-						{{set estatus="afectado"}}
-						{{set _estatus="Afectado"}}
-					{{/update}}
-				{{/spAffect}}
-			{{/user}}
-		{{/step}}
-	{{/workflow}}
-	{{#workflow id="cancelar" start="cancelar"}}
-		{{#step id="cancelar"}}
-			{{#user}}
-				{{#spAffect engine="node" action="cancel"}}
-					{{#update section="base"}}
-						{{set estatus="cancelado"}}
-						{{set _estatus="Cancelado"}}
-					{{/update}}
-				{{/spAffect}}
-			{{/user}}
-		{{/step}}
-	{{/workflow}}
 {{/define}}
 {{#markup}}
-	{{#page name="Norma"}}
+	{{#page name="planInventario"}}
 		{{row}}
 		{{row}}
 		{{#row}}
@@ -162,56 +107,49 @@
 				{{#row class="auto-form-row"}}
 					{{#col medium="100%" class="auto-form-col"}}
 						{{#h5 class="auto-form-h5"}}
-							Datos Generales
+							planInventario
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="codigo, descripcion, emisor, tipoAfiliacion" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="descripcion, _cuenta, salida, entrada, costoUnitario, lote, vencimiento" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
 				{{/row}}
 			{{/zone}}
 		{{/row}}
-		{{#row}}
-			{{#zone id="funciones" modalGrid="funciones"}}
-				{{#row class="auto-form-row"}}
-					{{#col medium="100%" class="auto-form-col"}}
-						{{#h5 class="auto-form-h5"}}
-							Funciones
-						{{/h5}}
-						{{#div}}
-							{{table funciones class="auto-form-table" cols="orden, funcion" medium="10,90" removeEmptyCols="true" unlink="true"}}
-							{{br}}
-						{{/div}}
-					{{/col}}
-				{{/row}}
-			{{/zone}}
-		{{/row}}
 	{{/page}}
-	{{#modal base id="base" name="Datos Generales" size="long" next="funciones"}}
+	{{#modal base id="base" name="planInventario"}}
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
-				{{field codigo}}
 				{{field descripcion}}
-				{{field emisor}}
-				{{field tipoAfiliacion}}
+				{{field _cuenta}}
+				{{field salida}}
+				{{field entrada}}
+				{{field costoUnitario}}
+				{{field lote}}
+				{{field vencimiento}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
-	{{modal funciones id="funciones" name="Funciones" grid="funciones" size="xwide" prev="base"}}
 	{{#template id="lista"}}
 		<div>{{_name}}</div>
 	{{/template}}
-	{{#template2 id="norma"}}
-		<br>Código: {{codigo}}
-		<br>Descripción: {{descripcion}}
-		<br>Emisor: {{emisor}}
-		<br>Tipo Afiliación: {{_tipoAfiliacion}}
+	{{#template2 id="planInventario"}}
+		<br>Artículo: {{descripcion}}
+		<br>Ubicación: {{_cuenta}}
+		<br>Salida: {{number salida "#,"}}
+		<br>Entrada: {{number entrada "#,"}}
+		<br>Costo Unitario: {{number costoUnitario "currency"}}
+		<br>Lote: {{lote}}
+		<br>Vencimiento: {{date vencimiento "DD/MMM/YYYY"}}
 	{{/template2}}
-	{{#template3 id="norma"}}
-		{{#if codigo}}<br>Código: {{codigo}}{{/if}}
-		{{#if descripcion}}<br>Descripción: {{descripcion}}{{/if}}
-		{{#if emisor}}<br>Emisor: {{emisor}}{{/if}}
-		{{#if tipoAfiliacion}}<br>Tipo Afiliación: {{_tipoAfiliacion}}{{/if}}
+	{{#template3 id="planInventario"}}
+		{{#if descripcion}}<br>Artículo: {{descripcion}}{{/if}}
+		{{#if _cuenta}}<br>Ubicación: {{_cuenta}}{{/if}}
+		{{#if salida}}<br>Salida: {{number salida "#,"}}{{/if}}
+		{{#if entrada}}<br>Entrada: {{number entrada "#,"}}{{/if}}
+		{{#if costoUnitario}}<br>Costo Unitario: {{number costoUnitario "currency"}}{{/if}}
+		{{#if lote}}<br>Lote: {{lote}}{{/if}}
+		{{#if vencimiento}}<br>Vencimiento: {{date vencimiento "DD/MMM/YYYY"}}{{/if}}
 	{{/template3}}
 {{/markup}}

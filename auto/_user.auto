@@ -74,10 +74,6 @@
 			{{#editor type="tags" preset="cfg.userRole" searchEnabled="false" searchTimeout="100" showSelectionControls="true" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="subordinados" label="Subordinados" type="array" column="A" references="_user" modalColumn="A" labelModalClass="full-width"}}
-			{{#editor type="tags" source="_user" view="lista" saveSelectedItem="true" searchEnabled="true" width="100%" searchTimeout="100" showSelectionControls="false"}}
-			{{/editor}}
-		{{/field}}
 		{{#field id="estatus" label="Estatus" type="text" column="A" references="estatusUsuario" modalColumn="A" labelModalClass="full-width" defaultValue="'activo'"}}
 			{{#editor type="select" preset="cfg.estatusUsuario" width="100%"}}
 			{{/editor}}
@@ -139,32 +135,7 @@
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="horaInicioDia" label="Hora Inicio Día" type="date" format="hh:mm a" column="A" modalColumn="A" sameLine="start" detach="Agenda" fieldSetHeader="Visualización Agenda" labelModalClass="full-width" saveFormat="YYYY-MM-DDTHH:mm"}}
-			{{#editor type="time" width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="horaFinDia" label="Hora Fin Día" type="date" format="hh:mm a" column="A" modalColumn="A" sameLine="end" detach="Agenda" labelModalClass="full-width" saveFormat="YYYY-MM-DDTHH:mm"}}
-			{{#editor type="time" width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="agendaPlan" label="Planeación Anual" type="docs" hide="true" column="A" references="agendaPlan" modalColumn="A" detach="Agenda" fieldSetHeader="Planeación" labelModalClass="full-width" source="agendaPlan"}}
-			{{#editor width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="especialidad" label="Especialidades" type="array" column="A" references="especialidad" modalColumn="A" detach="Especialidades" fieldSetHeader="Especialidades" labelModalClass="full-width"}}
-			{{#editor type="tags" source="ver" view="codeSystem" unlink="true" forceCache="true" searchEnabled="true" width="100%" searchTimeout="100" showSelectionControls="false" saveSelectedItem="true"}}
-				{{param name="'especialidad'"}}
-			{{/editor}}
-		{{/field}}
 		{{#field id="permisos" label="Permisos" type="doc" recordHide="true" column="A" references="permisosPrestadorServicios" modalColumn="B" labelModalClass="full-width" source="permisosPrestadorServicios"}}
-			{{#editor width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="responsable" label="Responsable" type="reference" column="A" references="_user" modalColumn="B" labelModalClass="full-width"}}
-			{{#editor type="lookup" source="_user" view="lista" searchEnabled="true" width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="datosEspecialidad" label="Datos Especialidades" type="docs" column="A" references="datosEspecialidad" modalColumn="A" detach="Especialidades" labelModalClass="full-width" source="datosEspecialidad"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
@@ -196,7 +167,6 @@
 			{{#record title="Datos Usuario" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
 				{{row field="nombre" align="left"}}
 				{{row field="correo" align="left"}}
-				{{row field="subordinados" align="left"}}
 				{{row field="estatus" align="left"}}
 			{{/record}}
 		{{/stack}}
@@ -219,20 +189,6 @@
 				{{row field="identificacion" align="left"}}
 				{{row field="idioma" align="left"}}
 				{{row field="estudios" align="left"}}
-				{{row field="responsable" align="left"}}
-			{{/record}}
-		{{/stack}}
-		{{#stack}}
-			{{#record title="Agenda" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="prestadorServicios" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
-				{{row field="horaInicioDia" align="left"}}
-				{{row field="horaFinDia" align="left"}}
-				{{row field="agendaPlan" align="left"}}
-			{{/record}}
-		{{/stack}}
-		{{#stack}}
-			{{#record title="Especialidades" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="prestadorServicios" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
-				{{row field="especialidad" align="left"}}
-				{{row field="datosEspecialidad" align="left"}}
 			{{/record}}
 		{{/stack}}
 	{{/report}}
@@ -286,7 +242,7 @@
 							Datos Usuario
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="nombre, correo, subordinados, estatus" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="nombre, correo, estatus" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -314,35 +270,13 @@
 						{{#with prestadorServicios}}
 							{{#row}}
 								{{#col vertical="80%" medium="80%" class="auto-form-col-a"}}
-									{{record this widths="24%,76%" rows="clave, genero, fechaNacimiento, nacionalidad, whatsApp, formaContacto, direccion, identificacion, idioma, estudios, responsable" class="auto-form-record"}}
+									{{record this widths="24%,76%" rows="clave, genero, fechaNacimiento, nacionalidad, whatsApp, formaContacto, direccion, identificacion, idioma, estudios" class="auto-form-record"}}
 								{{/col}}
 								{{#col vertical="20%" medium="20%" class="auto-form-col-b"}}
 									{{#img class="auto-form-img" src="{{foto.base.url}}"}}
 									{{/img}}
 								{{/col}}
 							{{/row}}
-							{{br}}
-						{{/with}}
-					{{/col}}
-				{{/row}}
-				{{#row class="auto-form-row"}}
-					{{#col medium="100%" class="auto-form-col"}}
-						{{#h5 class="auto-form-h5"}}
-							Agenda
-						{{/h5}}
-						{{#with prestadorServicios}}
-							{{record this widths="24%,76%" rows="horaInicioDia, horaFinDia" class="auto-form-record"}}
-							{{br}}
-						{{/with}}
-					{{/col}}
-				{{/row}}
-				{{#row class="auto-form-row"}}
-					{{#col medium="100%" class="auto-form-col"}}
-						{{#h5 class="auto-form-h5"}}
-							Especialidades
-						{{/h5}}
-						{{#with prestadorServicios}}
-							{{record this widths="24%,76%" rows="especialidad, datosEspecialidad" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -358,7 +292,6 @@
 				{{field correo}}
 				{{field contrasena}}
 				{{field nivelAcceso}}
-				{{field subordinados}}
 				{{field estatus}}
 			{{/fieldSet}}
 			{{#fieldSet header="Ubicación"}}
@@ -382,14 +315,6 @@
 				{{field whatsApp}}
 				{{field formaContacto}}
 			{{/fieldSet}}
-			{{#fieldSet header="Visualización Agenda"}}
-				{{field horaInicioDia header="Visualización Agenda"}}
-				{{field horaFinDia}}
-			{{/fieldSet}}
-			{{#fieldSet header="Especialidades"}}
-				{{field especialidad header="Especialidades"}}
-				{{field datosEspecialidad}}
-			{{/fieldSet}}
 		{{/col}}
 		{{#col medium="50%" vertical="50%"}}
 			{{#fieldSet}}
@@ -399,7 +324,6 @@
 				{{field idioma}}
 				{{field estudios}}
 				{{field permisos}}
-				{{field responsable}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
@@ -409,7 +333,6 @@
 	{{#template2 id="_user"}}
 		<br>Nombre: {{nombre}}
 		<br>Correo Electrónico: {{correo}}
-		<br>Subordinados: {{_subordinados}}
 		<br>Estatus: {{_estatus}}
 		<br>Servicio: {{_servicio}}
 		<br>Sucursal: {{_sucursal}}
@@ -417,7 +340,6 @@
 	{{#template3 id="_user"}}
 		{{#if nombre}}<br>Nombre: {{nombre}}{{/if}}
 		{{#if correo}}<br>Correo Electrónico: {{correo}}{{/if}}
-		{{#if subordinados}}<br>Subordinados: {{_subordinados}}{{/if}}
 		{{#if estatus}}<br>Estatus: {{_estatus}}{{/if}}
 		{{#if servicio}}<br>Servicio: {{_servicio}}{{/if}}
 		{{#if sucursal}}<br>Sucursal: {{_sucursal}}{{/if}}

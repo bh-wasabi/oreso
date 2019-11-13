@@ -47,12 +47,6 @@
 	{{section id="_options" temp="true"}}
 	{{section id="_params" temp="true"}}
 	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
-		{{#field id="codigo" label="Código" type="text" column="A" labelModalClass="full-width"}}
-			{{#editor case="upper" width="100%"}}
-			{{/editor}}
-			{{validator type="required"}}
-			{{validator type="unique"}}
-		{{/field}}
 		{{#field id="descripcion" label="Descripción" type="text" column="A" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
@@ -66,16 +60,24 @@
 			{{#editor type="select" preset="cfg.tipoArticulo" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="tipoServicio" label="Tipo Servicio" type="text" if="esServicio" column="A" references="app.tipoServicio" labelModalClass="full-width"}}
-			{{#editor type="select" preset="app.tipoServicio" width="100%"}}
+		{{#field id="marca" label="Marca" type="text" column="A" references="marca" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.marca" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="procesoRealizar" label="Proceso a Realizar" type="doc" if="esServicio" column="A" references="procesoRealizar" labelModalClass="full-width" source="procesoRealizar"}}
-			{{#editor width="100%"}}
+		{{#field id="estilo" label="Estilo" type="text" column="A" references="app.estilo" labelModalClass="full-width"}}
+			{{#editor type="select" preset="app.estilo" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="etiquetas" label="Etiquetas" type="array" column="A" labelModalClass="full-width"}}
-			{{#editor type="tags" fieldEditEnabled="true" width="100%"}}
+		{{#field id="talla" label="Talla" type="text" column="A" references="app.talla" labelModalClass="full-width"}}
+			{{#editor type="select" preset="app.talla" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="color" label="Color" type="text" column="A" references="app.color" labelModalClass="full-width"}}
+			{{#editor type="select" preset="app.color" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="temporada" label="Temporada" type="text" column="A" references="temporada" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.temporada" width="100%"}}
 			{{/editor}}
 		{{/field}}
 		{{#field id="comentarios" label="Comentarios" type="text" column="A" detach="Comentarios" labelModalClass="full-width"}}
@@ -108,11 +110,12 @@
 		{{/stack}}
 		{{#stack}}
 			{{#record title="Artículo" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
-				{{row field="codigo" align="left"}}
 				{{row field="descripcion" align="left"}}
-				{{row field="tipoServicio" condition="esServicio" align="left"}}
-				{{row field="procesoRealizar" condition="esServicio" align="left"}}
-				{{row field="etiquetas" align="left"}}
+				{{row field="marca" align="left"}}
+				{{row field="estilo" align="left"}}
+				{{row field="talla" align="left"}}
+				{{row field="color" align="left"}}
+				{{row field="temporada" align="left"}}
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
@@ -171,7 +174,7 @@
 							Artículo
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="codigo, descripcion, tipoServicio, procesoRealizar, etiquetas" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="descripcion, marca, estilo, talla, color, temporada" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -193,11 +196,12 @@
 	{{#modal base id="base" name="Artículo" size="xlong"}}
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
-				{{field codigo}}
 				{{field descripcion}}
-				{{field tipoServicio}}
-				{{field procesoRealizar}}
-				{{field etiquetas}}
+				{{field marca}}
+				{{field estilo}}
+				{{field talla}}
+				{{field color}}
+				{{field temporada}}
 				{{field comentarios}}
 			{{/fieldSet}}
 		{{/col}}
@@ -206,19 +210,21 @@
 		<div>{{_name}}</div>
 	{{/template}}
 	{{#template2 id="articulo"}}
-		<br>Código: {{codigo}}
 		<br>Descripción: {{descripcion}}
-		{{#if esServicio}}<br>Tipo Servicio: {{_tipoServicio}}{{/if}}
-		{{#if esServicio}}<br>Proceso a Realizar: {{_procesoRealizar}}{{/if}}
-		<br>Etiquetas: {{_etiquetas}}
+		<br>Marca: {{_marca}}
+		<br>Estilo: {{_estilo}}
+		<br>Talla: {{_talla}}
+		<br>Color: {{_color}}
+		<br>Temporada: {{_temporada}}
 		<br>{{comentarios}}
 	{{/template2}}
 	{{#template3 id="articulo"}}
-		{{#if codigo}}<br>Código: {{codigo}}{{/if}}
 		{{#if descripcion}}<br>Descripción: {{descripcion}}{{/if}}
-		{{#if esServicio}}{{#if tipoServicio}}<br>Tipo Servicio: {{_tipoServicio}}{{/if}}{{/if}}
-		{{#if esServicio}}{{#if procesoRealizar}}<br>Proceso a Realizar: {{_procesoRealizar}}{{/if}}{{/if}}
-		{{#if etiquetas}}<br>Etiquetas: {{_etiquetas}}{{/if}}
+		{{#if marca}}<br>Marca: {{_marca}}{{/if}}
+		{{#if estilo}}<br>Estilo: {{_estilo}}{{/if}}
+		{{#if talla}}<br>Talla: {{_talla}}{{/if}}
+		{{#if color}}<br>Color: {{_color}}{{/if}}
+		{{#if temporada}}<br>Temporada: {{_temporada}}{{/if}}
 		{{#if comentarios}}<br>{{comentarios}}{{/if}}
 	{{/template3}}
 {{/markup}}

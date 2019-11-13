@@ -30,13 +30,13 @@ var makeToken = "58c41f52-6fcb-43c2-82a0-760b435d344a";
 
 // host
 var wasabiHost = 'demo.enlanube.io'
-//wasabiHost = 'oreso.enlanube.io'
+wasabiHost = 'oreso.enlanube.io'
 
-// ssh -i "jheffes2.pem" ec2-user@gcp.enlanube.io
+// ssh -i "jheffes2.pem" ec2-user@oreso.enlanube.io
 
 var logo = 'https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png';
+var logo3 = 'https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png';
 var logo2;
-var logo3 = logo;
 
 var headers = ['Grupo Oreso', 'Leibnitz 83-1','Anzures 11590 CDMX','Teléfono +52 (55) 5580 6118']
 params = '&esOreso=true';

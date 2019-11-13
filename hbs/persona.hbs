@@ -1,0 +1,96 @@
+{{#define id="persona"}}
+  {{param defaultDisplay="_name"}}
+  {{param defaultView="todos"}}
+  {{param pageStart="1"}}
+  {{param pagesJustified="true"}}
+  {{param pagesTabsPosition="left"}}
+  {{param pagesTabsWidth="10%"}}
+  {{param pagesTabsMinPadding="false"}}
+  {{param allowAdd="true"}}
+  {{param allowEdit="true"}}
+  {{param allowDirectOperations="true"}}
+  {{param attachSection="adjuntos"}}
+  {{param attachLanguage="es"}}
+  {{param confirmUnSaved="true"}}
+  {{param showChangeHistory="true"}}
+  {{param pdfPageSize="letter"}}
+  {{param startOnOpen="persona"}}
+  {{param baseName="Datos Generales"}}
+  {{param displayExpr="persona.nombre"}}
+  {{param name="=_params._board||_name"}}
+  {{param bannerTopTemplate="banner4"}}
+  {{param addClass="no-padding-right"}}
+
+  {{tileView id="resumen" height="100%" width="100%" itemMargin="15" baseItemHeight="140" baseItemWidth="140" direction="vertical" section="resumen" itemTemplate="resumen" orderBy="orden" controlFromMetadata="true"}}
+
+  {{#transform id="copiar"}}
+    {{update section="contexto" value="=contexto"}}
+    {{update section="persona" transform="copiarPersona"}}
+  {{/transform}}  
+
+  {{#view id="lista"}}
+    {{#find}}
+      {{sort field="_name" direction="asc"}}
+      {{search field="persona.nombreCompleto"}}
+      {{search field="persona.clave"}}
+      {{search field="persona.grupo"}}
+      {{filter field="_hide" neq="=true"}}
+      {{filter condition="tipo" field="_parent.type" eq="=tipo"}}
+    {{/find}}
+  {{/view}}
+  {{#view id="ubicaciones"}}
+    {{#find}}
+      {{sort field="_name" direction="asc"}}
+      {{search field="persona.nombreCompleto"}}
+      {{search field="persona.clave"}}
+      {{filter field="_hide" neq="=true"}}
+      {{filter field="_parent.type" eq="'ubicacion'"}}
+    {{/find}}
+  {{/view}}
+  {{#view id="clientesProveedores"}}
+    {{#find}}
+      {{sort field="_name" direction="asc"}}
+      {{search field="persona.nombreCompleto"}}
+      {{search field="persona.clave"}}
+      {{filter field="_hide" neq="=true"}}
+      {{filter field="_parent.type" in="cliente,proveedor"}}
+    {{/find}}
+  {{/view}}
+  {{#action id="entrada" source="notaEntrada" name="Entrada" folio="entrada" label="Entrada" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+    {{param aliasDestino="='AG'"}}
+  {{/action}}
+  {{#action id="gasto" source="notaGasto" name="Gasto" folio="gasto" label="Gasto" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+    {{param aliasDestino="='AG'"}}
+  {{/action}}
+  {{#action id="traspaso" source="notaTraspaso" name="Traspaso" folio="traspaso" label="Traspaso" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+    {{param aliasOrigen="='AG'"}}
+  {{/action}}
+  {{#action id="salida" source="notaSalida" name="Salida" folio="salida" label="Salida" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{/action}}
+  {{#action id="venta" source="notaVenta" name="Venta" folio="venta" label="Venta" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{/action}}
+{{/define}}
+{{#markup}}
+  {{#page name="Dashboard"}}
+    {{#row class="no-padding-right"}}
+      {{#col medium="100%"}}
+        {{widget type="tileView" tileView="resumen"}}
+      {{/col}}
+    {{/row}}
+  {{/page}}
+  {{#template id="verPersona"}}
+    <div class="list-material">
+      <li class="has-action-left">
+        <div class="list-action-left"><i class="icon ion-{{contexto.icono}} text-{{contexto.color}}"></i></div>
+        <div class="list-content">
+          {{_name}}
+          <span style="font-size:12px;float:right;">{{persona.correo}}</span>
+          </br><span style="font-size:12px;">{{persona._area}}</span>
+          {{#if _readOnly}}
+          <span class="read-only" style="font-size:12px;"><strong>&nbsp;&nbsp;Solo Lectura&nbsp;&nbsp;</strong></span>
+          {{/if}}
+        </div>
+      </li>
+    </div>
+  {{/template}}
+{{/markup}}

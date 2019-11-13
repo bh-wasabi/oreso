@@ -13,42 +13,19 @@
   {{#menu id="menu-principal" name="Grupo Oreso" showUserName="true"}}
     {{item text="Tableros" type="userBoards"}}
     {{#item text="Ver"}} 
-      {{item text="Resumen"}}
-      {{item text="Estadísticas" beginGroup="true"}}
+      {{item text="Inventario" newTab="true" href="/_inv/cubo?_name=Inventario&_title=Inventario"}}
+      {{item text="Cuentas por Cobrar" newTab="true" href="/_cxc/cubo?_name=Cuentas por Cobrar&_title=Cuentas por Cobrar"}}
+      {{item text="Bitácora General" href="/nota/lista"}}
     {{/item}}
     {{#item text="Cuentas"}}
-      {{item text="Clientes" href="/cliente/lista" beginGroup="true"}}
+      {{item text="Clientes" href="/cliente/lista"}}
       {{item text="Proveedores" href="/proveedor/lista"}}
-      {{item text="Partners" href="/partner/lista" beginGroup="true"}}
-      {{item text="Personas" href="/individuo/lista"}}
-    {{/item}}
-    {{#item text="Productos"}}
-      {{#item text="Gestión" beginGroup="true"}}
-        {{item text="Temas" name="Temas Gestión" href="/tema/gestion"}}
-        {{item text="Funciones" name="Funciones Gestión" href="/funcion/gestion"}}
-      {{/item}}
-      {{#item text="Reclutamiento"}}
-        {{item text="Temas" name="Temas Reclutamiento" href="/tema/reclutamiento"}}
-        {{item text="Funciones" name="Funciones Reclutamiento" href="/funcion/reclutamiento"}}
-      {{/item}}
-      {{#item text="Básicos"}}
-        {{item text="Temas" name="Temas Básicos" href="/tema/basico"}}
-        {{item text="Funciones" name="Funciones Básicos" href="/funcion/basico"}}
-      {{/item}}
-      {{#item text="Salida"}}
-        {{item text="Temas" name="Temas Salida" href="/tema/salida"}}
-        {{item text="Funciones" name="Funciones Salida" href="/funcion/salida"}}
-      {{/item}}
-      {{#item text="Campus Honesto"}}
-        {{item text="Temas" name="Temas Campus Honesto" href="/tema/campusHonesto"}}
-        {{item text="Funciones" name="Funciones Campus Honesto" href="/funcion/campusHonesto"}}
-      {{/item}}
-      {{item text="Normas" href="/norma/lista" beginGroup="true"}}
-      {{item text="Incidentes"}}
+      {{item text="Ubicaciones" href="/ubicacion/lista" beginGroup="true"}}
     {{/item}}
     {{#item text="Configuración"}}
       {{item text="Configuración General" href="/_app"}}
       {{item text="Usuarios" href="/_user/lista"}}
+      {{item text="Artículos" href="/articulo/lista" beginGroup="true"}}
     {{/item}}
     {{#item text="Usuario"}}
       {{item text="Usuario" type="userName" icon="user"}}
@@ -60,25 +37,25 @@
     {{/item}}
   {{/menu}}
 
-  {{#css}}
+    {{#css}}
   .dx-overlay-content.dx-popup-normal .dx-item-content.dx-list-item-content {   
     white-space: pre-wrap; !important;
   }  
   .bg-primary{
-    background-color: #28446b;
+    background-color: #e66944;
   }
   .h2-center{
       text-align: center;
       margin: 0px;
       font-size: 25px !important;
-      color: #28446b !important;
+      color: #e66944 !important;
       font-weight: 500;
   }
   .h3-center{
       text-align: center;
       margin: 0px;
       font-size: 21px !important;
-      color: #28446b !important;
+      color: #e66944 !important;
       font-weight: 500;
   }
   .h4-center{
@@ -88,7 +65,7 @@
       font-weight: 500;
   }
   .h5-center {
-    color: #28446b;
+    color: #e66944;
     font-weight: 500;
     text-align: center;
     margin-top: 10px;
@@ -168,7 +145,7 @@
   .table-banner-tr > td > h1{
     font-size: 11px;
     margin-bottom: 0px;
-    color: #28446b;
+    color: #e66944;
   } 
   .table-banner-tr > td > h1 > span{
     color: #3c3c3c;
@@ -177,7 +154,7 @@
   }  
   .table-banner-tr > td{
     width:25%; 
-    border-bottom: 1px solid #28446b;
+    border-bottom: 1px solid #e66944;
     line-height: .9 !important;
     padding-bottom: 3px !important;
     border-top: 0px !important;
@@ -189,7 +166,7 @@
   .tabla-banner{
     padding-left: 0px;
     padding-right: 0px;
-    border: 1px solid #28446b;
+    border: 1px solid #e66944;
     border-radius: 10px;
     margin-bottom: 10px;
   }
@@ -209,7 +186,7 @@
   }
   .table-banner-td{
     width:50%; 
-    border-bottom: 1px solid #28446b;
+    border-bottom: 1px solid #e66944;
     line-height: .9 !important;
     padding-bottom: 3px !important;
     border-top: 0px !important;
@@ -265,12 +242,12 @@
 
     h4.title-hover {
       font-size: 21px !important;
-      color: #28446b !important;
+      color: #e66944 !important;
     }
 
     .panel > .panel-heading .panel-title h4 {
       font-size: 21px !important;
-      color: #28446b !important;
+      color: #e66944 !important;
     }
     
     .section-hover:hover {
@@ -399,7 +376,7 @@
     }
     
     .col-md-6.datos-baner {
-      border: 1px solid #28446b;
+      border: 1px solid #e66944;
       border-radius: 10px;
       padding-left: 0px;
       padding-right: 0px;
@@ -412,7 +389,7 @@
       border-top: 0px !important;
     }
      .col-md-8.datos-baner {
-      border: 1px solid #28446b;
+      border: 1px solid #e66944;
       border-radius: 10px;
       padding-left: 0px;
       padding-right: 0px;
@@ -520,27 +497,125 @@
   {{action id="cancelar" type="cancel-edit" color="grey"}}
   {{action id="abrir" type="open" label="Editar"}}
   {{action id="cerrar" type="close"}}
-  
-  {{#section id="industria" type="array"}}
+
+  {{#section id="estilo" type="array"}}
     {{field id="id" type="text" label="Identificador"}}
     {{field id="nombre" type="text" label="Nombre"}}
     {{field id="orden" type="number" label="Orden"}}
   {{/section}}
-  {{#grid id="industria" section="industria" allowInsert="true" allowRemove="true" allowSort="true" sortBy="orden,id"}}
+  {{#grid id="estilo" section="estilo" allowInsert="true" allowRemove="true" allowSort="true" sortBy="orden,id"}}
     {{column field="id" width="150"}}
     {{column field="nombre" width="350"}}
+    {{column field="orden" width="50"}}
+  {{/grid}}  
+  {{#section id="talla" type="array"}}
+    {{field id="id" type="text" label="Identificador"}}
+    {{field id="nombre" type="text" label="Nombre"}}
+    {{field id="orden" type="number" label="Orden"}}
+  {{/section}}
+  {{#grid id="talla" section="talla" allowInsert="true" allowRemove="true" allowSort="true" sortBy="orden,id"}}
+    {{column field="id" width="150"}}
+    {{column field="nombre" width="350"}}
+    {{column field="orden" width="50"}}
+  {{/grid}}  
+  {{#section id="color" type="array"}}
+    {{field id="id" type="text" label="Identificador"}}
+    {{field id="nombre" type="text" label="Nombre"}}
+    {{field id="orden" type="number" label="Orden"}}
+  {{/section}}
+  {{#grid id="color" section="color" allowInsert="true" allowRemove="true" allowSort="true" sortBy="orden,id"}}
+    {{column field="id" width="150"}}
+    {{column field="nombre" width="350"}}
+    {{column field="orden" width="50"}}
+  {{/grid}}  
+
+  
+  {{#section id="aliasUbicacion" type="array"}}
+    {{#field id="id" type="text" label="Identificador"}}
+      {{editor case="upper"}}
+    {{/field}}
+    {{#field id="persona" type="text" label="Cuenta"}}
+      {{editor type="lookup" source="persona" view="clientesProveedores" searchEnabled="true"}}
+    {{/field}}
+    {{#field id="ubicacion" type="text" label="Ubicación"}}
+      {{editor type="lookup" source="persona" view="ubicaciones" searchEnabled="true"}}
+    {{/field}}
+    {{field id="orden" type="number" label="Orden"}}
+  {{/section}}
+  {{#grid id="aliasUbicacion" section="aliasUbicacion" allowInsert="true" allowRemove="true" allowSort="true" sortBy="persona,orden,id"}}
+    {{column field="id" width="200"}}
+    {{column field="persona" width="350"}}
+    {{column field="ubicacion" width="350"}}
+    {{column field="orden" width="50"}}
+  {{/grid}}  
+  {{#section id="aliasArticulo" type="array"}}
+    {{#field id="id" type="text" label="Identificador"}}
+      {{editor case="upper"}}
+    {{/field}}
+    {{#field id="persona" type="text" label="Cuenta"}}
+      {{editor type="lookup" source="persona" view="clientesProveedores" searchEnabled="true"}}
+    {{/field}}
+    {{#field id="articulo" type="text" label="Artículo"}}
+      {{editor type="lookup" source="articulo" view="lista" searchEnabled="true"}}
+    {{/field}}
+    {{field id="precio" type="number" format="currency" label="Precio"}}
+    {{field id="orden" type="number" label="Orden"}}
+  {{/section}}
+  {{#grid id="aliasArticulo" section="aliasArticulo" allowInsert="true" allowRemove="true" allowSort="true" sortBy="persona,orden,id"}}
+    {{column field="id" width="200"}}
+    {{column field="persona" width="350"}}
+    {{column field="articulo" width="350"}}
+    {{column field="precio" width="150"}}
     {{column field="orden" width="50"}}
   {{/grid}}  
 
 {{/define}}
 
 {{#markup}}
-  {{#page name="General"}}
+  {{#page name="Códigos Artículos"}}
+    {{#row}}
+      {{#col medium="80%"}}
+        {{#zone id="aliasArticulo" modalGrid="aliasArticulo"}}
+          {{br}}
+          {{table aliasArticulo cols="id,persona,articulo,precio" medium="20%,40%,40%"}}
+        {{/zone}}
+      {{/col}}
+    {{/row}}
+  {{/page}}
+  {{#page name="Códigos Ubicaciones"}}
+    {{#row}}
+      {{#col medium="80%"}}
+        {{#zone id="aliasUbicacion" modalGrid="aliasUbicacion"}}
+          {{br}}
+          {{table aliasUbicacion cols="id,persona,ubicacion" medium="20%,40%,40%"}}
+        {{/zone}}
+      {{/col}}
+    {{/row}}
+  {{/page}}
+  {{#page name="Clasificadores"}}
     {{#row}}
       {{#col medium="50%"}}
-        {{#zone id="industria" modalGrid="industria"}}
-          {{#h5}}Industrias{{/h5}}
-          {{table industria cols="id,nombre" medium="30%,70%"}}
+        {{#zone id="estilo" modalGrid="estilo"}}
+          {{br}}
+          {{#h5}}Estilos{{/h5}}
+          {{table estilo cols="id,nombre" medium="30%,70%"}}
+        {{/zone}}
+      {{/col}}
+    {{/row}}
+    {{hairline}}
+    {{#row}}
+      {{#col medium="50%"}}
+        {{#zone id="talla" modalGrid="talla"}}
+          {{br}}
+          {{#h5}}Tallas{{/h5}}
+          {{table talla cols="id,nombre" medium="30%,70%"}}
+        {{/zone}}
+      {{/col}}
+      {{#col medium="50%"}}
+        {{#zone id="color" modalGrid="color"}}
+          {{br}}
+          {{#h5}}Colores{{/h5}}
+          {{table color cols="id,nombre" medium="30%,70%"}}
         {{/zone}}
       {{/col}}
     {{/row}}
@@ -584,11 +659,11 @@
           <table class="table banner-imagen">
             <tbody>
               <tr>
-                <td style="width:25%;">
-                  <img src="https://s3.amazonaws.com/mx-imagenes/logos/gcp.png" class="banner-logo-hospital-tamano-chica"><br>
+                <td style="width:20%;">
+                  <img src="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png" class="banner-logo-hospital-tamano-chica"><br>
                 </td>
-                <td style="width:75%;" class="banner-texto-fijo">
-                  Positive Compliance<br>Newton 286, Piso 5<br>CP 11570 CDMX<br>Teléfono +52 (55) 6272 5000
+                <td style="width:80%;" class="banner-texto-fijo">
+                  Grupo Oreso<br>Leibnitz 83-1<br>Anzures 11590 CDMX
                 </td>
               </tr>
             </tbody>
@@ -605,11 +680,11 @@
           <table class="table banner-imagen">
             <tbody>
               <tr>
-                <td style="width:25%;">
-                  <img src="https://s3.amazonaws.com/mx-imagenes/logos/gcp.png" class="banner-logo-hospital-tamano-chica"><br>
+                <td style="width:20%;">
+                  <img src="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png" class="banner-logo-hospital-tamano-chica"><br>
                 </td>
-                <td style="width:75%;" class="banner-texto-fijo">
-                  Positive Compliance<br>Newton 286, Piso 5<br>CP 11570 CDMX<br>Teléfono +52 (55) 6272 5000
+                <td style="width:80%;" class="banner-texto-fijo">
+                  Grupo Oreso<br>Leibnitz 83-1<br>Anzures 11590 CDMX
                 </td>
               </tr>
             </tbody>
@@ -640,11 +715,11 @@
           <table class="table banner-imagen">
             <tbody>
               <tr>
-                <td style="width:40%;">
-                  <img src="https://s3.amazonaws.com/mx-imagenes/logos/gcp.png" class="banner-logo-hospital-tamano-chica"><br>
+                <td style="width:20%;">
+                  <img src="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png" class="banner-logo-hospital-tamano-chica"><br>
                 </td>
-                <td style="width:60%;" class="banner-texto-fijo">
-                  Positive Compliance<br>Newton 286, Piso 5<br>CP 11570 CDMX<br>Teléfono +52 (55) 6272 5000
+                <td style="width:70%;" class="banner-texto-fijo">
+                  Grupo Oreso<br>Leibnitz 83-1<br>Anzures 11590 CDMX
                 </td>
               </tr>
             </tbody>
@@ -675,11 +750,11 @@
           <table class="table banner-imagen">
             <tbody>
               <tr>
-                <td style="width:50%;">
-                  <img src="https://s3.amazonaws.com/mx-imagenes/logos/gcp.png" class="banner-logo-hospital-tamano-chica"><br>
+                <td style="width:20%;">
+                  <img src="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png" class="banner-logo-hospital-tamano-chica"><br>
                 </td>
-                <td style="width:50%;" class="banner-texto-fijo">
-                  Positive Compliance<br>Newton 286, Piso 5<br>CP 11570 CDMX<br>Teléfono +52 (55) 6272 5000
+                <td style="width:80%;" class="banner-texto-fijo">
+                  Grupo Oreso<br>Leibnitz 83-1<br>Anzures 11590 CDMX
                 </td>
               </tr>
             </tbody>
@@ -711,11 +786,11 @@
           <table class="table banner-imagen">
             <tbody>
               <tr>
-                <td style="width:50%;">
-                  <img src="https://s3.amazonaws.com/mx-imagenes/logos/gcp.png" class="banner-logo-hospital-tamano-chica"><br>
+                <td style="width:20%;">
+                  <img src="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png" class="banner-logo-hospital-tamano-chica"><br>
                 </td>
-                <td style="width:50%;" class="banner-texto-fijo">
-                  Positive Compliance<br>Newton 286, Piso 5<br>CP 11570 CDMX<br>Teléfono +52 (55) 6272 5000
+                <td style="width:80%;" class="banner-texto-fijo">
+                  Grupo Oreso<br>Leibnitz 83-1<br>Anzures 11590 CDMX
                 </td>
               </tr>
             </tbody>
@@ -739,5 +814,9 @@
       </div>  
     </div>
   {{/template}}  
-  {{modal industria id="industria" grid="industria" name="Industrias" size="long"}}
+  {{modal estilo id="estilo" grid="estilo" name="Estilos" size="long"}}
+  {{modal talla id="talla" grid="talla" name="Tallas" size="long"}}
+  {{modal color id="color" grid="color" name="Colores" size="long"}}
+  {{modal aliasUbicacion id="aliasUbicacion" grid="aliasUbicacion" name="Alias Ubicaciones" size="xwide"}}
+  {{modal aliasArticulo id="aliasArticulo" grid="aliasArticulo" name="Alias Artículos" size="xwide"}}
 {{/markup}}

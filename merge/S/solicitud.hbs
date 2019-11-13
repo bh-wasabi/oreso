@@ -1,0 +1,22 @@
+{{#define type="doc" id="solicitud"}}
+  {{param name="=_params._board||'Solicitud'"}}
+  {{action id="abrir" hide="true"}}
+
+  {{#view id="resumenActivos"}}
+    {{#find}}
+      {{include field="_updated"}}
+      {{include field="base.tipoSolicitud"}}
+      {{include field="base.cantidadUnidad"}}
+      {{include field="base.unidad"}}
+      {{!-- {{include field="base.fechaHoraCita"}} --}}
+      {{sort field="base.fechaHoraCita" direction="asc"}}
+      {{sort field="_id" direction="desc"}}
+      {{filter field="persona.id" eq="=id"}}
+      {{filter field="base.estatus" in="nuevo,instalar,continuar"}}
+      {{filter field="_updated.moment" exists="true"}}
+      {{filter field="_updated.moment" nin="cancelado,suspedido,rechazado,finalizado,utilizado,ministrado,devuelto,esterilizado,facturado"}}
+    {{/find}}
+    {{calc field="etiqueta" type="expr" value="=calc.concat(calc.format('date', base.fechaHoraCita, 'DD/MMM/YYYY h:mma'), _updated._moment)"}}
+    {{calc field="nombre" type="expr" value="=calc.concat(base.cantidadUnidad, base._unidad, _name)"}}
+  {{/view}}
+{{/define}}

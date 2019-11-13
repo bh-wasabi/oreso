@@ -81,10 +81,6 @@
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="clienteFuncion" label="Funciones" type="docs" column="A" references="clienteFuncion" detach="Funciones" labelModalClass="full-width" source="clienteFuncion"}}
-			{{#editor width="100%"}}
-			{{/editor}}
-		{{/field}}
 	{{/section}}
 	{{#section id="adjuntos" type="array"}}
 		{{field id="id" label="ID" type="text" hide="true" column="A"}}
@@ -137,11 +133,6 @@
 				{{row field="formaContacto" align="left"}}
 				{{row field="direccion" align="left"}}
 				{{row field="contacto" align="left"}}
-			{{/record}}
-		{{/stack}}
-		{{#stack}}
-			{{#record title="Funciones" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
-				{{row field="clienteFuncion" align="left"}}
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
@@ -216,17 +207,6 @@
 						{{/with}}
 					{{/col}}
 				{{/row}}
-				{{#row class="auto-form-row"}}
-					{{#col medium="100%" class="auto-form-col"}}
-						{{#h5 class="auto-form-h5"}}
-							Funciones
-						{{/h5}}
-						{{#with base}}
-							{{record this widths="20%,80%" rows="clienteFuncion" class="auto-form-record"}}
-							{{br}}
-						{{/with}}
-					{{/col}}
-				{{/row}}
 			{{/zone}}
 		{{/row}}
 		{{#row}}
@@ -269,7 +249,6 @@
 				{{field formaContacto}}
 				{{field direccion}}
 				{{field contacto}}
-				{{field clienteFuncion}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
@@ -286,7 +265,6 @@
 		<br>Forma Contacto: {{_formaContacto}}
 		<br>Dirección: {{_direccion}}
 		<br>Contactos: {{_contacto}}
-		<br>Funciones: {{_clienteFuncion}}
 	{{/template2}}
 	{{#template3 id="cliente"}}
 		{{#if nombre}}<br>Nombre: {{nombre}}{{/if}}
@@ -297,6 +275,5 @@
 		{{#if formaContacto}}<br>Forma Contacto: {{_formaContacto}}{{/if}}
 		{{#if direccion}}<br>Dirección: {{_direccion}}{{/if}}
 		{{#if contacto}}<br>Contactos: {{_contacto}}{{/if}}
-		{{#if clienteFuncion}}<br>Funciones: {{_clienteFuncion}}{{/if}}
 	{{/template3}}
 {{/markup}}

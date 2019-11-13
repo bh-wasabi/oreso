@@ -1,0 +1,19 @@
+{{#define id="ubicacion"}}
+  {{#view id="lista" name="Lista"}}
+    {{#find}}
+      {{include field="_name"}}
+      {{include field="base.grupo"}}
+      {{search field="_name"}}
+      {{search field="base.grupo"}}
+      {{sort field="base.grupo" direction="asc"}}
+      {{sort field="_name" direction="asc"}}
+    {{/find}}
+    {{editor display="_name"}}
+  {{/view}}
+{{/define}}
+{{#markup}}
+  {{#template id="lista"}}
+    <div>{{_name}}</div>
+    <span style="font-size:12px;">{{base.grupo}}</span>
+  {{/template}}
+{{/markup}}

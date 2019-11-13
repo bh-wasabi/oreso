@@ -1,0 +1,363 @@
+{{#define type="doc" id="notaTraspaso"}}
+	{{param defaultDisplay="_name"}}
+	{{param defaultView="lista"}}
+	{{param pageStart="1"}}
+	{{param pagesJustified="true"}}
+	{{param pagesTabsPosition="left"}}
+	{{param pagesTabsWidth="20%"}}
+	{{param pagesTabsMinPadding="false"}}
+	{{param allowAdd="true"}}
+	{{param allowEdit="false"}}
+	{{param allowDirectOperations="true"}}
+	{{param attachSection="adjuntos"}}
+	{{param attachLanguage="es"}}
+	{{param confirmUnSaved="true"}}
+	{{param showChangeHistory="false"}}
+	{{param pdfPageSize="letter"}}
+	{{param startOnOpen="base"}}
+	{{param baseName="Datos Generales"}}
+	{{param displayExpr="_name"}}
+	{{param name="=fn('dynamicName', @_created)"}}
+	{{param group="General"}}
+	{{param fullWidth="true"}}
+	{{param modalSize="xwide"}}
+	{{param folioName="true"}}
+	{{param dynamicName="true"}}
+	{{param browserView="persona"}}
+	{{param itemTemplate="persona"}}
+	{{param isNote="true"}}
+	{{param addResponsable="true"}}
+	{{param allowInsert="false"}}
+	{{param tempSections="resumen"}}
+	{{param autoAffect="node"}}
+	{{param bannerTopTemplate="banner1"}}
+	{{param folioServiceName="true"}}
+	{{param autoPrint="preliminar"}}
+	{{param autoStamp="true"}}
+	{{param allowDraft="true"}}
+	{{param isAction="true"}}
+	{{action id="fix-user" type="add-subdoc" transform="copiarNota" source="notaAjusteUsuario" label="Ajustar Usuario" btnFlat="true" color="grey" superUser="true" visibleMode="close" onlyPost="true"}}
+	{{action id="subdoc" condition="=false"}}
+	{{action id="subdoc2" condition="=false"}}
+	{{action id="subdoc3" condition="=false"}}
+	{{action id="subdoc4" condition="=false"}}
+	{{action id="tool" condition="=false"}}
+	{{action id="tool2" condition="=false"}}
+	{{action id="tool3" condition="=false"}}
+	{{action id="ver" condition="=false" visibleMode="close"}}
+	{{action id="ver2" condition="=false" visibleMode="close"}}
+	{{action id="copiar" type="copy" label="Copiar" condition="=false"}}
+	{{action id="copiar2" type="copy" label="Copiar" condition="=false"}}
+	{{action id="preliminar" type="report-pdf" label="PDF" report="preliminar" fileName="=_name" visibleMode="close" color="grey"}}
+	{{action id="cancelar" type="cancel-edit" color="grey"}}
+	{{action id="sugerir1" condition="=false" visibleMode="close"}}
+	{{action id="adjuntar" type="attach" label="Adjuntar..." color="grey"}}
+	{{action id="excel" type="openFile" label="Cargar Excel..." color="green" condition="=false"}}
+	{{action id="importarDatos" type="pasteText" label="Importar Datos..." color="green" condition="=false"}}
+	{{action id="eliminar" type="remove" label="Eliminar"}}
+	{{action id="abrir" type="open" label="Editar" condition="=!@_isAffected"}}
+	{{action id="guardar" label="Guardar" btnFlat="true" color="grey" type="affect" workflow="guardar" condition="=!_inWorkflow" confirm="true" confirmMessage="¿Está seguro que desea guardar el borrador?"}}
+	{{action id="afectar" label="Procesar" type="affect" workflow="afectar"}}
+	{{#transform id="copiarNota"}}
+		{{#update section="base"}}
+			{{set nota="_id"}}
+			{{set _nota="_name"}}
+		{{/update}}
+	{{/transform}}
+	{{section id="_options" temp="true"}}
+	{{section id="_params" temp="true"}}
+	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
+		{{field id="esEstudiante" type="expr" hide="true" value="=user.isStudent"}}
+		{{#field id="responsableAcademico" label="Médico Responsable" type="reference" if="esEstudiante" references="persona" column="A" modalColumn="A" labelModalClass="full-width"}}
+			{{validator type="required"}}
+			{{#onChange}}
+				{{#update section="base"}}
+					{{set identificacionResponsableAcademico="=persona.prestadorServicios.datosEspecialidad"}}
+					{{set _identificacionResponsableAcademico="=persona.prestadorServicios._datosEspecialidad"}}
+				{{/update}}
+			{{/onChange}}
+			{{#editor type="lookup" source="persona" view="responsablesAcademicos" searchEnabled="true" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="estatus" label="Estatus" type="text" readOnly="true" column="A" references="estatusNota" modalHide="true" labelModalClass="full-width" defaultValue="'borrador'"}}
+			{{#editor type="select" preset="cfg.estatusNota" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="comentarios" label="Comentarios" type="text" column="A" labelModalClass="full-width"}}
+			{{#editor type="text-area" height="300" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{field id="nombre" label="Nombre" hide="true" type="expr" value="=fn('dynamicName', @_created)"}}
+	{{/section}}
+	{{#section id="articulos" type="array"}}
+		{{#field id="aliasArticulo" label="Artículo" type="text" column="A"}}
+			{{#editor case="upper"}}
+			{{/editor}}
+		{{/field}}
+		{{field id="articulo" label="Artículo ID" type="text" readOnly="true" hide="true" column="A"}}
+		{{field id="_articulo" label="Descripción Artículo" type="text" readOnly="true" column="A"}}
+		{{#field id="aliasOrigen" label="Origen" type="text" column="A"}}
+			{{#editor case="upper"}}
+			{{/editor}}
+		{{/field}}
+		{{field id="origen" label="Origen ID" type="text" readOnly="true" hide="true" column="A"}}
+		{{field id="_origen" label="Ubicación Origen" type="text" readOnly="true" column="A"}}
+		{{#field id="aliasDestino" label="Destino" type="text" column="A"}}
+			{{#editor case="upper"}}
+			{{/editor}}
+		{{/field}}
+		{{field id="destino" label="Destino ID" type="text" readOnly="true" hide="true" column="A"}}
+		{{field id="_destino" label="Ubicación Destino" type="text" readOnly="true" column="A"}}
+		{{field id="cantidad" label="Cantidad" type="number" format="#,.##" column="A"}}
+		{{field id="valorUnitario" label="Valor Unitario" type="number" format="currency" column="A"}}
+		{{field id="tasaIva" label="% IVA" type="number" format="#.##" column="A"}}
+		{{field id="importe" label="Importe" type="calc" format="currency" column="A"}}
+		{{field id="iva" label="IVA" type="calc" format="currency" column="A"}}
+		{{field id="total" label="Total" type="calc" format="currency" column="A"}}
+		{{#field id="lote" label="Lote" type="text" column="A"}}
+			{{#editor case="upper"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="vencimiento" label="Vencimiento" type="text" column="A"}}
+			{{#editor case="YYYY-MM-DD"}}
+			{{/editor}}
+		{{/field}}
+	{{/section}}
+	{{#section id="inv" type="array"}}
+		{{field id="descripcion" label="Artículo" type="text" column="A"}}
+		{{field id="_cuenta" label="Ubicación" type="text" column="A"}}
+		{{field id="salida" label="Salida" type="number" format="#," column="A"}}
+		{{field id="entrada" label="Entrada" type="number" format="#," column="A"}}
+		{{field id="costoUnitario" label="Costo Unitario" type="number" format="currency" column="A"}}
+		{{field id="lote" label="Lote" type="text" column="A"}}
+		{{#field id="vencimiento" label="Vencimiento" type="date" format="DD/MMM/YYYY" column="A" saveFormat="YYYY-MM-DD"}}
+			{{#editor type="date"}}
+			{{/editor}}
+		{{/field}}
+	{{/section}}
+	{{section id="resumen" temp="true"}}
+	{{#report id="preliminar-encabezado"}}
+		{{#stack}}
+			{{#columns margin="20" widths="210,150,*"}}
+				{{#column}}
+					{{row image="logo" alignment="left" imageWidth="90" margin="0,-15,0,0"}}
+				{{/column}}
+				{{#column margin="0,-10,0,0"}}
+					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Leibnitz 83-1" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Anzures 11590 CDMX" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
+				{{/column}}
+				{{#column}}
+					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
+					{{/row}}
+				{{/column}}
+			{{/columns}}
+		{{/stack}}
+	{{/report}}
+	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true"}}
+		{{#stack}}
+			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
+		{{/stack}}
+		{{#stack}}
+			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+				{{row field="responsableAcademico" condition="esEstudiante" align="left"}}
+				{{row field="estatus" align="left"}}
+				{{row field="comentarios" align="left"}}
+			{{/record}}
+		{{/stack}}
+		{{#stack}}
+			{{#row text="Artículos" fontSize="10" bold="true"}}
+			{{/row}}
+			{{#table title="Artículos" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="articulos" headerStyle="field" margin="0,5,10,10" removeEmptyCols="true"}}
+				{{column field="aliasArticulo"}}
+				{{column field="_articulo"}}
+				{{column field="aliasOrigen"}}
+				{{column field="_origen"}}
+				{{column field="aliasDestino"}}
+				{{column field="_destino"}}
+				{{column field="cantidad"}}
+				{{column field="valorUnitario"}}
+				{{column field="tasaIva"}}
+				{{column field="importe"}}
+				{{column field="iva"}}
+				{{column field="total"}}
+				{{column field="lote"}}
+				{{column field="vencimiento"}}
+			{{/table}}
+		{{/stack}}
+		{{#stack condition="=inv"}}
+			{{#row text="Movimiento del Inventario" fontSize="10" bold="true"}}
+			{{/row}}
+			{{#table title="Movimiento del Inventario" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="inv" headerStyle="field" margin="0,5,10,10" removeEmptyCols="true"}}
+				{{column field="descripcion"}}
+				{{column field="_cuenta"}}
+				{{column field="salida"}}
+				{{column field="entrada"}}
+				{{column field="costoUnitario"}}
+				{{column field="lote"}}
+				{{column field="vencimiento"}}
+			{{/table}}
+		{{/stack}}
+		{{#stack}}
+			{{#record title="Firmas" titleStyle="title" layout="lightHorizontalLines" fontSize="8" section="_stamp" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+				{{row expr="=_created._user" label="Elabora"}}
+				{{row expr="=_created._identification" label="Especialidad Elabora"}}
+				{{row expr="=''" label="Firma Elabora"}}
+				{{row condition="=!base.esEstudiante" expr="=_created._responsable" label="Responsable"}}
+				{{row condition="=!base.esEstudiante" expr="=_created._responsableId" label="Especialidad Responsable"}}
+				{{row condition="=!base.esEstudiante" expr="=''" label="Firma Responsable"}}
+				{{row condition="=base.esEstudiante" expr="=base._responsableAcademico" label="Médico Responsable"}}
+				{{row condition="=base.esEstudiante" expr="=base._identificacionResponsableAcademico" label="Especialidad Médico Responsable"}}
+				{{row condition="=base.esEstudiante" expr="=''" label="Firma Médico Responsable"}}
+				{{row condition="=calc.in(_created.service, ['inventarios','farmacia','almacen','ceye'])" expr="=''" label="Transporte / Recibe"}}
+				{{row field="text" label="Cadena Original"}}
+				{{row field="signature" label="Sello Digital"}}
+			{{/record}}
+		{{/stack}}
+	{{/report}}
+	{{#view id="lista" name="Lista"}}
+		{{#find}}
+			{{include field="_name"}}
+			{{search field="_name"}}
+			{{sort field="_id" direction="desc"}}
+		{{/find}}
+		{{editor display="_name"}}
+	{{/view}}
+	{{#browser id="lista" view="persona" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%"}}
+		{{list itemTemplate="persona" allowSearch="true" allowRefresh="true" allowEdit="false" allowInsert="false"}}
+	{{/browser}}
+	{{#workflow id="afectar" start="afectar"}}
+		{{#step id="afectar"}}
+			{{#user}}
+				{{#validate condition="=!_name" error="Nombre Incorrecto"}}
+				{{/validate}}
+				{{#spAffect engine="node"}}
+					{{#update section="base"}}
+						{{set estatus="afectado"}}
+						{{set _estatus="Afectado"}}
+					{{/update}}
+				{{/spAffect}}
+			{{/user}}
+		{{/step}}
+	{{/workflow}}
+	{{#workflow id="cancelar" start="cancelar"}}
+		{{#step id="cancelar"}}
+			{{#user}}
+				{{#spAffect engine="node" action="cancel"}}
+					{{#update section="base"}}
+						{{set estatus="cancelado"}}
+						{{set _estatus="Cancelado"}}
+					{{/update}}
+				{{/spAffect}}
+			{{/user}}
+		{{/step}}
+	{{/workflow}}
+	{{#workflow id="guardar" start="borrador"}}
+		{{#step id="borrador" next="afectacion"}}
+			{{#update section="base"}}
+				{{set estatus="borrador"}}
+				{{set _estatus="Borrador"}}
+			{{/update}}
+		{{/step}}
+		{{#step id="afectacion"}}
+			{{#user name="base.nombre" subject="persona.nombreCompleto" icon="flag" iconColor="blue" duration="2d"}}
+				{{#validate condition="=!_name" error="Nombre Incorrecto"}}
+				{{/validate}}
+				{{#spAffect engine="node"}}
+					{{#update section="base"}}
+						{{set estatus="afectado"}}
+						{{set _estatus="Afectado"}}
+					{{/update}}
+				{{/spAffect}}
+			{{/user}}
+		{{/step}}
+	{{/workflow}}
+{{/define}}
+{{#markup}}
+	{{#page name="Traspaso"}}
+		{{row}}
+		{{row}}
+		{{#row}}
+			{{#zone id="base" modal="base"}}
+				{{#row class="auto-form-row"}}
+					{{#col medium="100%" class="auto-form-col"}}
+						{{#h5 class="auto-form-h5"}}
+							Datos Generales
+						{{/h5}}
+						{{#with base}}
+							{{record this widths="20%,80%" rows="responsableAcademico, estatus, comentarios" class="auto-form-record"}}
+							{{br}}
+						{{/with}}
+					{{/col}}
+				{{/row}}
+			{{/zone}}
+		{{/row}}
+		{{#row}}
+			{{#zone id="articulos" modalGrid="articulos"}}
+				{{#row class="auto-form-row"}}
+					{{#col medium="100%" class="auto-form-col"}}
+						{{#h5 class="auto-form-h5"}}
+							Artículos
+						{{/h5}}
+						{{#div}}
+							{{table articulos class="auto-form-table" cols="aliasArticulo, _articulo, aliasOrigen, _origen, aliasDestino, _destino, cantidad, valorUnitario, tasaIva, importe, iva, total, lote, vencimiento" removeEmptyCols="true" unlink="true"}}
+							{{br}}
+						{{/div}}
+					{{/col}}
+				{{/row}}
+			{{/zone}}
+		{{/row}}
+		{{#row}}
+			{{#zone id="inv" modal="inv"}}
+				{{#row class="auto-form-row"}}
+					{{#if context="=inv"}}
+						{{#col medium="100%" class="auto-form-col"}}
+							{{#h5 class="auto-form-h5"}}
+								Movimiento del Inventario
+							{{/h5}}
+							{{#div}}
+								{{table inv class="auto-form-table" cols="descripcion, _cuenta, salida, entrada, costoUnitario, lote, vencimiento" removeEmptyCols="false" unlink="true"}}
+								{{br}}
+							{{/div}}
+						{{/col}}
+					{{/if}}
+				{{/row}}
+			{{/zone}}
+		{{/row}}
+		{{#row}}
+			{{#zone id="inv" modal="inv"}}
+			{{/zone}}
+		{{/row}}
+	{{/page}}
+	{{#modal base id="base" name="Datos Generales" size="xlong" next="articulos"}}
+		{{#col medium="100%" vertical="100%"}}
+			{{#fieldSet}}
+				{{field responsableAcademico}}
+				{{field estatus hide="true"}}
+				{{field comentarios}}
+			{{/fieldSet}}
+		{{/col}}
+	{{/modal}}
+	{{modal articulos id="articulos" name="Artículos" grid="articulos" size="xxwide" prev="base"}}
+	{{#modal inv id="inv" name="Movimiento del Inventario" size="xwide"}}
+		{{#col medium="100%" vertical="100%"}}
+			{{#fieldSet}}
+				{{field inv}}
+			{{/fieldSet}}
+		{{/col}}
+	{{/modal}}
+	{{#template id="lista"}}
+		<div>{{_name}}</div>
+	{{/template}}
+	{{#template2 id="notaTraspaso"}}
+		{{#if esEstudiante}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}
+		<br>Estatus: {{_estatus}}
+		<br>{{comentarios}}
+	{{/template2}}
+	{{#template3 id="notaTraspaso"}}
+		{{#if esEstudiante}}{{#if responsableAcademico}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}{{/if}}
+		{{#if estatus}}<br>Estatus: {{_estatus}}{{/if}}
+		{{#if comentarios}}<br>{{comentarios}}{{/if}}
+	{{/template3}}
+{{/markup}}

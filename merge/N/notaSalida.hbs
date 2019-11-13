@@ -1,0 +1,29 @@
+{{#define id="notaSalida"}}
+  {{param attribute1="=_created.service"}}
+  {{param removeIfEmptySection="articulos"}}
+  {{param removeIfEmptyField="cantidad"}}
+  {{param startOnOpen="articulos"}}
+
+  {{#section id="articulos"}}
+    {{#field id="aliasArticulo"}}
+      {{#onChange}}
+        {{set articulo="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).articulo"}}
+        {{set _articulo="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id)._articulo"}}
+      {{/onChange}}
+    {{/field}}
+    {{#field id="aliasOrigen"}}
+      {{#onChange}}
+        {{set origen="=calc.getPresetPersona('app.aliasUbicacion', aliasOrigen, _doc.persona.id).ubicacion"}}
+        {{set _origen="=calc.getPresetPersona('app.aliasUbicacion', aliasOrigen, _doc.persona.id)._ubicacion"}}
+      {{/onChange}}
+    {{/field}}
+  {{/section}}
+  
+  {{#grid id="articulos" section="articulos" allowInsert="true" allowRemove="true"}}
+    {{column field="aliasArticulo" label="Artículo" width="200"}}
+    {{column field="_articulo" label="Descripción" width="400"}}
+    {{column field="aliasOrigen" label="Origen" width="60" defaultValue="=_params.aliasOrigen"}}
+    {{column field="_origen" label="Ubicación" width="150"}}
+    {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
+  {{/grid}}
+{{/define}}
