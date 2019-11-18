@@ -26,6 +26,16 @@
       {{filter condition="=request" field="_created.request" eq="=request"}}
     {{/find}}
   {{/view}}
+  {{#view id="resumenActivos"}}
+    {{#find}}
+      {{include field="_created"}}
+      {{include field="flujo"}}
+      {{sort field="_id" direction="asc"}}
+      {{filter field="persona.id" eq="=id"}}
+      {{filter field="flujo.estatus" eq="='pendiente'"}}
+      {{filter field="_created.date" gt="=moment().add(-30,'d').format()"}}
+    {{/find}}
+  {{/view}}
   {{#cube id="cubo" name="Solicitudes" view="cubo" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
     {{column field="flujo.nombre" width="150" label="Tipo Solicitud"}}
     {{column field="flujo.grupo5" width="150" label="Sub Tipo"}}

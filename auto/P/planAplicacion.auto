@@ -46,6 +46,7 @@
 			{{/editor}}
 		{{/field}}
 		{{field id="ivaFactor" label="Factor IVA" type="number" column="A"}}
+		{{field id="saldo" label="Saldo" type="number" format="currency" readOnly="true" column="A"}}
 		{{field id="importe" label="Importe" type="number" format="currency" column="A"}}
 		{{#field id="formaPago" label="Forma Pago" type="text" column="A" references="formaPago"}}
 			{{#editor type="select" preset="cfg.formaPago"}}
@@ -101,6 +102,7 @@
 				{{row field="lote" align="left"}}
 				{{row field="vencimiento" align="left"}}
 				{{row field="ivaFactor" align="left"}}
+				{{row field="saldo" align="left"}}
 				{{row field="importe" align="left"}}
 				{{row field="formaPago" align="left"}}
 				{{row field="aliasOrigen" align="left"}}
@@ -137,7 +139,7 @@
 							planAplicacion
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="lote, vencimiento, ivaFactor, importe, formaPago, aliasOrigen, _origen, referenciaPago, aliasDestino, _destino, loteDestino, vencimientoDestino" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="lote, vencimiento, ivaFactor, saldo, importe, formaPago, aliasOrigen, _origen, referenciaPago, aliasDestino, _destino, loteDestino, vencimientoDestino" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -151,6 +153,7 @@
 				{{field lote}}
 				{{field vencimiento}}
 				{{field ivaFactor}}
+				{{field saldo}}
 				{{field importe}}
 				{{field formaPago}}
 				{{field aliasOrigen}}
@@ -170,6 +173,7 @@
 		<br>Lote: {{lote}}
 		<br>Vencimiento: {{vencimiento}}
 		<br>Factor IVA: {{ivaFactor}}
+		<br>Saldo: {{number saldo "currency"}}
 		<br>Importe: {{number importe "currency"}}
 		<br>Forma Pago: {{_formaPago}}
 		<br>Destino: {{aliasOrigen}}
@@ -184,6 +188,7 @@
 		{{#if lote}}<br>Lote: {{lote}}{{/if}}
 		{{#if vencimiento}}<br>Vencimiento: {{vencimiento}}{{/if}}
 		{{#if ivaFactor}}<br>Factor IVA: {{ivaFactor}}{{/if}}
+		{{#if saldo}}<br>Saldo: {{number saldo "currency"}}{{/if}}
 		{{#if importe}}<br>Importe: {{number importe "currency"}}{{/if}}
 		{{#if formaPago}}<br>Forma Pago: {{_formaPago}}{{/if}}
 		{{#if aliasOrigen}}<br>Destino: {{aliasOrigen}}{{/if}}

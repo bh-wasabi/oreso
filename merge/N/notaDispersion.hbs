@@ -8,14 +8,14 @@
   {{#section id="aplicacion"}}
     {{#field id="aliasOrigen"}}
       {{#onChange}}
-        {{set origen="=calc.getPresetPersona('app.aliasUbicacion', aliasOrigen, _doc.persona.id).ubicacion"}}
-        {{set _origen="=calc.getPresetPersona('app.aliasUbicacion', aliasOrigen, _doc.persona.id)._ubicacion"}}
+        {{set origen="=calc.getPresetPersona('app.aliasMonetaria', aliasOrigen, _doc.persona.id).monetaria"}}
+        {{set _origen="=calc.getPresetPersona('app.aliasMonetaria', aliasOrigen, _doc.persona.id)._monetaria"}}
       {{/onChange}}
     {{/field}}
     {{#field id="aliasDestino"}}
       {{#onChange}}
-        {{set destino="=calc.getPresetPersona('app.aliasUbicacion', aliasDestino, _doc.persona.id).ubicacion"}}
-        {{set _destino="=calc.getPresetPersona('app.aliasUbicacion', aliasDestino, _doc.persona.id)._ubicacion"}}
+        {{set destino="=calc.getPresetPersona('app.aliasMonetaria', aliasDestino, _doc.persona.id).monetaria"}}
+        {{set _destino="=calc.getPresetPersona('app.aliasMonetaria', aliasDestino, _doc.persona.id)._monetaria"}}
       {{/onChange}}
     {{/field}}
   {{/section}}

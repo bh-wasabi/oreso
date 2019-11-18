@@ -13,7 +13,8 @@
   {{#menu id="menu-principal" name="Grupo Oreso" showUserName="true"}}
     {{item text="Tableros" type="userBoards"}}
     {{#item text="Ver"}} 
-      {{item text="Inventario" newTab="true" href="/_inv/cubo?_name=Inventario&_title=Inventario" beginGroup="true"}}
+      {{item text="Inventario" newTab="true" href="/_inv/cubo?_name=Inventario&_title=Inventario"}}
+      {{item text="Tesorería" newTab="true" href="/_tesoreria/cubo?_name=Tesorería&_title=Tesorería" beginGroup="true"}}
       {{item text="Cuentas por Cobrar" newTab="true" href="/_cxc/cubo?_name=Cuentas por Cobrar&_title=Cuentas por Cobrar"}}
       {{item text="Cuentas por Pagar" newTab="true" href="/_cxp/cubo?_name=Cuentas por Pagar&_title=Cuentas por Pagar"}}
       {{item text="Contabilidad" newTab="true" href="/_contabilidad/cubo?_name=Contabilidad&_title=Contabilidad" beginGroup="true"}}
@@ -23,7 +24,7 @@
       {{item text="Clientes" href="/cliente/lista"}}
       {{item text="Proveedores" href="/proveedor/lista"}}
       {{item text="Ubicaciones" href="/ubicacion/lista" beginGroup="true"}}
-      {{item text="Monetarias" href="/monetaria/lista"}}
+      {{item text="Tesorería" href="/tesoreria/lista"}}
     {{/item}}
     {{#item text="Articulos"}}
       {{item text="Inventariables" href="/articulo/inventariables"}}
@@ -536,7 +537,7 @@
   {{/grid}}  
 
   
-  {{#section id="aliasUbicacion" type="array"}}
+   {{#section id="aliasUbicacion" type="array"}}
     {{#field id="id" type="text" label="Identificador"}}
       {{editor case="upper"}}
     {{/field}}
@@ -553,7 +554,23 @@
     {{column field="persona" width="350"}}
     {{column field="ubicacion" width="350"}}
     {{column field="orden" width="50"}}
+  {{/grid}}
+
+  {{#section id="aliasTesoreria" type="array"}}
+    {{#field id="id" type="text" label="Identificador"}}
+      {{editor case="upper"}}
+    {{/field}}
+    {{#field id="tesoreria" type="text" label="Tesorería"}}
+      {{editor type="lookup" source="persona" view="tesoreria" searchEnabled="true"}}
+    {{/field}}
+    {{field id="orden" type="number" label="Orden"}}
+  {{/section}}
+  {{#grid id="aliasTesoreria" section="aliasTesoreria" allowInsert="true" allowRemove="true" allowSort="true" sortBy="persona,orden,id"}}
+    {{column field="id" width="200"}}
+    {{column field="tesoreria" width="350"}}
+    {{column field="orden" width="50"}}
   {{/grid}}  
+
   {{#section id="aliasArticulo" type="array"}}
     {{#field id="id" type="text" label="Identificador"}}
       {{editor case="upper"}}
@@ -607,7 +624,7 @@
 {{/define}}
 
 {{#markup}}
-  {{#page name="Códigos Artículos"}}
+  {{#page name="Alias Artículos"}}
     {{#row}}
       {{#col medium="80%"}}
         {{#zone id="aliasArticulo" modalGrid="aliasArticulo"}}
@@ -617,12 +634,22 @@
       {{/col}}
     {{/row}}
   {{/page}}
-  {{#page name="Códigos Ubicaciones"}}
+  {{#page name="Alias Ubicaciones"}}
     {{#row}}
       {{#col medium="80%"}}
         {{#zone id="aliasUbicacion" modalGrid="aliasUbicacion"}}
           {{br}}
           {{table aliasUbicacion cols="id,persona,ubicacion" medium="20%,40%,40%"}}
+        {{/zone}}
+      {{/col}}
+    {{/row}}
+  {{/page}}
+  {{#page name="Alias Tesorería"}}
+    {{#row}}
+      {{#col medium="80%"}}
+        {{#zone id="aliasTesoreria" modalGrid="aliasTesoreria"}}
+          {{br}}
+          {{table aliasTesoreria cols="id,tesoreria" medium="30%,70%"}}
         {{/zone}}
       {{/col}}
     {{/row}}
@@ -862,7 +889,8 @@
   {{modal estilo id="estilo" grid="estilo" name="Estilos" size="long"}}
   {{modal tamano id="tamano" grid="tamano" name="Tamaños" size="long"}}
   {{modal color id="color" grid="color" name="Colores" size="long"}}
-  {{modal aliasUbicacion id="aliasUbicacion" grid="aliasUbicacion" name="Alias Ubicaciones" size="xwide"}}
   {{modal aliasArticulo id="aliasArticulo" grid="aliasArticulo" name="Alias Artículos" size="xwide"}}
+  {{modal aliasUbicacion id="aliasUbicacion" grid="aliasUbicacion" name="Alias Ubicaciones" size="xwide"}}
+  {{modal aliasTesoreria id="aliasTesoreria" grid="aliasTesoreria" name="Alias Tesorería" size="xwide"}}
   {{modal mayor id="mayor" grid="mayor" name="Mayor" size="xwide"}}
 {{/markup}}

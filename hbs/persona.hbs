@@ -47,6 +47,15 @@
       {{filter field="_parent.type" eq="'ubicacion'"}}
     {{/find}}
   {{/view}}
+  {{#view id="tesoreria"}}
+    {{#find}}
+      {{sort field="_name" direction="asc"}}
+      {{search field="persona.nombreCompleto"}}
+      {{search field="persona.clave"}}
+      {{filter field="_hide" neq="=true"}}
+      {{filter field="_parent.type" eq="'tesoreria'"}}
+    {{/find}}
+  {{/view}}
   {{#view id="clientesProveedores"}}
     {{#find}}
       {{sort field="_name" direction="asc"}}
@@ -59,18 +68,18 @@
   {{#action id="compra" source="notaCompra" subType="compra" subTypeName="Compra" label="Compra" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
     {{param aliasDestino="='AG'"}}
   {{/action}}
-  {{#action id="devolucionCompra" source="notaCompra" subType="devolucionCompra" subTypeName="Devolución Compra" label="Devolución Compra" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{#action id="devolucionCompra" source="notaDevolucionCompra" subType="devolucionCompra" subTypeName="Devolución Compra" label="Devolución Compra" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
     {{param aliasDestino="='AG'"}}
   {{/action}}
   {{#action id="gasto" source="notaGasto" subType="gasto" subTypeName="Gasto" label="Gasto" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
     {{param aliasDestino="='AG'"}}
   {{/action}}
-  {{#action id="devolucionGasto" source="notaGasto" subType="devolucionGasto" subTypeName="Devolución Gasto" label="Devolución Gasto" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{#action id="devolucionGasto" source="notaDevolucionGasto" subType="devolucionGasto" subTypeName="Devolución Gasto" label="Devolución Gasto" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
     {{param aliasDestino="='AG'"}}
   {{/action}}
-  {{#action id="pago" source="notaPago" subType="pago" subTypeName="Pago" label="Pago" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
-  {{/action}}
   {{#action id="aplicacionCxp" source="notaAplicacion" subType="aplicacionCxp" subTypeName="Aplicación Cxp" label="Aplicación Cxp" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{/action}}
+  {{#action id="pago" source="notaPago" subType="pago" subTypeName="Pago" label="Pago" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true" fromSource="mov" fromView="resumenPorPagar" toSection="aplicacion"}}
   {{/action}}
   {{#action id="traspaso" source="notaTraspaso" subType="traspaso" subTypeName="Traspaso" label="Traspaso" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
     {{param aliasOrigen="='AG'"}}
@@ -81,11 +90,12 @@
   {{/action}}
   {{#action id="venta" source="notaVenta" subType="venta" subTypeName="Venta" label="Venta" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
   {{/action}}
-  {{#action id="devolucionVenta" source="notaVenta" subType="devolucionVenta" subTypeName="Devolución Venta" label="Devolución Venta" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
-  {{/action}}
-  {{#action id="cobro" source="notaCobro" subType="cobro" subTypeName="Cobro" label="Cobro" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{#action id="devolucionVenta" source="notaDevolucionVenta" subType="devolucionVenta" subTypeName="Devolución Venta" label="Devolución Venta" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
   {{/action}}
   {{#action id="aplicacionCxc" source="notaAplicacion" subType="aplicacionCxc" subTypeName="Aplicación Cxc" label="Aplicación Cxc" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{/action}}
+  {{#action id="cobro" source="notaCobro" subType="cobro" subTypeName="Cobro" label="Cobro" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true" fromSource="mov" fromView="resumenPorCobrar" toSection="aplicacion"}}
+    {{param persona="_id"}}
   {{/action}}
   {{#action id="dispersion" source="notaDispersion" subType="dispersion" subTypeName="Dispersión" label="Dispersión" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
   {{/action}}
@@ -98,6 +108,61 @@
       {{/col}}
     {{/row}}
   {{/page}}
+  {{#template id="resumen"}}
+    <div class="auto-tile-resumen{{#if disabled}}{{else}} pointer{{/if}} table-responsive dash">
+      <table class="auto-tile-table">
+        <tr>
+          <td style="width:90%">
+            <h5 class="auto-tile-h5">{{_name}}</h5>
+          </td>
+          <td style="width:10%">
+            <img class="auto-img-resumen image-center" src="https://his-imagenes.s3-accelerate.amazonaws.com/widgets/{{id}}.png">
+          </td>
+        </tr>
+      </table>
+      <div class="table-responsive dash" style="height: 84%;width: 100%;">
+        {{#if unificarLista}}
+          <table>
+            <tbody>
+              {{#each lista}}
+                <tr style="font-size:{{fontSize}};">
+                {{!-- {{#if url}}
+                  <td style="white-space:normal">
+                    <strong>{{etiqueta}}: </strong><a class="link" href="{{url}}" target="_blank">{{nombre}}</a>
+                  </td>
+                {{else}} --}}
+                  {{#if nombre}}
+                  <td class="table-unify">{{#if etiqueta}}<strong>{{etiqueta}}:</strong> {{/if}}{{nombre}}{{#if desde}} (Duración: <strong>{{fromNowTime desde}}</strong>){{/if}}</td>
+                  {{else}}
+                    {{#if desde}}
+                    <td class="table-unify">{{#if etiqueta}}<strong>{{etiqueta}}</strong> (Duración: <strong>{{fromNowTime desde}}</strong>){{/if}}</td>
+                    {{/if}}
+                  {{/if}}
+                {{!-- {{/if}} --}}
+                </tr>
+              {{/each}}     
+            </tbody>
+          </table>
+        {{else}}
+          <table class="table record auto-form-record">
+            <tbody>
+              {{#each lista}}
+                <tr style="font-size:{{fontSize}};">
+                {{#if nombre}}
+                  <td class="table-data center">{{#if etiqueta}}<strong>{{etiqueta}}:</strong> {{/if}}{{nombre}}{{#if desde}} (Duración: <strong>{{fromNowTime desde}}</strong>){{/if}}</td>
+                {{else}}
+                  {{#if desde}}
+                    <td class="table-data center">{{#if etiqueta}}<strong>{{etiqueta}}</strong> (Duración: <strong>{{fromNowTime desde}}</strong>){{/if}}</td>
+                  {{/if}}
+                {{/if}}
+                </tr>
+              {{/each}}     
+            </tbody>
+          </table>
+        {{/if}}
+      </div>
+    </div>
+  {{/template}}    
   {{#template id="verPersona"}}
     <div class="list-material">
       <li class="has-action-left">

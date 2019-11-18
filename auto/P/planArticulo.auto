@@ -59,6 +59,7 @@
 		{{field id="destino" label="Destino ID" type="text" readOnly="true" hide="true" column="A"}}
 		{{field id="_destino" label="Ubicación Destino" type="text" readOnly="true" column="A"}}
 		{{field id="cantidad" label="Cantidad" type="number" format="#,.##" column="A"}}
+		{{field id="costoUnitario" label="Costo Unitario" type="number" format="currency" column="A"}}
 		{{field id="valorUnitario" label="Valor Unitario" type="number" format="currency" column="A"}}
 		{{field id="tasaIva" label="% IVA" type="number" format="#.##" column="A"}}
 		{{field id="importe" label="Importe" type="calc" format="currency" column="A"}}
@@ -105,6 +106,7 @@
 				{{row field="aliasDestino" align="left"}}
 				{{row field="_destino" align="left"}}
 				{{row field="cantidad" align="left"}}
+				{{row field="costoUnitario" align="left"}}
 				{{row field="valorUnitario" align="left"}}
 				{{row field="tasaIva" align="left"}}
 				{{row field="importe" align="left"}}
@@ -139,7 +141,7 @@
 							planArticulo
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="aliasArticulo, _articulo, aliasOrigen, _origen, aliasDestino, _destino, cantidad, valorUnitario, tasaIva, importe, iva, total, lote, vencimiento" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="aliasArticulo, _articulo, aliasOrigen, _origen, aliasDestino, _destino, cantidad, costoUnitario, valorUnitario, tasaIva, importe, iva, total, lote, vencimiento" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -157,6 +159,7 @@
 				{{field aliasDestino}}
 				{{field _destino}}
 				{{field cantidad}}
+				{{field costoUnitario}}
 				{{field valorUnitario}}
 				{{field tasaIva}}
 				{{field lote}}
@@ -175,6 +178,7 @@
 		<br>Destino: {{aliasDestino}}
 		<br>Ubicación Destino: {{_destino}}
 		<br>Cantidad: {{number cantidad "#,.##"}}
+		<br>Costo Unitario: {{number costoUnitario "currency"}}
 		<br>Valor Unitario: {{number valorUnitario "currency"}}
 		<br>% IVA: {{number tasaIva "#.##"}}
 		<br>Importe: {{number importe "currency"}}
@@ -191,6 +195,7 @@
 		{{#if aliasDestino}}<br>Destino: {{aliasDestino}}{{/if}}
 		{{#if _destino}}<br>Ubicación Destino: {{_destino}}{{/if}}
 		{{#if cantidad}}<br>Cantidad: {{number cantidad "#,.##"}}{{/if}}
+		{{#if costoUnitario}}<br>Costo Unitario: {{number costoUnitario "currency"}}{{/if}}
 		{{#if valorUnitario}}<br>Valor Unitario: {{number valorUnitario "currency"}}{{/if}}
 		{{#if tasaIva}}<br>% IVA: {{number tasaIva "#.##"}}{{/if}}
 		{{#if importe}}<br>Importe: {{number importe "currency"}}{{/if}}

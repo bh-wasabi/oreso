@@ -1,4 +1,4 @@
-{{#define type="doc" id="notaVenta"}}
+{{#define type="doc" id="notaDevolucionCompra"}}
 	{{param defaultDisplay="_name"}}
 	{{param defaultView="lista"}}
 	{{param pageStart="1"}}
@@ -79,7 +79,7 @@
 			{{#editor type="lookup" source="persona" view="responsablesAcademicos" searchEnabled="true" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="fechaEmision" label="Fecha Emisión" type="date" format="DD/MMM/YYYY" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD" generator="now"}}
+		{{#field id="fechaEmision" label="Fecha Emisión" type="date" format="DD/MMM/YYYY" readOnly="true" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD" generator="now"}}
 			{{#editor type="date" width="100%"}}
 			{{/editor}}
 		{{/field}}
@@ -91,7 +91,7 @@
 			{{#editor type="date" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="estatus" label="Estatus" type="text" readOnly="true" column="A" references="estatusNota" modalHide="true" labelModalClass="full-width" defaultValue="'borrador'"}}
+		{{#field id="estatus" label="Estatus" type="text" readOnly="true" column="A" references="estatusNota" labelModalClass="full-width" defaultValue="'borrador'"}}
 			{{#editor type="select" preset="cfg.estatusNota" width="100%"}}
 			{{/editor}}
 		{{/field}}
@@ -292,7 +292,7 @@
 	{{/workflow}}
 {{/define}}
 {{#markup}}
-	{{#page name="Venta"}}
+	{{#page name="Devolución Compra"}}
 		{{row}}
 		{{row}}
 		{{#row}}
@@ -354,7 +354,7 @@
 				{{field fechaEmision}}
 				{{field diasCredito}}
 				{{field vencimiento}}
-				{{field estatus hide="true"}}
+				{{field estatus}}
 				{{field comentarios}}
 			{{/fieldSet}}
 		{{/col}}
@@ -370,7 +370,7 @@
 	{{#template id="lista"}}
 		<div>{{_name}}</div>
 	{{/template}}
-	{{#template2 id="notaVenta"}}
+	{{#template2 id="notaDevolucionCompra"}}
 		{{#if esEstudiante}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}
 		<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}
 		<br>Días Crédito: {{diasCredito}}
@@ -378,7 +378,7 @@
 		<br>Estatus: {{_estatus}}
 		<br>{{comentarios}}
 	{{/template2}}
-	{{#template3 id="notaVenta"}}
+	{{#template3 id="notaDevolucionCompra"}}
 		{{#if esEstudiante}}{{#if responsableAcademico}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}{{/if}}
 		{{#if fechaEmision}}<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}{{/if}}
 		{{#if diasCredito}}<br>Días Crédito: {{diasCredito}}{{/if}}

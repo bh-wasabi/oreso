@@ -101,6 +101,7 @@
 			{{/editor}}
 		{{/field}}
 		{{field id="ivaFactor" label="Factor IVA" type="number" column="A"}}
+		{{field id="saldo" label="Saldo" type="number" format="currency" readOnly="true" column="A"}}
 		{{field id="importe" label="Importe" type="number" format="currency" column="A"}}
 		{{#field id="formaPago" label="Forma Pago" type="text" column="A" references="formaPago"}}
 			{{#editor type="select" preset="cfg.formaPago"}}
@@ -167,6 +168,7 @@
 				{{column field="lote"}}
 				{{column field="vencimiento"}}
 				{{column field="ivaFactor"}}
+				{{column field="saldo"}}
 				{{column field="importe"}}
 				{{column field="formaPago"}}
 				{{column field="aliasOrigen"}}
@@ -280,7 +282,7 @@
 							Aplicación
 						{{/h5}}
 						{{#div}}
-							{{table aplicacion class="auto-form-table" cols="lote, vencimiento, ivaFactor, importe, formaPago, aliasOrigen, _origen, referenciaPago, aliasDestino, _destino, loteDestino, vencimientoDestino" removeEmptyCols="true" unlink="true"}}
+							{{table aplicacion class="auto-form-table" cols="lote, vencimiento, ivaFactor, saldo, importe, formaPago, aliasOrigen, _origen, referenciaPago, aliasDestino, _destino, loteDestino, vencimientoDestino" removeEmptyCols="true" unlink="true"}}
 							{{br}}
 						{{/div}}
 					{{/col}}

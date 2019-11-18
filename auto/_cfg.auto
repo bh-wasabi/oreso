@@ -5,89 +5,49 @@
 		{{item board="proveedores" display="Proveedores" order="3" service="proveedores" serviceName="Proveedores" color="deep-purple" docPosition="0.75" type="persona" folder="persona" view="lista" params="tipo=proveedor" template="verPersona" showActions="compra, devolucionCompra, gasto, devolucionGasto, pago, aplicacionCxp, traspaso, entradaDiversa, salidaDiversa, venta, devolucionVenta, cobro, aplicacionCxc, dispersion"}}
 	{{/config}}
 	{{#config id="widget"}}
-		{{item widget="datosGeneralesPersona" display="Datos Generales" order="1" heightRatio="2" widthRatio="3" userRole="auxiliarAdmision, auxiliarConsultaExterna, bancoSangre, cajero, enfermera, enfermeraCeye, imagenologia, medico, medicoAnestesiologo, medicoObstetrico, patologia, perfusionista, tecnicoSueno, tecnicoQuimioterapia"}}
-		{{item widget="datosNacionalidad" display="Datos Nacionalidad" order="2" editAction="notaDatosNacionalidad" heightRatio="2" widthRatio="2" userRole="auxiliarAdmision, auxiliarConsultaExterna, cajero, enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia"}}
-		{{item widget="datosFinancieros" display="Datos Financieros" order="3" editAction="notaDatosFinancieros" heightRatio="2" widthRatio="2" userRole="cajero, supervisorLaboratorio"}}
-		{{item widget="solicitudesActivas" display="Solicitudes Activas" order="4" heightRatio="4" widthRatio="3" openAction="solicitudes" source="solicitud" view="resumenActivos" id="_id"}}
-		{{item widget="notasActivas" display="Notas Activas" order="5" heightRatio="2" widthRatio="2" source="nota" view="resumenActivos" id="_id"}}
-		{{item widget="resultadosTxDx" display="Resultados TX/DX" order="6" heightRatio="2" widthRatio="4" openAction="resultadosTxDx" source="solicitud" view="resumenTxDx" id="_id"}}
-		{{item widget="porCobrar" display="Cuentas por Cobrar" order="7" heightRatio="2" widthRatio="3" board="cuentaPacienteCaja" source="solicitud" view="resumenPorCobrar" id="_id" userRole="cajero"}}
-		{{item widget="porPagar" display="Cuentas por Pagar" order="8" heightRatio="2" widthRatio="3" board="cuentaPacienteCaja" source="solicitud" view="resumenPorPagar" id="_id" userRole="cajero"}}
-		{{item widget="caja" display="Caja" order="9" heightRatio="2" widthRatio="3" board="tesoreria" source="mov" view="resumenCaja" id="_id"}}
-		{{item widget="inventario" display="Inventario Asignado" order="10" heightRatio="4" widthRatio="3" source="mov" view="resumenInventario" id="_id"}}
-		{{item widget="autopsia" display="Autopsia" order="11" heightRatio="2" widthRatio="2"}}
-		{{item widget="alergia" display="Alergias" order="12" editAction="notaAlergia" heightRatio="2" widthRatio="2" userRole="enfermera, enfermeraCeye, imagenologia, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia"}}
-		{{item widget="riesgoEpidemiologico" display="Riesgo Epidemiológico" order="13" editAction="notaRiesgoEpidemiologico" heightRatio="2" widthRatio="2" userRole="auxiliarAdmision, auxiliarConsultaExterna, bancoSangre, cajero, enfermera, enfermeraCeye, imagenologia, medico, medicoAnestesiologo, medicoObstetrico, patologia, perfusionista, tecnicoSueno, tecnicoQuimioterapia"}}
-		{{item widget="antecedentes" display="Antecedentes" order="14" editAction="notaAntecedentes" heightRatio="4" widthRatio="2" userRole="enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, programadorQuirofanos, tecnicoSueno, tecnicoQuimioterapia"}}
-		{{item widget="atencionesActivas" display="Servicios Activos" order="15" heightRatio="2" widthRatio="2" userRole="bancoSangre, enfermera, enfermeraCeye, imagenologia, medico, medicoAnestesiologo, medicoObstetrico, patologia, perfusionista, programadorQuirofanos, tecnicoSueno, tecnicoQuimioterapia"}}
-		{{item widget="hospitalizacion" display="Hospitalización" order="16" heightRatio="2" widthRatio="2"}}
-		{{item widget="cateterSondaDrenaje" display="Catéteres, Sondas o Drenajes" order="17" heightRatio="2" widthRatio="2" userRole="enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista"}}
-		{{item widget="controlLiquidos" display="Control Liquídos" order="18" editAction="notaControlLiquidos" heightRatio="2" widthRatio="2" userRole="enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista"}}
-		{{item widget="diagnostico" display="Diagnósticos" order="19" heightRatio="2" widthRatio="3" userRole="enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, programadorQuirofanos"}}
-		{{item widget="dieta" display="Dieta" order="20" editAction="notaSolicitudDieta" heightRatio="2" widthRatio="2" userRole="enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista"}}
-		{{item widget="discapacidad" display="Discapacidades" order="21" heightRatio="2" widthRatio="2" userRole="enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia"}}
-		{{item widget="estudioSocioeconomico" display="Estudio Socioeconómico" order="22" editAction="notaEstudioSocioeconomico" heightRatio="2" widthRatio="2" userRole="directorOperaciones, enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, trabajoSocial, trabajoSocialResponsable"}}
-		{{item widget="imagenologia" display="Solicitudes Imagenología" order="23" editAction="notaSolicitudImagenologia" heightRatio="2" widthRatio="2" userRole="enfermera, enfermeraCeye, imagenologia, medico, medicoAnestesiologo, medicoObstetrico, perfusionista"}}
-		{{item widget="inmunizaciones" display="Inmunizaciones" order="24" heightRatio="2" widthRatio="2"}}
-		{{item widget="laboratorio" display="Solicitudes Laboratorio" order="25" editAction="notaSolicitudLaboratorio" heightRatio="2" widthRatio="2" userRole="enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia"}}
-		{{item widget="registroReferencia" display="Datos Referencia" order="26" heightRatio="2" widthRatio="2"}}
-		{{item widget="escala" display="Escalas" order="27" heightRatio="2" widthRatio="2"}}
-		{{item widget="nanda" display="NANDA" order="28" editAction="notaNanda" heightRatio="2" widthRatio="2" userRole="enfermera"}}
-		{{item widget="nic" display="NIC" order="29" editAction="notaNic" heightRatio="2" widthRatio="2" userRole="enfermera"}}
-		{{item widget="noc" display="NOC" order="30" editAction="notaNoc" heightRatio="2" widthRatio="2" userRole="enfermera"}}
-		{{item widget="medicamento" display="Solicitudes Medicamentos" order="31" editAction="notaSolicitudMedicamento" heightRatio="2" widthRatio="2" userRole="enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia"}}
-		{{item widget="solucion" display="Solicitudes Soluciones" order="32" editAction="notaSolicitudSolucion" heightRatio="2" widthRatio="2" userRole="enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia"}}
-		{{item widget="mezcla" display="Solicitudes Mezclas" order="33" editAction="notaSolicitudMezcla" heightRatio="2" widthRatio="2" userRole="enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia"}}
-		{{item widget="medidaGeneral" display="Solicitudes Medidas Generales" order="34" editAction="notaSolicitudMedidaGeneral" heightRatio="2" widthRatio="2" userRole="enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista"}}
-		{{item widget="patologia" display="Solicitudes Patología" order="35" editAction="notaSolicitudPatologia" heightRatio="2" widthRatio="2" userRole="enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, patologia, perfusionista"}}
-		{{item widget="procedimiento" display="Solicitudes Procedimientos" order="36" editAction="notaSolicitudProcedimiento" heightRatio="2" widthRatio="2" userRole="enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista"}}
-		{{item widget="cirugia" display="Solicitudes Cirugías" order="37" editAction="notaSolicitudCirugia" heightRatio="2" widthRatio="4" userRole="enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista"}}
-		{{item widget="bancoSangre" display="Solicitudes Banco de Sangre" order="38" editAction="notaSolicitudBancoSangre" heightRatio="2" widthRatio="2" userRole="bancoSangre, enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista"}}
-		{{item widget="hemocomponente" display="Solicitudes Hemocomponentes" order="39" editAction="notaSolicitudHemocomponente" heightRatio="2" widthRatio="2" userRole="bancoSangre, enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista"}}
-		{{item widget="gasometria" display="Gasometría" order="40" editAction="notaGasometria" heightRatio="2" widthRatio="2" userRole="enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista"}}
-		{{item widget="signosVitales" display="Signos Vitales" order="41" editAction="notaSignosVitales" heightRatio="2" widthRatio="2" userRole="enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia"}}
-		{{item widget="somatometria" display="Somatometría" order="42" editAction="notaSomatometria" heightRatio="2" widthRatio="2" userRole="enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia"}}
-		{{item widget="somatometriaNutricion" display="Somatometría Nutrición" order="43" editAction="notaSomatometriaNutricion" heightRatio="2" widthRatio="2" userRole="enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista"}}
-		{{item widget="adjuntos" display="Adjuntos" order="44" editAction="notaAdjuntos" heightRatio="2" widthRatio="2" userRole="enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista"}}
-		{{item widget="consultaExterna" display="Solicitudes Consultas Externas" order="45" editAction="notaSolicitudConsultaExterna" heightRatio="2" widthRatio="2" userRole="enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista"}}
-		{{item widget="interconsulta" display="Solicitudes Interconsulta" order="46" editAction="notaSolicitudInterconsulta" heightRatio="2" widthRatio="2"}}
-		{{item widget="material" display="Solicitudes Materiales o Insumos" order="47" editAction="notaSolicitudMaterial" heightRatio="4" widthRatio="3" userRole="enfermera, tecnicoSueno, tecnicoQuimioterapia"}}
-		{{item widget="materialCeye" display="Solicitudes Materiales CEYE" order="48" editAction="notaSolicitudMaterialCeye" heightRatio="4" widthRatio="3"}}
-		{{item widget="expedientesFusionados" display="Expedientes Fusionados" order="49" heightRatio="2" widthRatio="2" openAction="expedientesFusionados"}}
-		{{item widget="documentacion" display="Documentación" order="50" heightRatio="2" widthRatio="2"}}
-		{{item widget="contrato" display="Contratos" order="51" heightRatio="2" widthRatio="2"}}
-		{{item widget="lineaCredito" display="Línea Crédito" order="52" heightRatio="2" widthRatio="2"}}
-		{{item widget="cartaCredito" display="Cartas Crédito" order="53" heightRatio="2" widthRatio="2"}}
-		{{item widget="nivelRiesgo" display="Nivel Riesgo" order="54" heightRatio="2" widthRatio="2"}}
-		{{item widget="historialCredito" display="Historial Crédito" order="55" heightRatio="2" widthRatio="2"}}
-		{{item widget="historialVenta" display="Historial Ventas" order="56" heightRatio="2" widthRatio="2"}}
-		{{item widget="referencia" display="Referencias " order="57" heightRatio="2" widthRatio="2"}}
-		{{item widget="asignacion" display="Asignaciones" order="58" heightRatio="2" widthRatio="2"}}
-		{{item widget="clasificacion" display="Clasificación" order="59" heightRatio="2" widthRatio="2"}}
-		{{item widget="sucursal" display="Sucursales" order="60" heightRatio="2" widthRatio="2"}}
-		{{item widget="contacto" display="Contactos" order="61" heightRatio="2" widthRatio="2"}}
-		{{item widget="encuesta" display="Encuestas" order="62" heightRatio="2" widthRatio="2"}}
-		{{item widget="objetivoPersonal" display="Objetivos Personales" order="63" heightRatio="2" widthRatio="2"}}
-		{{item widget="experienciaLaboral" display="Experiencia Laboral" order="64" heightRatio="2" widthRatio="2"}}
-		{{item widget="educacion" display="Educación" order="65" heightRatio="2" widthRatio="2"}}
-		{{item widget="certificacion" display="Certificaciones y Licenciaturas" order="66" heightRatio="2" widthRatio="2"}}
-		{{item widget="voluntario" display="Experiencia como Voluntario" order="67" heightRatio="2" widthRatio="2"}}
-		{{item widget="aptitud" display="Aptitudes" order="68" heightRatio="2" widthRatio="2"}}
-		{{item widget="logro" display="Logros Importantes" order="69" heightRatio="2" widthRatio="2"}}
-		{{item widget="inicitivaPersonal" display="Iniciativas" order="70" heightRatio="2" widthRatio="2"}}
-		{{item widget="inquietudPersonal" display="Inquietudes" order="71" heightRatio="2" widthRatio="2"}}
-		{{item widget="solicitudPersonal" display="Solicitudes" order="72" heightRatio="2" widthRatio="2"}}
-		{{item widget="puntualidad" display="Puntualidad" order="73" heightRatio="2" widthRatio="2"}}
-		{{item widget="sueldoPrestaciones" display="Sueldo y Prestaciones" order="74" heightRatio="2" widthRatio="2"}}
-		{{item widget="pasatiempo" display="Deportes y Pasatiempos" order="75" heightRatio="2" widthRatio="2"}}
-		{{item widget="precioCosto" display="Precios y Costos" order="76" heightRatio="2" widthRatio="2"}}
-		{{item widget="proveedor" display="Proveedores" order="77" heightRatio="2" widthRatio="2"}}
-		{{item widget="porRecibir" display="Por Recibir" order="78" heightRatio="2" widthRatio="2"}}
-		{{item widget="porSurtir" display="por Surtir" order="79" heightRatio="2" widthRatio="2"}}
-		{{item widget="planeacionArticulo" display="Planeación Inventario" order="80" heightRatio="2" widthRatio="2"}}
-		{{item widget="calidadArticulo" display="Control Calidad" order="81" heightRatio="2" widthRatio="2"}}
-		{{item widget="caracteristicasArticulo" display="Características" order="82" heightRatio="2" widthRatio="2"}}
-		{{item widget="opcionesArticulo" display="Opciones" order="83" heightRatio="2" widthRatio="2"}}
+		{{item widget="datosGeneralesPersona" display="Datos Generales" order="1" heightRatio="2" widthRatio="3"}}
+		{{item widget="datosNacionalidad" display="Datos Nacionalidad" order="2" editAction="notaDatosNacionalidad" heightRatio="2" widthRatio="2"}}
+		{{item widget="datosFinancieros" display="Datos Financieros" order="3" editAction="notaDatosFinancieros" heightRatio="2" widthRatio="2"}}
+		{{item widget="notasActivas" display="Notas Activas" order="5" heightRatio="4" widthRatio="3" source="nota" view="resumenActivos" id="_id"}}
+		{{item widget="porCobrar" display="Cuentas por Cobrar" order="6" heightRatio="4" widthRatio="3" source="mov" view="resumenPorCobrar" id="_id"}}
+		{{item widget="porPagar" display="Cuentas por Pagar" order="7" heightRatio="4" widthRatio="3" source="mov" view="resumenPorPagar" id="_id"}}
+		{{item widget="caja" display="Caja" order="8" heightRatio="4" widthRatio="3" source="mov" view="resumenCaja" id="_id"}}
+		{{item widget="inventario" display="Inventario Asignado" order="9" heightRatio="4" widthRatio="3" source="mov" view="resumenInventario" id="_id"}}
+		{{item widget="adjuntos" display="Adjuntos" order="10" editAction="notaAdjuntos" heightRatio="2" widthRatio="2"}}
+		{{item widget="documentacion" display="Documentación" order="11" heightRatio="2" widthRatio="2"}}
+		{{item widget="contrato" display="Contratos" order="12" heightRatio="2" widthRatio="2"}}
+		{{item widget="lineaCredito" display="Línea Crédito" order="13" heightRatio="2" widthRatio="2"}}
+		{{item widget="cartaCredito" display="Cartas Crédito" order="14" heightRatio="2" widthRatio="2"}}
+		{{item widget="nivelRiesgo" display="Nivel Riesgo" order="15" heightRatio="2" widthRatio="2"}}
+		{{item widget="historialCredito" display="Historial Crédito" order="16" heightRatio="2" widthRatio="2"}}
+		{{item widget="historialVenta" display="Historial Ventas" order="17" heightRatio="2" widthRatio="2"}}
+		{{item widget="referencia" display="Referencias " order="18" heightRatio="2" widthRatio="2"}}
+		{{item widget="asignacion" display="Asignaciones" order="19" heightRatio="2" widthRatio="2"}}
+		{{item widget="clasificacion" display="Clasificación" order="20" heightRatio="2" widthRatio="2"}}
+		{{item widget="sucursal" display="Sucursales" order="21" heightRatio="2" widthRatio="2"}}
+		{{item widget="contacto" display="Contactos" order="22" heightRatio="2" widthRatio="2"}}
+		{{item widget="encuesta" display="Encuestas" order="23" heightRatio="2" widthRatio="2"}}
+		{{item widget="objetivoPersonal" display="Objetivos Personales" order="24" heightRatio="2" widthRatio="2"}}
+		{{item widget="experienciaLaboral" display="Experiencia Laboral" order="25" heightRatio="2" widthRatio="2"}}
+		{{item widget="educacion" display="Educación" order="26" heightRatio="2" widthRatio="2"}}
+		{{item widget="certificacion" display="Certificaciones y Licenciaturas" order="27" heightRatio="2" widthRatio="2"}}
+		{{item widget="voluntario" display="Experiencia como Voluntario" order="28" heightRatio="2" widthRatio="2"}}
+		{{item widget="aptitud" display="Aptitudes" order="29" heightRatio="2" widthRatio="2"}}
+		{{item widget="logro" display="Logros Importantes" order="30" heightRatio="2" widthRatio="2"}}
+		{{item widget="inicitivaPersonal" display="Iniciativas" order="31" heightRatio="2" widthRatio="2"}}
+		{{item widget="inquietudPersonal" display="Inquietudes" order="32" heightRatio="2" widthRatio="2"}}
+		{{item widget="solicitudPersonal" display="Solicitudes" order="33" heightRatio="2" widthRatio="2"}}
+		{{item widget="puntualidad" display="Puntualidad" order="34" heightRatio="2" widthRatio="2"}}
+		{{item widget="sueldoPrestaciones" display="Sueldo y Prestaciones" order="35" heightRatio="2" widthRatio="2"}}
+		{{item widget="pasatiempo" display="Deportes y Pasatiempos" order="36" heightRatio="2" widthRatio="2"}}
+		{{item widget="precioCosto" display="Precios y Costos" order="37" heightRatio="2" widthRatio="2"}}
+		{{item widget="proveedor" display="Proveedores" order="38" heightRatio="2" widthRatio="2"}}
+		{{item widget="porRecibir" display="Por Recibir" order="39" heightRatio="2" widthRatio="2"}}
+		{{item widget="porSurtir" display="por Surtir" order="40" heightRatio="2" widthRatio="2"}}
+		{{item widget="planeacionArticulo" display="Planeación Inventario" order="41" heightRatio="2" widthRatio="2"}}
+		{{item widget="calidadArticulo" display="Control Calidad" order="42" heightRatio="2" widthRatio="2"}}
+		{{item widget="caracteristicasArticulo" display="Características" order="43" heightRatio="2" widthRatio="2"}}
+		{{item widget="opcionesArticulo" display="Opciones" order="44" heightRatio="2" widthRatio="2"}}
 	{{/config}}
 	{{#config id="boardList"}}
 		{{item id="clientes" nombre="Clientes / Clientes"}}
@@ -95,9 +55,13 @@
 		{{item id="ubicaciones" nombre="Ubicaciones / Ubicaciones"}}
 	{{/config}}
 	{{#config id="actionList"}}
-		{{item id="notaAplicacion" nombre="Aplicación"}}
+		{{item id="notaAplicacionCxc" nombre="Aplicación - Cuentas por Cobrar"}}
+		{{item id="notaAplicacionCxp" nombre="Aplicación - Cuentas por Pagar"}}
 		{{item id="notaCobro" nombre="Cobro"}}
 		{{item id="notaCompra" nombre="Compra"}}
+		{{item id="notaDevolucionCompra" nombre="Devolución Compra"}}
+		{{item id="notaDevolucionGasto" nombre="Devolución Gasto"}}
+		{{item id="notaDevolucionVenta" nombre="Devolución Venta"}}
 		{{item id="notaDispersion" nombre="Dispersión"}}
 		{{item id="notaEntradaDiversa" nombre="Entrada Diversa"}}
 		{{item id="notaGasto" nombre="Gasto"}}
@@ -504,89 +468,49 @@
 	{{/function}}
 	{{#function id="widget" paramType="text" returnType="json"}}
 		{{define type="param" id="widget"}}
-		{{when widget="datosGeneralesPersona" push="{\"widget\":\"datosGeneralesPersona\",\"display\":\"Datos Generales\",\"order\":1,\"heightRatio\":2,\"widthRatio\":3,\"userRole\":\"auxiliarAdmision, auxiliarConsultaExterna, bancoSangre, cajero, enfermera, enfermeraCeye, imagenologia, medico, medicoAnestesiologo, medicoObstetrico, patologia, perfusionista, tecnicoSueno, tecnicoQuimioterapia\"}"}}
-		{{when widget="datosNacionalidad" push="{\"widget\":\"datosNacionalidad\",\"display\":\"Datos Nacionalidad\",\"order\":2,\"editAction\":\"notaDatosNacionalidad\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"auxiliarAdmision, auxiliarConsultaExterna, cajero, enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia\"}"}}
-		{{when widget="datosFinancieros" push="{\"widget\":\"datosFinancieros\",\"display\":\"Datos Financieros\",\"order\":3,\"editAction\":\"notaDatosFinancieros\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"cajero, supervisorLaboratorio\"}"}}
-		{{when widget="solicitudesActivas" push="{\"widget\":\"solicitudesActivas\",\"display\":\"Solicitudes Activas\",\"order\":4,\"heightRatio\":4,\"widthRatio\":3,\"openAction\":\"solicitudes\",\"source\":\"solicitud\",\"view\":\"resumenActivos\",\"id\":\"_id\"}"}}
-		{{when widget="notasActivas" push="{\"widget\":\"notasActivas\",\"display\":\"Notas Activas\",\"order\":5,\"heightRatio\":2,\"widthRatio\":2,\"source\":\"nota\",\"view\":\"resumenActivos\",\"id\":\"_id\"}"}}
-		{{when widget="resultadosTxDx" push="{\"widget\":\"resultadosTxDx\",\"display\":\"Resultados TX/DX\",\"order\":6,\"heightRatio\":2,\"widthRatio\":4,\"openAction\":\"resultadosTxDx\",\"source\":\"solicitud\",\"view\":\"resumenTxDx\",\"id\":\"_id\"}"}}
-		{{when widget="porCobrar" push="{\"widget\":\"porCobrar\",\"display\":\"Cuentas por Cobrar\",\"order\":7,\"heightRatio\":2,\"widthRatio\":3,\"board\":\"cuentaPacienteCaja\",\"source\":\"solicitud\",\"view\":\"resumenPorCobrar\",\"id\":\"_id\",\"userRole\":\"cajero\"}"}}
-		{{when widget="porPagar" push="{\"widget\":\"porPagar\",\"display\":\"Cuentas por Pagar\",\"order\":8,\"heightRatio\":2,\"widthRatio\":3,\"board\":\"cuentaPacienteCaja\",\"source\":\"solicitud\",\"view\":\"resumenPorPagar\",\"id\":\"_id\",\"userRole\":\"cajero\"}"}}
-		{{when widget="caja" push="{\"widget\":\"caja\",\"display\":\"Caja\",\"order\":9,\"heightRatio\":2,\"widthRatio\":3,\"board\":\"tesoreria\",\"source\":\"mov\",\"view\":\"resumenCaja\",\"id\":\"_id\"}"}}
-		{{when widget="inventario" push="{\"widget\":\"inventario\",\"display\":\"Inventario Asignado\",\"order\":10,\"heightRatio\":4,\"widthRatio\":3,\"source\":\"mov\",\"view\":\"resumenInventario\",\"id\":\"_id\"}"}}
-		{{when widget="autopsia" push="{\"widget\":\"autopsia\",\"display\":\"Autopsia\",\"order\":11,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="alergia" push="{\"widget\":\"alergia\",\"display\":\"Alergias\",\"order\":12,\"editAction\":\"notaAlergia\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, enfermeraCeye, imagenologia, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia\"}"}}
-		{{when widget="riesgoEpidemiologico" push="{\"widget\":\"riesgoEpidemiologico\",\"display\":\"Riesgo Epidemiológico\",\"order\":13,\"editAction\":\"notaRiesgoEpidemiologico\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"auxiliarAdmision, auxiliarConsultaExterna, bancoSangre, cajero, enfermera, enfermeraCeye, imagenologia, medico, medicoAnestesiologo, medicoObstetrico, patologia, perfusionista, tecnicoSueno, tecnicoQuimioterapia\"}"}}
-		{{when widget="antecedentes" push="{\"widget\":\"antecedentes\",\"display\":\"Antecedentes\",\"order\":14,\"editAction\":\"notaAntecedentes\",\"heightRatio\":4,\"widthRatio\":2,\"userRole\":\"enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, programadorQuirofanos, tecnicoSueno, tecnicoQuimioterapia\"}"}}
-		{{when widget="atencionesActivas" push="{\"widget\":\"atencionesActivas\",\"display\":\"Servicios Activos\",\"order\":15,\"editAction\":\"\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"bancoSangre, enfermera, enfermeraCeye, imagenologia, medico, medicoAnestesiologo, medicoObstetrico, patologia, perfusionista, programadorQuirofanos, tecnicoSueno, tecnicoQuimioterapia\"}"}}
-		{{when widget="hospitalizacion" push="{\"widget\":\"hospitalizacion\",\"display\":\"Hospitalización\",\"order\":16,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="cateterSondaDrenaje" push="{\"widget\":\"cateterSondaDrenaje\",\"display\":\"Catéteres, Sondas o Drenajes\",\"order\":17,\"editAction\":\"\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista\"}"}}
-		{{when widget="controlLiquidos" push="{\"widget\":\"controlLiquidos\",\"display\":\"Control Liquídos\",\"order\":18,\"editAction\":\"notaControlLiquidos\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista\"}"}}
-		{{when widget="diagnostico" push="{\"widget\":\"diagnostico\",\"display\":\"Diagnósticos\",\"order\":19,\"heightRatio\":2,\"widthRatio\":3,\"userRole\":\"enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, programadorQuirofanos\"}"}}
-		{{when widget="dieta" push="{\"widget\":\"dieta\",\"display\":\"Dieta\",\"order\":20,\"editAction\":\"notaSolicitudDieta\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista\"}"}}
-		{{when widget="discapacidad" push="{\"widget\":\"discapacidad\",\"display\":\"Discapacidades\",\"order\":21,\"editAction\":\"\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia\"}"}}
-		{{when widget="estudioSocioeconomico" push="{\"widget\":\"estudioSocioeconomico\",\"display\":\"Estudio Socioeconómico\",\"order\":22,\"editAction\":\"notaEstudioSocioeconomico\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"directorOperaciones, enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, trabajoSocial, trabajoSocialResponsable\"}"}}
-		{{when widget="imagenologia" push="{\"widget\":\"imagenologia\",\"display\":\"Solicitudes Imagenología\",\"order\":23,\"editAction\":\"notaSolicitudImagenologia\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, enfermeraCeye, imagenologia, medico, medicoAnestesiologo, medicoObstetrico, perfusionista\"}"}}
-		{{when widget="inmunizaciones" push="{\"widget\":\"inmunizaciones\",\"display\":\"Inmunizaciones\",\"order\":24,\"editAction\":\"\",\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="laboratorio" push="{\"widget\":\"laboratorio\",\"display\":\"Solicitudes Laboratorio\",\"order\":25,\"editAction\":\"notaSolicitudLaboratorio\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia\"}"}}
-		{{when widget="registroReferencia" push="{\"widget\":\"registroReferencia\",\"display\":\"Datos Referencia\",\"order\":26,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="escala" push="{\"widget\":\"escala\",\"display\":\"Escalas\",\"order\":27,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="nanda" push="{\"widget\":\"nanda\",\"display\":\"NANDA\",\"order\":28,\"editAction\":\"notaNanda\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera\"}"}}
-		{{when widget="nic" push="{\"widget\":\"nic\",\"display\":\"NIC\",\"order\":29,\"editAction\":\"notaNic\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera\"}"}}
-		{{when widget="noc" push="{\"widget\":\"noc\",\"display\":\"NOC\",\"order\":30,\"editAction\":\"notaNoc\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera\"}"}}
-		{{when widget="medicamento" push="{\"widget\":\"medicamento\",\"display\":\"Solicitudes Medicamentos\",\"order\":31,\"editAction\":\"notaSolicitudMedicamento\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia\"}"}}
-		{{when widget="solucion" push="{\"widget\":\"solucion\",\"display\":\"Solicitudes Soluciones\",\"order\":32,\"editAction\":\"notaSolicitudSolucion\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia\"}"}}
-		{{when widget="mezcla" push="{\"widget\":\"mezcla\",\"display\":\"Solicitudes Mezclas\",\"order\":33,\"editAction\":\"notaSolicitudMezcla\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia\"}"}}
-		{{when widget="medidaGeneral" push="{\"widget\":\"medidaGeneral\",\"display\":\"Solicitudes Medidas Generales\",\"order\":34,\"editAction\":\"notaSolicitudMedidaGeneral\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista\"}"}}
-		{{when widget="patologia" push="{\"widget\":\"patologia\",\"display\":\"Solicitudes Patología\",\"order\":35,\"editAction\":\"notaSolicitudPatologia\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, patologia, perfusionista\"}"}}
-		{{when widget="procedimiento" push="{\"widget\":\"procedimiento\",\"display\":\"Solicitudes Procedimientos\",\"order\":36,\"editAction\":\"notaSolicitudProcedimiento\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista\"}"}}
-		{{when widget="cirugia" push="{\"widget\":\"cirugia\",\"display\":\"Solicitudes Cirugías\",\"order\":37,\"editAction\":\"notaSolicitudCirugia\",\"heightRatio\":2,\"widthRatio\":4,\"userRole\":\"enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista\"}"}}
-		{{when widget="bancoSangre" push="{\"widget\":\"bancoSangre\",\"display\":\"Solicitudes Banco de Sangre\",\"order\":38,\"editAction\":\"notaSolicitudBancoSangre\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"bancoSangre, enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista\"}"}}
-		{{when widget="hemocomponente" push="{\"widget\":\"hemocomponente\",\"display\":\"Solicitudes Hemocomponentes\",\"order\":39,\"editAction\":\"notaSolicitudHemocomponente\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"bancoSangre, enfermera, enfermeraCeye, medico, medicoAnestesiologo, medicoObstetrico, perfusionista\"}"}}
-		{{when widget="gasometria" push="{\"widget\":\"gasometria\",\"display\":\"Gasometría\",\"order\":40,\"editAction\":\"notaGasometria\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista\"}"}}
-		{{when widget="signosVitales" push="{\"widget\":\"signosVitales\",\"display\":\"Signos Vitales\",\"order\":41,\"editAction\":\"notaSignosVitales\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia\"}"}}
-		{{when widget="somatometria" push="{\"widget\":\"somatometria\",\"display\":\"Somatometría\",\"order\":42,\"editAction\":\"notaSomatometria\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista, tecnicoSueno, tecnicoQuimioterapia\"}"}}
-		{{when widget="somatometriaNutricion" push="{\"widget\":\"somatometriaNutricion\",\"display\":\"Somatometría Nutrición\",\"order\":43,\"editAction\":\"notaSomatometriaNutricion\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista\"}"}}
-		{{when widget="adjuntos" push="{\"widget\":\"adjuntos\",\"display\":\"Adjuntos\",\"order\":44,\"editAction\":\"notaAdjuntos\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista\"}"}}
-		{{when widget="consultaExterna" push="{\"widget\":\"consultaExterna\",\"display\":\"Solicitudes Consultas Externas\",\"order\":45,\"editAction\":\"notaSolicitudConsultaExterna\",\"heightRatio\":2,\"widthRatio\":2,\"userRole\":\"enfermera, medico, medicoAnestesiologo, medicoObstetrico, perfusionista\"}"}}
-		{{when widget="interconsulta" push="{\"widget\":\"interconsulta\",\"display\":\"Solicitudes Interconsulta\",\"order\":46,\"editAction\":\"notaSolicitudInterconsulta\",\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="material" push="{\"widget\":\"material\",\"display\":\"Solicitudes Materiales o Insumos\",\"order\":47,\"editAction\":\"notaSolicitudMaterial\",\"heightRatio\":4,\"widthRatio\":3,\"userRole\":\"enfermera, tecnicoSueno, tecnicoQuimioterapia\"}"}}
-		{{when widget="materialCeye" push="{\"widget\":\"materialCeye\",\"display\":\"Solicitudes Materiales CEYE\",\"order\":48,\"editAction\":\"notaSolicitudMaterialCeye\",\"heightRatio\":4,\"widthRatio\":3}"}}
-		{{when widget="expedientesFusionados" push="{\"widget\":\"expedientesFusionados\",\"display\":\"Expedientes Fusionados\",\"order\":49,\"heightRatio\":2,\"widthRatio\":2,\"openAction\":\"expedientesFusionados\"}"}}
-		{{when widget="documentacion" push="{\"widget\":\"documentacion\",\"display\":\"Documentación\",\"order\":50,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="contrato" push="{\"widget\":\"contrato\",\"display\":\"Contratos\",\"order\":51,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="lineaCredito" push="{\"widget\":\"lineaCredito\",\"display\":\"Línea Crédito\",\"order\":52,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="cartaCredito" push="{\"widget\":\"cartaCredito\",\"display\":\"Cartas Crédito\",\"order\":53,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="nivelRiesgo" push="{\"widget\":\"nivelRiesgo\",\"display\":\"Nivel Riesgo\",\"order\":54,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="historialCredito" push="{\"widget\":\"historialCredito\",\"display\":\"Historial Crédito\",\"order\":55,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="historialVenta" push="{\"widget\":\"historialVenta\",\"display\":\"Historial Ventas\",\"order\":56,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="referencia" push="{\"widget\":\"referencia\",\"display\":\"Referencias \",\"order\":57,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="asignacion" push="{\"widget\":\"asignacion\",\"display\":\"Asignaciones\",\"order\":58,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="clasificacion" push="{\"widget\":\"clasificacion\",\"display\":\"Clasificación\",\"order\":59,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="sucursal" push="{\"widget\":\"sucursal\",\"display\":\"Sucursales\",\"order\":60,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="contacto" push="{\"widget\":\"contacto\",\"display\":\"Contactos\",\"order\":61,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="encuesta" push="{\"widget\":\"encuesta\",\"display\":\"Encuestas\",\"order\":62,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="objetivoPersonal" push="{\"widget\":\"objetivoPersonal\",\"display\":\"Objetivos Personales\",\"order\":63,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="experienciaLaboral" push="{\"widget\":\"experienciaLaboral\",\"display\":\"Experiencia Laboral\",\"order\":64,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="educacion" push="{\"widget\":\"educacion\",\"display\":\"Educación\",\"order\":65,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="certificacion" push="{\"widget\":\"certificacion\",\"display\":\"Certificaciones y Licenciaturas\",\"order\":66,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="voluntario" push="{\"widget\":\"voluntario\",\"display\":\"Experiencia como Voluntario\",\"order\":67,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="aptitud" push="{\"widget\":\"aptitud\",\"display\":\"Aptitudes\",\"order\":68,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="logro" push="{\"widget\":\"logro\",\"display\":\"Logros Importantes\",\"order\":69,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="inicitivaPersonal" push="{\"widget\":\"inicitivaPersonal\",\"display\":\"Iniciativas\",\"order\":70,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="inquietudPersonal" push="{\"widget\":\"inquietudPersonal\",\"display\":\"Inquietudes\",\"order\":71,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="solicitudPersonal" push="{\"widget\":\"solicitudPersonal\",\"display\":\"Solicitudes\",\"order\":72,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="puntualidad" push="{\"widget\":\"puntualidad\",\"display\":\"Puntualidad\",\"order\":73,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="sueldoPrestaciones" push="{\"widget\":\"sueldoPrestaciones\",\"display\":\"Sueldo y Prestaciones\",\"order\":74,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="pasatiempo" push="{\"widget\":\"pasatiempo\",\"display\":\"Deportes y Pasatiempos\",\"order\":75,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="precioCosto" push="{\"widget\":\"precioCosto\",\"display\":\"Precios y Costos\",\"order\":76,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="proveedor" push="{\"widget\":\"proveedor\",\"display\":\"Proveedores\",\"order\":77,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="porRecibir" push="{\"widget\":\"porRecibir\",\"display\":\"Por Recibir\",\"order\":78,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="porSurtir" push="{\"widget\":\"porSurtir\",\"display\":\"por Surtir\",\"order\":79,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="planeacionArticulo" push="{\"widget\":\"planeacionArticulo\",\"display\":\"Planeación Inventario\",\"order\":80,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="calidadArticulo" push="{\"widget\":\"calidadArticulo\",\"display\":\"Control Calidad\",\"order\":81,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="caracteristicasArticulo" push="{\"widget\":\"caracteristicasArticulo\",\"display\":\"Características\",\"order\":82,\"heightRatio\":2,\"widthRatio\":2}"}}
-		{{when widget="opcionesArticulo" push="{\"widget\":\"opcionesArticulo\",\"display\":\"Opciones\",\"order\":83,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="datosGeneralesPersona" push="{\"widget\":\"datosGeneralesPersona\",\"display\":\"Datos Generales\",\"order\":1,\"heightRatio\":2,\"widthRatio\":3}"}}
+		{{when widget="datosNacionalidad" push="{\"widget\":\"datosNacionalidad\",\"display\":\"Datos Nacionalidad\",\"order\":2,\"editAction\":\"notaDatosNacionalidad\",\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="datosFinancieros" push="{\"widget\":\"datosFinancieros\",\"display\":\"Datos Financieros\",\"order\":3,\"editAction\":\"notaDatosFinancieros\",\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="notasActivas" push="{\"widget\":\"notasActivas\",\"display\":\"Notas Activas\",\"order\":5,\"heightRatio\":4,\"widthRatio\":3,\"source\":\"nota\",\"view\":\"resumenActivos\",\"id\":\"_id\"}"}}
+		{{when widget="porCobrar" push="{\"widget\":\"porCobrar\",\"display\":\"Cuentas por Cobrar\",\"order\":6,\"heightRatio\":4,\"widthRatio\":3,\"source\":\"mov\",\"view\":\"resumenPorCobrar\",\"id\":\"_id\"}"}}
+		{{when widget="porPagar" push="{\"widget\":\"porPagar\",\"display\":\"Cuentas por Pagar\",\"order\":7,\"heightRatio\":4,\"widthRatio\":3,\"source\":\"mov\",\"view\":\"resumenPorPagar\",\"id\":\"_id\"}"}}
+		{{when widget="caja" push="{\"widget\":\"caja\",\"display\":\"Caja\",\"order\":8,\"heightRatio\":4,\"widthRatio\":3,\"source\":\"mov\",\"view\":\"resumenCaja\",\"id\":\"_id\"}"}}
+		{{when widget="inventario" push="{\"widget\":\"inventario\",\"display\":\"Inventario Asignado\",\"order\":9,\"heightRatio\":4,\"widthRatio\":3,\"source\":\"mov\",\"view\":\"resumenInventario\",\"id\":\"_id\"}"}}
+		{{when widget="adjuntos" push="{\"widget\":\"adjuntos\",\"display\":\"Adjuntos\",\"order\":10,\"editAction\":\"notaAdjuntos\",\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="documentacion" push="{\"widget\":\"documentacion\",\"display\":\"Documentación\",\"order\":11,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="contrato" push="{\"widget\":\"contrato\",\"display\":\"Contratos\",\"order\":12,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="lineaCredito" push="{\"widget\":\"lineaCredito\",\"display\":\"Línea Crédito\",\"order\":13,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="cartaCredito" push="{\"widget\":\"cartaCredito\",\"display\":\"Cartas Crédito\",\"order\":14,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="nivelRiesgo" push="{\"widget\":\"nivelRiesgo\",\"display\":\"Nivel Riesgo\",\"order\":15,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="historialCredito" push="{\"widget\":\"historialCredito\",\"display\":\"Historial Crédito\",\"order\":16,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="historialVenta" push="{\"widget\":\"historialVenta\",\"display\":\"Historial Ventas\",\"order\":17,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="referencia" push="{\"widget\":\"referencia\",\"display\":\"Referencias \",\"order\":18,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="asignacion" push="{\"widget\":\"asignacion\",\"display\":\"Asignaciones\",\"order\":19,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="clasificacion" push="{\"widget\":\"clasificacion\",\"display\":\"Clasificación\",\"order\":20,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="sucursal" push="{\"widget\":\"sucursal\",\"display\":\"Sucursales\",\"order\":21,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="contacto" push="{\"widget\":\"contacto\",\"display\":\"Contactos\",\"order\":22,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="encuesta" push="{\"widget\":\"encuesta\",\"display\":\"Encuestas\",\"order\":23,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="objetivoPersonal" push="{\"widget\":\"objetivoPersonal\",\"display\":\"Objetivos Personales\",\"order\":24,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="experienciaLaboral" push="{\"widget\":\"experienciaLaboral\",\"display\":\"Experiencia Laboral\",\"order\":25,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="educacion" push="{\"widget\":\"educacion\",\"display\":\"Educación\",\"order\":26,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="certificacion" push="{\"widget\":\"certificacion\",\"display\":\"Certificaciones y Licenciaturas\",\"order\":27,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="voluntario" push="{\"widget\":\"voluntario\",\"display\":\"Experiencia como Voluntario\",\"order\":28,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="aptitud" push="{\"widget\":\"aptitud\",\"display\":\"Aptitudes\",\"order\":29,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="logro" push="{\"widget\":\"logro\",\"display\":\"Logros Importantes\",\"order\":30,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="inicitivaPersonal" push="{\"widget\":\"inicitivaPersonal\",\"display\":\"Iniciativas\",\"order\":31,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="inquietudPersonal" push="{\"widget\":\"inquietudPersonal\",\"display\":\"Inquietudes\",\"order\":32,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="solicitudPersonal" push="{\"widget\":\"solicitudPersonal\",\"display\":\"Solicitudes\",\"order\":33,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="puntualidad" push="{\"widget\":\"puntualidad\",\"display\":\"Puntualidad\",\"order\":34,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="sueldoPrestaciones" push="{\"widget\":\"sueldoPrestaciones\",\"display\":\"Sueldo y Prestaciones\",\"order\":35,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="pasatiempo" push="{\"widget\":\"pasatiempo\",\"display\":\"Deportes y Pasatiempos\",\"order\":36,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="precioCosto" push="{\"widget\":\"precioCosto\",\"display\":\"Precios y Costos\",\"order\":37,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="proveedor" push="{\"widget\":\"proveedor\",\"display\":\"Proveedores\",\"order\":38,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="porRecibir" push="{\"widget\":\"porRecibir\",\"display\":\"Por Recibir\",\"order\":39,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="porSurtir" push="{\"widget\":\"porSurtir\",\"display\":\"por Surtir\",\"order\":40,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="planeacionArticulo" push="{\"widget\":\"planeacionArticulo\",\"display\":\"Planeación Inventario\",\"order\":41,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="calidadArticulo" push="{\"widget\":\"calidadArticulo\",\"display\":\"Control Calidad\",\"order\":42,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="caracteristicasArticulo" push="{\"widget\":\"caracteristicasArticulo\",\"display\":\"Características\",\"order\":43,\"heightRatio\":2,\"widthRatio\":2}"}}
+		{{when widget="opcionesArticulo" push="{\"widget\":\"opcionesArticulo\",\"display\":\"Opciones\",\"order\":44,\"heightRatio\":2,\"widthRatio\":2}"}}
 	{{/function}}
 	{{#function id="notification" paramType="text" returnType="json"}}
 		{{define type="param" id="notification"}}
@@ -614,34 +538,34 @@
 		{{define type="param" id="attribute1"}}
 		{{define type="param" id="attribute2"}}
 		{{define type="param" id="attribute3"}}
-		{{when document="notaCompra" attribute2="compra" push="{\"document\":\"notaCompra\",\"attribute2\":\"compra\",\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"inv\",\"code\":\"=articulo\",\"description\":\"=_articulo\",\"quantity\":\"=cantidad\",\"amount\":\"=valorUnitario*cantidad\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"to\":\"=destino\",\"toName\":\"=_destino\",\"debit\":\"inventario\"}"}}
-		{{when document="notaCompra" attribute2="compra" push="{\"document\":\"notaCompra\",\"attribute2\":\"compra\",\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxp\",\"amount\":\"=importe\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"credit\":\"proveedores\"}"}}
-		{{when document="notaCompra" attribute2="compra" push="{\"document\":\"notaCompra\",\"attribute2\":\"compra\",\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxp\",\"amount\":\"=iva\",\"rate\":\"=tasaIva\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"debit\":\"ivaAFavor\",\"credit\":\"proveedores\"}"}}
-		{{when document="notaCompra" attribute2="devolucionCompra" push="{\"document\":\"notaCompra\",\"attribute2\":\"devolucionCompra\",\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"inv\",\"code\":\"=articulo\",\"description\":\"=_articulo\",\"quantity\":\"=cantidad\",\"amount\":\"=valorUnitario*cantidad\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"from\":\"=destino\",\"fromName\":\"=_destino\",\"credit\":\"inventario\"}"}}
-		{{when document="notaCompra" attribute2="devolucionCompra" push="{\"document\":\"notaCompra\",\"attribute2\":\"devolucionCompra\",\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxp\",\"amount\":\"=importe\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"proveedores\"}"}}
-		{{when document="notaCompra" attribute2="devolucionCompra" push="{\"document\":\"notaCompra\",\"attribute2\":\"devolucionCompra\",\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxp\",\"amount\":\"=iva\",\"rate\":\"=tasaIva\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"proveedores\",\"credit\":\"ivaAFavor\"}"}}
-		{{when document="notaGasto" attribute2="gasto" push="{\"document\":\"notaGasto\",\"attribute2\":\"gasto\",\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"gastos\",\"code\":\"=articulo\",\"description\":\"=_articulo\",\"quantity\":\"=cantidad\",\"amount\":\"=valorUnitario*cantidad\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"debit\":\"gastos\",\"credit\":\"proveedores\"}"}}
-		{{when document="notaGasto" attribute2="gasto" push="{\"document\":\"notaGasto\",\"attribute2\":\"gasto\",\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxp\",\"amount\":\"=iva\",\"rate\":\"=tasaIva\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"debit\":\"ivaAFavor\",\"credit\":\"proveedores\"}"}}
-		{{when document="notaGasto" attribute2="devolucionGasto" push="{\"document\":\"notaGasto\",\"attribute2\":\"devolucionGasto\",\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"gastos\",\"code\":\"=articulo\",\"description\":\"=_articulo\",\"quantity\":\"=cantidad\",\"amount\":\"=valorUnitario*cantidad\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"proveedores\",\"credit\":\"gastos\"}"}}
-		{{when document="notaGasto" attribute2="devolucionGasto" push="{\"document\":\"notaGasto\",\"attribute2\":\"devolucionGasto\",\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxp\",\"amount\":\"=iva\",\"rate\":\"=tasaIva\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"proveedores\",\"credit\":\"ivaAFavor\"}"}}
-		{{when document="notaPago" push="{\"document\":\"notaPago\",\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"cxp\",\"amount\":\"=importe\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"proveedores\"}"}}
-		{{when document="notaPago" push="{\"document\":\"notaPago\",\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"tesoreria\",\"amount\":\"=importe\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"from\":\"=origen\",\"fromName\":\"=_origen\",\"credit\":\"bancos\"}"}}
-		{{when document="notaEntradaDiversa" push="{\"document\":\"notaEntradaDiversa\",\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"inv\",\"code\":\"=articulo\",\"description\":\"=_articulo\",\"quantity\":\"=cantidad\",\"getCost\":true,\"to\":\"=origen\",\"toName\":\"=_origen\",\"debit\":\"inventario\",\"credit\":\"mermas\"}"}}
-		{{when document="notaSalidaDiversa" push="{\"document\":\"notaSalidaDiversa\",\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"inv\",\"code\":\"=articulo\",\"description\":\"=_articulo\",\"quantity\":\"=cantidad\",\"getCost\":true,\"from\":\"=origen\",\"fromName\":\"=_origen\",\"debit\":\"mermas\",\"credit\":\"inventario\"}"}}
-		{{when document="notaTraspaso" push="{\"document\":\"notaTraspaso\",\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"inv\",\"code\":\"=articulo\",\"description\":\"=_articulo\",\"quantity\":\"=cantidad\",\"getCost\":true,\"from\":\"=origen\",\"fromName\":\"=_origen\",\"to\":\"=destino\",\"toName\":\"=_destino\",\"debit\":\"inventario\",\"credit\":\"inventario\"}"}}
-		{{when document="notaVenta" attribute2="venta" push="{\"document\":\"notaVenta\",\"attribute2\":\"venta\",\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"inv\",\"code\":\"=articulo\",\"description\":\"=_articulo\",\"quantity\":\"=cantidad\",\"getCost\":true,\"from\":\"=origen\",\"fromName\":\"=_origen\",\"debit\":\"costoVentas\",\"credit\":\"inventario\"}"}}
-		{{when document="notaVenta" attribute2="venta" push="{\"document\":\"notaVenta\",\"attribute2\":\"venta\",\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxc\",\"amount\":\"=importe\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"getMissing\":true,\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"debit\":\"clientes\",\"credit\":\"ventas\"}"}}
-		{{when document="notaVenta" attribute2="venta" push="{\"document\":\"notaVenta\",\"attribute2\":\"venta\",\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxc\",\"amount\":\"=iva\",\"rate\":\"=tasaIva\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"getMissing\":true,\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"debit\":\"clientes\",\"credit\":\"ivaPorPagar\"}"}}
-		{{when document="notaVenta" attribute2="devolucionVenta" push="{\"document\":\"notaVenta\",\"attribute2\":\"devolucionVenta\",\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"inv\",\"code\":\"=articulo\",\"description\":\"=_articulo\",\"quantity\":\"=cantidad\",\"getCost\":true,\"to\":\"=origen\",\"toName\":\"=_origen\",\"debit\":\"inventario\",\"credit\":\"costoVentas\"}"}}
-		{{when document="notaVenta" attribute2="devolucionVenta" push="{\"document\":\"notaVenta\",\"attribute2\":\"devolucionVenta\",\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxc\",\"amount\":\"=importe\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"getMissing\":true,\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"ventas\",\"credit\":\"clientes\"}"}}
-		{{when document="notaVenta" attribute2="devolucionVenta" push="{\"document\":\"notaVenta\",\"attribute2\":\"devolucionVenta\",\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxc\",\"amount\":\"=iva\",\"rate\":\"=tasaIva\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"getMissing\":true,\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"ivaPorPagar\",\"credit\":\"clientes\"}"}}
-		{{when document="notaCobro" push="{\"document\":\"notaCobro\",\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"cxc\",\"amount\":\"=importe\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"credit\":\"clientes\"}"}}
-		{{when document="notaCobro" push="{\"document\":\"notaCobro\",\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"tesoreria\",\"amount\":\"=importe\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"to\":\"=destino\",\"toName\":\"=_destino\",\"debit\":\"bancos\"}"}}
-		{{when document="notaDispersion" push="{\"document\":\"notaDispersion\",\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"tesoreria\",\"amount\":\"=importe\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"from\":\"=origen\",\"fromName\":\"=_origen\",\"to\":\"=destino\",\"toName\":\"=_destino\",\"debit\":\"bancos\",\"credit\":\"bancos\"}"}}
-		{{when document="notaAplicacion" attribute2="aplicacionCxp" push="{\"document\":\"notaAplicacion\",\"attribute2\":\"aplicacionCxp\",\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"cxp\",\"amount\":\"=importe\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"credit\":\"proveedores\"}"}}
-		{{when document="notaAplicacion" attribute2="aplicacionCxp" push="{\"document\":\"notaAplicacion\",\"attribute2\":\"aplicacionCxp\",\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"cxp\",\"amount\":\"=importe\",\"lot\":\"=loteDestino\",\"expiration\":\"=vencimientoDestino\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"proveedores\"}"}}
-		{{when document="notaAplicacion" attribute2="aplicacionCxc" push="{\"document\":\"notaAplicacion\",\"attribute2\":\"aplicacionCxc\",\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"cxc\",\"amount\":\"=importe\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"debit\":\"clientes\"}"}}
-		{{when document="notaAplicacion" attribute2="aplicacionCxc" push="{\"document\":\"notaAplicacion\",\"attribute2\":\"aplicacionCxc\",\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"cxc\",\"amount\":\"=importe\",\"lot\":\"=loteDestino\",\"expiration\":\"=vencimientoDestino\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"credit\":\"clientes\"}"}}
+		{{when document="notaAplicacionCxc" push="{\"document\":\"notaAplicacionCxc\",\"order\":1,\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"cxc\",\"amount\":\"=importe\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"debit\":\"clientes\"}"}}
+		{{when document="notaAplicacionCxc" push="{\"document\":\"notaAplicacionCxc\",\"order\":2,\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"cxc\",\"amount\":\"=importe\",\"lot\":\"=loteDestino\",\"expiration\":\"=vencimientoDestino\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"credit\":\"clientes\"}"}}
+		{{when document="notaAplicacionCxp" push="{\"document\":\"notaAplicacionCxp\",\"order\":1,\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"cxp\",\"amount\":\"=importe\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"credit\":\"proveedores\"}"}}
+		{{when document="notaAplicacionCxp" push="{\"document\":\"notaAplicacionCxp\",\"order\":2,\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"cxp\",\"amount\":\"=importe\",\"lot\":\"=loteDestino\",\"expiration\":\"=vencimientoDestino\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"proveedores\"}"}}
+		{{when document="notaCobro" push="{\"document\":\"notaCobro\",\"order\":1,\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"cxc\",\"amount\":\"=importe\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"credit\":\"clientes\"}"}}
+		{{when document="notaCobro" push="{\"document\":\"notaCobro\",\"order\":2,\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"tesoreria\",\"amount\":\"=importe\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"to\":\"=destino\",\"toName\":\"=_destino\",\"debit\":\"bancos\"}"}}
+		{{when document="notaCompra" push="{\"document\":\"notaCompra\",\"order\":1,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"inv\",\"code\":\"=articulo\",\"description\":\"=_articulo\",\"quantity\":\"=cantidad\",\"amount\":\"=valorUnitario*cantidad\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"to\":\"=destino\",\"toName\":\"=_destino\",\"debit\":\"inventario\"}"}}
+		{{when document="notaCompra" push="{\"document\":\"notaCompra\",\"order\":2,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxp\",\"amount\":\"=importe\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"credit\":\"proveedores\"}"}}
+		{{when document="notaCompra" push="{\"document\":\"notaCompra\",\"order\":3,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxp\",\"amount\":\"=iva\",\"rate\":\"=tasaIva\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"debit\":\"ivaAFavor\",\"credit\":\"proveedores\"}"}}
+		{{when document="notaDevolucionCompra" push="{\"document\":\"notaDevolucionCompra\",\"order\":1,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"inv\",\"code\":\"=articulo\",\"description\":\"=_articulo\",\"quantity\":\"=cantidad\",\"amount\":\"=valorUnitario*cantidad\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"getCost\":true,\"from\":\"=destino\",\"fromName\":\"=_destino\",\"credit\":\"inventario\"}"}}
+		{{when document="notaDevolucionCompra" push="{\"document\":\"notaDevolucionCompra\",\"order\":2,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxp\",\"amount\":\"=importe\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"proveedores\"}"}}
+		{{when document="notaDevolucionCompra" push="{\"document\":\"notaDevolucionCompra\",\"order\":3,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxp\",\"amount\":\"=iva\",\"rate\":\"=tasaIva\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"proveedores\",\"credit\":\"ivaAFavor\"}"}}
+		{{when document="notaDevolucionGasto" push="{\"document\":\"notaDevolucionGasto\",\"order\":1,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"gastos\",\"code\":\"=articulo\",\"description\":\"=_articulo\",\"quantity\":\"=cantidad\",\"amount\":\"=valorUnitario*cantidad\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"proveedores\",\"credit\":\"gastos\"}"}}
+		{{when document="notaDevolucionGasto" push="{\"document\":\"notaDevolucionGasto\",\"order\":2,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxp\",\"amount\":\"=iva\",\"rate\":\"=tasaIva\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"proveedores\",\"credit\":\"ivaAFavor\"}"}}
+		{{when document="notaDevolucionVenta" push="{\"document\":\"notaDevolucionVenta\",\"order\":1,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"inv\",\"code\":\"=articulo\",\"description\":\"=_articulo\",\"quantity\":\"=cantidad\",\"amount\":\"=costoUnitario*cantidad\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"to\":\"=origen\",\"toName\":\"=_origen\",\"debit\":\"inventario\",\"credit\":\"costoVentas\"}"}}
+		{{when document="notaDevolucionVenta" push="{\"document\":\"notaDevolucionVenta\",\"order\":2,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxc\",\"amount\":\"=importe\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"ventas\",\"credit\":\"clientes\"}"}}
+		{{when document="notaDevolucionVenta" push="{\"document\":\"notaDevolucionVenta\",\"order\":3,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxc\",\"amount\":\"=iva\",\"rate\":\"=tasaIva\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"ivaPorPagar\",\"credit\":\"clientes\"}"}}
+		{{when document="notaDispersion" push="{\"document\":\"notaDispersion\",\"order\":1,\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"tesoreria\",\"amount\":\"=importe\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"from\":\"=origen\",\"fromName\":\"=_origen\",\"to\":\"=destino\",\"toName\":\"=_destino\",\"debit\":\"bancos\",\"credit\":\"bancos\"}"}}
+		{{when document="notaEntradaDiversa" push="{\"document\":\"notaEntradaDiversa\",\"order\":1,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"inv\",\"code\":\"=articulo\",\"description\":\"=_articulo\",\"quantity\":\"=cantidad\",\"getCost\":true,\"to\":\"=origen\",\"toName\":\"=_origen\",\"debit\":\"inventario\",\"credit\":\"mermas\"}"}}
+		{{when document="notaGasto" push="{\"document\":\"notaGasto\",\"order\":1,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"gastos\",\"code\":\"=articulo\",\"description\":\"=_articulo\",\"quantity\":\"=cantidad\",\"amount\":\"=valorUnitario*cantidad\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"debit\":\"gastos\",\"credit\":\"proveedores\"}"}}
+		{{when document="notaGasto" push="{\"document\":\"notaGasto\",\"order\":2,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxp\",\"amount\":\"=iva\",\"rate\":\"=tasaIva\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"debit\":\"ivaAFavor\",\"credit\":\"proveedores\"}"}}
+		{{when document="notaPago" push="{\"document\":\"notaPago\",\"order\":1,\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"cxp\",\"amount\":\"=importe\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"proveedores\"}"}}
+		{{when document="notaPago" push="{\"document\":\"notaPago\",\"order\":2,\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"tesoreria\",\"amount\":\"=importe\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"from\":\"=origen\",\"fromName\":\"=_origen\",\"credit\":\"bancos\"}"}}
+		{{when document="notaSalidaDiversa" push="{\"document\":\"notaSalidaDiversa\",\"order\":1,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"inv\",\"code\":\"=articulo\",\"description\":\"=_articulo\",\"quantity\":\"=cantidad\",\"getCost\":true,\"from\":\"=origen\",\"fromName\":\"=_origen\",\"debit\":\"mermas\",\"credit\":\"inventario\"}"}}
+		{{when document="notaTraspaso" push="{\"document\":\"notaTraspaso\",\"order\":1,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"inv\",\"code\":\"=articulo\",\"description\":\"=_articulo\",\"quantity\":\"=cantidad\",\"getCost\":true,\"from\":\"=origen\",\"fromName\":\"=_origen\",\"to\":\"=destino\",\"toName\":\"=_destino\",\"debit\":\"inventario\",\"credit\":\"inventario\"}"}}
+		{{when document="notaVenta" push="{\"document\":\"notaVenta\",\"order\":1,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"inv\",\"code\":\"=articulo\",\"description\":\"=_articulo\",\"quantity\":\"=cantidad\",\"getCost\":true,\"from\":\"=origen\",\"fromName\":\"=_origen\",\"debit\":\"costoVentas\",\"credit\":\"inventario\"}"}}
+		{{when document="notaVenta" push="{\"document\":\"notaVenta\",\"order\":2,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxc\",\"amount\":\"=importe\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"getMissing\":true,\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"debit\":\"clientes\",\"credit\":\"ventas\"}"}}
+		{{when document="notaVenta" push="{\"document\":\"notaVenta\",\"order\":3,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxc\",\"amount\":\"=iva\",\"rate\":\"=tasaIva\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"getMissing\":true,\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"debit\":\"clientes\",\"credit\":\"ivaPorPagar\"}"}}
 	{{/function}}
 	{{#function id="edi" paramType="text" returnType="json"}}
 		{{define type="param" id="document"}}

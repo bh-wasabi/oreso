@@ -96,10 +96,36 @@
       {{filter field="aux" eq="='caja'"}}
       {{filter condition="=id" field="='cuenta'" eq="=id"}}
       {{group field="descripcion"}}
-      {{group field="importeFactor" type="sum" as="importe"}}
-      {{match field="importe" neq="=0"}}
+      {{group field="importeFactor" type="sum" as="saldo"}}
+      {{match field="saldo" neq="=0"}}
     {{/pipeline}}
     {{calc field="etiqueta" type="expr" value="=descripcion"}}
-    {{calc field="nombre" type="expr" value="=calc.format('number', importe, 'currency')"}}
+    {{calc field="nombre" type="expr" value="=calc.format('number', saldo, 'currency')"}}
+  {{/view}}
+  {{#view id="resumenPorCobrar"}}
+    {{#pipeline}}
+      {{filter field="aux" eq="='cxc'"}}
+      {{filter condition="=id" field="='cuenta'" eq="=id"}}
+      {{group field="lote"}}
+      {{group field="vencimiento"}}
+      {{group field="importeFactor" type="sum" as="saldo"}}
+      {{sort field="vencimiento" direction="asc"}}
+      {{match field="saldo" neq="=0"}}
+    {{/pipeline}}
+    {{calc field="etiqueta" value="=calc.concat(lote, calc.format('date', vencimiento, 'DD/MMM/YYYY'))"}}
+    {{calc field="nombre" type="expr" value="=calc.format('number', saldo, 'currency')"}}
+  {{/view}}
+  {{#view id="resumenPorPagar"}}
+    {{#pipeline}}
+      {{filter field="aux" eq="='cxp'"}}
+      {{filter condition="=id" field="='cuenta'" eq="=id"}}
+      {{group field="lote"}}
+      {{group field="vencimiento"}}
+      {{group field="importeFactor" type="sum" as="saldo"}}
+      {{sort field="vencimiento" direction="asc"}}
+      {{match field="saldo" neq="=0"}}
+    {{/pipeline}}
+    {{calc field="etiqueta" value="=calc.concat(lote, calc.format('date', vencimiento, 'DD/MMM/YYYY'))"}}
+    {{calc field="nombre" type="expr" value="=calc.format('number', saldo, 'currency')"}}
   {{/view}}
 {{/define}}

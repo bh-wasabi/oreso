@@ -1,4 +1,4 @@
-{{#define type="doc" id="monetaria"}}
+{{#define type="doc" id="tesoreria"}}
 	{{param defaultDisplay="_name"}}
 	{{param defaultView="lista"}}
 	{{param pageStart="1"}}
@@ -17,7 +17,7 @@
 	{{param startOnOpen="base"}}
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="base.nombre"}}
-	{{param name="Monetaria"}}
+	{{param name="Tesorería"}}
 	{{param group="Registro"}}
 	{{param fullWidth="true"}}
 	{{param modalSize="xlong"}}
@@ -88,7 +88,7 @@
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Monetaria" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+			{{#record title="Tesorería" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
 				{{row field="nombre" align="left"}}
 				{{row field="grupo" align="left"}}
 				{{row field="direccion" align="left"}}
@@ -135,7 +135,7 @@
 	{{/workflow}}
 {{/define}}
 {{#markup}}
-	{{#page name="Monetaria"}}
+	{{#page name="Tesorería"}}
 		{{row}}
 		{{row}}
 		{{#row}}
@@ -143,7 +143,7 @@
 				{{#row class="auto-form-row"}}
 					{{#col medium="100%" class="auto-form-col"}}
 						{{#h5 class="auto-form-h5"}}
-							Monetaria
+							Tesorería
 						{{/h5}}
 						{{#with base}}
 							{{record this widths="20%,80%" rows="nombre, grupo, direccion, contacto" class="auto-form-record"}}
@@ -154,7 +154,7 @@
 			{{/zone}}
 		{{/row}}
 	{{/page}}
-	{{#modal base id="base" name="Monetaria" size="xlong"}}
+	{{#modal base id="base" name="Tesorería" size="xlong"}}
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
 				{{field nombre}}
@@ -167,13 +167,13 @@
 	{{#template id="lista"}}
 		<div>{{_name}}</div>
 	{{/template}}
-	{{#template2 id="monetaria"}}
+	{{#template2 id="tesoreria"}}
 		<br>Nombre: {{nombre}}
 		<br>Grupo: {{grupo}}
 		<br>Dirección: {{_direccion}}
 		<br>Contactos: {{_contacto}}
 	{{/template2}}
-	{{#template3 id="monetaria"}}
+	{{#template3 id="tesoreria"}}
 		{{#if nombre}}<br>Nombre: {{nombre}}{{/if}}
 		{{#if grupo}}<br>Grupo: {{grupo}}{{/if}}
 		{{#if direccion}}<br>Dirección: {{_direccion}}{{/if}}

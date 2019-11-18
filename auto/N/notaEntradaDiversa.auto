@@ -113,6 +113,7 @@
 		{{field id="destino" label="Destino ID" type="text" readOnly="true" hide="true" column="A"}}
 		{{field id="_destino" label="Ubicación Destino" type="text" readOnly="true" column="A"}}
 		{{field id="cantidad" label="Cantidad" type="number" format="#,.##" column="A"}}
+		{{field id="costoUnitario" label="Costo Unitario" type="number" format="currency" column="A"}}
 		{{field id="valorUnitario" label="Valor Unitario" type="number" format="currency" column="A"}}
 		{{field id="tasaIva" label="% IVA" type="number" format="#.##" column="A"}}
 		{{field id="importe" label="Importe" type="calc" format="currency" column="A"}}
@@ -182,6 +183,7 @@
 				{{column field="aliasDestino"}}
 				{{column field="_destino"}}
 				{{column field="cantidad"}}
+				{{column field="costoUnitario"}}
 				{{column field="valorUnitario"}}
 				{{column field="tasaIva"}}
 				{{column field="importe"}}
@@ -306,7 +308,7 @@
 							Artículos
 						{{/h5}}
 						{{#div}}
-							{{table articulos class="auto-form-table" cols="aliasArticulo, _articulo, aliasOrigen, _origen, aliasDestino, _destino, cantidad, valorUnitario, tasaIva, importe, iva, total, lote, vencimiento" removeEmptyCols="true" unlink="true"}}
+							{{table articulos class="auto-form-table" cols="aliasArticulo, _articulo, aliasOrigen, _origen, aliasDestino, _destino, cantidad, costoUnitario, valorUnitario, tasaIva, importe, iva, total, lote, vencimiento" removeEmptyCols="true" unlink="true"}}
 							{{br}}
 						{{/div}}
 					{{/col}}
