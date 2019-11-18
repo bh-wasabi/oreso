@@ -56,18 +56,38 @@
       {{filter field="_parent.type" in="cliente,proveedor"}}
     {{/find}}
   {{/view}}
-  {{#action id="entrada" source="notaEntrada" name="Entrada" folio="entrada" label="Entrada" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{#action id="compra" source="notaCompra" subType="compra" subTypeName="Compra" label="Compra" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
     {{param aliasDestino="='AG'"}}
   {{/action}}
-  {{#action id="gasto" source="notaGasto" name="Gasto" folio="gasto" label="Gasto" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{#action id="devolucionCompra" source="notaCompra" subType="devolucionCompra" subTypeName="Devolución Compra" label="Devolución Compra" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
     {{param aliasDestino="='AG'"}}
   {{/action}}
-  {{#action id="traspaso" source="notaTraspaso" name="Traspaso" folio="traspaso" label="Traspaso" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{#action id="gasto" source="notaGasto" subType="gasto" subTypeName="Gasto" label="Gasto" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+    {{param aliasDestino="='AG'"}}
+  {{/action}}
+  {{#action id="devolucionGasto" source="notaGasto" subType="devolucionGasto" subTypeName="Devolución Gasto" label="Devolución Gasto" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+    {{param aliasDestino="='AG'"}}
+  {{/action}}
+  {{#action id="pago" source="notaPago" subType="pago" subTypeName="Pago" label="Pago" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{/action}}
+  {{#action id="aplicacionCxp" source="notaAplicacion" subType="aplicacionCxp" subTypeName="Aplicación Cxp" label="Aplicación Cxp" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{/action}}
+  {{#action id="traspaso" source="notaTraspaso" subType="traspaso" subTypeName="Traspaso" label="Traspaso" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
     {{param aliasOrigen="='AG'"}}
   {{/action}}
-  {{#action id="salida" source="notaSalida" name="Salida" folio="salida" label="Salida" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{#action id="entradaDiversa" source="notaEntradaDiversa" subType="entradaDiversa" subTypeName="Entrada Diversa" label="Entrada Diversa" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
   {{/action}}
-  {{#action id="venta" source="notaVenta" name="Venta" folio="venta" label="Venta" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{#action id="salidaDiversa" source="notaSalidaDiversa" subType="salidaDiversa" subTypeName="Salida Diversa" label="Salida Diversa" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{/action}}
+  {{#action id="venta" source="notaVenta" subType="venta" subTypeName="Venta" label="Venta" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{/action}}
+  {{#action id="devolucionVenta" source="notaVenta" subType="devolucionVenta" subTypeName="Devolución Venta" label="Devolución Venta" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{/action}}
+  {{#action id="cobro" source="notaCobro" subType="cobro" subTypeName="Cobro" label="Cobro" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{/action}}
+  {{#action id="aplicacionCxc" source="notaAplicacion" subType="aplicacionCxc" subTypeName="Aplicación Cxc" label="Aplicación Cxc" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{/action}}
+  {{#action id="dispersion" source="notaDispersion" subType="dispersion" subTypeName="Dispersión" label="Dispersión" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
   {{/action}}
 {{/define}}
 {{#markup}}

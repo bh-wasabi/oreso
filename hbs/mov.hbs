@@ -21,8 +21,8 @@
     {{column field="ubicacion.persona.grupo" label="Grupo"}}
     {{column field="_cuenta" label="Ubicación"}}
     {{row field="articulo.base._marca" label="Marca" width="100"}}  
-    {{row field="articulo.base._talla" label="Talla" width="100"}}  
-    {{row field="articulo.base._color" label="Color" width="100"}}      
+    {{row field="articulo.base._tamano" label="Tamaño" width="100"}}  
+    {{row field="articulo.base._color" label="Color/Sabor" width="100"}}      
     {{row field="articulo._name" label="Descripción" width="100"}}  
     {{row field="_lote" label="Lote"}}
     {{sum field="cantidad" label="Cantidad" format="#,"}}
@@ -42,13 +42,38 @@
       {{group field="importeFactor" type="sum" as="importe"}}
       {{match field="importe" neq="=0"}}
     {{/pipeline}}
+    {{calc field="vencimiento" type="expr" value="=moment(vencimiento).format()"}}
   {{/view}}
   {{#cube id="cxc" name="Cuentas por Cobrar" view="cxc" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
     {{column field="vencimiento" type="date" label="Año" groupInterval="year"}}
     {{column field="vencimiento" type="date" label="Mes" groupInterval="month"}}
     {{column field="vencimiento" type="date" label="Día" groupInterval="day"}}
     {{row field="_cuenta" label="Cliente" width="200"}}
-    {{row field="lote" label="Referencia" width="100"}}
+    {{row field="lote" label="Referencia" width="200"}}
+    {{sum field="importe" label="Importe" format="currency"}}
+  {{/cube}}
+
+  {{#view id="cxp"}}
+    {{#pipeline}}
+      {{filter field="aux" eq="='cxp'"}}
+      {{filter condition="=id" field="='cuenta'" eq="=id"}}
+      {{group field="cuenta"}}
+      {{group field="_cuenta"}}
+      {{group field="codigo"}}
+      {{!-- {{group field="descripcion"}} --}}
+      {{group field="lote"}}
+      {{group field="vencimiento"}}
+      {{group field="importeFactor" type="sum" as="importe"}}
+      {{match field="importe" neq="=0"}}
+    {{/pipeline}}
+    {{calc field="vencimiento" type="expr" value="=moment(vencimiento).format()"}}
+  {{/view}}
+  {{#cube id="cxp" name="Cuentas por Pagar" view="cxp" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
+    {{column field="vencimiento" type="date" label="Año" groupInterval="year"}}
+    {{column field="vencimiento" type="date" label="Mes" groupInterval="month"}}
+    {{column field="vencimiento" type="date" label="Día" groupInterval="day"}}
+    {{row field="_cuenta" label="Cliente" width="200"}}
+    {{row field="lote" label="Referencia" width="200"}}
     {{sum field="importe" label="Importe" format="currency"}}
   {{/cube}}
 

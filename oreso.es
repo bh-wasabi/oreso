@@ -118,10 +118,30 @@
 {"name":"estatusUsuario","code":"activo","display":"Activo","order":1}
 {"index":{"_id":"estatusUsuario/inactivo"}}
 {"name":"estatusUsuario","code":"inactivo","display":"Inactivo","order":2}
+{"index":{"_id":"formaPago/01"}}
+{"name":"formaPago","code":"01","display":"Efectivo","order":1}
+{"index":{"_id":"formaPago/04"}}
+{"name":"formaPago","code":"04","display":"Tarjeta de Crédito","order":2}
+{"index":{"_id":"formaPago/28"}}
+{"name":"formaPago","code":"28","display":"Tarjeta de Débito","order":3}
+{"index":{"_id":"formaPago/03"}}
+{"name":"formaPago","code":"03","display":"Transferencia Bancaria","order":4}
+{"index":{"_id":"formaPago/06"}}
+{"name":"formaPago","code":"06","display":"Depósito Bancario","order":5}
+{"index":{"_id":"formaPago/02"}}
+{"name":"formaPago","code":"02","display":"Cheque","order":6}
+{"index":{"_id":"formaPago/99"}}
+{"name":"formaPago","code":"99","display":"Otros","order":7}
 {"index":{"_id":"genero/hombre"}}
 {"name":"genero","code":"hombre","display":"Hombre","order":1}
 {"index":{"_id":"genero/mujer"}}
 {"name":"genero","code":"mujer","display":"Mujer","order":2}
+{"index":{"_id":"grupoCuenta/balance"}}
+{"name":"grupoCuenta","code":"balance","display":"Balance","order":1}
+{"index":{"_id":"grupoCuenta/resultados"}}
+{"name":"grupoCuenta","code":"resultados","display":"Resultados","order":2}
+{"index":{"_id":"grupoCuenta/orden"}}
+{"name":"grupoCuenta","code":"orden","display":"Orden","order":3}
 {"index":{"_id":"idioma/ar"}}
 {"name":"idioma","code":"ar","display":"Arábica","order":1}
 {"index":{"_id":"idioma/bn"}}
@@ -144,6 +164,16 @@
 {"name":"idioma","code":"fr","display":"Francés","order":10}
 {"index":{"_id":"idioma/fy"}}
 {"name":"idioma","code":"fy","display":"Frysian","order":11}
+{"index":{"_id":"marca/maidenform"}}
+{"name":"marca","code":"maidenform","display":"Maiden Form","order":1}
+{"index":{"_id":"marca/selfExpression"}}
+{"name":"marca","code":"selfExpression","display":"Self Expression","order":2}
+{"index":{"_id":"marca/piqueNique"}}
+{"name":"marca","code":"piqueNique","display":"Pique Nique","order":3}
+{"index":{"_id":"marca/thatsIt"}}
+{"name":"marca","code":"thatsIt","display":"That´s it","order":4}
+{"index":{"_id":"marca/icon"}}
+{"name":"marca","code":"icon","display":"Icon","order":5}
 {"index":{"_id":"medioComunicacion/telefono"}}
 {"name":"medioComunicacion","code":"telefono","display":"Teléfono","order":1}
 {"index":{"_id":"medioComunicacion/correo"}}
@@ -494,6 +524,10 @@
 {"name":"nacionalidad","code":"169","display":"Zairana","order":169}
 {"index":{"_id":"nacionalidad/170"}}
 {"name":"nacionalidad","code":"170","display":"Zambiana","order":170}
+{"index":{"_id":"naturalezaCuenta/deudora"}}
+{"name":"naturalezaCuenta","code":"deudora","display":"Deudora","order":1}
+{"index":{"_id":"naturalezaCuenta/acreedora"}}
+{"name":"naturalezaCuenta","code":"acreedora","display":"Acreedora","order":2}
 {"index":{"_id":"ocupacion/271111"}}
 {"name":"ocupacion","code":"271111","display":"Abogado","order":1}
 {"index":{"_id":"ocupacion/332000"}}
@@ -3420,12 +3454,56 @@
 {"name":"pais","code":"ZM","display":"Zambia","order":254}
 {"index":{"_id":"pais/ZW"}}
 {"name":"pais","code":"ZW","display":"Zimbabue","order":255}
+{"index":{"_id":"subTipoCuenta/cortoPlazo"}}
+{"name":"subTipoCuenta","code":"cortoPlazo","display":"Corto Plazo","order":1}
+{"index":{"_id":"subTipoCuenta/largoPlazo"}}
+{"name":"subTipoCuenta","code":"largoPlazo","display":"Largo Plazo","order":2}
+{"index":{"_id":"subTipoCuenta/ventas"}}
+{"name":"subTipoCuenta","code":"ventas","display":"Ventas","order":3}
+{"index":{"_id":"subTipoCuenta/comisiones"}}
+{"name":"subTipoCuenta","code":"comisiones","display":"Comisiones","order":4}
+{"index":{"_id":"subTipoCuenta/operacion"}}
+{"name":"subTipoCuenta","code":"operacion","display":"Operación","order":5}
+{"index":{"_id":"subTipoCuenta/administracion"}}
+{"name":"subTipoCuenta","code":"administracion","display":"Administración","order":6}
+{"index":{"_id":"subTipoCuenta/produccion"}}
+{"name":"subTipoCuenta","code":"produccion","display":"Producción","order":7}
+{"index":{"_id":"temporada/B15"}}
+{"name":"temporada","code":"B15","display":"Back to School 2015","order":1}
+{"index":{"_id":"temporada/S15"}}
+{"name":"temporada","code":"S15","display":"Spring 2015","order":2}
+{"index":{"_id":"temporada/B16"}}
+{"name":"temporada","code":"B16","display":"Back to School 2016","order":3}
+{"index":{"_id":"temporada/S16"}}
+{"name":"temporada","code":"S16","display":"Spring 2015","order":4}
+{"index":{"_id":"temporada/B17"}}
+{"name":"temporada","code":"B17","display":"Back to School 2017","order":5}
+{"index":{"_id":"temporada/S17"}}
+{"name":"temporada","code":"S17","display":"Spring 2017","order":6}
+{"index":{"_id":"temporada/B18"}}
+{"name":"temporada","code":"B18","display":"Back to School 2018","order":7}
+{"index":{"_id":"temporada/S18"}}
+{"name":"temporada","code":"S18","display":"Spring 2018","order":8}
+{"index":{"_id":"temporada/B19"}}
+{"name":"temporada","code":"B19","display":"Back to School 2019","order":9}
+{"index":{"_id":"temporada/S19"}}
+{"name":"temporada","code":"S19","display":"Spring 2019","order":10}
+{"index":{"_id":"temporada/B20"}}
+{"name":"temporada","code":"B20","display":"Back to School 2020","order":11}
+{"index":{"_id":"temporada/S20"}}
+{"name":"temporada","code":"S20","display":"Spring 2020","order":12}
+{"index":{"_id":"temporada/B21"}}
+{"name":"temporada","code":"B21","display":"Back to School 2021","order":13}
+{"index":{"_id":"temporada/S21"}}
+{"name":"temporada","code":"S21","display":"Spring 2021","order":14}
 {"index":{"_id":"tipoAdjunto/foto"}}
 {"name":"tipoAdjunto","code":"foto","display":"Foto","order":1}
 {"index":{"_id":"tipoAdjunto/doc"}}
 {"name":"tipoAdjunto","code":"doc","display":"Documento","order":2}
+{"index":{"_id":"tipoArticulo/inventariable"}}
+{"name":"tipoArticulo","code":"inventariable","display":"Inventariable","order":1}
 {"index":{"_id":"tipoArticulo/servicio"}}
-{"name":"tipoArticulo","code":"servicio","display":"Servicio","order":1}
+{"name":"tipoArticulo","code":"servicio","display":"Servicio","order":2}
 {"index":{"_id":"tipoCertificado/cedulaProfesional"}}
 {"name":"tipoCertificado","code":"cedulaProfesional","display":"Cedula Profesional","order":1}
 {"index":{"_id":"tipoCertificado/diploma"}}
@@ -3436,6 +3514,18 @@
 {"name":"tipoCliente","code":"tienda","display":"Tienda","order":2}
 {"index":{"_id":"tipoCliente/publicoGeneral"}}
 {"name":"tipoCliente","code":"publicoGeneral","display":"Publico General","order":3}
+{"index":{"_id":"tipoCuenta/activo"}}
+{"name":"tipoCuenta","code":"activo","display":"Activo","order":1}
+{"index":{"_id":"tipoCuenta/pasivo"}}
+{"name":"tipoCuenta","code":"pasivo","display":"Pasivo","order":2}
+{"index":{"_id":"tipoCuenta/capital"}}
+{"name":"tipoCuenta","code":"capital","display":"Capital","order":3}
+{"index":{"_id":"tipoCuenta/ingresos"}}
+{"name":"tipoCuenta","code":"ingresos","display":"Ingresos","order":4}
+{"index":{"_id":"tipoCuenta/costos"}}
+{"name":"tipoCuenta","code":"costos","display":"Costos","order":5}
+{"index":{"_id":"tipoCuenta/gastos"}}
+{"name":"tipoCuenta","code":"gastos","display":"Gastos","order":6}
 {"index":{"_id":"tipoIdentificacion/ine"}}
 {"name":"tipoIdentificacion","code":"ine","display":"INE","order":1}
 {"index":{"_id":"tipoIdentificacion/pasaporte"}}
@@ -3482,41 +3572,3 @@
 {"name":"usoIdentificacion","code":"oficial","display":"Oficial","order":1}
 {"index":{"_id":"usoIdentificacion/secundario"}}
 {"name":"usoIdentificacion","code":"secundario","display":"Secundario","order":4}
-{"index":{"_id":"marca/maidenform"}}
-{"name":"marca","code":"maidenform","display":"Maiden Form","order":1}
-{"index":{"_id":"marca/selfExpression"}}
-{"name":"marca","code":"selfExpression","display":"Self Expression","order":2}
-{"index":{"_id":"marca/piqueNique"}}
-{"name":"marca","code":"piqueNique","display":"Pique Nique","order":3}
-{"index":{"_id":"marca/thatsIt"}}
-{"name":"marca","code":"thatsIt","display":"That´s it","order":4}
-{"index":{"_id":"marca/icon"}}
-{"name":"marca","code":"icon","display":"Icon","order":5}
-{"index":{"_id":"temporada/B15"}}
-{"name":"temporada","code":"B15","display":"Back to School 2015","order":1}
-{"index":{"_id":"temporada/S15"}}
-{"name":"temporada","code":"S15","display":"Spring 2015","order":2}
-{"index":{"_id":"temporada/B16"}}
-{"name":"temporada","code":"B16","display":"Back to School 2016","order":3}
-{"index":{"_id":"temporada/S16"}}
-{"name":"temporada","code":"S16","display":"Spring 2015","order":4}
-{"index":{"_id":"temporada/B17"}}
-{"name":"temporada","code":"B17","display":"Back to School 2017","order":5}
-{"index":{"_id":"temporada/S17"}}
-{"name":"temporada","code":"S17","display":"Spring 2017","order":6}
-{"index":{"_id":"temporada/B18"}}
-{"name":"temporada","code":"B18","display":"Back to School 2018","order":7}
-{"index":{"_id":"temporada/S18"}}
-{"name":"temporada","code":"S18","display":"Spring 2018","order":8}
-{"index":{"_id":"temporada/B19"}}
-{"name":"temporada","code":"B19","display":"Back to School 2019","order":9}
-{"index":{"_id":"temporada/S19"}}
-{"name":"temporada","code":"S19","display":"Spring 2019","order":10}
-{"index":{"_id":"temporada/B20"}}
-{"name":"temporada","code":"B20","display":"Back to School 2020","order":11}
-{"index":{"_id":"temporada/S20"}}
-{"name":"temporada","code":"S20","display":"Spring 2020","order":12}
-{"index":{"_id":"temporada/B21"}}
-{"name":"temporada","code":"B21","display":"Back to School 2021","order":13}
-{"index":{"_id":"temporada/S21"}}
-{"name":"temporada","code":"S21","display":"Spring 2021","order":14}

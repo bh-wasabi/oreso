@@ -1,8 +1,17 @@
 {{#define id="notaGasto"}}
   {{param attribute1="=_created.service"}}
+  {{param attribute2="=_created.subType"}}
   {{param removeIfEmptySection="articulos"}}
   {{param removeIfEmptyField="cantidad"}}
   {{param startOnOpen="articulos"}}
+
+  {{#section id="base"}}
+    {{#field id="diasCredito"}}
+      {{#onChange}}
+        {{set vencimiento="=moment().add(diasCredito,'d').format('YYYY-MM-DD')"}}
+      {{/onChange}}
+    {{/field}}
+  {{/section}}
 
   {{#section id="articulos"}}
     {{#field id="aliasArticulo"}}
@@ -11,23 +20,26 @@
         {{set _articulo="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id)._articulo"}}
       {{/onChange}}
     {{/field}}
-    {{#field id="aliasDestino"}}
+    {{!-- {{#field id="aliasDestino"}}
       {{#onChange}}
         {{set destino="=calc.getPresetPersona('app.aliasUbicacion', aliasDestino, _doc.persona.id).ubicacion"}}
         {{set _destino="=calc.getPresetPersona('app.aliasUbicacion', aliasDestino, _doc.persona.id)._ubicacion"}}
       {{/onChange}}
-    {{/field}}
+    {{/field}} --}}
     {{field id="importe" type="calc" value="=valorUnitario*cantidad"}}
+    {{field id="iva" type="calc" value="=importe*(tasaIva/100)"}}
+    {{field id="total" type="calc" value="=importe+iva"}}
   {{/section}}
   
   {{#grid id="articulos" section="articulos" allowInsert="true" allowRemove="true"}}
     {{column field="aliasArticulo" label="Artículo" width="200"}}
     {{column field="_articulo" label="Descripción" width="400"}}
-    {{column field="aliasDestino" label="Destino" width="60" defaultValue="=_params.aliasDestino"}}
-    {{column field="_destino" label="Ubicación" width="150"}}
+    {{!-- {{column field="aliasDestino" label="Destino" width="60" defaultValue="=_params.aliasDestino"}}
+    {{column field="_destino" label="Ubicación" width="150"}} --}}
     {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
     {{column field="valorUnitario" label="Costo Unitario" width="110" type="numeric" format="#,.##"}}
-    {{column field="lote" label="Lote" width="100"}}
-    {{column field="vencimiento" label="Vencimiento" validateDate="true" width="100"}}
+    {{column field="tasaIva" label="% IVA" width="50" type="numeric" format="#.##" defaultValue="16"}}
+    {{!-- {{column field="lote" label="Lote" width="100"}}
+    {{column field="vencimiento" label="Vencimiento" validateDate="true" width="100"}} --}}
   {{/grid}}
 {{/define}}

@@ -1,4 +1,4 @@
-{{#define type="doc" id="ubicacion"}}
+{{#define type="doc" id="planAplicacion"}}
 	{{param defaultDisplay="_name"}}
 	{{param defaultView="lista"}}
 	{{param pageStart="1"}}
@@ -12,18 +12,12 @@
 	{{param attachSection="adjuntos"}}
 	{{param attachLanguage="es"}}
 	{{param confirmUnSaved="true"}}
-	{{param showChangeHistory="true"}}
+	{{param showChangeHistory="false"}}
 	{{param pdfPageSize="letter"}}
 	{{param startOnOpen="base"}}
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="base.nombre"}}
-	{{param name="Ubicación"}}
-	{{param group="Registro"}}
-	{{param fullWidth="true"}}
-	{{param modalSize="xlong"}}
-	{{param autoOpenEditors="true"}}
-	{{param autoAffect="node-direct"}}
-	{{param bannerTopTemplate="banner1"}}
+	{{param name="planAplicacion"}}
 	{{action id="subdoc" condition="=false"}}
 	{{action id="subdoc2" condition="=false"}}
 	{{action id="subdoc3" condition="=false"}}
@@ -43,24 +37,39 @@
 	{{action id="importarDatos" type="pasteText" label="Importar Datos..." color="green" condition="=false"}}
 	{{action id="eliminar" type="remove" label="Eliminar"}}
 	{{action id="abrir" type="open" label="Editar" condition="=!@_isAffected"}}
-	{{action id="afectar" label="Procesar" type="affect-direct" workflow="afectar"}}
 	{{section id="_options" temp="true"}}
 	{{section id="_params" temp="true"}}
 	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
-		{{#field id="nombre" label="Nombre" type="text" column="A" labelModalClass="full-width"}}
-			{{#editor width="100%"}}
+		{{field id="lote" label="Lote" type="text" column="A"}}
+		{{#field id="vencimiento" label="Vencimiento" type="text" column="A"}}
+			{{#editor case="YYYY-MM-DD"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="grupo" label="Grupo" type="text" column="A" labelModalClass="full-width"}}
-			{{#editor width="100%"}}
+		{{field id="ivaFactor" label="Factor IVA" type="number" column="A"}}
+		{{field id="importe" label="Importe" type="number" format="currency" column="A"}}
+		{{#field id="formaPago" label="Forma Pago" type="text" column="A" references="formaPago"}}
+			{{#editor type="select" preset="cfg.formaPago"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="direccion" label="Dirección" type="doc" column="A" references="direccion" labelModalClass="full-width" source="direccion"}}
-			{{#editor width="100%"}}
+		{{#field id="aliasOrigen" label="Destino" type="text" column="A"}}
+			{{#editor case="upper"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="contacto" label="Contactos" type="docs" column="A" references="contacto" labelModalClass="full-width" source="contacto"}}
-			{{#editor width="100%"}}
+		{{field id="origen" label="Origen ID" type="text" readOnly="true" hide="true" column="A"}}
+		{{field id="_origen" label="Ubicación Origen" type="text" readOnly="true" column="A"}}
+		{{#field id="referenciaPago" label="Referencia Pago" type="text" column="A"}}
+			{{#editor case="upper"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="aliasDestino" label="Destino" type="text" column="A"}}
+			{{#editor case="upper"}}
+			{{/editor}}
+		{{/field}}
+		{{field id="destino" label="Destino ID" type="text" readOnly="true" hide="true" column="A"}}
+		{{field id="_destino" label="Ubicación Destino" type="text" readOnly="true" column="A"}}
+		{{field id="loteDestino" label="Lote Destino" type="text" column="A"}}
+		{{#field id="vencimientoDestino" label="Vencimiento Destino" type="text" column="A"}}
+			{{#editor case="YYYY-MM-DD"}}
 			{{/editor}}
 		{{/field}}
 	{{/section}}
@@ -88,11 +97,19 @@
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Ubicación" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
-				{{row field="nombre" align="left"}}
-				{{row field="grupo" align="left"}}
-				{{row field="direccion" align="left"}}
-				{{row field="contacto" align="left"}}
+			{{#record title="planAplicacion" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+				{{row field="lote" align="left"}}
+				{{row field="vencimiento" align="left"}}
+				{{row field="ivaFactor" align="left"}}
+				{{row field="importe" align="left"}}
+				{{row field="formaPago" align="left"}}
+				{{row field="aliasOrigen" align="left"}}
+				{{row field="_origen" align="left"}}
+				{{row field="referenciaPago" align="left"}}
+				{{row field="aliasDestino" align="left"}}
+				{{row field="_destino" align="left"}}
+				{{row field="loteDestino" align="left"}}
+				{{row field="vencimientoDestino" align="left"}}
 			{{/record}}
 		{{/stack}}
 	{{/report}}
@@ -107,35 +124,9 @@
 	{{#browser id="lista" view="lista" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%"}}
 		{{list itemTemplate="lista" allowSearch="true" allowRefresh="true" allowEdit="true" allowInsert="true"}}
 	{{/browser}}
-	{{#workflow id="afectar" start="afectar"}}
-		{{#step id="afectar"}}
-			{{#user}}
-				{{#validate condition="=!_name" error="Nombre Incorrecto"}}
-				{{/validate}}
-				{{#spAffect engine="node"}}
-					{{#update section="base"}}
-						{{set estatus="afectado"}}
-						{{set _estatus="Afectado"}}
-					{{/update}}
-				{{/spAffect}}
-			{{/user}}
-		{{/step}}
-	{{/workflow}}
-	{{#workflow id="cancelar" start="cancelar"}}
-		{{#step id="cancelar"}}
-			{{#user}}
-				{{#spAffect engine="node" action="cancel"}}
-					{{#update section="base"}}
-						{{set estatus="cancelado"}}
-						{{set _estatus="Cancelado"}}
-					{{/update}}
-				{{/spAffect}}
-			{{/user}}
-		{{/step}}
-	{{/workflow}}
 {{/define}}
 {{#markup}}
-	{{#page name="Ubicación"}}
+	{{#page name="planAplicacion"}}
 		{{row}}
 		{{row}}
 		{{#row}}
@@ -143,10 +134,10 @@
 				{{#row class="auto-form-row"}}
 					{{#col medium="100%" class="auto-form-col"}}
 						{{#h5 class="auto-form-h5"}}
-							Ubicación
+							planAplicacion
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="nombre, grupo, direccion, contacto" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="lote, vencimiento, ivaFactor, importe, formaPago, aliasOrigen, _origen, referenciaPago, aliasDestino, _destino, loteDestino, vencimientoDestino" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -154,29 +145,53 @@
 			{{/zone}}
 		{{/row}}
 	{{/page}}
-	{{#modal base id="base" name="Ubicación" size="xlong"}}
+	{{#modal base id="base" name="planAplicacion"}}
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
-				{{field nombre}}
-				{{field grupo}}
-				{{field direccion}}
-				{{field contacto}}
+				{{field lote}}
+				{{field vencimiento}}
+				{{field ivaFactor}}
+				{{field importe}}
+				{{field formaPago}}
+				{{field aliasOrigen}}
+				{{field _origen}}
+				{{field referenciaPago}}
+				{{field aliasDestino}}
+				{{field _destino}}
+				{{field loteDestino}}
+				{{field vencimientoDestino}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
 	{{#template id="lista"}}
 		<div>{{_name}}</div>
 	{{/template}}
-	{{#template2 id="ubicacion"}}
-		<br>Nombre: {{nombre}}
-		<br>Grupo: {{grupo}}
-		<br>Dirección: {{_direccion}}
-		<br>Contactos: {{_contacto}}
+	{{#template2 id="planAplicacion"}}
+		<br>Lote: {{lote}}
+		<br>Vencimiento: {{vencimiento}}
+		<br>Factor IVA: {{ivaFactor}}
+		<br>Importe: {{number importe "currency"}}
+		<br>Forma Pago: {{_formaPago}}
+		<br>Destino: {{aliasOrigen}}
+		<br>Ubicación Origen: {{_origen}}
+		<br>Referencia Pago: {{referenciaPago}}
+		<br>Destino: {{aliasDestino}}
+		<br>Ubicación Destino: {{_destino}}
+		<br>Lote Destino: {{loteDestino}}
+		<br>Vencimiento Destino: {{vencimientoDestino}}
 	{{/template2}}
-	{{#template3 id="ubicacion"}}
-		{{#if nombre}}<br>Nombre: {{nombre}}{{/if}}
-		{{#if grupo}}<br>Grupo: {{grupo}}{{/if}}
-		{{#if direccion}}<br>Dirección: {{_direccion}}{{/if}}
-		{{#if contacto}}<br>Contactos: {{_contacto}}{{/if}}
+	{{#template3 id="planAplicacion"}}
+		{{#if lote}}<br>Lote: {{lote}}{{/if}}
+		{{#if vencimiento}}<br>Vencimiento: {{vencimiento}}{{/if}}
+		{{#if ivaFactor}}<br>Factor IVA: {{ivaFactor}}{{/if}}
+		{{#if importe}}<br>Importe: {{number importe "currency"}}{{/if}}
+		{{#if formaPago}}<br>Forma Pago: {{_formaPago}}{{/if}}
+		{{#if aliasOrigen}}<br>Destino: {{aliasOrigen}}{{/if}}
+		{{#if _origen}}<br>Ubicación Origen: {{_origen}}{{/if}}
+		{{#if referenciaPago}}<br>Referencia Pago: {{referenciaPago}}{{/if}}
+		{{#if aliasDestino}}<br>Destino: {{aliasDestino}}{{/if}}
+		{{#if _destino}}<br>Ubicación Destino: {{_destino}}{{/if}}
+		{{#if loteDestino}}<br>Lote Destino: {{loteDestino}}{{/if}}
+		{{#if vencimientoDestino}}<br>Vencimiento Destino: {{vencimientoDestino}}{{/if}}
 	{{/template3}}
 {{/markup}}

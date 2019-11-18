@@ -1,0 +1,15 @@
+{{#define id="notaAplicacion"}}
+  {{param attribute1="=_created.service"}}
+  {{param attribute2="=_created.subType"}}
+  {{param removeIfEmptySection="aplicacion"}}
+  {{param removeIfEmptyField="importe"}}
+  {{param startOnOpen="aplicacion"}}
+
+  {{#grid id="aplicacion" section="aplicacion" allowInsert="true" allowRemove="true"}}
+    {{column field="lote" label="Referencia" width="250"}}
+    {{column field="vencimiento" label="Vencimiento" validateDate="true" width="110"}}
+    {{column field="importe" label="Importe" width="150" type="numeric" format="#,.##"}}
+    {{column field="loteDestino" label="Referencia Destino" width="150"}}
+    {{column field="vencimientoDestino" label="Vencimiento Destino" validateDate="true" width="150"}}
+  {{/grid}}
+{{/define}}

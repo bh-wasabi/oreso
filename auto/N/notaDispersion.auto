@@ -1,4 +1,4 @@
-{{#define type="doc" id="notaSalida"}}
+{{#define type="doc" id="notaDispersion"}}
 	{{param defaultDisplay="_name"}}
 	{{param defaultView="lista"}}
 	{{param pageStart="1"}}
@@ -36,6 +36,7 @@
 	{{param autoStamp="true"}}
 	{{param allowDraft="true"}}
 	{{param isAction="true"}}
+	{{param disableCashier="true"}}
 	{{action id="fix-user" type="add-subdoc" transform="copiarNota" source="notaAjusteUsuario" label="Ajustar Usuario" btnFlat="true" color="grey" superUser="true" visibleMode="close" onlyPost="true"}}
 	{{action id="subdoc" condition="=false"}}
 	{{action id="subdoc2" condition="=false"}}
@@ -79,7 +80,11 @@
 			{{#editor type="lookup" source="persona" view="responsablesAcademicos" searchEnabled="true" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="estatus" label="Estatus" type="text" readOnly="true" column="A" references="estatusNota" modalHide="true" labelModalClass="full-width" defaultValue="'borrador'"}}
+		{{#field id="fechaEmision" label="Fecha Emisión" type="date" format="DD/MMM/YYYY" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD" generator="now"}}
+			{{#editor type="date" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="estatus" label="Estatus" type="text" readOnly="true" column="A" references="estatusNota" labelModalClass="full-width" defaultValue="'borrador'"}}
 			{{#editor type="select" preset="cfg.estatusNota" width="100%"}}
 			{{/editor}}
 		{{/field}}
@@ -89,49 +94,37 @@
 		{{/field}}
 		{{field id="nombre" label="Nombre" hide="true" type="expr" value="=fn('dynamicName', @_created)"}}
 	{{/section}}
-	{{#section id="articulos" type="array"}}
-		{{#field id="aliasArticulo" label="Artículo" type="text" column="A"}}
-			{{#editor case="upper"}}
+	{{#section id="aplicacion" type="array"}}
+		{{field id="lote" label="Lote" type="text" column="A"}}
+		{{#field id="vencimiento" label="Vencimiento" type="text" column="A"}}
+			{{#editor case="YYYY-MM-DD"}}
 			{{/editor}}
 		{{/field}}
-		{{field id="articulo" label="Artículo ID" type="text" readOnly="true" hide="true" column="A"}}
-		{{field id="_articulo" label="Descripción Artículo" type="text" readOnly="true" column="A"}}
-		{{#field id="aliasOrigen" label="Origen" type="text" column="A"}}
+		{{field id="ivaFactor" label="Factor IVA" type="number" column="A"}}
+		{{field id="importe" label="Importe" type="number" format="currency" column="A"}}
+		{{#field id="formaPago" label="Forma Pago" type="text" column="A" references="formaPago"}}
+			{{#editor type="select" preset="cfg.formaPago"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="aliasOrigen" label="Destino" type="text" column="A"}}
 			{{#editor case="upper"}}
 			{{/editor}}
 		{{/field}}
 		{{field id="origen" label="Origen ID" type="text" readOnly="true" hide="true" column="A"}}
 		{{field id="_origen" label="Ubicación Origen" type="text" readOnly="true" column="A"}}
+		{{#field id="referenciaPago" label="Referencia Pago" type="text" column="A"}}
+			{{#editor case="upper"}}
+			{{/editor}}
+		{{/field}}
 		{{#field id="aliasDestino" label="Destino" type="text" column="A"}}
 			{{#editor case="upper"}}
 			{{/editor}}
 		{{/field}}
 		{{field id="destino" label="Destino ID" type="text" readOnly="true" hide="true" column="A"}}
 		{{field id="_destino" label="Ubicación Destino" type="text" readOnly="true" column="A"}}
-		{{field id="cantidad" label="Cantidad" type="number" format="#,.##" column="A"}}
-		{{field id="valorUnitario" label="Valor Unitario" type="number" format="currency" column="A"}}
-		{{field id="tasaIva" label="% IVA" type="number" format="#.##" column="A"}}
-		{{field id="importe" label="Importe" type="calc" format="currency" column="A"}}
-		{{field id="iva" label="IVA" type="calc" format="currency" column="A"}}
-		{{field id="total" label="Total" type="calc" format="currency" column="A"}}
-		{{#field id="lote" label="Lote" type="text" column="A"}}
-			{{#editor case="upper"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="vencimiento" label="Vencimiento" type="text" column="A"}}
+		{{field id="loteDestino" label="Lote Destino" type="text" column="A"}}
+		{{#field id="vencimientoDestino" label="Vencimiento Destino" type="text" column="A"}}
 			{{#editor case="YYYY-MM-DD"}}
-			{{/editor}}
-		{{/field}}
-	{{/section}}
-	{{#section id="inv" type="array"}}
-		{{field id="descripcion" label="Artículo" type="text" column="A"}}
-		{{field id="_cuenta" label="Ubicación" type="text" column="A"}}
-		{{field id="salida" label="Salida" type="number" format="#," column="A"}}
-		{{field id="entrada" label="Entrada" type="number" format="#," column="A"}}
-		{{field id="costoUnitario" label="Costo Unitario" type="number" format="currency" column="A"}}
-		{{field id="lote" label="Lote" type="text" column="A"}}
-		{{#field id="vencimiento" label="Vencimiento" type="date" format="DD/MMM/YYYY" column="A" saveFormat="YYYY-MM-DD"}}
-			{{#editor type="date"}}
 			{{/editor}}
 		{{/field}}
 	{{/section}}
@@ -162,41 +155,27 @@
 		{{#stack}}
 			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
 				{{row field="responsableAcademico" condition="esEstudiante" align="left"}}
+				{{row field="fechaEmision" align="left"}}
 				{{row field="estatus" align="left"}}
 				{{row field="comentarios" align="left"}}
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
-			{{#row text="Artículos" fontSize="10" bold="true"}}
+			{{#row text="Aplicación" fontSize="10" bold="true"}}
 			{{/row}}
-			{{#table title="Artículos" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="articulos" headerStyle="field" margin="0,5,10,10" removeEmptyCols="true"}}
-				{{column field="aliasArticulo"}}
-				{{column field="_articulo"}}
+			{{#table title="Aplicación" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="aplicacion" headerStyle="field" margin="0,5,10,10" removeEmptyCols="true"}}
+				{{column field="lote"}}
+				{{column field="vencimiento"}}
+				{{column field="ivaFactor"}}
+				{{column field="importe"}}
+				{{column field="formaPago"}}
 				{{column field="aliasOrigen"}}
 				{{column field="_origen"}}
+				{{column field="referenciaPago"}}
 				{{column field="aliasDestino"}}
 				{{column field="_destino"}}
-				{{column field="cantidad"}}
-				{{column field="valorUnitario"}}
-				{{column field="tasaIva"}}
-				{{column field="importe"}}
-				{{column field="iva"}}
-				{{column field="total"}}
-				{{column field="lote"}}
-				{{column field="vencimiento"}}
-			{{/table}}
-		{{/stack}}
-		{{#stack condition="=inv"}}
-			{{#row text="Movimiento del Inventario" fontSize="10" bold="true"}}
-			{{/row}}
-			{{#table title="Movimiento del Inventario" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="inv" headerStyle="field" margin="0,5,10,10" removeEmptyCols="true"}}
-				{{column field="descripcion"}}
-				{{column field="_cuenta"}}
-				{{column field="salida"}}
-				{{column field="entrada"}}
-				{{column field="costoUnitario"}}
-				{{column field="lote"}}
-				{{column field="vencimiento"}}
+				{{column field="loteDestino"}}
+				{{column field="vencimientoDestino"}}
 			{{/table}}
 		{{/stack}}
 		{{#stack}}
@@ -275,7 +254,7 @@
 	{{/workflow}}
 {{/define}}
 {{#markup}}
-	{{#page name="Salida"}}
+	{{#page name="Dispersión"}}
 		{{row}}
 		{{row}}
 		{{#row}}
@@ -286,7 +265,7 @@
 							Datos Generales
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="responsableAcademico, estatus, comentarios" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="responsableAcademico, fechaEmision, estatus, comentarios" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -294,14 +273,14 @@
 			{{/zone}}
 		{{/row}}
 		{{#row}}
-			{{#zone id="articulos" modalGrid="articulos"}}
+			{{#zone id="aplicacion" modalGrid="aplicacion"}}
 				{{#row class="auto-form-row"}}
 					{{#col medium="100%" class="auto-form-col"}}
 						{{#h5 class="auto-form-h5"}}
-							Artículos
+							Aplicación
 						{{/h5}}
 						{{#div}}
-							{{table articulos class="auto-form-table" cols="aliasArticulo, _articulo, aliasOrigen, _origen, aliasDestino, _destino, cantidad, valorUnitario, tasaIva, importe, iva, total, lote, vencimiento" removeEmptyCols="true" unlink="true"}}
+							{{table aplicacion class="auto-form-table" cols="lote, vencimiento, ivaFactor, importe, formaPago, aliasOrigen, _origen, referenciaPago, aliasDestino, _destino, loteDestino, vencimientoDestino" removeEmptyCols="true" unlink="true"}}
 							{{br}}
 						{{/div}}
 					{{/col}}
@@ -309,54 +288,33 @@
 			{{/zone}}
 		{{/row}}
 		{{#row}}
-			{{#zone id="inv" modal="inv"}}
-				{{#row class="auto-form-row"}}
-					{{#if context="=inv"}}
-						{{#col medium="100%" class="auto-form-col"}}
-							{{#h5 class="auto-form-h5"}}
-								Movimiento del Inventario
-							{{/h5}}
-							{{#div}}
-								{{table inv class="auto-form-table" cols="descripcion, _cuenta, salida, entrada, costoUnitario, lote, vencimiento" removeEmptyCols="false" unlink="true"}}
-								{{br}}
-							{{/div}}
-						{{/col}}
-					{{/if}}
-				{{/row}}
-			{{/zone}}
-		{{/row}}
-		{{#row}}
-			{{#zone id="inv" modal="inv"}}
+			{{#zone id="aplicacion" modalGrid="aplicacion"}}
 			{{/zone}}
 		{{/row}}
 	{{/page}}
-	{{#modal base id="base" name="Datos Generales" size="xlong" next="articulos"}}
+	{{#modal base id="base" name="Datos Generales" size="xwide" next="aplicacion"}}
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
 				{{field responsableAcademico}}
-				{{field estatus hide="true"}}
+				{{field fechaEmision}}
+				{{field estatus}}
 				{{field comentarios}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
-	{{modal articulos id="articulos" name="Artículos" grid="articulos" size="xxwide" prev="base"}}
-	{{#modal inv id="inv" name="Movimiento del Inventario" size="xwide"}}
-		{{#col medium="100%" vertical="100%"}}
-			{{#fieldSet}}
-				{{field inv}}
-			{{/fieldSet}}
-		{{/col}}
-	{{/modal}}
+	{{modal aplicacion id="aplicacion" name="Aplicación" grid="aplicacion" size="xwide" prev="base"}}
 	{{#template id="lista"}}
 		<div>{{_name}}</div>
 	{{/template}}
-	{{#template2 id="notaSalida"}}
+	{{#template2 id="notaDispersion"}}
 		{{#if esEstudiante}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}
+		<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}
 		<br>Estatus: {{_estatus}}
 		<br>{{comentarios}}
 	{{/template2}}
-	{{#template3 id="notaSalida"}}
+	{{#template3 id="notaDispersion"}}
 		{{#if esEstudiante}}{{#if responsableAcademico}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}{{/if}}
+		{{#if fechaEmision}}<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}{{/if}}
 		{{#if estatus}}<br>Estatus: {{_estatus}}{{/if}}
 		{{#if comentarios}}<br>{{comentarios}}{{/if}}
 	{{/template3}}

@@ -1,4 +1,4 @@
-{{#define type="doc" id="notaTraspaso"}}
+{{#define type="doc" id="notaCompra"}}
 	{{param defaultDisplay="_name"}}
 	{{param defaultView="lista"}}
 	{{param pageStart="1"}}
@@ -79,7 +79,15 @@
 			{{#editor type="lookup" source="persona" view="responsablesAcademicos" searchEnabled="true" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="fechaEmision" label="Fecha Emisión" type="date" format="DD/MMM/YYYY" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD" generator="now"}}
+		{{#field id="fechaEmision" label="Fecha Emisión" type="date" format="DD/MMM/YYYY" readOnly="true" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD" generator="now"}}
+			{{#editor type="date" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="diasCredito" label="Días Crédito" type="number" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="vencimiento" label="Vencimiento" type="date" format="DD/MMM/YYYY" readOnly="true" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD" generator="now"}}
 			{{#editor type="date" width="100%"}}
 			{{/editor}}
 		{{/field}}
@@ -167,6 +175,8 @@
 			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
 				{{row field="responsableAcademico" condition="esEstudiante" align="left"}}
 				{{row field="fechaEmision" align="left"}}
+				{{row field="diasCredito" align="left"}}
+				{{row field="vencimiento" align="left"}}
 				{{row field="estatus" align="left"}}
 				{{row field="comentarios" align="left"}}
 			{{/record}}
@@ -280,7 +290,7 @@
 	{{/workflow}}
 {{/define}}
 {{#markup}}
-	{{#page name="Traspaso"}}
+	{{#page name="Compra"}}
 		{{row}}
 		{{row}}
 		{{#row}}
@@ -291,7 +301,7 @@
 							Datos Generales
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="responsableAcademico, fechaEmision, estatus, comentarios" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="responsableAcademico, fechaEmision, diasCredito, vencimiento, estatus, comentarios" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -340,6 +350,8 @@
 			{{#fieldSet}}
 				{{field responsableAcademico}}
 				{{field fechaEmision}}
+				{{field diasCredito}}
+				{{field vencimiento}}
 				{{field estatus}}
 				{{field comentarios}}
 			{{/fieldSet}}
@@ -356,15 +368,19 @@
 	{{#template id="lista"}}
 		<div>{{_name}}</div>
 	{{/template}}
-	{{#template2 id="notaTraspaso"}}
+	{{#template2 id="notaCompra"}}
 		{{#if esEstudiante}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}
 		<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}
+		<br>Días Crédito: {{diasCredito}}
+		<br>Vencimiento: {{date vencimiento "DD/MMM/YYYY"}}
 		<br>Estatus: {{_estatus}}
 		<br>{{comentarios}}
 	{{/template2}}
-	{{#template3 id="notaTraspaso"}}
+	{{#template3 id="notaCompra"}}
 		{{#if esEstudiante}}{{#if responsableAcademico}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}{{/if}}
 		{{#if fechaEmision}}<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}{{/if}}
+		{{#if diasCredito}}<br>Días Crédito: {{diasCredito}}{{/if}}
+		{{#if vencimiento}}<br>Vencimiento: {{date vencimiento "DD/MMM/YYYY"}}{{/if}}
 		{{#if estatus}}<br>Estatus: {{_estatus}}{{/if}}
 		{{#if comentarios}}<br>{{comentarios}}{{/if}}
 	{{/template3}}

@@ -1,5 +1,6 @@
-{{#define id="notaEntrada"}}
+{{#define id="notaSalidaDiversa"}}
   {{param attribute1="=_created.service"}}
+  {{param attribute2="=_created.subType"}}
   {{param removeIfEmptySection="articulos"}}
   {{param removeIfEmptyField="cantidad"}}
   {{param startOnOpen="articulos"}}
@@ -11,23 +12,19 @@
         {{set _articulo="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id)._articulo"}}
       {{/onChange}}
     {{/field}}
-    {{#field id="aliasDestino"}}
+    {{#field id="aliasOrigen"}}
       {{#onChange}}
-        {{set destino="=calc.getPresetPersona('app.aliasUbicacion', aliasDestino, _doc.persona.id).ubicacion"}}
-        {{set _destino="=calc.getPresetPersona('app.aliasUbicacion', aliasDestino, _doc.persona.id)._ubicacion"}}
+        {{set origen="=calc.getPresetPersona('app.aliasUbicacion', aliasOrigen, _doc.persona.id).ubicacion"}}
+        {{set _origen="=calc.getPresetPersona('app.aliasUbicacion', aliasOrigen, _doc.persona.id)._ubicacion"}}
       {{/onChange}}
     {{/field}}
-    {{field id="importe" type="calc" value="=valorUnitario*cantidad"}}
   {{/section}}
   
   {{#grid id="articulos" section="articulos" allowInsert="true" allowRemove="true"}}
     {{column field="aliasArticulo" label="Artículo" width="200"}}
     {{column field="_articulo" label="Descripción" width="400"}}
-    {{column field="aliasDestino" label="Destino" width="60" defaultValue="=_params.aliasDestino"}}
-    {{column field="_destino" label="Ubicación" width="150"}}
+    {{column field="aliasOrigen" label="Origen" width="60" defaultValue="=_params.aliasOrigen"}}
+    {{column field="_origen" label="Ubicación" width="150"}}
     {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
-    {{column field="valorUnitario" label="Costo Unitario" width="110" type="numeric" format="#,.##"}}
-    {{column field="lote" label="Lote" width="100"}}
-    {{column field="vencimiento" label="Vencimiento" validateDate="true" width="100"}}
   {{/grid}}
 {{/define}}

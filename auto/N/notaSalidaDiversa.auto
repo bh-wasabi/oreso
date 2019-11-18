@@ -1,4 +1,4 @@
-{{#define type="doc" id="notaTraspaso"}}
+{{#define type="doc" id="notaSalidaDiversa"}}
 	{{param defaultDisplay="_name"}}
 	{{param defaultView="lista"}}
 	{{param pageStart="1"}}
@@ -280,7 +280,7 @@
 	{{/workflow}}
 {{/define}}
 {{#markup}}
-	{{#page name="Traspaso"}}
+	{{#page name="Salida Diversa"}}
 		{{row}}
 		{{row}}
 		{{#row}}
@@ -356,13 +356,13 @@
 	{{#template id="lista"}}
 		<div>{{_name}}</div>
 	{{/template}}
-	{{#template2 id="notaTraspaso"}}
+	{{#template2 id="notaSalidaDiversa"}}
 		{{#if esEstudiante}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}
 		<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}
 		<br>Estatus: {{_estatus}}
 		<br>{{comentarios}}
 	{{/template2}}
-	{{#template3 id="notaTraspaso"}}
+	{{#template3 id="notaSalidaDiversa"}}
 		{{#if esEstudiante}}{{#if responsableAcademico}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}{{/if}}
 		{{#if fechaEmision}}<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}{{/if}}
 		{{#if estatus}}<br>Estatus: {{_estatus}}{{/if}}

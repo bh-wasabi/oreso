@@ -1,0 +1,28 @@
+{{#define id="notaCobro"}}
+  {{param attribute1="=_created.service"}}
+  {{param attribute2="=_created.subType"}}
+  {{param removeIfEmptySection="aplicacion"}}
+  {{param removeIfEmptyField="importe"}}
+  {{param startOnOpen="aplicacion"}}
+
+  {{#section id="aplicacion"}}
+    {{#field id="aliasDestino"}}
+      {{#onChange}}
+        {{set destino="=calc.getPresetPersona('app.aliasUbicacion', aliasDestino, _doc.persona.id).ubicacion"}}
+        {{set _destino="=calc.getPresetPersona('app.aliasUbicacion', aliasDestino, _doc.persona.id)._ubicacion"}}
+      {{/onChange}}
+    {{/field}}
+  {{/section}}
+
+
+  {{#grid id="aplicacion" section="aplicacion" allowInsert="true" allowRemove="true"}}
+    {{column field="lote" label="Referencia" width="250"}}
+    {{column field="vencimiento" label="Vencimiento" validateDate="true" width="110"}}
+    {{!-- {{column field="ivaFactor" label="Factor IVA" width="80"}} --}}
+    {{column field="aliasDestino" label="Destino" width="60" defaultValue="=_params.aliasDestino"}}
+    {{column field="_destino" label="Cuenta Monetaria" width="150"}}
+    {{column field="importe" label="Importe" width="150" type="numeric" format="#,.##"}}
+    {{column field="formaPago" label="Forma Pago" width="150"}}
+    {{column field="referenciaPago" label="Referencia Pago" width="250"}}
+  {{/grid}}
+{{/define}}

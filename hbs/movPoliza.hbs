@@ -1,0 +1,25 @@
+{{#define type="doc" id="movPoliza"}}
+  {{#view id="saldos"}}
+    {{#pipeline}}
+      {{group field="mayor"}}
+      {{group field="_persona"}}
+      {{!-- {{group field="lote"}} --}}
+      {{group field="importe" type="sum" as="saldo"}}
+    {{/pipeline}}
+    {{join preset="app.mayor" as="join" id="mayor"}}
+    {{calc2 field="_mayor" value="=calc.concat(join.numero, join.nombre)"}}
+    {{calc2 field="esAcreedora" value="=join.naturaleza=='acreedora'"}}
+    {{calc2 field="saldoDeudor" value="=(!esAcreedora)?saldo:null"}}
+    {{calc2 field="saldoAcreedor" value="=(esAcreedora)?-saldo:null"}}
+  {{/view}}
+  {{#cube id="saldos" name="Saldos" view="saldos" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
+    {{column field="join._grupo" label="Grupo" width="150"}}
+    {{row field="join._tipo" label="Tipo" width="150"}}
+    {{row field="join._subTipo" label="Sub Tipo" width="150"}}
+    {{row field="_mayor" label="Cuenta Mayor" width="150"}}
+    {{row field="_persona" label="Persona" width="250"}}
+    {{!-- {{row field="lote" label="Referencia" width="110"}} --}}
+    {{sum field="saldoDeudor" label="Saldo Deudor" format="currency"}}
+    {{sum field="saldoAcreedor" label="Saldo Acreedor" format="currency"}}
+  {{/cube}}
+{{/define}}

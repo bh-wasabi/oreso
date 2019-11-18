@@ -1,24 +1,28 @@
 {{#define id="articulo"}}  
-  {{param name="=base.nombre||'Cliente'"}}
+  {{param name="=_params._tipoArticulo||'Artículo'"}}
   {{#view id="lista"}}
     {{#find}}
       {{include field="_name"}}
       {{include field="base.codigo"}}
       {{include field="base.marca"}}
       {{include field="base.estilo"}}
-      {{include field="base.talla"}}
+      {{include field="base.tamano"}}
       {{include field="base.color"}}
       {{sort field="_name" direction="asc"}}
+      {{filter condition="=tipoArticulo" field="base.tipoArticulo" in="=tipoArticulo"}}
       {{search field="_name"}}
       {{search field="base.codigo"}}
       {{search field="base._marca"}}
       {{search field="base._estilo"}}
-      {{search field="base._talla"}}
+      {{search field="base._tamano"}}
       {{search field="base._color"}}
     {{/find}}
   {{/view}}
   {{#section id="base"}}
     {{field id="nombre" type="expr" value="=@descripcion"}}
+    {{field id="tipoArticulo" defaultValue="_params.tipoArticulo" readOnly="true"}}
+    {{field id="esInventariable" type="expr" value="=tipoArticulo=='inventariable'"}}
+    {{field id="esServicio" type="expr" value="=tipoArticulo=='servicio'"}}
   {{/section}}
   {{action id="eliminar" hide="true"}}
   {{action id="ver" condition="=true" type="openFolder" label="Adjuntos" items="=adjuntos" color="grey" visibleMode="close"}}
@@ -30,12 +34,22 @@
     {{column field="tamano" width="100" readOnly="true"}}
     {{column field="orden" width="60"}}
   {{/grid}}
+  {{#browser id="inventariables" view="lista" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%"}}
+    {{list itemTemplate="lista" allowSearch="true" allowRefresh="true" allowEdit="true" allowInsert="true"}}
+    {{param tipoArticulo="inventariable"}}
+    {{param _tipoArticulo="Inventariable"}}
+  {{/browser}}
+  {{#browser id="servicios" view="lista" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%"}}
+    {{list itemTemplate="lista" allowSearch="true" allowRefresh="true" allowEdit="true" allowInsert="true"}}
+    {{param tipoArticulo="servicio"}}
+    {{param _tipoArticulo="Servicio"}}
+  {{/browser}}  
 {{/define}}
 {{#markup}}
   {{#template id="lista"}}
     <div>
       {{_name}}
-      <br><span style="font-size:12px;">{{base._marca}}</span>
+      <br><span style="font-size:12px;">{{base.codigo}}</span>
     </div>
   {{/template}}
 {{/markup}}

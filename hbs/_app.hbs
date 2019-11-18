@@ -13,19 +13,25 @@
   {{#menu id="menu-principal" name="Grupo Oreso" showUserName="true"}}
     {{item text="Tableros" type="userBoards"}}
     {{#item text="Ver"}} 
-      {{item text="Inventario" newTab="true" href="/_inv/cubo?_name=Inventario&_title=Inventario"}}
+      {{item text="Inventario" newTab="true" href="/_inv/cubo?_name=Inventario&_title=Inventario" beginGroup="true"}}
       {{item text="Cuentas por Cobrar" newTab="true" href="/_cxc/cubo?_name=Cuentas por Cobrar&_title=Cuentas por Cobrar"}}
-      {{item text="Bitácora General" href="/nota/lista"}}
+      {{item text="Cuentas por Pagar" newTab="true" href="/_cxp/cubo?_name=Cuentas por Pagar&_title=Cuentas por Pagar"}}
+      {{item text="Contabilidad" newTab="true" href="/_contabilidad/cubo?_name=Contabilidad&_title=Contabilidad" beginGroup="true"}}
+      {{item text="Bitácora General" href="/nota/lista" beginGroup="true"}}
     {{/item}}
     {{#item text="Cuentas"}}
       {{item text="Clientes" href="/cliente/lista"}}
       {{item text="Proveedores" href="/proveedor/lista"}}
       {{item text="Ubicaciones" href="/ubicacion/lista" beginGroup="true"}}
+      {{item text="Monetarias" href="/monetaria/lista"}}
+    {{/item}}
+    {{#item text="Articulos"}}
+      {{item text="Inventariables" href="/articulo/inventariables"}}
+      {{item text="Servicios" href="/articulo/servicios"}}
     {{/item}}
     {{#item text="Configuración"}}
       {{item text="Configuración General" href="/_app"}}
       {{item text="Usuarios" href="/_user/lista"}}
-      {{item text="Artículos" href="/articulo/lista" beginGroup="true"}}
     {{/item}}
     {{#item text="Usuario"}}
       {{item text="Usuario" type="userName" icon="user"}}
@@ -508,12 +514,12 @@
     {{column field="nombre" width="350"}}
     {{column field="orden" width="50"}}
   {{/grid}}  
-  {{#section id="talla" type="array"}}
+  {{#section id="tamano" type="array"}}
     {{field id="id" type="text" label="Identificador"}}
     {{field id="nombre" type="text" label="Nombre"}}
     {{field id="orden" type="number" label="Orden"}}
   {{/section}}
-  {{#grid id="talla" section="talla" allowInsert="true" allowRemove="true" allowSort="true" sortBy="orden,id"}}
+  {{#grid id="tamano" section="tamano" allowInsert="true" allowRemove="true" allowSort="true" sortBy="orden,id"}}
     {{column field="id" width="150"}}
     {{column field="nombre" width="350"}}
     {{column field="orden" width="50"}}
@@ -534,7 +540,7 @@
     {{#field id="id" type="text" label="Identificador"}}
       {{editor case="upper"}}
     {{/field}}
-    {{#field id="persona" type="text" label="Cuenta"}}
+    {{#field id="persona" type="text" label="Sujeto"}}
       {{editor type="lookup" source="persona" view="clientesProveedores" searchEnabled="true"}}
     {{/field}}
     {{#field id="ubicacion" type="text" label="Ubicación"}}
@@ -552,7 +558,7 @@
     {{#field id="id" type="text" label="Identificador"}}
       {{editor case="upper"}}
     {{/field}}
-    {{#field id="persona" type="text" label="Cuenta"}}
+    {{#field id="persona" type="text" label="Sujeto"}}
       {{editor type="lookup" source="persona" view="clientesProveedores" searchEnabled="true"}}
     {{/field}}
     {{#field id="articulo" type="text" label="Artículo"}}
@@ -567,6 +573,35 @@
     {{column field="articulo" width="350"}}
     {{column field="precio" width="150"}}
     {{column field="orden" width="50"}}
+  {{/grid}}  
+
+  {{#section id="mayor" type="array"}}
+    {{field id="id" type="text" label="Identificador"}}
+    {{field id="nombre" label="Nombre" type="text"}}
+    {{#field id="numero" label="Número" type="text"}}
+      {{editor case="upper"}}
+    {{/field}}
+    {{#field id="grupo" label="Grupo" type="text"}}
+      {{editor type="select" preset="cfg.grupoCuenta"}}
+    {{/field}}
+    {{#field id="tipo" label="Tipo" type="text"}}
+      {{editor type="select" preset="cfg.tipoCuenta"}}
+    {{/field}}
+    {{#field id="subTipo" label="Sub Tipo" type="text"}}
+      {{editor type="select" preset="cfg.subTipoCuenta"}}
+    {{/field}}
+    {{#field id="naturaleza" label="Naturaleza" type="text"}}
+      {{editor type="select" preset="cfg.naturalezaCuenta"}}
+    {{/field}}
+  {{/section}}
+  {{#grid id="mayor" section="mayor" allowInsert="true" allowRemove="true" allowSort="true" sortBy="numero"}}
+    {{column field="id" width="150"}}
+    {{column field="nombre" width="200"}}
+    {{column field="numero" width="60"}}
+    {{column field="grupo" width="350"}}
+    {{column field="tipo" width="150"}}
+    {{column field="subTipo" width="100"}}
+    {{column field="naturaleza" width="100"}}
   {{/grid}}  
 
 {{/define}}
@@ -605,10 +640,10 @@
     {{hairline}}
     {{#row}}
       {{#col medium="50%"}}
-        {{#zone id="talla" modalGrid="talla"}}
+        {{#zone id="tamano" modalGrid="tamano"}}
           {{br}}
-          {{#h5}}Tallas{{/h5}}
-          {{table talla cols="id,nombre" medium="30%,70%"}}
+          {{#h5}}Tamaños{{/h5}}
+          {{table tamano cols="id,nombre" medium="30%,70%"}}
         {{/zone}}
       {{/col}}
       {{#col medium="50%"}}
@@ -616,6 +651,16 @@
           {{br}}
           {{#h5}}Colores{{/h5}}
           {{table color cols="id,nombre" medium="30%,70%"}}
+        {{/zone}}
+      {{/col}}
+    {{/row}}
+  {{/page}}
+  {{#page name="Cuentas Mayor"}}
+    {{#row}}
+      {{#col medium="100%"}}
+        {{#zone id="mayor" modalGrid="mayor"}}
+          {{br}}
+          {{table mayor cols="numero,nombre,grupo,tipo,subTipo,naturaleza" medium="10%,30%,15%,15%,15%,15%"}}
         {{/zone}}
       {{/col}}
     {{/row}}
@@ -815,8 +860,9 @@
     </div>
   {{/template}}  
   {{modal estilo id="estilo" grid="estilo" name="Estilos" size="long"}}
-  {{modal talla id="talla" grid="talla" name="Tallas" size="long"}}
+  {{modal tamano id="tamano" grid="tamano" name="Tamaños" size="long"}}
   {{modal color id="color" grid="color" name="Colores" size="long"}}
   {{modal aliasUbicacion id="aliasUbicacion" grid="aliasUbicacion" name="Alias Ubicaciones" size="xwide"}}
   {{modal aliasArticulo id="aliasArticulo" grid="aliasArticulo" name="Alias Artículos" size="xwide"}}
+  {{modal mayor id="mayor" grid="mayor" name="Mayor" size="xwide"}}
 {{/markup}}

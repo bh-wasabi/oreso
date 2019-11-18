@@ -47,6 +47,11 @@
 	{{section id="_options" temp="true"}}
 	{{section id="_params" temp="true"}}
 	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
+		{{#field id="codigo" label="Código" type="text" column="A" labelModalClass="full-width"}}
+			{{#editor case="upper" width="100%"}}
+			{{/editor}}
+			{{validator type="required"}}
+		{{/field}}
 		{{#field id="descripcion" label="Descripción" type="text" column="A" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
@@ -60,23 +65,23 @@
 			{{#editor type="select" preset="cfg.tipoArticulo" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="marca" label="Marca" type="text" column="A" references="marca" labelModalClass="full-width"}}
+		{{#field id="marca" label="Marca" type="text" if="esInventariable" column="A" references="marca" labelModalClass="full-width"}}
 			{{#editor type="select" preset="cfg.marca" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="estilo" label="Estilo" type="text" column="A" references="app.estilo" labelModalClass="full-width"}}
+		{{#field id="estilo" label="Estilo" type="text" if="esInventariable" column="A" references="app.estilo" labelModalClass="full-width"}}
 			{{#editor type="select" preset="app.estilo" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="talla" label="Talla" type="text" column="A" references="app.talla" labelModalClass="full-width"}}
-			{{#editor type="select" preset="app.talla" width="100%"}}
+		{{#field id="tamano" label="Tamaño" type="text" if="esInventariable" column="A" references="app.tamano" labelModalClass="full-width"}}
+			{{#editor type="select" preset="app.tamano" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="color" label="Color" type="text" column="A" references="app.color" labelModalClass="full-width"}}
+		{{#field id="color" label="Color/Sabor" type="text" if="esInventariable" column="A" references="app.color" labelModalClass="full-width"}}
 			{{#editor type="select" preset="app.color" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="temporada" label="Temporada" type="text" column="A" references="temporada" labelModalClass="full-width"}}
+		{{#field id="temporada" label="Temporada" type="text" if="esInventariable" column="A" references="temporada" labelModalClass="full-width"}}
 			{{#editor type="select" preset="cfg.temporada" width="100%"}}
 			{{/editor}}
 		{{/field}}
@@ -110,12 +115,13 @@
 		{{/stack}}
 		{{#stack}}
 			{{#record title="Artículo" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+				{{row field="codigo" align="left"}}
 				{{row field="descripcion" align="left"}}
-				{{row field="marca" align="left"}}
-				{{row field="estilo" align="left"}}
-				{{row field="talla" align="left"}}
-				{{row field="color" align="left"}}
-				{{row field="temporada" align="left"}}
+				{{row field="marca" condition="esInventariable" align="left"}}
+				{{row field="estilo" condition="esInventariable" align="left"}}
+				{{row field="tamano" condition="esInventariable" align="left"}}
+				{{row field="color" condition="esInventariable" align="left"}}
+				{{row field="temporada" condition="esInventariable" align="left"}}
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
@@ -174,7 +180,7 @@
 							Artículo
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="descripcion, marca, estilo, talla, color, temporada" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="codigo, descripcion, marca, estilo, tamano, color, temporada" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -196,10 +202,11 @@
 	{{#modal base id="base" name="Artículo" size="xlong"}}
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
+				{{field codigo}}
 				{{field descripcion}}
 				{{field marca}}
 				{{field estilo}}
-				{{field talla}}
+				{{field tamano}}
 				{{field color}}
 				{{field temporada}}
 				{{field comentarios}}
@@ -210,21 +217,23 @@
 		<div>{{_name}}</div>
 	{{/template}}
 	{{#template2 id="articulo"}}
+		<br>Código: {{codigo}}
 		<br>Descripción: {{descripcion}}
-		<br>Marca: {{_marca}}
-		<br>Estilo: {{_estilo}}
-		<br>Talla: {{_talla}}
-		<br>Color: {{_color}}
-		<br>Temporada: {{_temporada}}
+		{{#if esInventariable}}<br>Marca: {{_marca}}{{/if}}
+		{{#if esInventariable}}<br>Estilo: {{_estilo}}{{/if}}
+		{{#if esInventariable}}<br>Tamaño: {{_tamano}}{{/if}}
+		{{#if esInventariable}}<br>Color/Sabor: {{_color}}{{/if}}
+		{{#if esInventariable}}<br>Temporada: {{_temporada}}{{/if}}
 		<br>{{comentarios}}
 	{{/template2}}
 	{{#template3 id="articulo"}}
+		{{#if codigo}}<br>Código: {{codigo}}{{/if}}
 		{{#if descripcion}}<br>Descripción: {{descripcion}}{{/if}}
-		{{#if marca}}<br>Marca: {{_marca}}{{/if}}
-		{{#if estilo}}<br>Estilo: {{_estilo}}{{/if}}
-		{{#if talla}}<br>Talla: {{_talla}}{{/if}}
-		{{#if color}}<br>Color: {{_color}}{{/if}}
-		{{#if temporada}}<br>Temporada: {{_temporada}}{{/if}}
+		{{#if esInventariable}}{{#if marca}}<br>Marca: {{_marca}}{{/if}}{{/if}}
+		{{#if esInventariable}}{{#if estilo}}<br>Estilo: {{_estilo}}{{/if}}{{/if}}
+		{{#if esInventariable}}{{#if tamano}}<br>Tamaño: {{_tamano}}{{/if}}{{/if}}
+		{{#if esInventariable}}{{#if color}}<br>Color/Sabor: {{_color}}{{/if}}{{/if}}
+		{{#if esInventariable}}{{#if temporada}}<br>Temporada: {{_temporada}}{{/if}}{{/if}}
 		{{#if comentarios}}<br>{{comentarios}}{{/if}}
 	{{/template3}}
 {{/markup}}

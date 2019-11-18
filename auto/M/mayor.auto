@@ -1,4 +1,4 @@
-{{#define type="doc" id="ubicacion"}}
+{{#define type="doc" id="mayor"}}
 	{{param defaultDisplay="_name"}}
 	{{param defaultView="lista"}}
 	{{param pageStart="1"}}
@@ -17,7 +17,7 @@
 	{{param startOnOpen="base"}}
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="base.nombre"}}
-	{{param name="Ubicación"}}
+	{{param name="Mayor"}}
 	{{param group="Registro"}}
 	{{param fullWidth="true"}}
 	{{param modalSize="xlong"}}
@@ -47,20 +47,34 @@
 	{{section id="_options" temp="true"}}
 	{{section id="_params" temp="true"}}
 	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
+		{{#field id="cuenta" label="Cuenta" type="text" recordHide="true" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+			{{validator type="required"}}
+		{{/field}}
 		{{#field id="nombre" label="Nombre" type="text" column="A" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
+			{{validator type="required"}}
 		{{/field}}
-		{{#field id="grupo" label="Grupo" type="text" column="A" labelModalClass="full-width"}}
-			{{#editor width="100%"}}
+		{{#field id="numero" label="Número" type="text" column="A" labelModalClass="full-width"}}
+			{{#editor case="upper" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="direccion" label="Dirección" type="doc" column="A" references="direccion" labelModalClass="full-width" source="direccion"}}
-			{{#editor width="100%"}}
+		{{#field id="grupo" label="Grupo" type="text" column="A" references="grupoCuenta" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.grupoCuenta" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="contacto" label="Contactos" type="docs" column="A" references="contacto" labelModalClass="full-width" source="contacto"}}
-			{{#editor width="100%"}}
+		{{#field id="tipo" label="Tipo" type="text" column="A" references="tipoCuenta" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.tipoCuenta" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="subTipo" label="Subtipo" type="text" column="A" references="subTipoCuenta" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.subTipoCuenta" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="naturaleza" label="Naturaleza" type="text" column="A" references="naturalezaCuenta" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.naturalezaCuenta" width="100%"}}
 			{{/editor}}
 		{{/field}}
 	{{/section}}
@@ -88,11 +102,13 @@
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Ubicación" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+			{{#record title="Mayor" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
 				{{row field="nombre" align="left"}}
+				{{row field="numero" align="left"}}
 				{{row field="grupo" align="left"}}
-				{{row field="direccion" align="left"}}
-				{{row field="contacto" align="left"}}
+				{{row field="tipo" align="left"}}
+				{{row field="subTipo" align="left"}}
+				{{row field="naturaleza" align="left"}}
 			{{/record}}
 		{{/stack}}
 	{{/report}}
@@ -135,7 +151,7 @@
 	{{/workflow}}
 {{/define}}
 {{#markup}}
-	{{#page name="Ubicación"}}
+	{{#page name="Mayor"}}
 		{{row}}
 		{{row}}
 		{{#row}}
@@ -143,10 +159,10 @@
 				{{#row class="auto-form-row"}}
 					{{#col medium="100%" class="auto-form-col"}}
 						{{#h5 class="auto-form-h5"}}
-							Ubicación
+							Mayor
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="nombre, grupo, direccion, contacto" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="nombre, numero, grupo, tipo, subTipo, naturaleza" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -154,29 +170,36 @@
 			{{/zone}}
 		{{/row}}
 	{{/page}}
-	{{#modal base id="base" name="Ubicación" size="xlong"}}
+	{{#modal base id="base" name="Mayor" size="xlong"}}
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
+				{{field cuenta}}
 				{{field nombre}}
+				{{field numero}}
 				{{field grupo}}
-				{{field direccion}}
-				{{field contacto}}
+				{{field tipo}}
+				{{field subTipo}}
+				{{field naturaleza}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
 	{{#template id="lista"}}
 		<div>{{_name}}</div>
 	{{/template}}
-	{{#template2 id="ubicacion"}}
+	{{#template2 id="mayor"}}
 		<br>Nombre: {{nombre}}
-		<br>Grupo: {{grupo}}
-		<br>Dirección: {{_direccion}}
-		<br>Contactos: {{_contacto}}
+		<br>Número: {{numero}}
+		<br>Grupo: {{_grupo}}
+		<br>Tipo: {{_tipo}}
+		<br>Subtipo: {{_subTipo}}
+		<br>Naturaleza: {{_naturaleza}}
 	{{/template2}}
-	{{#template3 id="ubicacion"}}
+	{{#template3 id="mayor"}}
 		{{#if nombre}}<br>Nombre: {{nombre}}{{/if}}
-		{{#if grupo}}<br>Grupo: {{grupo}}{{/if}}
-		{{#if direccion}}<br>Dirección: {{_direccion}}{{/if}}
-		{{#if contacto}}<br>Contactos: {{_contacto}}{{/if}}
+		{{#if numero}}<br>Número: {{numero}}{{/if}}
+		{{#if grupo}}<br>Grupo: {{_grupo}}{{/if}}
+		{{#if tipo}}<br>Tipo: {{_tipo}}{{/if}}
+		{{#if subTipo}}<br>Subtipo: {{_subTipo}}{{/if}}
+		{{#if naturaleza}}<br>Naturaleza: {{_naturaleza}}{{/if}}
 	{{/template3}}
 {{/markup}}
