@@ -67,50 +67,50 @@
   {{/view}}
   {{#action id="ordenCompra" label="Orden Compra"}}
   {{/action}}
-  {{#action id="entradaCompra" source="notaCompra" subType="entradaCompra" subTypeName="Entrada Compra" label="Entrada Compra" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{#action id="entradaCompra" source="notaCompra" label="Entrada Compra" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
     {{param aliasDestino="='AG'"}}
   {{/action}}
-  {{#action id="devolucionCompra" source="notaDevolucionCompra" subType="devolucionCompra" subTypeName="Devolución Compra" label="Devolución Compra" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{#action id="devolucionCompra" source="notaDevolucionCompra" label="Devolución Compra" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
     {{param aliasDestino="='AG'"}}
   {{/action}}
-  {{#action id="gasto" source="notaGasto" subType="gasto" subTypeName="Gasto" label="Gasto" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{#action id="gasto" source="notaGasto" label="Gasto" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
     {{param aliasDestino="='AG'"}}
   {{/action}}
-  {{#action id="devolucionGasto" source="notaDevolucionGasto" subType="devolucionGasto" subTypeName="Devolución Gasto" label="Devolución Gasto" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{#action id="devolucionGasto" source="notaDevolucionGasto" label="Devolución Gasto" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
     {{param aliasDestino="='AG'"}}
   {{/action}}
-  {{#action id="neteoCxp" source="notaNeteoCxp" subType="neteoCxp" subTypeName="Neteo Cxp" label="Neteo" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true" fromSource="mov" fromView="sugerirNeteo" toSection="aplicacion"}}
+  {{#action id="neteoCxp" source="notaNeteoCxp" label="Neteo" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true" fromSource="mov" fromView="sugerirNeteo" toSection="aplicacion"}}
     {{param aux="='cxp'"}}
   {{/action}}
-  {{#action id="pago" source="notaPago" subType="pago" subTypeName="Pago" label="Pago" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true" fromSource="mov" fromView="sugerirLiquidacion" toSection="aplicacion"}}
+  {{#action id="pago" source="notaPago" label="Pago" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true" fromSource="mov" fromView="sugerirLiquidacion" toSection="aplicacion"}}
     {{param aux="='cxp'"}}
   {{/action}}
-  {{#action id="traspaso" source="notaTraspaso" subType="traspaso" subTypeName="Traspaso" label="Traspaso" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{#action id="traspaso" source="notaTraspaso" label="Traspaso" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
     {{param aliasOrigen="='AG'"}}
   {{/action}}
-  {{#action id="entradaDiversa" source="notaEntradaDiversa" subType="entradaDiversa" subTypeName="Entrada Diversa" label="Entrada Diversa" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{#action id="entradaDiversa" source="notaEntradaDiversa" label="Entrada Diversa" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
   {{/action}}
-  {{#action id="salidaDiversa" source="notaSalidaDiversa" subType="salidaDiversa" subTypeName="Salida Diversa" label="Salida Diversa" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{#action id="salidaDiversa" source="notaSalidaDiversa" label="Salida Diversa" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
   {{/action}}
-  {{#action id="pedido" source="notaTraspaso" subType="pedido" subTypeName="Pedido" label="Pedido" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{#action id="pedido" source="notaPedido" label="Pedido" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
     {{param aliasOrigen="='AG'"}}
   {{/action}}
   {{#action id="factura" source="notaVenta" subType="factura" subTypeName="Factura" label="Factura" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
   {{/action}}
-  {{#action id="devolucionVenta" source="notaDevolucionVenta" subType="devolucionVenta" subTypeName="Devolución Venta" label="Devolución Venta" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{#action id="devolucionVenta" source="notaDevolucionVenta" label="Devolución Venta" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
   {{/action}}
-  {{#action id="neteoCxc" source="notaNeteoCxc" subType="neteoCxc" subTypeName="Neteo Cxc" label="Neteo" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true" fromSource="mov" fromView="sugerirNeteo" toSection="aplicacion"}}
+  {{#action id="neteoCxc" source="notaNeteoCxc" label="Neteo" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true" fromSource="mov" fromView="sugerirNeteo" toSection="aplicacion"}}
     {{param aux="='cxc'"}}
   {{/action}}
-  {{#action id="cobro" source="notaCobro" subType="cobro" subTypeName="Cobro" label="Cobro" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true" fromSource="mov" fromView="sugerirLiquidacion" toSection="aplicacion"}}
+  {{#action id="cobro" source="notaCobro" label="Cobro" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true" fromSource="mov" fromView="sugerirLiquidacion" toSection="aplicacion"}}
     {{param aux="='cxc'"}}
     {{param persona="_id"}}
   {{/action}}
-  {{#action id="dispersion" source="notaDispersion" subType="dispersion" subTypeName="Dispersión" label="Dispersión" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{#action id="dispersion" source="notaDispersion" label="Dispersión" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
   {{/action}}
-  {{#action id="aportacionCapital" source="notaAportacionCapital" subType="aportacionCapital" subTypeName="Aportación Capital" label="Aportación Capital" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{#action id="aportacionCapital" source="notaAportacionCapital" label="Aportación Capital" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
   {{/action}}
-  {{#action id="retiroCapital" source="notaRetiroCapital" subType="retiroCapital" subTypeName="Retiro Capital" label="Retiro Capital" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{#action id="retiroCapital" source="notaRetiroCapital" label="Retiro Capital" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
   {{/action}}
 {{/define}}
 {{#markup}}
