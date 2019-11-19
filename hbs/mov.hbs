@@ -29,6 +29,22 @@
     {{sum field="importe" label="Importe" format="currency"}}
   {{/cube}}
 
+  {{#view id="tesoreria"}}
+    {{#pipeline}}
+      {{filter field="aux" eq="='tesoreria'"}}
+      {{filter condition="=id" field="='cuenta'" eq="=id"}}
+      {{group field="cuenta"}}
+      {{group field="_cuenta"}}
+      {{group field="codigo"}}
+      {{group field="importeFactor" type="sum" as="importe"}}
+      {{match field="importe" neq="=0"}}
+    {{/pipeline}}
+  {{/view}}
+  {{#cube id="tesoreria" name="Tesorería" view="tesoreria" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
+    {{row field="_cuenta" label="Cuenta" width="200"}}
+    {{sum field="importe" label="Importe" format="currency"}}
+  {{/cube}}
+
   {{#view id="cxc"}}
     {{#pipeline}}
       {{filter field="aux" eq="='cxc'"}}
@@ -88,8 +104,8 @@
       {{group field="cantidadFactor" type="sum" as="cantidad"}}
       {{match field="cantidad" neq="=0"}}
     {{/pipeline}}
-    {{calc field="etiqueta" type="expr" value="=codigo"}}
-    {{calc field="nombre" type="expr" value="=calc.concat(calc.format('number', cantidad, '#,'), @lote||@descripcion, @vencimiento&&calc.format('date', @vencimiento, 'DD/MMM/YYYY'))"}}
+    {{calc field="etiqueta" type="expr" value="=descripcion"}}
+    {{calc field="nombre" type="expr" value="=calc.concat(calc.format('number', cantidad, '#,'), @lote, @vencimiento&&calc.format('date', @vencimiento, 'DD/MMM/YYYY'))"}}
   {{/view}}
   {{#view id="resumenCaja"}}
     {{#pipeline}}
@@ -102,6 +118,15 @@
     {{calc field="etiqueta" type="expr" value="=descripcion"}}
     {{calc field="nombre" type="expr" value="=calc.format('number', saldo, 'currency')"}}
   {{/view}}
+  {{#view id="resumenSaldo"}}
+    {{#pipeline}}
+      {{filter condition="=id" field="='cuenta'" eq="=id"}}
+      {{group field="importeFactor" type="sum" as="saldo"}}
+      {{match field="saldo" neq="=0"}}
+    {{/pipeline}}
+    {{calc field="etiqueta" type="expr" value="='Saldo'"}}
+    {{calc field="nombre" type="expr" value="=calc.format('number', saldo, 'currency')"}}
+  {{/view}}
   {{#view id="resumenPorCobrar"}}
     {{#pipeline}}
       {{filter field="aux" eq="='cxc'"}}
@@ -112,7 +137,7 @@
       {{sort field="vencimiento" direction="asc"}}
       {{match field="saldo" neq="=0"}}
     {{/pipeline}}
-    {{calc field="etiqueta" value="=calc.concat(lote, calc.format('date', vencimiento, 'DD/MMM/YYYY'))"}}
+    {{calc field="etiqueta" value="=calc.concat(lote, '-', calc.format('date', vencimiento, 'DD/MMM/YYYY'))"}}
     {{calc field="nombre" type="expr" value="=calc.format('number', saldo, 'currency')"}}
   {{/view}}
   {{#view id="resumenPorPagar"}}
@@ -125,7 +150,30 @@
       {{sort field="vencimiento" direction="asc"}}
       {{match field="saldo" neq="=0"}}
     {{/pipeline}}
-    {{calc field="etiqueta" value="=calc.concat(lote, calc.format('date', vencimiento, 'DD/MMM/YYYY'))"}}
+    {{calc field="etiqueta" value="=calc.concat(lote, '-', calc.format('date', vencimiento, 'DD/MMM/YYYY'))"}}
     {{calc field="nombre" type="expr" value="=calc.format('number', saldo, 'currency')"}}
   {{/view}}
+  {{#view id="sugerirLiquidacion"}}
+    {{#pipeline}}
+      {{filter field="aux" eq="=aux"}}
+      {{filter condition="=id" field="='cuenta'" eq="=id"}}
+      {{group field="lote"}}
+      {{group field="vencimiento"}}
+      {{group field="importeFactor" type="sum" as="saldo"}}
+      {{sort field="vencimiento" direction="asc"}}
+      {{match field="saldo" gt="=0"}}
+    {{/pipeline}}
+  {{/view}}
+  {{#view id="sugerirNeteo"}}
+    {{#pipeline}}
+      {{filter field="aux" eq="=aux"}}
+      {{filter condition="=id" field="='cuenta'" eq="=id"}}
+      {{group field="lote"}}
+      {{group field="vencimiento"}}
+      {{group field="importeFactor" type="sum" as="saldo"}}
+      {{sort field="saldo" direction="asc"}}
+      {{match field="saldo" neq="=0"}}
+    {{/pipeline}}
+    {{!-- {{calc field="importe" value="=(saldo<0)?saldo:null"}} --}}
+  {{/view}}  
 {{/define}}

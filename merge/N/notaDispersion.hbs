@@ -6,30 +6,22 @@
   {{param startOnOpen="aplicacion"}}
 
   {{#section id="aplicacion"}}
-    {{#field id="aliasOrigen"}}
-      {{#onChange}}
-        {{set origen="=calc.getPresetPersona('app.aliasMonetaria', aliasOrigen, _doc.persona.id).monetaria"}}
-        {{set _origen="=calc.getPresetPersona('app.aliasMonetaria', aliasOrigen, _doc.persona.id)._monetaria"}}
-      {{/onChange}}
-    {{/field}}
     {{#field id="aliasDestino"}}
       {{#onChange}}
-        {{set destino="=calc.getPresetPersona('app.aliasMonetaria', aliasDestino, _doc.persona.id).monetaria"}}
-        {{set _destino="=calc.getPresetPersona('app.aliasMonetaria', aliasDestino, _doc.persona.id)._monetaria"}}
+        {{set destino="=calc.getPreset('app.aliasTesoreria', aliasDestino).tesoreria"}}
+        {{set _destino="=calc.getPreset('app.aliasTesoreria', aliasDestino)._tesoreria"}}
       {{/onChange}}
     {{/field}}
   {{/section}}
 
   {{#grid id="aplicacion" section="aplicacion" allowInsert="true" allowRemove="true"}}
-    {{column field="lote" label="Lote" width="250"}}
-    {{column field="vencimiento" label="Vencimiento" validateDate="true" width="110"}}
+    {{!-- {{column field="lote" label="Lote" width="250"}}
+    {{column field="vencimiento" label="Vencimiento" validateDate="true" width="110"}} --}}
     {{!-- {{column field="ivaFactor" label="Factor IVA" width="80"}} --}}
-    {{column field="aliasOrigen" label="Origen" width="60" defaultValue="=_params.aliasOrigen"}}
-    {{column field="_origen" label="Ubicación" width="150"}}
-    {{column field="aliasDestino" label="Destino" width="60" defaultValue="=_params.aliasDestino"}}
-    {{column field="_destino" label="Ubicación" width="150"}}
     {{column field="importe" label="Importe" width="150" type="numeric" format="#,.##"}}
     {{column field="formaPago" label="Forma Pago" width="150"}}
     {{column field="referenciaPago" label="Referencia Pago" width="250"}}
+    {{column field="aliasDestino" label="Destino" width="60" defaultValue="=_params.aliasDestino"}}
+    {{column field="_destino" label="Cuenta Destino" width="150" required="false"}}
   {{/grid}}
 {{/define}}

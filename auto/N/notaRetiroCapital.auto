@@ -1,4 +1,4 @@
-{{#define type="doc" id="notaAplicacionCxc"}}
+{{#define type="doc" id="notaRetiroCapital"}}
 	{{param defaultDisplay="_name"}}
 	{{param defaultView="lista"}}
 	{{param pageStart="1"}}
@@ -123,11 +123,6 @@
 		{{/field}}
 		{{field id="destino" label="Destino ID" type="text" readOnly="true" hide="true" column="A"}}
 		{{field id="_destino" label="Ubicación Destino" type="text" readOnly="true" column="A"}}
-		{{field id="loteDestino" label="Lote Destino" type="text" column="A"}}
-		{{#field id="vencimientoDestino" label="Vencimiento Destino" type="text" column="A"}}
-			{{#editor case="YYYY-MM-DD"}}
-			{{/editor}}
-		{{/field}}
 	{{/section}}
 	{{section id="resumen" temp="true"}}
 	{{#report id="preliminar-encabezado"}}
@@ -176,8 +171,6 @@
 				{{column field="referenciaPago"}}
 				{{column field="aliasDestino"}}
 				{{column field="_destino"}}
-				{{column field="loteDestino"}}
-				{{column field="vencimientoDestino"}}
 			{{/table}}
 		{{/stack}}
 		{{#stack}}
@@ -256,7 +249,7 @@
 	{{/workflow}}
 {{/define}}
 {{#markup}}
-	{{#page name="Aplicación - Cuentas por Cobrar"}}
+	{{#page name="Retiro Capital"}}
 		{{row}}
 		{{row}}
 		{{#row}}
@@ -282,7 +275,7 @@
 							Aplicación
 						{{/h5}}
 						{{#div}}
-							{{table aplicacion class="auto-form-table" cols="lote, vencimiento, ivaFactor, saldo, importe, formaPago, aliasOrigen, _origen, referenciaPago, aliasDestino, _destino, loteDestino, vencimientoDestino" removeEmptyCols="true" unlink="true"}}
+							{{table aplicacion class="auto-form-table" cols="lote, vencimiento, ivaFactor, saldo, importe, formaPago, aliasOrigen, _origen, referenciaPago, aliasDestino, _destino" removeEmptyCols="true" unlink="true"}}
 							{{br}}
 						{{/div}}
 					{{/col}}
@@ -308,13 +301,13 @@
 	{{#template id="lista"}}
 		<div>{{_name}}</div>
 	{{/template}}
-	{{#template2 id="notaAplicacionCxc"}}
+	{{#template2 id="notaRetiroCapital"}}
 		{{#if esEstudiante}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}
 		<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}
 		<br>Estatus: {{_estatus}}
 		<br>{{comentarios}}
 	{{/template2}}
-	{{#template3 id="notaAplicacionCxc"}}
+	{{#template3 id="notaRetiroCapital"}}
 		{{#if esEstudiante}}{{#if responsableAcademico}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}{{/if}}
 		{{#if fechaEmision}}<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}{{/if}}
 		{{#if estatus}}<br>Estatus: {{_estatus}}{{/if}}

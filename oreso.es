@@ -164,16 +164,6 @@
 {"name":"idioma","code":"fr","display":"Francés","order":10}
 {"index":{"_id":"idioma/fy"}}
 {"name":"idioma","code":"fy","display":"Frysian","order":11}
-{"index":{"_id":"marca/maidenform"}}
-{"name":"marca","code":"maidenform","display":"Maiden Form","order":1}
-{"index":{"_id":"marca/selfExpression"}}
-{"name":"marca","code":"selfExpression","display":"Self Expression","order":2}
-{"index":{"_id":"marca/piqueNique"}}
-{"name":"marca","code":"piqueNique","display":"Pique Nique","order":3}
-{"index":{"_id":"marca/thatsIt"}}
-{"name":"marca","code":"thatsIt","display":"That´s it","order":4}
-{"index":{"_id":"marca/icon"}}
-{"name":"marca","code":"icon","display":"Icon","order":5}
 {"index":{"_id":"medioComunicacion/telefono"}}
 {"name":"medioComunicacion","code":"telefono","display":"Teléfono","order":1}
 {"index":{"_id":"medioComunicacion/correo"}}
@@ -3458,44 +3448,18 @@
 {"name":"subTipoCuenta","code":"cortoPlazo","display":"Corto Plazo","order":1}
 {"index":{"_id":"subTipoCuenta/largoPlazo"}}
 {"name":"subTipoCuenta","code":"largoPlazo","display":"Largo Plazo","order":2}
+{"index":{"_id":"subTipoCuenta/capital"}}
+{"name":"subTipoCuenta","code":"capital","display":"Capital","order":3}
 {"index":{"_id":"subTipoCuenta/ventas"}}
-{"name":"subTipoCuenta","code":"ventas","display":"Ventas","order":3}
+{"name":"subTipoCuenta","code":"ventas","display":"Ventas","order":4}
 {"index":{"_id":"subTipoCuenta/comisiones"}}
-{"name":"subTipoCuenta","code":"comisiones","display":"Comisiones","order":4}
+{"name":"subTipoCuenta","code":"comisiones","display":"Comisiones","order":5}
 {"index":{"_id":"subTipoCuenta/operacion"}}
-{"name":"subTipoCuenta","code":"operacion","display":"Operación","order":5}
+{"name":"subTipoCuenta","code":"operacion","display":"Operación","order":6}
 {"index":{"_id":"subTipoCuenta/administracion"}}
-{"name":"subTipoCuenta","code":"administracion","display":"Administración","order":6}
+{"name":"subTipoCuenta","code":"administracion","display":"Administración","order":7}
 {"index":{"_id":"subTipoCuenta/produccion"}}
-{"name":"subTipoCuenta","code":"produccion","display":"Producción","order":7}
-{"index":{"_id":"temporada/B15"}}
-{"name":"temporada","code":"B15","display":"Back to School 2015","order":1}
-{"index":{"_id":"temporada/S15"}}
-{"name":"temporada","code":"S15","display":"Spring 2015","order":2}
-{"index":{"_id":"temporada/B16"}}
-{"name":"temporada","code":"B16","display":"Back to School 2016","order":3}
-{"index":{"_id":"temporada/S16"}}
-{"name":"temporada","code":"S16","display":"Spring 2015","order":4}
-{"index":{"_id":"temporada/B17"}}
-{"name":"temporada","code":"B17","display":"Back to School 2017","order":5}
-{"index":{"_id":"temporada/S17"}}
-{"name":"temporada","code":"S17","display":"Spring 2017","order":6}
-{"index":{"_id":"temporada/B18"}}
-{"name":"temporada","code":"B18","display":"Back to School 2018","order":7}
-{"index":{"_id":"temporada/S18"}}
-{"name":"temporada","code":"S18","display":"Spring 2018","order":8}
-{"index":{"_id":"temporada/B19"}}
-{"name":"temporada","code":"B19","display":"Back to School 2019","order":9}
-{"index":{"_id":"temporada/S19"}}
-{"name":"temporada","code":"S19","display":"Spring 2019","order":10}
-{"index":{"_id":"temporada/B20"}}
-{"name":"temporada","code":"B20","display":"Back to School 2020","order":11}
-{"index":{"_id":"temporada/S20"}}
-{"name":"temporada","code":"S20","display":"Spring 2020","order":12}
-{"index":{"_id":"temporada/B21"}}
-{"name":"temporada","code":"B21","display":"Back to School 2021","order":13}
-{"index":{"_id":"temporada/S21"}}
-{"name":"temporada","code":"S21","display":"Spring 2021","order":14}
+{"name":"subTipoCuenta","code":"produccion","display":"Producción","order":8}
 {"index":{"_id":"tipoAdjunto/foto"}}
 {"name":"tipoAdjunto","code":"foto","display":"Foto","order":1}
 {"index":{"_id":"tipoAdjunto/doc"}}

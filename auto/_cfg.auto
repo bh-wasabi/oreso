@@ -1,8 +1,10 @@
 {{#define type="_cfg" id="_cfg"}}
 	{{#config id="board"}}
-		{{item board="clientes" display="Clientes" order="1" service="clientes" serviceName="Clientes" color="primary" docPosition="0.75" type="persona" folder="persona" view="lista" params="tipo=cliente" template="verPersona" showActions="compra, devolucionCompra, gasto, devolucionGasto, pago, aplicacionCxp, traspaso, entradaDiversa, salidaDiversa, venta, devolucionVenta, cobro, aplicacionCxc, dispersion"}}
-		{{item board="ubicaciones" display="Ubicaciones" order="2" service="ubicaciones" serviceName="Ubicaciones" color="green" docPosition="0.75" type="persona" folder="persona" view="lista" params="tipo=ubicacion" template="verPersona" showActions="compra, devolucionCompra, gasto, devolucionGasto, pago, aplicacionCxp, traspaso, entradaDiversa, salidaDiversa, venta, devolucionVenta, cobro, aplicacionCxc, dispersion"}}
-		{{item board="proveedores" display="Proveedores" order="3" service="proveedores" serviceName="Proveedores" color="deep-purple" docPosition="0.75" type="persona" folder="persona" view="lista" params="tipo=proveedor" template="verPersona" showActions="compra, devolucionCompra, gasto, devolucionGasto, pago, aplicacionCxp, traspaso, entradaDiversa, salidaDiversa, venta, devolucionVenta, cobro, aplicacionCxc, dispersion"}}
+		{{item board="clientes" display="Clientes" order="1" service="clientes" serviceName="Clientes" color="primary" docPosition="0.75" type="persona" folder="persona" view="lista" params="tipo=cliente" template="verPersona" showActions="pedido, factura, devolucionVenta, cobro, neteoCxc"}}
+		{{item board="proveedores" display="Proveedores" order="2" service="proveedores" serviceName="Proveedores" color="primary" docPosition="0.75" type="persona" folder="persona" view="lista" params="tipo=proveedor" template="verPersona" showActions="ordenCompra, entradaCompra, devolucionCompra, gasto, devolucionGasto, pago, neteoCxp"}}
+		{{item board="tesoreria" display="Tesoreria" order="3" service="tesoreria" serviceName="Tesoreria" color="primary" beginGroup="true" docPosition="0.75" type="persona" folder="persona" view="lista" params="tipo=tesoreria" template="verPersona" showActions="dispersion"}}
+		{{item board="ubicaciones" display="Ubicaciones" order="4" service="ubicaciones" serviceName="Ubicaciones" color="primary" docPosition="0.75" type="persona" folder="persona" view="lista" params="tipo=ubicacion" template="verPersona" showActions="traspaso, entradaDiversa, salidaDiversa"}}
+		{{item board="socios" display="Socios" order="5" service="socios" serviceName="Socios" color="primary" beginGroup="true" docPosition="0.75" type="persona" folder="persona" view="lista" params="tipo=socio" template="verPersona" showActions="aportacionCapital, retiroCapital"}}
 	{{/config}}
 	{{#config id="widget"}}
 		{{item widget="datosGeneralesPersona" display="Datos Generales" order="1" heightRatio="2" widthRatio="3"}}
@@ -11,7 +13,7 @@
 		{{item widget="notasActivas" display="Notas Activas" order="5" heightRatio="4" widthRatio="3" source="nota" view="resumenActivos" id="_id"}}
 		{{item widget="porCobrar" display="Cuentas por Cobrar" order="6" heightRatio="4" widthRatio="3" source="mov" view="resumenPorCobrar" id="_id"}}
 		{{item widget="porPagar" display="Cuentas por Pagar" order="7" heightRatio="4" widthRatio="3" source="mov" view="resumenPorPagar" id="_id"}}
-		{{item widget="caja" display="Caja" order="8" heightRatio="4" widthRatio="3" source="mov" view="resumenCaja" id="_id"}}
+		{{item widget="saldo" display="Saldo" order="8" heightRatio="4" widthRatio="3" source="mov" view="resumenSaldo" id="_id"}}
 		{{item widget="inventario" display="Inventario Asignado" order="9" heightRatio="4" widthRatio="3" source="mov" view="resumenInventario" id="_id"}}
 		{{item widget="adjuntos" display="Adjuntos" order="10" editAction="notaAdjuntos" heightRatio="2" widthRatio="2"}}
 		{{item widget="documentacion" display="Documentación" order="11" heightRatio="2" widthRatio="2"}}
@@ -52,11 +54,12 @@
 	{{#config id="boardList"}}
 		{{item id="clientes" nombre="Clientes / Clientes"}}
 		{{item id="proveedores" nombre="Proveedores / Proveedores"}}
+		{{item id="socios" nombre="Socios / Socios"}}
+		{{item id="tesoreria" nombre="Tesoreria / Tesoreria"}}
 		{{item id="ubicaciones" nombre="Ubicaciones / Ubicaciones"}}
 	{{/config}}
 	{{#config id="actionList"}}
-		{{item id="notaAplicacionCxc" nombre="Aplicación - Cuentas por Cobrar"}}
-		{{item id="notaAplicacionCxp" nombre="Aplicación - Cuentas por Pagar"}}
+		{{item id="notaAportacionCapital" nombre="Aportación Capital"}}
 		{{item id="notaCobro" nombre="Cobro"}}
 		{{item id="notaCompra" nombre="Compra"}}
 		{{item id="notaDevolucionCompra" nombre="Devolución Compra"}}
@@ -65,7 +68,10 @@
 		{{item id="notaDispersion" nombre="Dispersión"}}
 		{{item id="notaEntradaDiversa" nombre="Entrada Diversa"}}
 		{{item id="notaGasto" nombre="Gasto"}}
+		{{item id="notaNeteoCxc" nombre="Neteo - Cuentas por Cobrar"}}
+		{{item id="notaNeteoCxp" nombre="Neteo - Cuentas por Pagar"}}
 		{{item id="notaPago" nombre="Pago"}}
+		{{item id="notaRetiroCapital" nombre="Retiro Capital"}}
 		{{item id="notaSalidaDiversa" nombre="Salida Diversa"}}
 		{{item id="notaTraspaso" nombre="Traspaso"}}
 		{{item id="notaVenta" nombre="Venta"}}
@@ -172,13 +178,6 @@
 		{{item id="fi" nombre="Finlandés"}}
 		{{item id="fr" nombre="Francés"}}
 		{{item id="fy" nombre="Frysian"}}
-	{{/config}}
-	{{#config id="marca"}}
-		{{item id="maidenform" nombre="Maiden Form"}}
-		{{item id="selfExpression" nombre="Self Expression"}}
-		{{item id="piqueNique" nombre="Pique Nique"}}
-		{{item id="thatsIt" nombre="That´s it"}}
-		{{item id="icon" nombre="Icon"}}
 	{{/config}}
 	{{#config id="medioComunicacion"}}
 		{{item id="telefono" nombre="Teléfono"}}
@@ -368,27 +367,12 @@
 	{{#config id="subTipoCuenta"}}
 		{{item id="cortoPlazo" nombre="Corto Plazo"}}
 		{{item id="largoPlazo" nombre="Largo Plazo"}}
+		{{item id="capital" nombre="Capital"}}
 		{{item id="ventas" nombre="Ventas"}}
 		{{item id="comisiones" nombre="Comisiones"}}
 		{{item id="operacion" nombre="Operación"}}
 		{{item id="administracion" nombre="Administración"}}
 		{{item id="produccion" nombre="Producción"}}
-	{{/config}}
-	{{#config id="temporada"}}
-		{{item id="B15" nombre="Back to School 2015"}}
-		{{item id="S15" nombre="Spring 2015"}}
-		{{item id="B16" nombre="Back to School 2016"}}
-		{{item id="S16" nombre="Spring 2015"}}
-		{{item id="B17" nombre="Back to School 2017"}}
-		{{item id="S17" nombre="Spring 2017"}}
-		{{item id="B18" nombre="Back to School 2018"}}
-		{{item id="S18" nombre="Spring 2018"}}
-		{{item id="B19" nombre="Back to School 2019"}}
-		{{item id="S19" nombre="Spring 2019"}}
-		{{item id="B20" nombre="Back to School 2020"}}
-		{{item id="S20" nombre="Spring 2020"}}
-		{{item id="B21" nombre="Back to School 2021"}}
-		{{item id="S21" nombre="Spring 2021"}}
 	{{/config}}
 	{{#config id="tipoAdjunto"}}
 		{{item id="foto" nombre="Foto"}}
@@ -459,9 +443,11 @@
 	{{/function}}
 	{{#function id="board" paramType="text" returnType="json"}}
 		{{define type="param" id="board"}}
-		{{when board="clientes" push="{\"board\":\"clientes\",\"display\":\"Clientes\",\"order\":1,\"service\":\"clientes\",\"serviceName\":\"Clientes\",\"color\":\"primary\",\"docPosition\":0.75,\"type\":\"persona\",\"folder\":\"persona\",\"view\":\"lista\",\"params\":\"tipo=cliente\",\"template\":\"verPersona\",\"showActions\":\"compra, devolucionCompra, gasto, devolucionGasto, pago, aplicacionCxp, traspaso, entradaDiversa, salidaDiversa, venta, devolucionVenta, cobro, aplicacionCxc, dispersion\"}"}}
-		{{when board="ubicaciones" push="{\"board\":\"ubicaciones\",\"display\":\"Ubicaciones\",\"order\":2,\"service\":\"ubicaciones\",\"serviceName\":\"Ubicaciones\",\"color\":\"green\",\"docPosition\":0.75,\"type\":\"persona\",\"folder\":\"persona\",\"view\":\"lista\",\"params\":\"tipo=ubicacion\",\"template\":\"verPersona\",\"showActions\":\"compra, devolucionCompra, gasto, devolucionGasto, pago, aplicacionCxp, traspaso, entradaDiversa, salidaDiversa, venta, devolucionVenta, cobro, aplicacionCxc, dispersion\"}"}}
-		{{when board="proveedores" push="{\"board\":\"proveedores\",\"display\":\"Proveedores\",\"order\":3,\"service\":\"proveedores\",\"serviceName\":\"Proveedores\",\"color\":\"deep-purple\",\"docPosition\":0.75,\"type\":\"persona\",\"folder\":\"persona\",\"view\":\"lista\",\"params\":\"tipo=proveedor\",\"template\":\"verPersona\",\"showActions\":\"compra, devolucionCompra, gasto, devolucionGasto, pago, aplicacionCxp, traspaso, entradaDiversa, salidaDiversa, venta, devolucionVenta, cobro, aplicacionCxc, dispersion\"}"}}
+		{{when board="clientes" push="{\"board\":\"clientes\",\"display\":\"Clientes\",\"order\":1,\"service\":\"clientes\",\"serviceName\":\"Clientes\",\"color\":\"primary\",\"docPosition\":0.75,\"type\":\"persona\",\"folder\":\"persona\",\"view\":\"lista\",\"params\":\"tipo=cliente\",\"template\":\"verPersona\",\"showActions\":\"pedido, factura, devolucionVenta, cobro, neteoCxc\"}"}}
+		{{when board="proveedores" push="{\"board\":\"proveedores\",\"display\":\"Proveedores\",\"order\":2,\"service\":\"proveedores\",\"serviceName\":\"Proveedores\",\"color\":\"primary\",\"docPosition\":0.75,\"type\":\"persona\",\"folder\":\"persona\",\"view\":\"lista\",\"params\":\"tipo=proveedor\",\"template\":\"verPersona\",\"showActions\":\"ordenCompra, entradaCompra, devolucionCompra, gasto, devolucionGasto, pago, neteoCxp\"}"}}
+		{{when board="tesoreria" push="{\"board\":\"tesoreria\",\"display\":\"Tesoreria\",\"order\":3,\"service\":\"tesoreria\",\"serviceName\":\"Tesoreria\",\"color\":\"primary\",\"beginGroup\":true,\"docPosition\":0.75,\"type\":\"persona\",\"folder\":\"persona\",\"view\":\"lista\",\"params\":\"tipo=tesoreria\",\"template\":\"verPersona\",\"showActions\":\"dispersion\"}"}}
+		{{when board="ubicaciones" push="{\"board\":\"ubicaciones\",\"display\":\"Ubicaciones\",\"order\":4,\"service\":\"ubicaciones\",\"serviceName\":\"Ubicaciones\",\"color\":\"primary\",\"docPosition\":0.75,\"type\":\"persona\",\"folder\":\"persona\",\"view\":\"lista\",\"params\":\"tipo=ubicacion\",\"template\":\"verPersona\",\"showActions\":\"traspaso, entradaDiversa, salidaDiversa\"}"}}
+		{{when board="socios" push="{\"board\":\"socios\",\"display\":\"Socios\",\"order\":5,\"service\":\"socios\",\"serviceName\":\"Socios\",\"color\":\"primary\",\"beginGroup\":true,\"docPosition\":0.75,\"type\":\"persona\",\"folder\":\"persona\",\"view\":\"lista\",\"params\":\"tipo=socio\",\"template\":\"verPersona\",\"showActions\":\"aportacionCapital, retiroCapital\"}"}}
 	{{/function}}
 	{{#function id="boardRole" paramType="text" returnType="json"}}
 		{{define type="param" id="board"}}
@@ -474,7 +460,7 @@
 		{{when widget="notasActivas" push="{\"widget\":\"notasActivas\",\"display\":\"Notas Activas\",\"order\":5,\"heightRatio\":4,\"widthRatio\":3,\"source\":\"nota\",\"view\":\"resumenActivos\",\"id\":\"_id\"}"}}
 		{{when widget="porCobrar" push="{\"widget\":\"porCobrar\",\"display\":\"Cuentas por Cobrar\",\"order\":6,\"heightRatio\":4,\"widthRatio\":3,\"source\":\"mov\",\"view\":\"resumenPorCobrar\",\"id\":\"_id\"}"}}
 		{{when widget="porPagar" push="{\"widget\":\"porPagar\",\"display\":\"Cuentas por Pagar\",\"order\":7,\"heightRatio\":4,\"widthRatio\":3,\"source\":\"mov\",\"view\":\"resumenPorPagar\",\"id\":\"_id\"}"}}
-		{{when widget="caja" push="{\"widget\":\"caja\",\"display\":\"Caja\",\"order\":8,\"heightRatio\":4,\"widthRatio\":3,\"source\":\"mov\",\"view\":\"resumenCaja\",\"id\":\"_id\"}"}}
+		{{when widget="saldo" push="{\"widget\":\"saldo\",\"display\":\"Saldo\",\"order\":8,\"heightRatio\":4,\"widthRatio\":3,\"source\":\"mov\",\"view\":\"resumenSaldo\",\"id\":\"_id\"}"}}
 		{{when widget="inventario" push="{\"widget\":\"inventario\",\"display\":\"Inventario Asignado\",\"order\":9,\"heightRatio\":4,\"widthRatio\":3,\"source\":\"mov\",\"view\":\"resumenInventario\",\"id\":\"_id\"}"}}
 		{{when widget="adjuntos" push="{\"widget\":\"adjuntos\",\"display\":\"Adjuntos\",\"order\":10,\"editAction\":\"notaAdjuntos\",\"heightRatio\":2,\"widthRatio\":2}"}}
 		{{when widget="documentacion" push="{\"widget\":\"documentacion\",\"display\":\"Documentación\",\"order\":11,\"heightRatio\":2,\"widthRatio\":2}"}}
@@ -538,27 +524,27 @@
 		{{define type="param" id="attribute1"}}
 		{{define type="param" id="attribute2"}}
 		{{define type="param" id="attribute3"}}
-		{{when document="notaAplicacionCxc" push="{\"document\":\"notaAplicacionCxc\",\"order\":1,\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"cxc\",\"amount\":\"=importe\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"debit\":\"clientes\"}"}}
-		{{when document="notaAplicacionCxc" push="{\"document\":\"notaAplicacionCxc\",\"order\":2,\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"cxc\",\"amount\":\"=importe\",\"lot\":\"=loteDestino\",\"expiration\":\"=vencimientoDestino\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"credit\":\"clientes\"}"}}
-		{{when document="notaAplicacionCxp" push="{\"document\":\"notaAplicacionCxp\",\"order\":1,\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"cxp\",\"amount\":\"=importe\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"credit\":\"proveedores\"}"}}
-		{{when document="notaAplicacionCxp" push="{\"document\":\"notaAplicacionCxp\",\"order\":2,\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"cxp\",\"amount\":\"=importe\",\"lot\":\"=loteDestino\",\"expiration\":\"=vencimientoDestino\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"proveedores\"}"}}
+		{{when document="notaAportacionCapital" push="{\"document\":\"notaAportacionCapital\",\"order\":1,\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"tesoreria\",\"amount\":\"=importe\",\"to\":\"=destino\",\"toName\":\"=_destino\",\"debit\":\"bancos\",\"credit\":\"capital\"}"}}
+		{{when document="notaRetiroCapital" push="{\"document\":\"notaRetiroCapital\",\"order\":1,\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"tesoreria\",\"amount\":\"=importe\",\"from\":\"=origen\",\"fromName\":\"=_origen\",\"debit\":\"capital\",\"credit\":\"bancos\"}"}}
 		{{when document="notaCobro" push="{\"document\":\"notaCobro\",\"order\":1,\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"cxc\",\"amount\":\"=importe\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"credit\":\"clientes\"}"}}
 		{{when document="notaCobro" push="{\"document\":\"notaCobro\",\"order\":2,\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"tesoreria\",\"amount\":\"=importe\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"to\":\"=destino\",\"toName\":\"=_destino\",\"debit\":\"bancos\"}"}}
 		{{when document="notaCompra" push="{\"document\":\"notaCompra\",\"order\":1,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"inv\",\"code\":\"=articulo\",\"description\":\"=_articulo\",\"quantity\":\"=cantidad\",\"amount\":\"=valorUnitario*cantidad\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"to\":\"=destino\",\"toName\":\"=_destino\",\"debit\":\"inventario\"}"}}
 		{{when document="notaCompra" push="{\"document\":\"notaCompra\",\"order\":2,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxp\",\"amount\":\"=importe\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"credit\":\"proveedores\"}"}}
 		{{when document="notaCompra" push="{\"document\":\"notaCompra\",\"order\":3,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxp\",\"amount\":\"=iva\",\"rate\":\"=tasaIva\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"debit\":\"ivaAFavor\",\"credit\":\"proveedores\"}"}}
 		{{when document="notaDevolucionCompra" push="{\"document\":\"notaDevolucionCompra\",\"order\":1,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"inv\",\"code\":\"=articulo\",\"description\":\"=_articulo\",\"quantity\":\"=cantidad\",\"amount\":\"=valorUnitario*cantidad\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"getCost\":true,\"from\":\"=destino\",\"fromName\":\"=_destino\",\"credit\":\"inventario\"}"}}
-		{{when document="notaDevolucionCompra" push="{\"document\":\"notaDevolucionCompra\",\"order\":2,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxp\",\"amount\":\"=importe\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"proveedores\"}"}}
-		{{when document="notaDevolucionCompra" push="{\"document\":\"notaDevolucionCompra\",\"order\":3,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxp\",\"amount\":\"=iva\",\"rate\":\"=tasaIva\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"proveedores\",\"credit\":\"ivaAFavor\"}"}}
+		{{when document="notaDevolucionCompra" push="{\"document\":\"notaDevolucionCompra\",\"order\":2,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxp\",\"amount\":\"=importe\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"getMissing\":true,\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"proveedores\"}"}}
+		{{when document="notaDevolucionCompra" push="{\"document\":\"notaDevolucionCompra\",\"order\":3,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxp\",\"amount\":\"=iva\",\"rate\":\"=tasaIva\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"getMissing\":true,\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"proveedores\",\"credit\":\"ivaAFavor\"}"}}
 		{{when document="notaDevolucionGasto" push="{\"document\":\"notaDevolucionGasto\",\"order\":1,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"gastos\",\"code\":\"=articulo\",\"description\":\"=_articulo\",\"quantity\":\"=cantidad\",\"amount\":\"=valorUnitario*cantidad\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"proveedores\",\"credit\":\"gastos\"}"}}
 		{{when document="notaDevolucionGasto" push="{\"document\":\"notaDevolucionGasto\",\"order\":2,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxp\",\"amount\":\"=iva\",\"rate\":\"=tasaIva\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"proveedores\",\"credit\":\"ivaAFavor\"}"}}
 		{{when document="notaDevolucionVenta" push="{\"document\":\"notaDevolucionVenta\",\"order\":1,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"inv\",\"code\":\"=articulo\",\"description\":\"=_articulo\",\"quantity\":\"=cantidad\",\"amount\":\"=costoUnitario*cantidad\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"to\":\"=origen\",\"toName\":\"=_origen\",\"debit\":\"inventario\",\"credit\":\"costoVentas\"}"}}
 		{{when document="notaDevolucionVenta" push="{\"document\":\"notaDevolucionVenta\",\"order\":2,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxc\",\"amount\":\"=importe\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"ventas\",\"credit\":\"clientes\"}"}}
 		{{when document="notaDevolucionVenta" push="{\"document\":\"notaDevolucionVenta\",\"order\":3,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxc\",\"amount\":\"=iva\",\"rate\":\"=tasaIva\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"ivaPorPagar\",\"credit\":\"clientes\"}"}}
-		{{when document="notaDispersion" push="{\"document\":\"notaDispersion\",\"order\":1,\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"tesoreria\",\"amount\":\"=importe\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"from\":\"=origen\",\"fromName\":\"=_origen\",\"to\":\"=destino\",\"toName\":\"=_destino\",\"debit\":\"bancos\",\"credit\":\"bancos\"}"}}
+		{{when document="notaDispersion" push="{\"document\":\"notaDispersion\",\"order\":1,\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"tesoreria\",\"amount\":\"=importe\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"to\":\"=destino\",\"toName\":\"=_destino\",\"debit\":\"bancos\",\"credit\":\"bancos\"}"}}
 		{{when document="notaEntradaDiversa" push="{\"document\":\"notaEntradaDiversa\",\"order\":1,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"inv\",\"code\":\"=articulo\",\"description\":\"=_articulo\",\"quantity\":\"=cantidad\",\"getCost\":true,\"to\":\"=origen\",\"toName\":\"=_origen\",\"debit\":\"inventario\",\"credit\":\"mermas\"}"}}
 		{{when document="notaGasto" push="{\"document\":\"notaGasto\",\"order\":1,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"gastos\",\"code\":\"=articulo\",\"description\":\"=_articulo\",\"quantity\":\"=cantidad\",\"amount\":\"=valorUnitario*cantidad\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"debit\":\"gastos\",\"credit\":\"proveedores\"}"}}
 		{{when document="notaGasto" push="{\"document\":\"notaGasto\",\"order\":2,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxp\",\"amount\":\"=iva\",\"rate\":\"=tasaIva\",\"lot\":\"=calc.concat(_created.subTypeName, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"debit\":\"ivaAFavor\",\"credit\":\"proveedores\"}"}}
+		{{when document="notaNeteoCxc" push="{\"document\":\"notaNeteoCxc\",\"order\":1,\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"cxc\",\"amount\":\"=importe\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"to\":\"=destino\",\"toName\":\"=_destino\",\"debit\":\"clientes\",\"credit\":\"clientes\"}"}}
+		{{when document="notaNeteoCxp" push="{\"document\":\"notaNeteoCxp\",\"order\":1,\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"cxp\",\"amount\":\"=importe\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"to\":\"=origen\",\"toName\":\"=_origen\",\"debit\":\"proveedores\",\"credit\":\"proveedores\"}"}}
 		{{when document="notaPago" push="{\"document\":\"notaPago\",\"order\":1,\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"cxp\",\"amount\":\"=importe\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"proveedores\"}"}}
 		{{when document="notaPago" push="{\"document\":\"notaPago\",\"order\":2,\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"tesoreria\",\"amount\":\"=importe\",\"lot\":\"=lote\",\"expiration\":\"=vencimiento\",\"from\":\"=origen\",\"fromName\":\"=_origen\",\"credit\":\"bancos\"}"}}
 		{{when document="notaSalidaDiversa" push="{\"document\":\"notaSalidaDiversa\",\"order\":1,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"inv\",\"code\":\"=articulo\",\"description\":\"=_articulo\",\"quantity\":\"=cantidad\",\"getCost\":true,\"from\":\"=origen\",\"fromName\":\"=_origen\",\"debit\":\"mermas\",\"credit\":\"inventario\"}"}}

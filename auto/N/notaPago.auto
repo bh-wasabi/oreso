@@ -123,11 +123,6 @@
 		{{/field}}
 		{{field id="destino" label="Destino ID" type="text" readOnly="true" hide="true" column="A"}}
 		{{field id="_destino" label="Ubicación Destino" type="text" readOnly="true" column="A"}}
-		{{field id="loteDestino" label="Lote Destino" type="text" column="A"}}
-		{{#field id="vencimientoDestino" label="Vencimiento Destino" type="text" column="A"}}
-			{{#editor case="YYYY-MM-DD"}}
-			{{/editor}}
-		{{/field}}
 	{{/section}}
 	{{section id="resumen" temp="true"}}
 	{{#report id="preliminar-encabezado"}}
@@ -176,8 +171,6 @@
 				{{column field="referenciaPago"}}
 				{{column field="aliasDestino"}}
 				{{column field="_destino"}}
-				{{column field="loteDestino"}}
-				{{column field="vencimientoDestino"}}
 			{{/table}}
 		{{/stack}}
 		{{#stack}}
@@ -282,7 +275,7 @@
 							Aplicación
 						{{/h5}}
 						{{#div}}
-							{{table aplicacion class="auto-form-table" cols="lote, vencimiento, ivaFactor, saldo, importe, formaPago, aliasOrigen, _origen, referenciaPago, aliasDestino, _destino, loteDestino, vencimientoDestino" removeEmptyCols="true" unlink="true"}}
+							{{table aplicacion class="auto-form-table" cols="lote, vencimiento, ivaFactor, saldo, importe, formaPago, aliasOrigen, _origen, referenciaPago, aliasDestino, _destino" removeEmptyCols="true" unlink="true"}}
 							{{br}}
 						{{/div}}
 					{{/col}}

@@ -65,7 +65,9 @@
       {{filter field="_parent.type" in="cliente,proveedor"}}
     {{/find}}
   {{/view}}
-  {{#action id="compra" source="notaCompra" subType="compra" subTypeName="Compra" label="Compra" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{#action id="ordenCompra" label="Orden Compra"}}
+  {{/action}}
+  {{#action id="entradaCompra" source="notaCompra" subType="entradaCompra" subTypeName="Entrada Compra" label="Entrada Compra" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
     {{param aliasDestino="='AG'"}}
   {{/action}}
   {{#action id="devolucionCompra" source="notaDevolucionCompra" subType="devolucionCompra" subTypeName="Devolución Compra" label="Devolución Compra" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
@@ -77,9 +79,11 @@
   {{#action id="devolucionGasto" source="notaDevolucionGasto" subType="devolucionGasto" subTypeName="Devolución Gasto" label="Devolución Gasto" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
     {{param aliasDestino="='AG'"}}
   {{/action}}
-  {{#action id="aplicacionCxp" source="notaAplicacion" subType="aplicacionCxp" subTypeName="Aplicación Cxp" label="Aplicación Cxp" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{#action id="neteoCxp" source="notaNeteoCxp" subType="neteoCxp" subTypeName="Neteo Cxp" label="Neteo" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true" fromSource="mov" fromView="sugerirNeteo" toSection="aplicacion"}}
+    {{param aux="='cxp'"}}
   {{/action}}
-  {{#action id="pago" source="notaPago" subType="pago" subTypeName="Pago" label="Pago" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true" fromSource="mov" fromView="resumenPorPagar" toSection="aplicacion"}}
+  {{#action id="pago" source="notaPago" subType="pago" subTypeName="Pago" label="Pago" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true" fromSource="mov" fromView="sugerirLiquidacion" toSection="aplicacion"}}
+    {{param aux="='cxp'"}}
   {{/action}}
   {{#action id="traspaso" source="notaTraspaso" subType="traspaso" subTypeName="Traspaso" label="Traspaso" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
     {{param aliasOrigen="='AG'"}}
@@ -88,16 +92,25 @@
   {{/action}}
   {{#action id="salidaDiversa" source="notaSalidaDiversa" subType="salidaDiversa" subTypeName="Salida Diversa" label="Salida Diversa" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
   {{/action}}
-  {{#action id="venta" source="notaVenta" subType="venta" subTypeName="Venta" label="Venta" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{#action id="pedido" source="notaTraspaso" subType="pedido" subTypeName="Pedido" label="Pedido" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+    {{param aliasOrigen="='AG'"}}
+  {{/action}}
+  {{#action id="factura" source="notaVenta" subType="factura" subTypeName="Factura" label="Factura" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
   {{/action}}
   {{#action id="devolucionVenta" source="notaDevolucionVenta" subType="devolucionVenta" subTypeName="Devolución Venta" label="Devolución Venta" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
   {{/action}}
-  {{#action id="aplicacionCxc" source="notaAplicacion" subType="aplicacionCxc" subTypeName="Aplicación Cxc" label="Aplicación Cxc" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{#action id="neteoCxc" source="notaNeteoCxc" subType="neteoCxc" subTypeName="Neteo Cxc" label="Neteo" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true" fromSource="mov" fromView="sugerirNeteo" toSection="aplicacion"}}
+    {{param aux="='cxc'"}}
   {{/action}}
-  {{#action id="cobro" source="notaCobro" subType="cobro" subTypeName="Cobro" label="Cobro" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true" fromSource="mov" fromView="resumenPorCobrar" toSection="aplicacion"}}
+  {{#action id="cobro" source="notaCobro" subType="cobro" subTypeName="Cobro" label="Cobro" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true" fromSource="mov" fromView="sugerirLiquidacion" toSection="aplicacion"}}
+    {{param aux="='cxc'"}}
     {{param persona="_id"}}
   {{/action}}
   {{#action id="dispersion" source="notaDispersion" subType="dispersion" subTypeName="Dispersión" label="Dispersión" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{/action}}
+  {{#action id="aportacionCapital" source="notaAportacionCapital" subType="aportacionCapital" subTypeName="Aportación Capital" label="Aportación Capital" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{/action}}
+  {{#action id="retiroCapital" source="notaRetiroCapital" subType="retiroCapital" subTypeName="Retiro Capital" label="Retiro Capital" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
   {{/action}}
 {{/define}}
 {{#markup}}

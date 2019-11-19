@@ -1,4 +1,4 @@
-{{#define type="doc" id="notaDispersion"}}
+{{#define type="doc" id="notaNeteoCxp"}}
 	{{param defaultDisplay="_name"}}
 	{{param defaultView="lista"}}
 	{{param pageStart="1"}}
@@ -249,7 +249,7 @@
 	{{/workflow}}
 {{/define}}
 {{#markup}}
-	{{#page name="Dispersión"}}
+	{{#page name="Neteo - Cuentas por Pagar"}}
 		{{row}}
 		{{row}}
 		{{#row}}
@@ -301,13 +301,13 @@
 	{{#template id="lista"}}
 		<div>{{_name}}</div>
 	{{/template}}
-	{{#template2 id="notaDispersion"}}
+	{{#template2 id="notaNeteoCxp"}}
 		{{#if esEstudiante}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}
 		<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}
 		<br>Estatus: {{_estatus}}
 		<br>{{comentarios}}
 	{{/template2}}
-	{{#template3 id="notaDispersion"}}
+	{{#template3 id="notaNeteoCxp"}}
 		{{#if esEstudiante}}{{#if responsableAcademico}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}{{/if}}
 		{{#if fechaEmision}}<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}{{/if}}
 		{{#if estatus}}<br>Estatus: {{_estatus}}{{/if}}

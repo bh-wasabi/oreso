@@ -51,10 +51,6 @@
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="tipoProveedor" label="Tipo Proveedor" type="text" column="A" references="tipoProveedor" labelModalClass="full-width"}}
-			{{#editor type="select" preset="cfg.tipoProveedor" width="100%"}}
-			{{/editor}}
-		{{/field}}
 		{{#field id="tipoPersona" label="Tipo Persona" type="text" column="A" references="tipoPersona" labelModalClass="full-width" defaultValue="'personaMoral'"}}
 			{{#editor type="select" preset="cfg.tipoPersona" width="100%"}}
 			{{/editor}}
@@ -126,7 +122,6 @@
 		{{#stack}}
 			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
 				{{row field="nombre" align="left"}}
-				{{row field="tipoProveedor" align="left"}}
 				{{row field="tipoPersona" align="left"}}
 				{{row field="personaFisica" condition="esPersonaFisica" align="left"}}
 				{{row field="formaContacto" align="left"}}
@@ -197,7 +192,7 @@
 							Datos Generales
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="nombre, tipoProveedor, tipoPersona, personaFisica, formaContacto, personaMoral, direccion, contacto" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="nombre, tipoPersona, personaFisica, formaContacto, personaMoral, direccion, contacto" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -226,7 +221,6 @@
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
 				{{field nombre}}
-				{{field tipoProveedor}}
 				{{field tipoPersona}}
 				{{field personaFisica}}
 				{{field formaContacto}}
@@ -242,7 +236,6 @@
 	{{/template}}
 	{{#template2 id="proveedor"}}
 		<br>Nombre: {{nombre}}
-		<br>Tipo Proveedor: {{_tipoProveedor}}
 		<br>Tipo Persona: {{_tipoPersona}}
 		{{#if esPersonaFisica}}<br>Persona Física: {{_personaFisica}}{{/if}}
 		<br>Forma Contacto: {{_formaContacto}}
@@ -252,7 +245,6 @@
 	{{/template2}}
 	{{#template3 id="proveedor"}}
 		{{#if nombre}}<br>Nombre: {{nombre}}{{/if}}
-		{{#if tipoProveedor}}<br>Tipo Proveedor: {{_tipoProveedor}}{{/if}}
 		{{#if tipoPersona}}<br>Tipo Persona: {{_tipoPersona}}{{/if}}
 		{{#if esPersonaFisica}}{{#if personaFisica}}<br>Persona Física: {{_personaFisica}}{{/if}}{{/if}}
 		{{#if formaContacto}}<br>Forma Contacto: {{_formaContacto}}{{/if}}

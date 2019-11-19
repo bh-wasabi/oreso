@@ -1,17 +1,15 @@
-{{#define id="notaAplicacionCxp"}}
+{{#define id="notaNeteoCxp"}}
   {{param attribute1="=_created.service"}}
   {{param attribute2="=_created.subType"}}
   {{param removeIfEmptySection="aplicacion"}}
   {{param removeIfEmptyField="importe"}}
   {{param startOnOpen="aplicacion"}}
 
-  {{#grid id="aplicacion" section="aplicacion" allowInsert="false" allowRemove="false" applyBaseColumn="saldo" applyTo="importe" applySuggest="saldo" applyValidate="true"}}
+  {{#grid id="aplicacion" section="aplicacion" allowInsert="false" allowRemove="false" applyBaseColumn="saldo" applyTo="importe" applySuggest="saldo" applyValidateNetZero="true"}}
     {{column field="lote" label="Referencia" width="200"}}
     {{column field="vencimiento" label="Vencimiento" validateDate="true" width="110"}}
     {{!-- {{column field="ivaFactor" label="Factor IVA" width="80"}} --}}
     {{column field="saldo" label="Saldo" width="150" type="numeric" format="#,.##" readOnly="true"}}
     {{column field="importe" label="Importe" width="150" type="numeric" format="#,.##"}}
-    {{column field="loteDestino" label="Referencia Destino" width="150"}}
-    {{column field="vencimientoDestino" label="Vencimiento Destino" validateDate="true" width="150"}}
   {{/grid}}
 {{/define}}

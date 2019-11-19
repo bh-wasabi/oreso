@@ -68,11 +68,6 @@
 		{{/field}}
 		{{field id="destino" label="Destino ID" type="text" readOnly="true" hide="true" column="A"}}
 		{{field id="_destino" label="Ubicación Destino" type="text" readOnly="true" column="A"}}
-		{{field id="loteDestino" label="Lote Destino" type="text" column="A"}}
-		{{#field id="vencimientoDestino" label="Vencimiento Destino" type="text" column="A"}}
-			{{#editor case="YYYY-MM-DD"}}
-			{{/editor}}
-		{{/field}}
 	{{/section}}
 	{{#report id="preliminar-encabezado"}}
 		{{#stack}}
@@ -110,8 +105,6 @@
 				{{row field="referenciaPago" align="left"}}
 				{{row field="aliasDestino" align="left"}}
 				{{row field="_destino" align="left"}}
-				{{row field="loteDestino" align="left"}}
-				{{row field="vencimientoDestino" align="left"}}
 			{{/record}}
 		{{/stack}}
 	{{/report}}
@@ -139,7 +132,7 @@
 							planAplicacion
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="lote, vencimiento, ivaFactor, saldo, importe, formaPago, aliasOrigen, _origen, referenciaPago, aliasDestino, _destino, loteDestino, vencimientoDestino" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="lote, vencimiento, ivaFactor, saldo, importe, formaPago, aliasOrigen, _origen, referenciaPago, aliasDestino, _destino" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -161,8 +154,6 @@
 				{{field referenciaPago}}
 				{{field aliasDestino}}
 				{{field _destino}}
-				{{field loteDestino}}
-				{{field vencimientoDestino}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
@@ -181,8 +172,6 @@
 		<br>Referencia Pago: {{referenciaPago}}
 		<br>Destino: {{aliasDestino}}
 		<br>Ubicación Destino: {{_destino}}
-		<br>Lote Destino: {{loteDestino}}
-		<br>Vencimiento Destino: {{vencimientoDestino}}
 	{{/template2}}
 	{{#template3 id="planAplicacion"}}
 		{{#if lote}}<br>Lote: {{lote}}{{/if}}
@@ -196,7 +185,5 @@
 		{{#if referenciaPago}}<br>Referencia Pago: {{referenciaPago}}{{/if}}
 		{{#if aliasDestino}}<br>Destino: {{aliasDestino}}{{/if}}
 		{{#if _destino}}<br>Ubicación Destino: {{_destino}}{{/if}}
-		{{#if loteDestino}}<br>Lote Destino: {{loteDestino}}{{/if}}
-		{{#if vencimientoDestino}}<br>Vencimiento Destino: {{vencimientoDestino}}{{/if}}
 	{{/template3}}
 {{/markup}}
