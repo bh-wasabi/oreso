@@ -18,6 +18,7 @@
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="base.nombre"}}
 	{{param name="Mayor"}}
+	{{param typeName="Mayor"}}
 	{{param group="Registro"}}
 	{{param fullWidth="true"}}
 	{{param modalSize="xlong"}}

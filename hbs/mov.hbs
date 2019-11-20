@@ -18,13 +18,37 @@
     {{calc field="_lote" value="=calc.concat(lote, calc.format('date', vencimiento, 'DD/MMM/YYYY'))"}}
   {{/view}}
   {{#cube id="inv" name="Inventario" view="inv" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
-    {{column field="ubicacion.persona.grupo" label="Grupo"}}
+    {{column field="ubicacion.persona._grupo" label="Grupo"}}
     {{column field="_cuenta" label="Ubicación"}}
     {{row field="articulo.base._marca" label="Marca" width="100"}}  
     {{row field="articulo.base._tamano" label="Tamaño" width="100"}}  
     {{row field="articulo.base._color" label="Color/Sabor" width="100"}}      
     {{row field="articulo._name" label="Descripción" width="100"}}  
     {{row field="_lote" label="Lote"}}
+    {{sum field="cantidad" label="Cantidad" format="#,"}}
+    {{sum field="importe" label="Importe" format="currency"}}
+  {{/cube}}
+  {{#view id="comprasPorRecibir"}}
+    {{#pipeline}}
+      {{filter field="aux" eq="='comprasPorRecibir'"}}
+      {{filter condition="=id" field="='cuenta'" eq="=id"}}
+      {{group field="persona.nombreCompleto" as="proveedor"}}
+      {{group field="cuenta"}}
+      {{group field="_cuenta"}}
+      {{group field="codigo"}}
+      {{group field="cantidadFactor" type="sum" as="cantidad"}}
+      {{group field="importeFactor" type="sum" as="importe"}}
+      {{match field="cantidad" neq="=0"}}
+    {{/pipeline}}
+    {{join source="articulo" as="articulo" view="lista" id="codigo"}}
+  {{/view}}
+  {{#cube id="comprasPorRecibir" name="Compras por Recibir" view="comprasPorRecibir" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
+    {{column field="proveedor" label="Proveedor"}}
+    {{column field="_cuenta" label="Ubicación"}}
+    {{row field="articulo.base._marca" label="Marca" width="100"}}  
+    {{row field="articulo.base._tamano" label="Tamaño" width="100"}}  
+    {{row field="articulo.base._color" label="Color/Sabor" width="100"}}      
+    {{row field="articulo._name" label="Descripción" width="100"}}  
     {{sum field="cantidad" label="Cantidad" format="#,"}}
     {{sum field="importe" label="Importe" format="currency"}}
   {{/cube}}

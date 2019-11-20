@@ -139,17 +139,9 @@
     {{calc field="nombre" type="expr" value="=_name"}}
   {{/view}}
 
-  {{#browser id="lista" view="lista" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%" color="green"}}
+  {{#browser id="lista" view="lista" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%"}}
     {{list itemTemplate="persona" allowSearch="true" allowRefresh="true"}}
   {{/browser}}  
-
-  {{#browser id="bitacora" view="bitacora" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%" color="indigo"}}
-    {{list itemTemplate="persona" allowSearch="true" allowRefresh="true"}}
-  {{/browser}}  
-  {{#browser id="servicio" view="servicio" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%" color="indigo"}}
-    {{list itemTemplate="persona" allowSearch="true" allowRefresh="true"}}
-  {{/browser}}  
-
 {{/define}}
 
 {{#markup}}  

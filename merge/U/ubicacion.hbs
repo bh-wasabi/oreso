@@ -2,18 +2,25 @@
   {{#view id="lista" name="Lista"}}
     {{#find}}
       {{include field="_name"}}
-      {{include field="base.grupo"}}
+      {{include field="base._grupo"}}
       {{search field="_name"}}
-      {{search field="base.grupo"}}
-      {{sort field="base.grupo" direction="asc"}}
+      {{search field="base._grupo"}}
+      {{sort field="base._grupo" direction="asc"}}
       {{sort field="_name" direction="asc"}}
     {{/find}}
     {{editor display="_name"}}
   {{/view}}
+
+  {{#section id="base"}}
+    {{#field id="persona" type="text" label="Sujeto"}}
+      {{editor type="lookup" source="persona" view="clientesProveedores" searchEnabled="true"}}
+    {{/field}}
+  {{/section}}
 {{/define}}
+
 {{#markup}}
   {{#template id="lista"}}
     <div>{{_name}}</div>
-    <span style="font-size:12px;">{{base.grupo}}</span>
+    <span style="font-size:12px;">{{base._grupo}}</span>
   {{/template}}
 {{/markup}}

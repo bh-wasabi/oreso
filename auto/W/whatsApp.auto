@@ -18,6 +18,7 @@
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="base.nombre"}}
 	{{param name="WhatsApp"}}
+	{{param typeName="WhatsApp"}}
 	{{param group="Registro"}}
 	{{param tplName="whatsApp"}}
 	{{param fullWidth="true"}}

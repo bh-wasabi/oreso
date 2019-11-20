@@ -1,4 +1,4 @@
-{{#define type="doc" id="notaVenta"}}
+{{#define type="doc" id="notaFactura"}}
 	{{param defaultDisplay="_name"}}
 	{{param defaultView="lista"}}
 	{{param pageStart="1"}}
@@ -17,7 +17,8 @@
 	{{param startOnOpen="base"}}
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="_name"}}
-	{{param name="=fn('dynamicName', @_created)"}}
+	{{param name="=fn('dynamicName', 'Factura', @_created)"}}
+	{{param typeName="Factura"}}
 	{{param group="General"}}
 	{{param fullWidth="true"}}
 	{{param modalSize="xwide"}}
@@ -99,7 +100,7 @@
 			{{#editor type="text-area" height="300" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{field id="nombre" label="Nombre" hide="true" type="expr" value="=fn('dynamicName', @_created)"}}
+		{{field id="nombre" label="Nombre" hide="true" type="expr" value="=fn('dynamicName', 'Factura', @_created)"}}
 	{{/section}}
 	{{#section id="articulos" type="array"}}
 		{{#field id="aliasArticulo" label="Artículo" type="text" column="A"}}
@@ -292,7 +293,7 @@
 	{{/workflow}}
 {{/define}}
 {{#markup}}
-	{{#page name="Venta"}}
+	{{#page name="Factura"}}
 		{{row}}
 		{{row}}
 		{{#row}}
@@ -370,7 +371,7 @@
 	{{#template id="lista"}}
 		<div>{{_name}}</div>
 	{{/template}}
-	{{#template2 id="notaVenta"}}
+	{{#template2 id="notaFactura"}}
 		{{#if esEstudiante}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}
 		<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}
 		<br>Días Crédito: {{diasCredito}}
@@ -378,7 +379,7 @@
 		<br>Estatus: {{_estatus}}
 		<br>{{comentarios}}
 	{{/template2}}
-	{{#template3 id="notaVenta"}}
+	{{#template3 id="notaFactura"}}
 		{{#if esEstudiante}}{{#if responsableAcademico}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}{{/if}}
 		{{#if fechaEmision}}<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}{{/if}}
 		{{#if diasCredito}}<br>Días Crédito: {{diasCredito}}{{/if}}

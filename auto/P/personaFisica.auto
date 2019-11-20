@@ -18,6 +18,7 @@
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="base.nombre"}}
 	{{param name="Persona Física"}}
+	{{param typeName="Persona Física"}}
 	{{param group="Registro"}}
 	{{param tplName="personaFisica"}}
 	{{param fullWidth="true"}}

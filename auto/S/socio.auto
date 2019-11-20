@@ -18,6 +18,7 @@
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="base.nombre"}}
 	{{param name="Socio"}}
+	{{param typeName="Socio"}}
 	{{param group="Registro"}}
 	{{param fullWidth="true"}}
 	{{param modalSize="xlong"}}

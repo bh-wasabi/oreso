@@ -65,9 +65,19 @@
       {{filter field="_parent.type" in="cliente,proveedor"}}
     {{/find}}
   {{/view}}
-  {{#action id="ordenCompra" label="Orden Compra"}}
+  {{!-- {{#view id="clientesProveedoresEmpresas"}}
+    {{#find}}
+      {{sort field="_name" direction="asc"}}
+      {{search field="persona.nombreCompleto"}}
+      {{search field="persona.clave"}}
+      {{filter field="_hide" neq="=true"}}
+      {{filter field="_parent.type" in="='cliente,proveedor,empresa'"}}
+    {{/find}}
+  {{/view}} --}}
+  {{#action id="ordenCompra" source="notaOrdenCompra" label="Orden Compra" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+    {{param aliasDestino="='AG'"}}
   {{/action}}
-  {{#action id="entradaCompra" source="notaCompra" label="Entrada Compra" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{#action id="entradaCompra" source="notaEntradaCompra" label="Entrada Compra" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
     {{param aliasDestino="='AG'"}}
   {{/action}}
   {{#action id="devolucionCompra" source="notaDevolucionCompra" label="Devolución Compra" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
@@ -92,12 +102,14 @@
   {{/action}}
   {{#action id="salidaDiversa" source="notaSalidaDiversa" label="Salida Diversa" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
   {{/action}}
-  {{#action id="pedido" source="notaPedido" label="Pedido" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{#action id="pedido" source="notaTraspaso" subType="pedido" subTypeName="Pedido" label="Pedido" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
     {{param aliasOrigen="='AG'"}}
   {{/action}}
-  {{#action id="factura" source="notaFactura" subType="factura" subTypeName="Factura" label="Factura" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{#action id="factura" source="notaFactura" label="Factura" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+    {{param aliasOrigen="='AG'"}}
   {{/action}}
   {{#action id="devolucionVenta" source="notaDevolucionVenta" label="Devolución Venta" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+    {{param aliasOrigen="='AG'"}}
   {{/action}}
   {{#action id="neteoCxc" source="notaNeteoCxc" label="Neteo" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true" fromSource="mov" fromView="sugerirNeteo" toSection="aplicacion"}}
     {{param aux="='cxc'"}}

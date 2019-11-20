@@ -18,6 +18,7 @@
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="base.nombre"}}
 	{{param name="Persona Moral"}}
+	{{param typeName="Persona Moral"}}
 	{{param group="Registro"}}
 	{{param tplName="personaMoral"}}
 	{{param fullWidth="true"}}

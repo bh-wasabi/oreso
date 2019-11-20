@@ -17,7 +17,8 @@
 	{{param startOnOpen="base"}}
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="_name"}}
-	{{param name="=fn('dynamicName', @_created)"}}
+	{{param name="=fn('dynamicName', 'Devolución Venta', @_created)"}}
+	{{param typeName="Devolución Venta"}}
 	{{param group="General"}}
 	{{param fullWidth="true"}}
 	{{param modalSize="xwide"}}
@@ -99,7 +100,7 @@
 			{{#editor type="text-area" height="300" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{field id="nombre" label="Nombre" hide="true" type="expr" value="=fn('dynamicName', @_created)"}}
+		{{field id="nombre" label="Nombre" hide="true" type="expr" value="=fn('dynamicName', 'Devolución Venta', @_created)"}}
 	{{/section}}
 	{{#section id="articulos" type="array"}}
 		{{#field id="aliasArticulo" label="Artículo" type="text" column="A"}}

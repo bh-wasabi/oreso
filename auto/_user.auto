@@ -18,6 +18,7 @@
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="base.nombre"}}
 	{{param name="Usuario"}}
+	{{param typeName="Usuario"}}
 	{{param group="Registro"}}
 	{{param fullWidth="true"}}
 	{{param modalSize="xwide"}}

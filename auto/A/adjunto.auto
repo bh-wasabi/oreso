@@ -18,6 +18,7 @@
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="base.nombre"}}
 	{{param name="adjunto"}}
+	{{param typeName="adjunto"}}
 	{{action id="subdoc" condition="=false"}}
 	{{action id="subdoc2" condition="=false"}}
 	{{action id="subdoc3" condition="=false"}}

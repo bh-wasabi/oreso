@@ -18,6 +18,7 @@
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="base.nombre"}}
 	{{param name="Ubicación"}}
+	{{param typeName="Ubicación"}}
 	{{param group="Registro"}}
 	{{param fullWidth="true"}}
 	{{param modalSize="xlong"}}
@@ -51,8 +52,8 @@
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="grupo" label="Grupo" type="text" column="A" labelModalClass="full-width"}}
-			{{#editor width="100%"}}
+		{{#field id="grupo" label="Grupo" type="text" column="A" references="app.grupoUbicacion" labelModalClass="full-width"}}
+			{{#editor type="select" preset="app.grupoUbicacion" width="100%"}}
 			{{/editor}}
 		{{/field}}
 		{{#field id="direccion" label="Dirección" type="doc" column="A" references="direccion" labelModalClass="full-width" source="direccion"}}
@@ -169,13 +170,13 @@
 	{{/template}}
 	{{#template2 id="ubicacion"}}
 		<br>Nombre: {{nombre}}
-		<br>Grupo: {{grupo}}
+		<br>Grupo: {{_grupo}}
 		<br>Dirección: {{_direccion}}
 		<br>Contactos: {{_contacto}}
 	{{/template2}}
 	{{#template3 id="ubicacion"}}
 		{{#if nombre}}<br>Nombre: {{nombre}}{{/if}}
-		{{#if grupo}}<br>Grupo: {{grupo}}{{/if}}
+		{{#if grupo}}<br>Grupo: {{_grupo}}{{/if}}
 		{{#if direccion}}<br>Dirección: {{_direccion}}{{/if}}
 		{{#if contacto}}<br>Contactos: {{_contacto}}{{/if}}
 	{{/template3}}

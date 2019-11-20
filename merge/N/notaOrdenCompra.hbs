@@ -1,4 +1,4 @@
-{{#define id="notaDevolucionCompra"}}
+{{#define id="notaOrdenCompra"}}
   {{param attribute1="=_created.service"}}
   {{param attribute2="=_created.subType"}}
   {{param removeIfEmptySection="articulos"}}
@@ -35,11 +35,9 @@
     {{column field="aliasArticulo" label="Artículo" width="200"}}
     {{column field="_articulo" label="Descripción" width="400"}}
     {{column field="aliasDestino" label="Destino" width="60" defaultValue="=_params.aliasDestino"}}
-    {{column field="_destino" label="Ubicación" width="150" required="false"}}
+    {{column field="_destino" label="Ubicación" width="150"}}
     {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
     {{column field="valorUnitario" label="Costo Unitario" width="110" type="numeric" format="#,.##"}}
     {{column field="tasaIva" label="% IVA" width="50" type="numeric" format="#.##" defaultValue="16"}}
-    {{!-- {{column field="lote" label="Lote" width="100"}}
-    {{column field="vencimiento" label="Vencimiento" validateDate="true" width="100"}} --}}
   {{/grid}}
 {{/define}}

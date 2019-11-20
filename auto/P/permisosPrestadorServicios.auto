@@ -18,6 +18,7 @@
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="base.nombre"}}
 	{{param name="Permisos"}}
+	{{param typeName="Permisos"}}
 	{{param group="Registro"}}
 	{{param lastChange="43605"}}
 	{{param tplName="permisosPrestadorServicios"}}

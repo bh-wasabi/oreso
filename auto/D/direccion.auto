@@ -18,6 +18,7 @@
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="base.nombre"}}
 	{{param name="Dirección"}}
+	{{param typeName="Dirección"}}
 	{{param group="Registro"}}
 	{{param tplName="direccion"}}
 	{{param fullWidth="true"}}

@@ -1,7 +1,8 @@
 {{#define id="_cfg" type="cfg" name="Configuración Interna"}} 
   {{#function id="dynamicName"}}
+    {{define type="param" id="name"}}
     {{define type="param" id="created"}}
-    {{default return="=calc.concat(@created.subTypeName, @created.folio)"}}
+    {{default return="=calc.concat(@created.name||@name, @created.folio)"}}
   {{/function}}
   {{#function id="folioName"}}
     {{define type="param" id="name"}}

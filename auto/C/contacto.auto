@@ -18,6 +18,7 @@
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="base.nombre"}}
 	{{param name="Contacto"}}
+	{{param typeName="Contacto"}}
 	{{param group="Registro"}}
 	{{param tplName="contacto"}}
 	{{param fullWidth="true"}}

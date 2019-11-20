@@ -1,4 +1,4 @@
-{{#define type="doc" id="notaNeteoCxp"}}
+{{#define type="doc" id="notaOrdenCompra"}}
 	{{param defaultDisplay="_name"}}
 	{{param defaultView="lista"}}
 	{{param pageStart="1"}}
@@ -17,8 +17,8 @@
 	{{param startOnOpen="base"}}
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="_name"}}
-	{{param name="=fn('dynamicName', 'Neteo - Cuentas por Pagar', @_created)"}}
-	{{param typeName="Neteo - Cuentas por Pagar"}}
+	{{param name="=fn('dynamicName', 'Orden Compra', @_created)"}}
+	{{param typeName="Orden Compra"}}
 	{{param group="General"}}
 	{{param fullWidth="true"}}
 	{{param modalSize="xwide"}}
@@ -37,7 +37,6 @@
 	{{param autoStamp="true"}}
 	{{param allowDraft="true"}}
 	{{param isAction="true"}}
-	{{param disableCashier="true"}}
 	{{action id="fix-user" type="add-subdoc" transform="copiarNota" source="notaAjusteUsuario" label="Ajustar Usuario" btnFlat="true" color="grey" superUser="true" visibleMode="close" onlyPost="true"}}
 	{{action id="subdoc" condition="=false"}}
 	{{action id="subdoc2" condition="=false"}}
@@ -81,7 +80,15 @@
 			{{#editor type="lookup" source="persona" view="responsablesAcademicos" searchEnabled="true" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="fechaEmision" label="Fecha Emisión" type="date" format="DD/MMM/YYYY" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD" generator="now"}}
+		{{#field id="fechaEmision" label="Fecha Emisión" type="date" format="DD/MMM/YYYY" readOnly="true" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD" generator="now"}}
+			{{#editor type="date" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="diasCredito" label="Días Crédito" type="number" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="vencimiento" label="Vencimiento" type="date" format="DD/MMM/YYYY" readOnly="true" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD" generator="now"}}
 			{{#editor type="date" width="100%"}}
 			{{/editor}}
 		{{/field}}
@@ -93,37 +100,54 @@
 			{{#editor type="text-area" height="300" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{field id="nombre" label="Nombre" hide="true" type="expr" value="=fn('dynamicName', 'Neteo - Cuentas por Pagar', @_created)"}}
+		{{field id="nombre" label="Nombre" hide="true" type="expr" value="=fn('dynamicName', 'Orden Compra', @_created)"}}
 	{{/section}}
-	{{#section id="aplicacion" type="array"}}
-		{{field id="lote" label="Lote" type="text" column="A"}}
-		{{#field id="vencimiento" label="Vencimiento" type="text" column="A"}}
-			{{#editor case="YYYY-MM-DD"}}
+	{{#section id="articulos" type="array"}}
+		{{#field id="aliasArticulo" label="Artículo" type="text" column="A"}}
+			{{#editor case="upper"}}
 			{{/editor}}
 		{{/field}}
-		{{field id="ivaFactor" label="Factor IVA" type="number" column="A"}}
-		{{field id="saldo" label="Saldo" type="number" format="currency" readOnly="true" column="A"}}
-		{{field id="importe" label="Importe" type="number" format="currency" column="A"}}
-		{{#field id="formaPago" label="Forma Pago" type="text" column="A" references="formaPago"}}
-			{{#editor type="select" preset="cfg.formaPago"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="aliasOrigen" label="Destino" type="text" column="A"}}
+		{{field id="articulo" label="Artículo ID" type="text" readOnly="true" hide="true" column="A"}}
+		{{field id="_articulo" label="Descripción Artículo" type="text" readOnly="true" column="A"}}
+		{{#field id="aliasOrigen" label="Origen" type="text" column="A"}}
 			{{#editor case="upper"}}
 			{{/editor}}
 		{{/field}}
 		{{field id="origen" label="Origen ID" type="text" readOnly="true" hide="true" column="A"}}
 		{{field id="_origen" label="Ubicación Origen" type="text" readOnly="true" column="A"}}
-		{{#field id="referenciaPago" label="Referencia Pago" type="text" column="A"}}
-			{{#editor case="upper"}}
-			{{/editor}}
-		{{/field}}
 		{{#field id="aliasDestino" label="Destino" type="text" column="A"}}
 			{{#editor case="upper"}}
 			{{/editor}}
 		{{/field}}
 		{{field id="destino" label="Destino ID" type="text" readOnly="true" hide="true" column="A"}}
 		{{field id="_destino" label="Ubicación Destino" type="text" readOnly="true" column="A"}}
+		{{field id="cantidad" label="Cantidad" type="number" format="#,.##" column="A"}}
+		{{field id="costoUnitario" label="Costo Unitario" type="number" format="currency" column="A"}}
+		{{field id="valorUnitario" label="Valor Unitario" type="number" format="currency" column="A"}}
+		{{field id="tasaIva" label="% IVA" type="number" format="#.##" column="A"}}
+		{{field id="importe" label="Importe" type="calc" format="currency" column="A"}}
+		{{field id="iva" label="IVA" type="calc" format="currency" column="A"}}
+		{{field id="total" label="Total" type="calc" format="currency" column="A"}}
+		{{#field id="lote" label="Lote" type="text" column="A"}}
+			{{#editor case="upper"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="vencimiento" label="Vencimiento" type="text" column="A"}}
+			{{#editor case="YYYY-MM-DD"}}
+			{{/editor}}
+		{{/field}}
+	{{/section}}
+	{{#section id="inv" type="array"}}
+		{{field id="descripcion" label="Artículo" type="text" column="A"}}
+		{{field id="_cuenta" label="Ubicación" type="text" column="A"}}
+		{{field id="salida" label="Salida" type="number" format="#," column="A"}}
+		{{field id="entrada" label="Entrada" type="number" format="#," column="A"}}
+		{{field id="costoUnitario" label="Costo Unitario" type="number" format="currency" column="A"}}
+		{{field id="lote" label="Lote" type="text" column="A"}}
+		{{#field id="vencimiento" label="Vencimiento" type="date" format="DD/MMM/YYYY" column="A" saveFormat="YYYY-MM-DD"}}
+			{{#editor type="date"}}
+			{{/editor}}
+		{{/field}}
 	{{/section}}
 	{{section id="resumen" temp="true"}}
 	{{#report id="preliminar-encabezado"}}
@@ -153,25 +177,44 @@
 			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
 				{{row field="responsableAcademico" condition="esEstudiante" align="left"}}
 				{{row field="fechaEmision" align="left"}}
+				{{row field="diasCredito" align="left"}}
+				{{row field="vencimiento" align="left"}}
 				{{row field="estatus" align="left"}}
 				{{row field="comentarios" align="left"}}
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
-			{{#row text="Aplicación" fontSize="10" bold="true"}}
+			{{#row text="Artículos" fontSize="10" bold="true"}}
 			{{/row}}
-			{{#table title="Aplicación" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="aplicacion" headerStyle="field" margin="0,5,10,10" removeEmptyCols="true"}}
-				{{column field="lote"}}
-				{{column field="vencimiento"}}
-				{{column field="ivaFactor"}}
-				{{column field="saldo"}}
-				{{column field="importe"}}
-				{{column field="formaPago"}}
+			{{#table title="Artículos" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="articulos" headerStyle="field" margin="0,5,10,10" removeEmptyCols="true"}}
+				{{column field="aliasArticulo"}}
+				{{column field="_articulo"}}
 				{{column field="aliasOrigen"}}
 				{{column field="_origen"}}
-				{{column field="referenciaPago"}}
 				{{column field="aliasDestino"}}
 				{{column field="_destino"}}
+				{{column field="cantidad"}}
+				{{column field="costoUnitario"}}
+				{{column field="valorUnitario"}}
+				{{column field="tasaIva"}}
+				{{column field="importe"}}
+				{{column field="iva"}}
+				{{column field="total"}}
+				{{column field="lote"}}
+				{{column field="vencimiento"}}
+			{{/table}}
+		{{/stack}}
+		{{#stack condition="=inv"}}
+			{{#row text="Movimiento del Inventario" fontSize="10" bold="true"}}
+			{{/row}}
+			{{#table title="Movimiento del Inventario" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="inv" headerStyle="field" margin="0,5,10,10" removeEmptyCols="true"}}
+				{{column field="descripcion"}}
+				{{column field="_cuenta"}}
+				{{column field="salida"}}
+				{{column field="entrada"}}
+				{{column field="costoUnitario"}}
+				{{column field="lote"}}
+				{{column field="vencimiento"}}
 			{{/table}}
 		{{/stack}}
 		{{#stack}}
@@ -250,7 +293,7 @@
 	{{/workflow}}
 {{/define}}
 {{#markup}}
-	{{#page name="Neteo - Cuentas por Pagar"}}
+	{{#page name="Orden Compra"}}
 		{{row}}
 		{{row}}
 		{{#row}}
@@ -261,7 +304,7 @@
 							Datos Generales
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="responsableAcademico, fechaEmision, estatus, comentarios" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="responsableAcademico, fechaEmision, diasCredito, vencimiento, estatus, comentarios" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -269,14 +312,14 @@
 			{{/zone}}
 		{{/row}}
 		{{#row}}
-			{{#zone id="aplicacion" modalGrid="aplicacion"}}
+			{{#zone id="articulos" modalGrid="articulos"}}
 				{{#row class="auto-form-row"}}
 					{{#col medium="100%" class="auto-form-col"}}
 						{{#h5 class="auto-form-h5"}}
-							Aplicación
+							Artículos
 						{{/h5}}
 						{{#div}}
-							{{table aplicacion class="auto-form-table" cols="lote, vencimiento, ivaFactor, saldo, importe, formaPago, aliasOrigen, _origen, referenciaPago, aliasDestino, _destino" removeEmptyCols="true" unlink="true"}}
+							{{table articulos class="auto-form-table" cols="aliasArticulo, _articulo, aliasOrigen, _origen, aliasDestino, _destino, cantidad, costoUnitario, valorUnitario, tasaIva, importe, iva, total, lote, vencimiento" removeEmptyCols="true" unlink="true"}}
 							{{br}}
 						{{/div}}
 					{{/col}}
@@ -284,33 +327,63 @@
 			{{/zone}}
 		{{/row}}
 		{{#row}}
-			{{#zone id="aplicacion" modalGrid="aplicacion"}}
+			{{#zone id="inv" modal="inv"}}
+				{{#row class="auto-form-row"}}
+					{{#if context="=inv"}}
+						{{#col medium="100%" class="auto-form-col"}}
+							{{#h5 class="auto-form-h5"}}
+								Movimiento del Inventario
+							{{/h5}}
+							{{#div}}
+								{{table inv class="auto-form-table" cols="descripcion, _cuenta, salida, entrada, costoUnitario, lote, vencimiento" removeEmptyCols="false" unlink="true"}}
+								{{br}}
+							{{/div}}
+						{{/col}}
+					{{/if}}
+				{{/row}}
+			{{/zone}}
+		{{/row}}
+		{{#row}}
+			{{#zone id="inv" modal="inv"}}
 			{{/zone}}
 		{{/row}}
 	{{/page}}
-	{{#modal base id="base" name="Datos Generales" size="xwide" next="aplicacion"}}
+	{{#modal base id="base" name="Datos Generales" size="xlong" next="articulos"}}
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
 				{{field responsableAcademico}}
 				{{field fechaEmision}}
+				{{field diasCredito}}
+				{{field vencimiento}}
 				{{field estatus}}
 				{{field comentarios}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
-	{{modal aplicacion id="aplicacion" name="Aplicación" grid="aplicacion" size="xwide" prev="base"}}
+	{{modal articulos id="articulos" name="Artículos" grid="articulos" size="xxwide" prev="base"}}
+	{{#modal inv id="inv" name="Movimiento del Inventario" size="xwide"}}
+		{{#col medium="100%" vertical="100%"}}
+			{{#fieldSet}}
+				{{field inv}}
+			{{/fieldSet}}
+		{{/col}}
+	{{/modal}}
 	{{#template id="lista"}}
 		<div>{{_name}}</div>
 	{{/template}}
-	{{#template2 id="notaNeteoCxp"}}
+	{{#template2 id="notaOrdenCompra"}}
 		{{#if esEstudiante}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}
 		<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}
+		<br>Días Crédito: {{diasCredito}}
+		<br>Vencimiento: {{date vencimiento "DD/MMM/YYYY"}}
 		<br>Estatus: {{_estatus}}
 		<br>{{comentarios}}
 	{{/template2}}
-	{{#template3 id="notaNeteoCxp"}}
+	{{#template3 id="notaOrdenCompra"}}
 		{{#if esEstudiante}}{{#if responsableAcademico}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}{{/if}}
 		{{#if fechaEmision}}<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}{{/if}}
+		{{#if diasCredito}}<br>Días Crédito: {{diasCredito}}{{/if}}
+		{{#if vencimiento}}<br>Vencimiento: {{date vencimiento "DD/MMM/YYYY"}}{{/if}}
 		{{#if estatus}}<br>Estatus: {{_estatus}}{{/if}}
 		{{#if comentarios}}<br>{{comentarios}}{{/if}}
 	{{/template3}}

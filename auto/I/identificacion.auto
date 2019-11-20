@@ -18,6 +18,7 @@
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="base.nombre"}}
 	{{param name="Identificación"}}
+	{{param typeName="Identificación"}}
 	{{param group="Registro"}}
 	{{param tplName="identificacion"}}
 	{{param fullWidth="true"}}

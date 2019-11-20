@@ -16,11 +16,12 @@
   {{#menu id="menu-principal" name="Cinetop" showUserName="true"}}
     {{item text="Tableros" type="userBoards"}}
     {{#item text="Ver"}} 
+      {{item text="Contabilidad" newTab="true" href="/_contabilidad/cubo?_name=Contabilidad&_title=Contabilidad"}}
       {{item text="Inventario" newTab="true" href="/_inv/cubo?_name=Inventario&_title=Inventario"}}
-      {{item text="Tesorería" newTab="true" href="/_tesoreria/cubo?_name=Tesorería&_title=Tesorería" beginGroup="true"}}
-      {{item text="Cuentas por Cobrar" newTab="true" href="/_cxc/cubo?_name=Cuentas por Cobrar&_title=Cuentas por Cobrar"}}
+      {{item text="Tesorería" newTab="true" href="/_tesoreria/cubo?_name=Tesorería&_title=Tesorería"}}
+      {{item text="Cuentas por Cobrar" newTab="true" href="/_cxc/cubo?_name=Cuentas por Cobrar&_title=Cuentas por Cobrar" beginGroup="true"}}
       {{item text="Cuentas por Pagar" newTab="true" href="/_cxp/cubo?_name=Cuentas por Pagar&_title=Cuentas por Pagar"}}
-      {{item text="Contabilidad" newTab="true" href="/_contabilidad/cubo?_name=Contabilidad&_title=Contabilidad" beginGroup="true"}}
+      {{item text="Compras por Recibir" newTab="true" href="/_comprasPorRecibir/cubo?_name=Compras por Recibir&_title=Compras por Recibir"}}
       {{item text="Bitácora General" href="/nota/lista" beginGroup="true"}}
     {{/item}}
     {{#item text="Cuentas"}}
@@ -37,7 +38,7 @@
     {{#item text="Configuración"}}
       {{item text="Configuración General" href="/_app"}}
       {{item text="Usuarios" href="/_user/lista"}}
-      {{item text="Empresas" href="/empresa/lista"}}
+      {{!-- {{item text="Empresas" href="/empresa/lista"}} --}}
     {{/item}}
     {{#item text="Usuario"}}
       {{item text="Usuario" type="userName" icon="user"}}
@@ -580,6 +581,17 @@
     {{column field="orden" width="50"}}
   {{/grid}}
 
+  {{#section id="grupoUbicacion" type="array"}}
+    {{field id="id" type="text" label="Identificador"}}
+    {{field id="nombre" type="text" label="Nombre"}}
+    {{field id="orden" type="number" label="Orden"}}
+  {{/section}}
+  {{#grid id="grupoUbicacion" section="grupoUbicacion" allowInsert="true" allowRemove="true" allowSort="true" sortBy="persona,orden,id"}}
+    {{column field="id" width="200"}}
+    {{column field="nombre" width="350"}}
+    {{column field="orden" width="50"}}
+  {{/grid}}
+
   {{#section id="aliasTesoreria" type="array"}}
     {{#field id="id" type="text" label="Identificador"}}
       {{editor case="upper"}}
@@ -648,31 +660,44 @@
 {{/define}}
 
 {{#markup}}
-  {{#page name="Alias Artículos"}}
+  {{#page name="Artículos"}}
     {{#row}}
       {{#col medium="80%"}}
         {{#zone id="aliasArticulo" modalGrid="aliasArticulo"}}
           {{br}}
+          {{#h5}}Alias Artículos{{/h5}}
           {{table aliasArticulo cols="id,persona,articulo,precio" medium="20%,40%,40%"}}
         {{/zone}}
       {{/col}}
     {{/row}}
   {{/page}}
-  {{#page name="Alias Ubicaciones"}}
+  {{#page name="Ubicaciones"}}
     {{#row}}
       {{#col medium="80%"}}
         {{#zone id="aliasUbicacion" modalGrid="aliasUbicacion"}}
           {{br}}
+          {{#h5}}Alias Ubicaciones{{/h5}}
           {{table aliasUbicacion cols="id,persona,ubicacion" medium="20%,40%,40%"}}
         {{/zone}}
       {{/col}}
     {{/row}}
+    {{hairline}}
+    {{#row}}
+      {{#col medium="50%"}}
+        {{#zone id="grupoUbicacion" modalGrid="grupoUbicacion"}}
+          {{br}}
+          {{#h5}}Grupos Ubicaciones{{/h5}}
+          {{table grupoUbicacion cols="id,nombre" medium="30%,70%"}}
+        {{/zone}}
+      {{/col}}
+    {{/row}}
   {{/page}}
-  {{#page name="Alias Tesorería"}}
+  {{#page name="Tesorería"}}
     {{#row}}
       {{#col medium="80%"}}
         {{#zone id="aliasTesoreria" modalGrid="aliasTesoreria"}}
           {{br}}
+          {{#h5}}Alias Tesorería{{/h5}}
           {{table aliasTesoreria cols="id,tesoreria" medium="30%,70%"}}
         {{/zone}}
       {{/col}}
@@ -707,7 +732,7 @@
       {{#col medium="50%"}}
         {{#zone id="color" modalGrid="color"}}
           {{br}}
-          {{#h5}}Colores{{/h5}}
+          {{#h5}}Colores/Sabores{{/h5}}
           {{table color cols="id,nombre" medium="30%,70%"}}
         {{/zone}}
       {{/col}}
@@ -935,10 +960,11 @@
   {{modal marca id="marca" grid="marca" name="Marcas" size="long"}}
   {{modal estilo id="estilo" grid="estilo" name="Estilos" size="long"}}
   {{modal tamano id="tamano" grid="tamano" name="Tamaños" size="long"}}
-  {{modal color id="color" grid="color" name="Colores" size="long"}}
+  {{modal color id="color" grid="color" name="Colores/Sabores" size="long"}}
   {{modal temporada id="temporada" grid="temporada" name="Temporadas" size="long"}}
   {{modal aliasArticulo id="aliasArticulo" grid="aliasArticulo" name="Alias Artículos" size="xwide"}}
   {{modal aliasUbicacion id="aliasUbicacion" grid="aliasUbicacion" name="Alias Ubicaciones" size="xwide"}}
+  {{modal grupoUbicacion id="grupoUbicacion" grid="grupoUbicacion" name="Grupos Ubicaciones" size="xwide"}}
   {{modal aliasTesoreria id="aliasTesoreria" grid="aliasTesoreria" name="Alias Tesorería" size="xwide"}}
   {{modal mayor id="mayor" grid="mayor" name="Mayor" size="xwide"}}
 {{/markup}}

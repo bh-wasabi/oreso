@@ -1,4 +1,4 @@
-{{#define type="doc" id="notaCompra"}}
+{{#define type="doc" id="notaPedido"}}
 	{{param defaultDisplay="_name"}}
 	{{param defaultView="lista"}}
 	{{param pageStart="1"}}
@@ -17,7 +17,8 @@
 	{{param startOnOpen="base"}}
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="_name"}}
-	{{param name="=fn('dynamicName', @_created)"}}
+	{{param name="=fn('dynamicName', 'Pedido', @_created)"}}
+	{{param typeName="Pedido"}}
 	{{param group="General"}}
 	{{param fullWidth="true"}}
 	{{param modalSize="xwide"}}
@@ -79,7 +80,7 @@
 			{{#editor type="lookup" source="persona" view="responsablesAcademicos" searchEnabled="true" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="fechaEmision" label="Fecha Emisión" type="date" format="DD/MMM/YYYY" readOnly="true" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD" generator="now"}}
+		{{#field id="fechaEmision" label="Fecha Emisión" type="date" format="DD/MMM/YYYY" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD" generator="now"}}
 			{{#editor type="date" width="100%"}}
 			{{/editor}}
 		{{/field}}
@@ -91,7 +92,7 @@
 			{{#editor type="date" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="estatus" label="Estatus" type="text" readOnly="true" column="A" references="estatusNota" labelModalClass="full-width" defaultValue="'borrador'"}}
+		{{#field id="estatus" label="Estatus" type="text" readOnly="true" column="A" references="estatusNota" modalHide="true" labelModalClass="full-width" defaultValue="'borrador'"}}
 			{{#editor type="select" preset="cfg.estatusNota" width="100%"}}
 			{{/editor}}
 		{{/field}}
@@ -99,7 +100,7 @@
 			{{#editor type="text-area" height="300" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{field id="nombre" label="Nombre" hide="true" type="expr" value="=fn('dynamicName', @_created)"}}
+		{{field id="nombre" label="Nombre" hide="true" type="expr" value="=fn('dynamicName', 'Pedido', @_created)"}}
 	{{/section}}
 	{{#section id="articulos" type="array"}}
 		{{#field id="aliasArticulo" label="Artículo" type="text" column="A"}}
@@ -292,7 +293,7 @@
 	{{/workflow}}
 {{/define}}
 {{#markup}}
-	{{#page name="Compra"}}
+	{{#page name="Pedido"}}
 		{{row}}
 		{{row}}
 		{{#row}}
@@ -354,7 +355,7 @@
 				{{field fechaEmision}}
 				{{field diasCredito}}
 				{{field vencimiento}}
-				{{field estatus}}
+				{{field estatus hide="true"}}
 				{{field comentarios}}
 			{{/fieldSet}}
 		{{/col}}
@@ -370,7 +371,7 @@
 	{{#template id="lista"}}
 		<div>{{_name}}</div>
 	{{/template}}
-	{{#template2 id="notaCompra"}}
+	{{#template2 id="notaPedido"}}
 		{{#if esEstudiante}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}
 		<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}
 		<br>Días Crédito: {{diasCredito}}
@@ -378,7 +379,7 @@
 		<br>Estatus: {{_estatus}}
 		<br>{{comentarios}}
 	{{/template2}}
-	{{#template3 id="notaCompra"}}
+	{{#template3 id="notaPedido"}}
 		{{#if esEstudiante}}{{#if responsableAcademico}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}{{/if}}
 		{{#if fechaEmision}}<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}{{/if}}
 		{{#if diasCredito}}<br>Días Crédito: {{diasCredito}}{{/if}}

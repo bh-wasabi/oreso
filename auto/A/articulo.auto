@@ -18,6 +18,7 @@
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="base.nombre"}}
 	{{param name="Artículo"}}
+	{{param typeName="Artículo"}}
 	{{param group="Registro"}}
 	{{param fullWidth="true"}}
 	{{param modalSize="xlong"}}
@@ -82,7 +83,7 @@
 			{{/editor}}
 		{{/field}}
 		{{#field id="temporada" label="Temporada" type="text" if="esInventariable" column="A" references="app.temporada" labelModalClass="full-width"}}
-			{{#editor type="select" preset="cfg.app.temporada" width="100%"}}
+			{{#editor type="select" preset="app.temporada" width="100%"}}
 			{{/editor}}
 		{{/field}}
 		{{#field id="comentarios" label="Comentarios" type="text" column="A" detach="Comentarios" labelModalClass="full-width"}}
