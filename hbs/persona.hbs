@@ -30,6 +30,7 @@
 
   {{#view id="lista"}}
     {{#find}}
+      {{sort field="persona._grupo" direction="asc"}}
       {{sort field="_name" direction="asc"}}
       {{search field="persona.nombreCompleto"}}
       {{search field="persona.clave"}}
@@ -195,7 +196,7 @@
         <div class="list-content">
           {{_name}}
           <span style="font-size:12px;float:right;">{{persona.correo}}</span>
-          </br><span style="font-size:12px;">{{persona._area}}</span>
+          </br><span style="font-size:12px;">{{persona._area}} {{persona._grupo}}</span>
           {{#if _readOnly}}
           <span class="read-only" style="font-size:12px;"><strong>&nbsp;&nbsp;Solo Lectura&nbsp;&nbsp;</strong></span>
           {{/if}}

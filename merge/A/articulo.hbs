@@ -12,12 +12,48 @@
       {{filter condition="=tipoArticulo" field="base.tipoArticulo" in="=tipoArticulo"}}
       {{search field="_name"}}
       {{search field="base.codigo"}}
+      {{search field="base.codigoUpc"}}
+      {{search field="base.codigoSku"}}
+      {{search field="base.codigoLocal"}}
       {{search field="base._marca"}}
       {{search field="base._estilo"}}
       {{search field="base._tamano"}}
       {{search field="base._color"}}
     {{/find}}
   {{/view}}
+  {{#view id="porCodigo"}}
+    {{#find}}
+      {{include field="base.codigo"}}
+      {{include field="_name"}}
+      {{include field="base.precioLista"}}
+      {{filter field="base.codigo" exists="=true"}}
+    {{/find}}
+  {{/view}}
+  {{#view id="porCodigoUpc"}}
+    {{#find}}
+      {{include field="base.codigoUpc"}}
+      {{include field="_name"}}
+      {{include field="base.precioLista"}}
+      {{filter field="base.codigoUpc" exists="=true"}}
+    {{/find}}
+  {{/view}}
+  {{#view id="porCodigoSku"}}
+    {{#find}}
+      {{include field="base.codigoSku"}}
+      {{include field="_name"}}
+      {{include field="base.precioLista"}}
+      {{filter field="base.codigoSku" exists="=true"}}
+    {{/find}}
+  {{/view}}
+  {{#view id="porCodigoLocal"}}
+    {{#find}}
+      {{include field="base.codigoLocal"}}
+      {{include field="_name"}}
+      {{include field="base.precioLista"}}
+      {{filter field="base.codigoLocal" exists="=true"}}
+    {{/find}}
+  {{/view}}
+
   {{#section id="base"}}
     {{field id="nombre" type="expr" value="=@descripcion"}}
     {{field id="tipoArticulo" defaultValue="_params.tipoArticulo" readOnly="true"}}
