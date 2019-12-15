@@ -32,13 +32,12 @@
     {{field id="total" type="calc" value="=importe+iva"}}
   {{/section}}
   
-  {{#grid id="articulos" section="articulos" allowInsert="true" allowRemove="true"}}
-    {{column field="aliasArticulo" label="Artículo" width="200"}}
-    {{column field="_articulo" label="Descripción" width="400"}}
-    {{column field="aliasOrigen" label="Origen" width="60" defaultValue="=_params.aliasOrigen"}}
-    {{column field="_origen" label="Ubicación" width="150" required="false"}}
+  {{#grid id="articulos" applyFilter="referencia" section="articulos" allowInsert="false" allowRemove="false" allowSort="true" sortBy="referencia,_articulo"}}
+    {{column field="referencia" label="Referencia" width="150" readOnly="true"}}
+    {{column field="_articulo" label="Artículo" width="400" readOnly="true"}}
+    {{column field="_origen" label="Ubicación" width="250" readOnly="true"}}
     {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
     {{column field="valorUnitario" label="Precio Unitario" width="110" type="numeric" format="#,.##"}}
-    {{column field="tasaIva" label="% IVA" width="50" type="numeric" format="#.##" defaultValue="16"}}
+    {{column field="tasaIva" label="% IVA" width="50" type="numeric" format="#.##" defaultValue="16" readOnly="true"}}
   {{/grid}}
 {{/define}}

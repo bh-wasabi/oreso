@@ -8,6 +8,7 @@
       {{include field="base.estilo"}}
       {{include field="base.tamano"}}
       {{include field="base.color"}}
+      {{include field="base.cliente"}}
       {{sort field="_name" direction="asc"}}
       {{filter condition="=tipoArticulo" field="base.tipoArticulo" in="=tipoArticulo"}}
       {{search field="_name"}}
@@ -84,8 +85,8 @@
 {{#markup}}
   {{#template id="lista"}}
     <div>
-      {{_name}}
-      <br><span style="font-size:12px;">{{base.codigo}}</span>
+      <span style="font-size:12px;white-space:pre-wrap;font-style:italic;">{{_name}}</span></br>
+      <span style="font-size:12px;">{{base.codigo}}</span>
     </div>
   {{/template}}
 {{/markup}}

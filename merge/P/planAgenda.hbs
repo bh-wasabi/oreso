@@ -1,0 +1,98 @@
+{{#define id="planAgenda"}}
+  {{!-- {{action id="cancelar-mov" type="affect-direct" label="Cancelar" visibleMode="close" workflow="cancelar" color="danger" condition="=@_isAffected&&@base.estatus=='afectado'" confirm="true" confirmMessage="¿Está seguro que desea cancelar?" btnFlat="true" reload="true"}}
+  {{action id="abrir" type="open" label="Editar" condition="=false"}} --}}
+  {{action id="eliminar" condition="=false"}}
+  {{action id="afectar" type="affect-direct" label="Procesar" workflow="afectar"}}
+  {{#view id="lista"}}
+    {{#find}}
+      {{include field="_name"}}
+      {{include field="base.comentarios"}}
+      {{include field="base._area"}}
+      {{include field="base._subArea"}}
+      {{include field="base._recurso"}}
+      {{include field="base._tipoServicio"}}
+      {{include field="base._estatus"}}
+      {{search field="_name"}}
+      {{search field="base.comentarios"}}
+      {{search field="base._recurso"}}
+      {{search field="base._area"}}
+      {{search field="base._subArea"}}
+      {{sort field="_id" direction="desc"}}
+    {{/find}}
+  {{/view}}
+  {{#view id="_salas"}}
+    {{define type="param" id="id"}}   {{!-- este id se usa para filtar por actor especifico --}}
+    {{#find limit="-1" flatten="true"}}
+      {{include field="base.recurso" as="actor"}}
+      {{include field="base._recurso" as="_actor"}}
+      {{include field="base._area" as="area"}}
+      {{include field="base._subArea" as="subArea"}}
+      {{include field="base.color" as="color"}}
+      {{include field="base.tipoRecurso" as="tipoRecurso"}}
+      {{include field="base.tipoServicio" as="tipoServicio"}}
+      {{sort field="base._recurso" direction="asc"}}
+      {{filter field="base.estatus" eq="'afectado'"}}
+      {{!-- {{filter field="base.area" eq="='area'"}} --}}
+      {{filter field="base.tipoRecurso" eq="='espacio'"}}
+    {{/find}}
+    {{calc field="text" value="=fn('areaSubArea', @area, @subArea)"}}
+  {{/view}}
+  {{#section id="base"}}
+    {{#field id="tipoRecurso"}}
+      {{onChange clearFields="prestadorServicios,seleccionarEspecialidad,especialidad,equipoMedico,tipoEquipoMedico,espacio,tipoEspacio"}}
+    {{/field}}
+    {{field id="esPrestadorServicios" type="expr" value="=@tipoRecurso==='prestadorServicios'"}}
+    {{field id="esEquipoMedico" type="expr" value="=@tipoRecurso==='equipoMedico'"}}
+    {{field id="esEspacio" type="expr" value="=@tipoRecurso==='espacio'"}}
+    {{#field id="prestadorServicios"}}
+      {{#onChange}}
+        {{set seleccionarEspecialidad="=prestadorServicios.especialidad"}}
+        {{set especialidad="=prestadorServicios.especialidad[0]"}}
+      {{/onChange}}
+    {{/field}}
+    {{#field id="especialidad"}}
+      {{editor sourceFromTagBox="seleccionarEspecialidad"}}
+    {{/field}}
+    {{#field id="equipoMedico"}}
+      {{#onChange}}
+        {{set tipoEquipoMedico="=base.tipoEquipoMedico"}}
+      {{/onChange}}
+    {{/field}}
+    {{#field id="espacio"}}
+      {{#onChange}}
+        {{set tipoEspacio="=base.tipoEspacio"}}
+      {{/onChange}}
+    {{/field}}
+    {{field id="recurso" type="expr" value="=fn('recursoId', base.tipoRecurso, base)"}}
+    {{field id="_recurso" type="expr" value="=fn('recursoNombre', base.tipoRecurso, base)"}}
+    {{field id="tipoServicio" type="expr" value="=fn('recursoTipoServicio', base.tipoRecurso, base)"}}
+    {{field id="_tipoServicio" type="expr" value="=fn('recursoTipoServicioNombre', base.tipoRecurso, base)"}}
+    {{validator type="expr" validIf="=moment().diff(@desde, 'days')>=moment().diff(@hasta, 'days')" message="Fecha Incorecta"}}
+  {{/section}}
+  {{#workflow id="afectar" start="afectar"}}
+    {{#step id="afectar"}}
+      {{#user}}
+        {{#validate condition="=!_name" error="Nombre Incorrecto"}}
+        {{/validate}}
+        {{#spAffect engine="node"}}
+          {{#update section="base"}}
+            {{set estatus="afectado"}}
+            {{set _estatus="Afectado"}}
+          {{/update}}
+        {{/spAffect}}
+      {{/user}}
+    {{/step}}
+  {{/workflow}}
+{{/define}}
+{{#markup}}
+  {{#template id="lista"}}
+    <div>
+      {{_name}}
+      <span style="font-size:12px;float:right;">{{base._estatus}}</span>
+      </br>
+      {{base.comentarios}}
+      <span style="font-size:12px;">{{base._recurso}}</span>
+      <span style="float:right;">{{base._area}}{{#if base.subArea}} / {{base._subArea}}{{/if}}</span>
+    </div>
+  {{/template}}
+{{/markup}}

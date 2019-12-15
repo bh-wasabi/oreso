@@ -3536,3 +3536,65 @@
 {"name":"usoIdentificacion","code":"oficial","display":"Oficial","order":1}
 {"index":{"_id":"usoIdentificacion/secundario"}}
 {"name":"usoIdentificacion","code":"secundario","display":"Secundario","order":4}
+{"index":{"_id":"tipoRecurso/espacio"}}
+{"name":"tipoRecurso","code":"espacio","display":"Espacio","order":99}
+{"index":{"_id":"timeZones/America/Mexico_City"}}
+{"name":"timeZones","code":"America/Mexico_City","display":"México CDMX","order":99}
+{"index":{"_id":"colorAgenda/blue"}}
+{"name":"colorAgenda","code":"blue","display":"Azul","order":1}
+{"index":{"_id":"colorAgenda/green"}}
+{"name":"colorAgenda","code":"green","display":"Verde","order":2}
+{"index":{"_id":"colorAgenda/orange"}}
+{"name":"colorAgenda","code":"orange","display":"Naranja","order":3}
+{"index":{"_id":"colorAgenda/violet"}}
+{"name":"colorAgenda","code":"violet","display":"Violeta","order":4}
+{"index":{"_id":"colorAgenda/red"}}
+{"name":"colorAgenda","code":"red","display":"Rojo","order":5}
+{"index":{"_id":"estatusNota/borrador"}}
+{"name":"estatusNota","code":"borrador","display":"Borrador","order":1}
+{"index":{"_id":"estatusNota/afectado"}}
+{"name":"estatusNota","code":"afectado","display":"Afectado","order":2}
+{"index":{"_id":"estatusNota/cancelado"}}
+{"name":"estatusNota","code":"cancelado","display":"Cancelado","order":3}
+{"index":{"_id":"area/normal"}}
+{"name":"area","code":"normal","display":"Normal","order":1}
+{"index":{"_id":"area/lux"}}
+{"name":"area","code":"lux","display":"Lux","order":1780}
+{"index":{"_id":"tipoEspacio/sala"}}
+{"name":"tipoEspacio","code":"sala","display":"Sala","order":1}
+{"index":{"_id":"tipoEspacio/sillon"}}
+{"name":"tipoEspacio","code":"sillon","display":"Sillón","order":2}
+{"index":{"_id":"tipoEspacio/almacen"}}
+{"name":"tipoEspacio","code":"almacen","display":"Almacén","order":3}
+{"index":{"_id":"tipoEspacio/otro"}}
+{"name":"tipoEspacio","code":"otro","display":"Otro","order":4}
+{"index":{"_id":"estatusUbicacion/activo"}}
+{"name":"estatusUbicacion","code":"activo","display":"Activo","order":1}
+{"index":{"_id":"estatusUbicacion/suspendido"}}
+{"name":"estatusUbicacion","code":"suspendido","display":"Suspendido","order":2}
+{"index":{"_id":"estatusUbicacion/inactivo"}}
+{"name":"estatusUbicacion","code":"inactivo","display":"Inactivo","order":3}
+{"index":{"_id":"diaSemana/1"}}
+{"name":"diaSemana","code":"1","display":"Lunes","order":1}
+{"index":{"_id":"diaSemana/2"}}
+{"name":"diaSemana","code":"2","display":"Martes","order":2}
+{"index":{"_id":"diaSemana/3"}}
+{"name":"diaSemana","code":"3","display":"Miércoles","order":3}
+{"index":{"_id":"diaSemana/4"}}
+{"name":"diaSemana","code":"4","display":"Jueves","order":4}
+{"index":{"_id":"diaSemana/5"}}
+{"name":"diaSemana","code":"5","display":"Viernes","order":5}
+{"index":{"_id":"diaSemana/6"}}
+{"name":"diaSemana","code":"6","display":"Sábado","order":6}
+{"index":{"_id":"diaSemana/7"}}
+{"name":"diaSemana","code":"7","display":"Domingo","order":7}
+{"index":{"_id":"empaque/1"}}
+{"name":"empaque","code":"1","display":"1 Pieza","order":1}
+{"index":{"_id":"empaque/3"}}
+{"name":"empaque","code":"3","display":"3 Piezas","order":2}
+{"index":{"_id":"empaque/6"}}
+{"name":"empaque","code":"6","display":"6 Piezas","order":3}
+{"index":{"_id":"empaque/9"}}
+{"name":"empaque","code":"9","display":"9 Piezas","order":4}
+{"index":{"_id":"empaque/12"}}
+{"name":"empaque","code":"12","display":"12 Piezas","order":5}

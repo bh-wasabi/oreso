@@ -39,6 +39,7 @@ var logo3 = 'https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png';
 var logo2;
 
 var headers = ['Grupo Oreso', 'Leibnitz 83-1','Anzures 11590 CDMX','Teléfono +52 (55) 5580 6118']
+//var headers = ['Xtra Cinemas', 'Reforma 215','Lomas de Chapultepec 11000 CDMX','Teléfono 55 5284 8500']
 params = '&esOreso=true';
 subProyect = 'oreso';
 var proyectId = 'oreso';

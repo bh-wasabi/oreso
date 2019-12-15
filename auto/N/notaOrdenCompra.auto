@@ -128,11 +128,15 @@
 		{{field id="importe" label="Importe" type="calc" format="currency" column="A"}}
 		{{field id="iva" label="IVA" type="calc" format="currency" column="A"}}
 		{{field id="total" label="Total" type="calc" format="currency" column="A"}}
+		{{#field id="referencia" label="Referencia" type="text" column="A"}}
+			{{#editor case="upper"}}
+			{{/editor}}
+		{{/field}}
 		{{#field id="lote" label="Lote" type="text" column="A"}}
 			{{#editor case="upper"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="vencimiento" label="Vencimiento" type="text" column="A"}}
+		{{#field id="vencimiento" label="Fecha" type="text" column="A"}}
 			{{#editor case="YYYY-MM-DD"}}
 			{{/editor}}
 		{{/field}}
@@ -144,7 +148,7 @@
 		{{field id="entrada" label="Entrada" type="number" format="#," column="A"}}
 		{{field id="costoUnitario" label="Costo Unitario" type="number" format="currency" column="A"}}
 		{{field id="lote" label="Lote" type="text" column="A"}}
-		{{#field id="vencimiento" label="Vencimiento" type="date" format="DD/MMM/YYYY" column="A" saveFormat="YYYY-MM-DD"}}
+		{{#field id="vencimiento" label="Fecha" type="date" format="DD/MMM/YYYY" column="A" saveFormat="YYYY-MM-DD"}}
 			{{#editor type="date"}}
 			{{/editor}}
 		{{/field}}
@@ -152,7 +156,7 @@
 	{{section id="resumen" temp="true"}}
 	{{#report id="preliminar-encabezado"}}
 		{{#stack}}
-			{{#columns margin="20" widths="210,150,*"}}
+			{{#columns margin="20" widths="100,150,*"}}
 				{{#column}}
 					{{row image="logo" alignment="left" imageWidth="90" margin="0,-15,0,0"}}
 				{{/column}}
@@ -174,7 +178,7 @@
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
 				{{row field="responsableAcademico" condition="esEstudiante" align="left"}}
 				{{row field="fechaEmision" align="left"}}
 				{{row field="diasCredito" align="left"}}
@@ -186,7 +190,7 @@
 		{{#stack}}
 			{{#row text="Artículos" fontSize="10" bold="true"}}
 			{{/row}}
-			{{#table title="Artículos" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="articulos" headerStyle="field" margin="0,5,10,10" removeEmptyCols="true"}}
+			{{#table title="Artículos" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="articulos" headerStyle="field" margin="0,5,10,10" removeEmptyCols="true"}}
 				{{column field="aliasArticulo"}}
 				{{column field="_articulo"}}
 				{{column field="aliasOrigen"}}
@@ -200,6 +204,7 @@
 				{{column field="importe"}}
 				{{column field="iva"}}
 				{{column field="total"}}
+				{{column field="referencia"}}
 				{{column field="lote"}}
 				{{column field="vencimiento"}}
 			{{/table}}
@@ -207,7 +212,7 @@
 		{{#stack condition="=inv"}}
 			{{#row text="Movimiento del Inventario" fontSize="10" bold="true"}}
 			{{/row}}
-			{{#table title="Movimiento del Inventario" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="inv" headerStyle="field" margin="0,5,10,10" removeEmptyCols="true"}}
+			{{#table title="Movimiento del Inventario" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="inv" headerStyle="field" margin="0,5,10,10" removeEmptyCols="true"}}
 				{{column field="descripcion"}}
 				{{column field="_cuenta"}}
 				{{column field="salida"}}
@@ -319,7 +324,7 @@
 							Artículos
 						{{/h5}}
 						{{#div}}
-							{{table articulos class="auto-form-table" cols="aliasArticulo, _articulo, aliasOrigen, _origen, aliasDestino, _destino, cantidad, costoUnitario, valorUnitario, tasaIva, importe, iva, total, lote, vencimiento" removeEmptyCols="true" unlink="true"}}
+							{{table articulos class="auto-form-table" cols="aliasArticulo, _articulo, aliasOrigen, _origen, aliasDestino, _destino, cantidad, costoUnitario, valorUnitario, tasaIva, importe, iva, total, referencia, lote, vencimiento" removeEmptyCols="true" unlink="true"}}
 							{{br}}
 						{{/div}}
 					{{/col}}

@@ -42,7 +42,7 @@
 	{{section id="_params" temp="true"}}
 	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
 		{{field id="lote" label="Lote" type="text" column="A"}}
-		{{#field id="vencimiento" label="Vencimiento" type="text" column="A"}}
+		{{#field id="vencimiento" label="Fecha" type="text" column="A"}}
 			{{#editor case="YYYY-MM-DD"}}
 			{{/editor}}
 		{{/field}}
@@ -72,7 +72,7 @@
 	{{/section}}
 	{{#report id="preliminar-encabezado"}}
 		{{#stack}}
-			{{#columns margin="20" widths="210,150,*"}}
+			{{#columns margin="20" widths="100,150,*"}}
 				{{#column}}
 					{{row image="logo" alignment="left" imageWidth="90" margin="0,-15,0,0"}}
 				{{/column}}
@@ -94,7 +94,7 @@
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="planAplicacion" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+			{{#record title="planAplicacion" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
 				{{row field="lote" align="left"}}
 				{{row field="vencimiento" align="left"}}
 				{{row field="ivaFactor" align="left"}}
@@ -163,7 +163,7 @@
 	{{/template}}
 	{{#template2 id="planAplicacion"}}
 		<br>Lote: {{lote}}
-		<br>Vencimiento: {{vencimiento}}
+		<br>Fecha: {{vencimiento}}
 		<br>Factor IVA: {{ivaFactor}}
 		<br>Saldo: {{number saldo "currency"}}
 		<br>Importe: {{number importe "currency"}}
@@ -176,7 +176,7 @@
 	{{/template2}}
 	{{#template3 id="planAplicacion"}}
 		{{#if lote}}<br>Lote: {{lote}}{{/if}}
-		{{#if vencimiento}}<br>Vencimiento: {{vencimiento}}{{/if}}
+		{{#if vencimiento}}<br>Fecha: {{vencimiento}}{{/if}}
 		{{#if ivaFactor}}<br>Factor IVA: {{ivaFactor}}{{/if}}
 		{{#if saldo}}<br>Saldo: {{number saldo "currency"}}{{/if}}
 		{{#if importe}}<br>Importe: {{number importe "currency"}}{{/if}}

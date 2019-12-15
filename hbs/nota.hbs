@@ -1,13 +1,4 @@
 {{#define type="doc" id="nota"}}
-  {{#view id="cubo"}}
-    {{#find}}
-      {{include field="_name"}}
-      {{include field="_created"}}
-      {{include field="flujo"}}
-      {{include field="base"}}
-      {{filter field="flujo.categoria" in="ticket,asignacion"}}
-    {{/find}}
-  {{/view}}
   {{#view id="lista"}}
     {{#find}}
       {{include field="_name"}}
@@ -26,27 +17,6 @@
       {{filter condition="=request" field="_created.request" eq="=request"}}
     {{/find}}
   {{/view}}
-  {{#view id="resumenActivos"}}
-    {{#find}}
-      {{include field="_created"}}
-      {{include field="flujo"}}
-      {{sort field="_id" direction="asc"}}
-      {{filter field="persona.id" eq="=id"}}
-      {{filter field="flujo.estatus" eq="='pendiente'"}}
-      {{filter field="_created.date" gt="=moment().add(-30,'d').format()"}}
-    {{/find}}
-  {{/view}}
-  {{#cube id="cubo" name="Solicitudes" view="cubo" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
-    {{column field="flujo.nombre" width="150" label="Tipo Solicitud"}}
-    {{column field="flujo.grupo5" width="150" label="Sub Tipo"}}
-    {{row field="flujo.titulo" width="150" label="Cliente"}}
-    {{row field="flujo.grupo1" width="150" label="Proyecto"}}
-    {{row field="flujo.grupo2" width="150" label="Inmueble"}}
-    {{row field="flujo.grupo3" width="150" label="Zona"}}
-    {{row field="flujo.grupo4" width="150" label="Ubicación"}}
-    {{count field="_id" label="Cantidad" format="#"}}
-  {{/cube}}
-
   {{#view id="resumenPorCliente"}}
     {{#pipeline}}
       {{group field="flujo.titulo" as="cliente"}}
@@ -134,6 +104,7 @@
       {{sort field="_id" direction="asc"}}
       {{filter field="persona.id" eq="=id"}}
       {{filter field="flujo.estatus" eq="='pendiente'"}}
+      {{filter field="_created.date" gt="=moment().add(-30,'d').format()"}}
     {{/find}}
     {{calc field="etiqueta" type="expr" value="=calc.concat(calc.format('date', _created.date, 'DD/MMM/YYYY h:mma'))"}}
     {{calc field="nombre" type="expr" value="=_name"}}

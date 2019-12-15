@@ -14,6 +14,39 @@
     {{define type="param" id="created"}}
     {{default return="=calc.concat(@name, @created._service, @created.folio)"}}
   {{/function}}
+  {{#function id="areaSubArea"}}
+    {{define type="param" id="area"}}
+    {{define type="param" id="subArea"}}
+    {{default return="=calc.concat(@area, (@subArea)?'/ '+@subArea:'')"}}
+  {{/function}}
+  {{#function id="recursoId"}}
+    {{define type="param" id="tipoRecurso"}}
+    {{define type="param" id="base"}}
+    {{when tipoRecurso="prestadorServicios" return="=base.prestadorServicios"}}
+    {{when tipoRecurso="equipoMedico" return="=base.equipoMedico"}}
+    {{when tipoRecurso="espacio" return="=base.espacio"}}
+  {{/function}}
+  {{#function id="recursoNombre"}}
+    {{define type="param" id="tipoRecurso"}}
+    {{define type="param" id="base"}}
+    {{when tipoRecurso="prestadorServicios" return="=base._prestadorServicios"}}
+    {{when tipoRecurso="equipoMedico" return="=base._equipoMedico"}}
+    {{when tipoRecurso="espacio" return="=base._espacio"}}
+  {{/function}}
+  {{#function id="recursoTipoServicio"}}
+    {{define type="param" id="tipoRecurso"}}
+    {{define type="param" id="base"}}
+    {{when tipoRecurso="prestadorServicios" return="=base.especialidad"}}
+    {{when tipoRecurso="equipoMedico" return="=base.tipoEquipoMedico"}}
+    {{when tipoRecurso="espacio" return="=base.espacio"}}
+  {{/function}}
+  {{#function id="recursoTipoServicioNombre"}}
+    {{define type="param" id="tipoRecurso"}}
+    {{define type="param" id="base"}}
+    {{when tipoRecurso="prestadorServicios" return="=base._especialidad"}}
+    {{when tipoRecurso="equipoMedico" return="=base._tipoEquipoMedico"}}
+    {{when tipoRecurso="espacio" return="=base._espacio"}}
+  {{/function}}
   {{#transform id="copiarPersona"}}
     {{set id="=_id"}}
     {{set tipoExpediente="=persona.tipoExpediente"}}
@@ -22,6 +55,20 @@
   {{/transform}}  
 {{/define}}
 {{#markup}}
+  {{#template id="agenda"}}
+    {{_tipoServicio}}, {{_color}} ({{_estatus}})
+  {{/template}}
+  {{#template id="agendaDisponibilidad"}}
+    {{_diaSemana}} {{#if es24Horas}} 24 Horas{{/if}}
+    {{#if tieneHorarioEspecifico}} {{date desde "h:mma"}} - {{date hasta "h:mma"}}{{/if}}
+    {{#if comentarios}}<br>{{comentarios}}{{/if}}
+  {{/template}}
+  {{#template id="agendaExcepcion"}}
+    {{_motivo}}: {{#if esRango}}{{date desde "DD/MMM/YYYY"}} - {{date hasta "DD/MMM/YYYY"}}{{else}}{{date fecha "DD/MMM/YYYY"}}{{/if}}
+  {{/template}}
+  {{#template id="agendaPlan"}}
+    {{descripcion}} ({{date desde "DD/MMM/YYYY"}} - {{date hasta "DD/MMM/YYYY"}})
+  {{/template}}
   {{#template id="formaContacto"}}
     {{#if telefonoMovil}}<br>Teléfono móvil: {{telefonoMovil}}{{/if}}
     {{#if telefonoFijo}}<br>Teléfono fijo: {{telefonoFijo}}{{/if}}

@@ -21,10 +21,10 @@
         {{set valorUnitario="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).precio"}}
       {{/onChange}}
     {{/field}}
-    {{#field id="aliasOrigen"}}
+    {{#field id="aliasDestino"}}
       {{#onChange}}
-        {{set origen="=calc.getPresetPersona('app.aliasUbicacion', aliasOrigen, _doc.persona.id).ubicacion"}}
-        {{set _origen="=calc.getPresetPersona('app.aliasUbicacion', aliasOrigen, _doc.persona.id)._ubicacion"}}
+        {{set destino="=calc.getPresetPersona('app.aliasUbicacion', aliasDestino, _doc.persona.id).ubicacion"}}
+        {{set _destino="=calc.getPresetPersona('app.aliasUbicacion', aliasDestino, _doc.persona.id)._ubicacion"}}
       {{/onChange}}
     {{/field}}
     {{field id="importe" type="calc" value="=valorUnitario*cantidad"}}
@@ -35,13 +35,14 @@
   {{#grid id="articulos" section="articulos" allowInsert="true" allowRemove="true"}}
     {{column field="aliasArticulo" label="Artículo" width="200"}}
     {{column field="_articulo" label="Descripción" width="400"}}
-    {{column field="aliasOrigen" label="Origen" width="60" defaultValue="=_params.aliasOrigen"}}
-    {{column field="_origen" label="Ubicación" width="150" required="false"}}
+    {{column field="aliasDestino" label="Destino" width="60" defaultValue="=_params.aliasDestino"}}
+    {{column field="_destino" label="Ubicación" width="150" required="false"}}
     {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
     {{column field="valorUnitario" label="Precio Unitario" width="110" type="numeric" format="#,.##"}}
     {{column field="tasaIva" label="% IVA" width="50" type="numeric" format="#.##" defaultValue="16"}}
     {{column field="costoUnitario" label="Costo Unitario" width="110" type="numeric" format="#,.##"}}
-    {{column field="lote" label="Lote" width="100"}}
-    {{column field="vencimiento" label="Vencimiento" validateDate="true" width="100"}}
+    {{column field="lote" width="100"}}
+    {{column field="vencimiento" validateDate="true" width="100"}}
+    {{column field="referencia" label="Referencia" width="150"}}
   {{/grid}}
 {{/define}}

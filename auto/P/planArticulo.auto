@@ -66,18 +66,22 @@
 		{{field id="importe" label="Importe" type="calc" format="currency" column="A"}}
 		{{field id="iva" label="IVA" type="calc" format="currency" column="A"}}
 		{{field id="total" label="Total" type="calc" format="currency" column="A"}}
+		{{#field id="referencia" label="Referencia" type="text" column="A"}}
+			{{#editor case="upper"}}
+			{{/editor}}
+		{{/field}}
 		{{#field id="lote" label="Lote" type="text" column="A"}}
 			{{#editor case="upper"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="vencimiento" label="Vencimiento" type="text" column="A"}}
+		{{#field id="vencimiento" label="Fecha" type="text" column="A"}}
 			{{#editor case="YYYY-MM-DD"}}
 			{{/editor}}
 		{{/field}}
 	{{/section}}
 	{{#report id="preliminar-encabezado"}}
 		{{#stack}}
-			{{#columns margin="20" widths="210,150,*"}}
+			{{#columns margin="20" widths="100,150,*"}}
 				{{#column}}
 					{{row image="logo" alignment="left" imageWidth="90" margin="0,-15,0,0"}}
 				{{/column}}
@@ -99,7 +103,7 @@
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="planArticulo" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+			{{#record title="planArticulo" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
 				{{row field="aliasArticulo" align="left"}}
 				{{row field="_articulo" align="left"}}
 				{{row field="aliasOrigen" align="left"}}
@@ -113,6 +117,7 @@
 				{{row field="importe" align="left"}}
 				{{row field="iva" align="left"}}
 				{{row field="total" align="left"}}
+				{{row field="referencia" align="left"}}
 				{{row field="lote" align="left"}}
 				{{row field="vencimiento" align="left"}}
 			{{/record}}
@@ -142,7 +147,7 @@
 							planArticulo
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="aliasArticulo, _articulo, aliasOrigen, _origen, aliasDestino, _destino, cantidad, costoUnitario, valorUnitario, tasaIva, importe, iva, total, lote, vencimiento" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="aliasArticulo, _articulo, aliasOrigen, _origen, aliasDestino, _destino, cantidad, costoUnitario, valorUnitario, tasaIva, importe, iva, total, referencia, lote, vencimiento" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -163,6 +168,7 @@
 				{{field costoUnitario}}
 				{{field valorUnitario}}
 				{{field tasaIva}}
+				{{field referencia}}
 				{{field lote}}
 				{{field vencimiento}}
 			{{/fieldSet}}
@@ -185,8 +191,9 @@
 		<br>Importe: {{number importe "currency"}}
 		<br>IVA: {{number iva "currency"}}
 		<br>Total: {{number total "currency"}}
+		<br>Referencia: {{referencia}}
 		<br>Lote: {{lote}}
-		<br>Vencimiento: {{vencimiento}}
+		<br>Fecha: {{vencimiento}}
 	{{/template2}}
 	{{#template3 id="planArticulo"}}
 		{{#if aliasArticulo}}<br>Artículo: {{aliasArticulo}}{{/if}}
@@ -202,7 +209,8 @@
 		{{#if importe}}<br>Importe: {{number importe "currency"}}{{/if}}
 		{{#if iva}}<br>IVA: {{number iva "currency"}}{{/if}}
 		{{#if total}}<br>Total: {{number total "currency"}}{{/if}}
+		{{#if referencia}}<br>Referencia: {{referencia}}{{/if}}
 		{{#if lote}}<br>Lote: {{lote}}{{/if}}
-		{{#if vencimiento}}<br>Vencimiento: {{vencimiento}}{{/if}}
+		{{#if vencimiento}}<br>Fecha: {{vencimiento}}{{/if}}
 	{{/template3}}
 {{/markup}}

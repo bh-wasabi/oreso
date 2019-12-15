@@ -13,8 +13,9 @@
       {{group field="importeFactor" type="sum" as="importe"}}
       {{match field="cantidad" neq="=0"}}
     {{/pipeline}}
-    {{join source="articulo" as="articulo" view="lista" id="codigo"}}
-    {{join source="persona" as="ubicacion" view="lista" id="cuenta"}}
+    {{join source="articulo" view="lista" as="articulo" id="codigo"}}
+    {{join source="persona" view="lista" as="ubicacion" id="cuenta"}}
+    {{join source="lote" view="lista" as="loteInfo" id="lote" key="base.lote"}}
     {{calc field="_lote" value="=calc.concat(lote, calc.format('date', vencimiento, 'DD/MMM/YYYY'))"}}
   {{/view}}
   {{#cube id="inv" name="Inventario" view="inv" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
@@ -23,16 +24,21 @@
     {{row field="articulo.base._marca" label="Marca" width="100"}}  
     {{row field="articulo.base._tamano" label="Tamaño" width="100"}}  
     {{row field="articulo.base._color" label="Color/Sabor" width="100"}}      
+    {{row field="articulo.base._cliente" label="Cliente" width="200"}}
     {{row field="articulo._name" label="Descripción" width="100"}}  
     {{row field="_lote" label="Lote"}}
+    {{row field="loteInfo.base.ordenCompra" label="Orden Compra"}}
+    {{row field="loteInfo.base.fabricante" label="Fabricante"}}
+    {{row field="loteInfo.base.referenciaFabricante" label="Referencia Fabricante"}}
     {{sum field="cantidad" label="Cantidad" format="#,"}}
-    {{sum field="importe" label="Importe" format="currency"}}
+    {{!-- {{sum field="importe" label="Importe" format="currency"}} --}}
   {{/cube}}
   {{#view id="comprasPorRecibir"}}
     {{#pipeline}}
       {{filter field="aux" eq="='comprasPorRecibir'"}}
       {{filter condition="=id" field="='cuenta'" eq="=id"}}
       {{group field="persona.nombreCompleto" as="proveedor"}}
+      {{group field="referencia"}}
       {{group field="cuenta"}}
       {{group field="_cuenta"}}
       {{group field="codigo"}}
@@ -40,19 +46,20 @@
       {{group field="importeFactor" type="sum" as="importe"}}
       {{match field="cantidad" neq="=0"}}
     {{/pipeline}}
-    {{join source="articulo" as="articulo" view="lista" id="codigo"}}
+    {{join source="articulo" as="articulo" view="lista" id="codigo" key="base.codigo"}}
   {{/view}}
   {{#cube id="comprasPorRecibir" name="Compras por Recibir" view="comprasPorRecibir" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
     {{column field="proveedor" label="Proveedor"}}
+    {{column field="referencia" label="Referencia"}}
     {{column field="_cuenta" label="Ubicación"}}
     {{row field="articulo.base._marca" label="Marca" width="100"}}  
     {{row field="articulo.base._tamano" label="Tamaño" width="100"}}  
-    {{row field="articulo.base._color" label="Color/Sabor" width="100"}}      
+    {{row field="articulo.base._color" label="Color/Sabor" width="100"}}
+    {{row field="articulo.base._cliente" label="Cliente" width="200"}}
     {{row field="articulo._name" label="Descripción" width="100"}}  
     {{sum field="cantidad" label="Cantidad" format="#,"}}
     {{sum field="importe" label="Importe" format="currency"}}
   {{/cube}}
-
   {{#view id="tesoreria"}}
     {{#pipeline}}
       {{filter field="aux" eq="='tesoreria'"}}
@@ -77,7 +84,7 @@
       {{group field="_cuenta"}}
       {{group field="codigo"}}
       {{!-- {{group field="descripcion"}} --}}
-      {{group field="lote"}}
+      {{group field="referencia"}}
       {{group field="vencimiento"}}
       {{group field="importeFactor" type="sum" as="importe"}}
       {{match field="importe" neq="=0"}}
@@ -89,7 +96,7 @@
     {{column field="vencimiento" type="date" label="Mes" groupInterval="month"}}
     {{column field="vencimiento" type="date" label="Día" groupInterval="day"}}
     {{row field="_cuenta" label="Cliente" width="200"}}
-    {{row field="lote" label="Referencia" width="200"}}
+    {{row field="referencia" label="Referencia" width="200"}}
     {{sum field="importe" label="Importe" format="currency"}}
   {{/cube}}
 
@@ -101,7 +108,7 @@
       {{group field="_cuenta"}}
       {{group field="codigo"}}
       {{!-- {{group field="descripcion"}} --}}
-      {{group field="lote"}}
+      {{group field="referencia"}}
       {{group field="vencimiento"}}
       {{group field="importeFactor" type="sum" as="importe"}}
       {{match field="importe" neq="=0"}}
@@ -113,7 +120,7 @@
     {{column field="vencimiento" type="date" label="Mes" groupInterval="month"}}
     {{column field="vencimiento" type="date" label="Día" groupInterval="day"}}
     {{row field="_cuenta" label="Cliente" width="200"}}
-    {{row field="lote" label="Referencia" width="200"}}
+    {{row field="referencia" label="Referencia" width="200"}}
     {{sum field="importe" label="Importe" format="currency"}}
   {{/cube}}
 
@@ -155,33 +162,45 @@
     {{#pipeline}}
       {{filter field="aux" eq="='cxc'"}}
       {{filter condition="=id" field="='cuenta'" eq="=id"}}
-      {{group field="lote"}}
+      {{group field="referencia"}}
       {{group field="vencimiento"}}
       {{group field="importeFactor" type="sum" as="saldo"}}
       {{sort field="vencimiento" direction="asc"}}
       {{match field="saldo" neq="=0"}}
     {{/pipeline}}
-    {{calc field="etiqueta" value="=calc.concat(lote, '-', calc.format('date', vencimiento, 'DD/MMM/YYYY'))"}}
+    {{calc field="etiqueta" value="=calc.concat(referencia, '-', calc.format('date', vencimiento, 'DD/MMM/YYYY'))"}}
     {{calc field="nombre" type="expr" value="=calc.format('number', saldo, 'currency')"}}
   {{/view}}
   {{#view id="resumenPorPagar"}}
     {{#pipeline}}
       {{filter field="aux" eq="='cxp'"}}
       {{filter condition="=id" field="='cuenta'" eq="=id"}}
-      {{group field="lote"}}
+      {{group field="referencia"}}
       {{group field="vencimiento"}}
       {{group field="importeFactor" type="sum" as="saldo"}}
       {{sort field="vencimiento" direction="asc"}}
       {{match field="saldo" neq="=0"}}
     {{/pipeline}}
-    {{calc field="etiqueta" value="=calc.concat(lote, '-', calc.format('date', vencimiento, 'DD/MMM/YYYY'))"}}
+    {{calc field="etiqueta" value="=calc.concat(referencia, '-', calc.format('date', vencimiento, 'DD/MMM/YYYY'))"}}
     {{calc field="nombre" type="expr" value="=calc.format('number', saldo, 'currency')"}}
+  {{/view}}
+  {{#view id="resumenComprasPorRecibir"}}
+    {{#pipeline}}
+      {{filter field="aux" eq="='comprasPorRecibir'"}}
+      {{filter condition="=id" field="='cuenta'" eq="=id"}}
+      {{group field="referencia"}}
+      {{group field="descripcion"}}
+      {{group field="cantidadFactor" type="sum" as="pendiente"}}
+      {{match field="pendiente" gt="=0"}}
+    {{/pipeline}}
+    {{calc field="etiqueta" value="=referencia"}}
+    {{calc field="nombre" type="expr" value="=calc.concat(descripcion, calc.format('number', pendiente, '#,'))"}}
   {{/view}}
   {{#view id="sugerirLiquidacion"}}
     {{#pipeline}}
       {{filter field="aux" eq="=aux"}}
-      {{filter condition="=id" field="='cuenta'" eq="=id"}}
-      {{group field="lote"}}
+      {{filter field="='cuenta'" eq="=persona"}}
+      {{group field="referencia"}}
       {{group field="vencimiento"}}
       {{group field="importeFactor" type="sum" as="saldo"}}
       {{sort field="vencimiento" direction="asc"}}
@@ -191,13 +210,59 @@
   {{#view id="sugerirNeteo"}}
     {{#pipeline}}
       {{filter field="aux" eq="=aux"}}
-      {{filter condition="=id" field="='cuenta'" eq="=id"}}
-      {{group field="lote"}}
+      {{filter field="='cuenta'" eq="=persona"}}
+      {{group field="referencia"}}
       {{group field="vencimiento"}}
       {{group field="importeFactor" type="sum" as="saldo"}}
       {{sort field="saldo" direction="asc"}}
       {{match field="saldo" neq="=0"}}
     {{/pipeline}}
     {{!-- {{calc field="importe" value="=(saldo<0)?saldo:null"}} --}}
+  {{/view}}  
+  {{#view id="sugerirCompra"}}
+    {{#pipeline}}
+      {{filter field="aux" eq="='comprasPorRecibir'"}}
+      {{filter field="='cuenta'" eq="=persona"}}
+      {{group field="codigo" as="articulo"}}
+      {{group field="descripcion" as="_articulo"}}
+      {{group field="tasa" as="tasaIva"}}
+      {{group field="referencia"}}
+      {{group field="cantidadFactor" type="sum" as="cantidad"}}
+      {{group field="importeFactor" type="sum" as="importe"}}
+      {{!-- {{sort field="descripcion" direction="asc"}} --}}
+      {{match field="cantidad" gt="=0"}}
+    {{/pipeline}}
+    {{calc field="valorUnitario" value="=importe/cantidad"}}
+  {{/view}}  
+  {{#view id="sugerirReciboUbicacion"}}
+    {{#pipeline}}
+      {{filter field="aux" eq="='inv'"}}
+      {{filter field="cuenta" eq="=persona"}}
+      {{group field="codigo" as="articulo"}}
+      {{group field="descripcion" as="_articulo"}}
+      {{group field="cuenta" as="origen"}}
+      {{group field="_cuenta" as="_origen"}}
+      {{group field="referencia"}}
+      {{group field="cantidadFactor" type="sum" as="cantidad"}}
+      {{!-- {{sort field="descripcion" direction="asc"}} --}}
+      {{match field="cantidad" gt="=0"}}
+    {{/pipeline}}
+  {{/view}}  
+  {{#view id="sugerirFactura"}}
+    {{#pipeline}}
+      {{filter field="aux" eq="='inv'"}}
+      {{filter field="persona.id" eq="=persona"}}
+      {{filter field="precio" exists="=true"}}
+      {{group field="codigo" as="articulo"}}
+      {{group field="descripcion" as="_articulo"}}
+      {{group field="cuenta" as="origen"}}
+      {{group field="_cuenta" as="_origen"}}
+      {{group field="precio" as="valorUnitario"}}
+      {{group field="tasa" as="tasaIva"}}
+      {{group field="referencia"}}
+      {{group field="cantidadFactor" type="sum" as="cantidad"}}
+      {{!-- {{sort field="descripcion" direction="asc"}} --}}
+      {{match field="cantidad" gt="=0"}}
+    {{/pipeline}}
   {{/view}}  
 {{/define}}

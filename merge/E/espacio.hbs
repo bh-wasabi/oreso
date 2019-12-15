@@ -1,0 +1,37 @@
+{{#define id="espacio"}}
+  {{#action id="ver" condition="=true" label="Ver Planeación" type="view-scheduler" color="cyan"}}
+    {{scheduler type="plan" startDayHour="=base.horaInicioDia" endDayHour="=base.horaFinDia" cellDuration="30" resourceSource="planAgenda" resourceView="agendasActivas" resourceField="schedule" views="month,week,day" currentView="month"}}
+  {{/action}}
+{{!--   {{#action id="ver2" condition="=true" label="Ver Agenda" type="view-scheduler" btnSolid="false" color="green"}}
+    {{scheduler type="busy" startDayHour="=base.horaInicioDia" endDayHour="=base.horaFinDia" cellDuration="30" resourceSource="planAgenda" resourceView="agendasActivas" resourceField="schedule" views="month,week,day" currentView="week"}}
+  {{/action}} --}}
+  {{#view id="lista"}}
+    {{#find}}
+      {{include field="base.nombre"}}
+      {{include field="base._estatus"}}    
+      {{include field="base._tipoEspacio"}}
+      {{sort field="_name" direction="asc"}}
+      {{filter condition="=area" field="base.area" eq="=area"}}
+    {{/find}}
+  {{/view}}
+  {{#section id="base"}}
+    {{#field id="horaInicioDia"}}
+      {{editor interval="60"}}
+    {{/field}}
+    {{#field id="horaFinDia"}}
+      {{editor interval="60"}}
+    {{/field}}  
+    {{!-- {{field id="esArea" type="expr" value="=@tipoLocalizacion==='area'"}}
+    {{field id="esDireccion" type="expr" value="=@tipoLocalizacion==='direccion'"}} --}}
+  {{/section}}
+{{/define}}
+
+{{#markup}}
+  {{#template id="lista"}}
+    <div>
+      {{base.nombre}}</br>
+      <span style="font-size:12px;">{{base._tipoEspacio}}</span>
+      <span style="font-size:12px;float:right;">{{base._estatus}}</span>
+    </div>    
+  {{/template}}
+{{/markup}}

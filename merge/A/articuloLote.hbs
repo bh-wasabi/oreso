@@ -1,0 +1,39 @@
+{{#define id="articuloLote"}}
+  {{param startOnOpen="articulos"}}
+  {{!-- {{action id="abrir" hide="true"}} --}}
+  {{action id="eliminar" hide="true"}}
+  {{action id="afectar" redirect="/"}}
+  {{#view id="lista"}}
+    {{#find}}
+      {{include field="_name"}}
+      {{include field="base.fechaEmision"}}
+      {{sort field="base.fechaEmision" direction="desc"}}
+      {{search field="_name"}}
+      {{search field="base.fechaEmision"}}
+    {{/find}}
+  {{/view}}
+  {{#grid id="articulos" section="articulos" allowInsert="true" allowRemove="true"}}
+    {{column field="codigo" label="Código" width="150"}}
+    {{column field="descripcion" label="Descripción" width="200"}}
+    {{column field="precioLista" label="Precio Lista" width="100"}}
+    {{column field="marca" label="Marca" width="100"}}
+    {{column field="estilo" label="Estilo" width="100"}}
+    {{column field="tamano" label="Tamaño" width="100"}}
+    {{column field="color" label="Color/Sabor" width="100"}}
+    {{column field="temporada" label="Temporada" width="100"}}
+    {{column field="empaque" label="Empaque" width="100"}}
+    {{column field="cliente" label="Cliente" width="100"}}
+    {{column field="codigoUpc" label="Código UPC" width="100"}}
+    {{column field="codigoSku" label="Código SKU" width="100"}}
+    {{column field="codigoLocal" label="Código Local" width="100"}}
+    {{column field="comentarios" label="Comentarios" width="100"}}
+  {{/grid}}
+{{/define}}
+{{#markup}}
+  {{#template id="lista"}}
+    <div>
+      <span style="font-size:12px;white-space:pre-wrap;font-style:italic;">{{_name}}</span></br>
+      <span style="font-size:12px;">{{date base.fechaEmision "DD/MMM/YYYY"}}</span>
+    </div>
+  {{/template}}
+{{/markup}}

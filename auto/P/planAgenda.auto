@@ -1,0 +1,358 @@
+{{#define type="doc" id="planAgenda"}}
+	{{param defaultDisplay="_name"}}
+	{{param defaultView="lista"}}
+	{{param pageStart="1"}}
+	{{param pagesJustified="true"}}
+	{{param pagesTabsPosition="left"}}
+	{{param pagesTabsWidth="20%"}}
+	{{param pagesTabsMinPadding="false"}}
+	{{param allowAdd="true"}}
+	{{param allowEdit="true"}}
+	{{param allowDirectOperations="true"}}
+	{{param attachSection="adjuntos"}}
+	{{param attachLanguage="es"}}
+	{{param confirmUnSaved="true"}}
+	{{param showChangeHistory="false"}}
+	{{param pdfPageSize="letter"}}
+	{{param startOnOpen="base"}}
+	{{param baseName="Datos Generales"}}
+	{{param displayExpr="_name"}}
+	{{param name="=fn('folioName', 'Planeación Agenda', @_created)"}}
+	{{param typeName="Planeación Agenda"}}
+	{{param group="Registro"}}
+	{{param fullWidth="true"}}
+	{{param modalSize="full"}}
+	{{param folioName="true"}}
+	{{param tempSections="resumen"}}
+	{{param bannerTopTemplate="banner1"}}
+	{{param autoPrint="preliminar"}}
+	{{param autoHeader="true"}}
+	{{action id="subdoc" condition="=false"}}
+	{{action id="subdoc2" condition="=false"}}
+	{{action id="subdoc3" condition="=false"}}
+	{{action id="subdoc4" condition="=false"}}
+	{{action id="tool" condition="=false"}}
+	{{action id="tool2" condition="=false"}}
+	{{action id="tool3" condition="=false"}}
+	{{action id="ver" condition="=false" visibleMode="close"}}
+	{{action id="ver2" condition="=false" visibleMode="close"}}
+	{{action id="copiar" type="copy" label="Copiar" condition="=false"}}
+	{{action id="copiar2" type="copy" label="Copiar" condition="=false"}}
+	{{action id="preliminar" type="report-pdf" label="PDF" report="preliminar" fileName="=_name" visibleMode="close" color="grey"}}
+	{{action id="cancelar" type="cancel-edit" color="grey"}}
+	{{action id="sugerir1" condition="=false" visibleMode="close"}}
+	{{action id="adjuntar" type="attach" label="Adjuntar..." color="grey"}}
+	{{action id="excel" type="openFile" label="Cargar Excel..." color="green" condition="=false"}}
+	{{action id="importarDatos" type="pasteText" label="Importar Datos..." color="green" condition="=false"}}
+	{{action id="eliminar" type="remove" label="Eliminar"}}
+	{{action id="abrir" type="open" label="Editar" condition="=!@_isAffected"}}
+	{{section id="_options" temp="true"}}
+	{{section id="_params" temp="true"}}
+	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
+		{{#field id="comentarios" label="Concepto" type="text" column="A" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+			{{validator type="required"}}
+		{{/field}}
+		{{#field id="area" label="Área" type="text" column="A" references="area" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.area" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="subArea" label="Sub área" type="text" column="A" references="subArea" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.subArea" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="color" label="Color" type="text" column="A" references="colorAgenda" modalColumn="A" labelModalClass="full-width" defaultValue="'blue'"}}
+			{{#editor type="select" preset="cfg.colorAgenda" width="100%"}}
+			{{/editor}}
+			{{validator type="required"}}
+		{{/field}}
+		{{#field id="estatus" label="Estatus" type="text" column="A" references="estatusNota" labelModalClass="full-width" defaultValue="'borrador'"}}
+			{{#editor type="select" preset="cfg.estatusNota" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="tipoRecurso" label="Tipo Recurso" type="text" column="A" references="tipoRecurso" detach="Recurso" fieldSetHeader="Recurso" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.tipoRecurso" width="100%"}}
+			{{/editor}}
+			{{#onChange refresh="true"}}
+			{{/onChange}}
+		{{/field}}
+		{{#field id="prestadorServicios" label="Prestador Servicios" type="reference" if="esPrestadorServicios" column="A" references="_user" detach="Recurso" labelModalClass="full-width"}}
+			{{#editor type="lookup" source="_user" view="lista" searchEnabled="true" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="seleccionarEspecialidad" label="Especialidades del Prestador Servicios" type="array" recordHide="true" if="esPrestadorServicios" column="A" references="especialidad" detach="Recurso" labelModalClass="full-width"}}
+			{{#editor type="tags" preset="cfg.especialidad" searchEnabled="false" searchTimeout="100" showSelectionControls="false" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="especialidad" label="Especialidad" type="text" if="esPrestadorServicios" column="A" references="especialidad" detach="Recurso" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.especialidad" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="equipoMedico" label="Equipo Apoyo" type="reference" if="esEquipoMedico" column="A" references="equipoMedico" detach="Recurso" labelModalClass="full-width"}}
+			{{#editor type="lookup" source="equipoMedico" view="lista" searchEnabled="true" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="tipoEquipoMedico" label="Tipo Equipo Apoyo" type="text" readOnly="true" if="esEquipoMedico" column="A" references="tipoEquipoMedico" detach="Recurso" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.tipoEquipoMedico" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="espacio" label="Espacio" type="reference" if="esEspacio" column="A" references="espacio" detach="Recurso" labelModalClass="full-width"}}
+			{{#editor type="lookup" source="espacio" view="lista" searchEnabled="true" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="tipoEspacio" label="Tipo Espacio" type="text" readOnly="true" if="esEspacio" column="A" references="tipoEspacio" detach="Recurso" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.tipoEspacio" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="capacidad" label="Capacidad (personas)" type="number" recordHide="true" column="A" detach="Recurso" modalHide="true" labelModalClass="full-width" defaultValue="'1'"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+			{{validator type="range" min="1" max="25"}}
+		{{/field}}
+		{{#field id="zonaHoraria" label="Zona Horaria" type="text" column="A" references="timeZones" modalColumn="B" detach="Horizonte Planeación" fieldSetHeader="Horizonte Planeación" labelModalClass="full-width" defaultValue="'America/Mexico_City'"}}
+			{{#editor type="select" preset="cfg.timeZones" width="100%"}}
+			{{/editor}}
+			{{validator type="required"}}
+		{{/field}}
+		{{#field id="duracionCita" label="Duración Cita (min)" type="number" column="A" modalColumn="B" detach="Horizonte Planeación" labelModalClass="full-width" defaultValue="'30'"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="desde" label="Desde" type="date" format="DD/MMM/YYYY" column="A" modalColumn="B" detach="Horizonte Planeación" labelModalClass="full-width" saveFormat="YYYY-MM-DD"}}
+			{{#editor type="date" width="100%"}}
+			{{/editor}}
+			{{validator type="required"}}
+		{{/field}}
+		{{#field id="hasta" label="Hasta" type="date" format="DD/MMM/YYYY" column="A" modalColumn="B" detach="Horizonte Planeación" labelModalClass="full-width" saveFormat="YYYY-MM-DD"}}
+			{{#editor type="date" width="100%"}}
+			{{/editor}}
+			{{validator type="required"}}
+		{{/field}}
+		{{#field id="disponibilidad" label="Disponibilidad" type="docs" column="A" references="agendaDisponibilidad" modalColumn="B" detach="Horizonte Planeación" labelModalClass="full-width" source="agendaDisponibilidad"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="excepcion" label="Excepciones" type="docs" column="A" references="agendaExcepcion" modalColumn="B" detach="Horizonte Planeación" labelModalClass="full-width" source="agendaExcepcion"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{field id="nombre" label="Nombre" hide="true" type="expr" value="=fn('folioName', 'Planeación Agenda', @_created)"}}
+	{{/section}}
+	{{section id="resumen" temp="true"}}
+	{{#report id="preliminar-encabezado"}}
+		{{#stack}}
+			{{#columns margin="20" widths="100,150,*"}}
+				{{#column}}
+					{{row image="logo" alignment="left" imageWidth="90" margin="0,-15,0,0"}}
+				{{/column}}
+				{{#column margin="0,-10,0,0"}}
+					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Leibnitz 83-1" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Anzures 11590 CDMX" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
+				{{/column}}
+				{{#column}}
+					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
+					{{/row}}
+				{{/column}}
+			{{/columns}}
+		{{/stack}}
+		{{#stack}}
+			{{#columns margin="30,-20,0,30"}}
+				{{#column}}
+					{{#record layout="lightHorizontalLines" section="persona" headerStyle="field" margin="0,5,5,5" widths="80,170" fontSize="6"}}
+						{{row field="nombreCompleto" label="Paciente"}}
+						{{row expr="=calc.concat3(_genero, calc.format('date', fechaNacimiento, 'DD/MMM/YYYY')+' ('+_edadActual+')')" label="Género / Fecha Nacimiento"}}
+						{{row field="clave" label="Expediente / CURP"}}
+						{{row expr="=calc.concat3(_created._service, calc.format('date', _updated.date, 'DD/MMM/YYYY h:mma'))" label="Servicio / Fecha Atención"}}
+						{{row expr="=calc.concat3(base.solicitud.base._solicitante, base.solicitud.base._especialidad)" label="Solicitante / Especialidad"}}
+					{{/record}}
+				{{/column}}
+				{{#column}}
+					{{#record layout="lightHorizontalLines" section="contexto" headerStyle="field" margin="0,5,5,5" widths="80,170" fontSize="6" condition="=contexto.ingreso"}}
+						{{row expr="=calc.concat3(contexto._medico, calc.format('date', contexto.ingreso.fechaHora, 'DD/MMM/YYYY hh:mma'))" label="Médico / Fecha Ingreso"}}
+						{{row expr="=calc.concat3(contexto._servicio, contexto._cama)" label="Servicio / Cama Ingreso"}}
+						{{row expr="=contexto.ingreso._seleccionarDiagnostico" label="Diagnóstico Ingreso"}}
+					{{/record}}
+				{{/column}}
+			{{/columns}}
+		{{/stack}}
+	{{/report}}
+	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true" pageMargins="30,130,30,40"}}
+		{{#stack}}
+			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
+		{{/stack}}
+		{{#stack}}
+			{{#record title="Planeación Agenda" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+				{{row expr="=calc.format('date', _updated.date||_created.date, 'DD/MMM/YYYY h:mma')" label="Fecha Emisión"}}
+				{{row expr="=_created._service" label="Servicio"}}
+				{{row field="comentarios" align="left"}}
+				{{row field="area" align="left"}}
+				{{row field="subArea" align="left"}}
+				{{row field="color" align="left"}}
+				{{row field="estatus" align="left"}}
+			{{/record}}
+		{{/stack}}
+		{{#stack}}
+			{{#record title="Recurso" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+				{{row expr="=calc.format('date', _updated.date||_created.date, 'DD/MMM/YYYY h:mma')" label="Fecha Emisión"}}
+				{{row expr="=_created._service" label="Servicio"}}
+				{{row field="tipoRecurso" align="left"}}
+				{{row field="prestadorServicios" condition="esPrestadorServicios" align="left"}}
+				{{row field="seleccionarEspecialidad" condition="esPrestadorServicios" align="left"}}
+				{{row field="especialidad" condition="esPrestadorServicios" align="left"}}
+				{{row field="equipoMedico" condition="esEquipoMedico" align="left"}}
+				{{row field="tipoEquipoMedico" condition="esEquipoMedico" align="left"}}
+				{{row field="espacio" condition="esEspacio" align="left"}}
+				{{row field="tipoEspacio" condition="esEspacio" align="left"}}
+				{{row field="capacidad" align="left"}}
+			{{/record}}
+		{{/stack}}
+		{{#stack}}
+			{{#record title="Horizonte Planeación" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+				{{row expr="=calc.format('date', _updated.date||_created.date, 'DD/MMM/YYYY h:mma')" label="Fecha Emisión"}}
+				{{row expr="=_created._service" label="Servicio"}}
+				{{row field="zonaHoraria" align="left"}}
+				{{row field="duracionCita" align="left"}}
+				{{row field="desde" align="left"}}
+				{{row field="hasta" align="left"}}
+				{{row field="disponibilidad" align="left"}}
+				{{row field="excepcion" align="left"}}
+			{{/record}}
+		{{/stack}}
+	{{/report}}
+	{{#view id="lista" name="Lista"}}
+		{{#find}}
+			{{include field="_name"}}
+			{{search field="_name"}}
+			{{sort field="_id" direction="desc"}}
+		{{/find}}
+		{{editor display="_name"}}
+	{{/view}}
+	{{#browser id="lista" view="lista" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%"}}
+		{{list itemTemplate="lista" allowSearch="true" allowRefresh="true" allowEdit="true" allowInsert="true"}}
+	{{/browser}}
+{{/define}}
+{{#markup}}
+	{{#page name="Planeación Agenda"}}
+		{{row}}
+		{{row}}
+		{{#row}}
+			{{#zone id="base" modal="base"}}
+				{{#row class="auto-form-row"}}
+					{{#col medium="100%" class="auto-form-col"}}
+						{{#h5 class="auto-form-h5"}}
+							Planeación Agenda
+						{{/h5}}
+						{{#with base}}
+							{{record this widths="20%,80%" rows="comentarios, area, subArea, color, estatus" class="auto-form-record"}}
+							{{br}}
+						{{/with}}
+					{{/col}}
+				{{/row}}
+				{{#row class="auto-form-row"}}
+					{{#col medium="100%" class="auto-form-col"}}
+						{{#h5 class="auto-form-h5"}}
+							Recurso
+						{{/h5}}
+						{{#with base}}
+							{{record this widths="20%,80%" rows="tipoRecurso, prestadorServicios, especialidad, equipoMedico, tipoEquipoMedico, espacio, tipoEspacio" class="auto-form-record"}}
+							{{br}}
+						{{/with}}
+					{{/col}}
+				{{/row}}
+				{{#row class="auto-form-row"}}
+					{{#col medium="100%" class="auto-form-col"}}
+						{{#h5 class="auto-form-h5"}}
+							Horizonte Planeación
+						{{/h5}}
+						{{#with base}}
+							{{record this widths="20%,80%" rows="zonaHoraria, duracionCita, desde, hasta, disponibilidad, excepcion" class="auto-form-record"}}
+							{{br}}
+						{{/with}}
+					{{/col}}
+				{{/row}}
+			{{/zone}}
+		{{/row}}
+		{{#row}}
+			{{#zone id="base" modal="base"}}
+			{{/zone}}
+		{{/row}}
+	{{/page}}
+	{{#modal base id="base" name="Planeación Agenda" size="full"}}
+		{{#col medium="50%" vertical="50%"}}
+			{{#fieldSet}}
+				{{field comentarios}}
+				{{field area}}
+				{{field subArea}}
+				{{field color}}
+				{{field estatus}}
+			{{/fieldSet}}
+			{{#fieldSet header="Recurso"}}
+				{{field tipoRecurso header="Recurso"}}
+				{{field prestadorServicios}}
+				{{field seleccionarEspecialidad}}
+				{{field especialidad}}
+				{{field equipoMedico}}
+				{{field tipoEquipoMedico}}
+				{{field espacio}}
+				{{field tipoEspacio}}
+				{{field capacidad hide="true"}}
+			{{/fieldSet}}
+		{{/col}}
+		{{#col medium="50%" vertical="50%"}}
+			{{#fieldSet header="Horizonte Planeación"}}
+				{{field zonaHoraria header="Horizonte Planeación"}}
+				{{field duracionCita}}
+				{{field desde}}
+				{{field hasta}}
+				{{field disponibilidad}}
+				{{field excepcion}}
+			{{/fieldSet}}
+		{{/col}}
+	{{/modal}}
+	{{#template id="lista"}}
+		<div>{{_name}}</div>
+	{{/template}}
+	{{#template2 id="planAgenda"}}
+		<br>{{comentarios}}
+		<br>Área: {{_area}}
+		<br>Sub área: {{_subArea}}
+		<br>Color: {{_color}}
+		<br>Estatus: {{_estatus}}
+		<br>Tipo Recurso: {{_tipoRecurso}}
+		{{#if esPrestadorServicios}}<br>Prestador Servicios: {{_prestadorServicios}}{{/if}}
+		{{#if esPrestadorServicios}}<br>Especialidad: {{_especialidad}}{{/if}}
+		{{#if esEquipoMedico}}<br>Equipo Apoyo: {{_equipoMedico}}{{/if}}
+		{{#if esEquipoMedico}}<br>Tipo Equipo Apoyo: {{_tipoEquipoMedico}}{{/if}}
+		{{#if esEspacio}}<br>Espacio: {{_espacio}}{{/if}}
+		{{#if esEspacio}}<br>Tipo Espacio: {{_tipoEspacio}}{{/if}}
+		<br>Zona Horaria: {{_zonaHoraria}}
+		<br>Duración Cita (min): {{duracionCita}}
+		<br>Desde: {{date desde "DD/MMM/YYYY"}}
+		<br>Hasta: {{date hasta "DD/MMM/YYYY"}}
+		<br>Disponibilidad: {{_disponibilidad}}
+		<br>Excepciones: {{_excepcion}}
+	{{/template2}}
+	{{#template3 id="planAgenda"}}
+		{{#if comentarios}}<br>{{comentarios}}{{/if}}
+		{{#if area}}<br>Área: {{_area}}{{/if}}
+		{{#if subArea}}<br>Sub área: {{_subArea}}{{/if}}
+		{{#if color}}<br>Color: {{_color}}{{/if}}
+		{{#if estatus}}<br>Estatus: {{_estatus}}{{/if}}
+		{{#if tipoRecurso}}<br>Tipo Recurso: {{_tipoRecurso}}{{/if}}
+		{{#if esPrestadorServicios}}{{#if prestadorServicios}}<br>Prestador Servicios: {{_prestadorServicios}}{{/if}}{{/if}}
+		{{#if esPrestadorServicios}}{{#if especialidad}}<br>Especialidad: {{_especialidad}}{{/if}}{{/if}}
+		{{#if esEquipoMedico}}{{#if equipoMedico}}<br>Equipo Apoyo: {{_equipoMedico}}{{/if}}{{/if}}
+		{{#if esEquipoMedico}}{{#if tipoEquipoMedico}}<br>Tipo Equipo Apoyo: {{_tipoEquipoMedico}}{{/if}}{{/if}}
+		{{#if esEspacio}}{{#if espacio}}<br>Espacio: {{_espacio}}{{/if}}{{/if}}
+		{{#if esEspacio}}{{#if tipoEspacio}}<br>Tipo Espacio: {{_tipoEspacio}}{{/if}}{{/if}}
+		{{#if zonaHoraria}}<br>Zona Horaria: {{_zonaHoraria}}{{/if}}
+		{{#if duracionCita}}<br>Duración Cita (min): {{duracionCita}}{{/if}}
+		{{#if desde}}<br>Desde: {{date desde "DD/MMM/YYYY"}}{{/if}}
+		{{#if hasta}}<br>Hasta: {{date hasta "DD/MMM/YYYY"}}{{/if}}
+		{{#if disponibilidad}}<br>Disponibilidad: {{_disponibilidad}}{{/if}}
+		{{#if excepcion}}<br>Excepciones: {{_excepcion}}{{/if}}
+	{{/template3}}
+{{/markup}}

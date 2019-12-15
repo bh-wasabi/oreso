@@ -93,7 +93,7 @@
 	{{/section}}
 	{{#section id="aplicacion" type="array"}}
 		{{field id="lote" label="Lote" type="text" column="A"}}
-		{{#field id="vencimiento" label="Vencimiento" type="text" column="A"}}
+		{{#field id="vencimiento" label="Fecha" type="text" column="A"}}
 			{{#editor case="YYYY-MM-DD"}}
 			{{/editor}}
 		{{/field}}
@@ -124,7 +124,7 @@
 	{{section id="resumen" temp="true"}}
 	{{#report id="preliminar-encabezado"}}
 		{{#stack}}
-			{{#columns margin="20" widths="210,150,*"}}
+			{{#columns margin="20" widths="100,150,*"}}
 				{{#column}}
 					{{row image="logo" alignment="left" imageWidth="90" margin="0,-15,0,0"}}
 				{{/column}}
@@ -146,7 +146,7 @@
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
 				{{row field="responsableAcademico" condition="esEstudiante" align="left"}}
 				{{row field="estatus" align="left"}}
 				{{row field="comentarios" align="left"}}
@@ -155,7 +155,7 @@
 		{{#stack}}
 			{{#row text="Aplicación" fontSize="10" bold="true"}}
 			{{/row}}
-			{{#table title="Aplicación" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="aplicacion" headerStyle="field" margin="0,5,10,10" removeEmptyCols="true"}}
+			{{#table title="Aplicación" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="aplicacion" headerStyle="field" margin="0,5,10,10" removeEmptyCols="true"}}
 				{{column field="lote"}}
 				{{column field="vencimiento"}}
 				{{column field="ivaFactor"}}

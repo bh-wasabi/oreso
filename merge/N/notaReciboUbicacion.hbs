@@ -1,0 +1,24 @@
+{{#define id="notaReciboUbicacion"}}
+  {{param attribute1="=_created.service"}}
+  {{param attribute2="=_created.subType"}}
+  {{param removeIfEmptySection="articulos"}}
+  {{param removeIfEmptyField="cantidad"}}
+  {{param startOnOpen="articulos"}}
+
+  {{#section id="articulos"}}
+    {{#field id="aliasDestino"}}
+      {{#onChange}}
+        {{set destino="=calc.getPresetPersona('app.aliasUbicacion', aliasDestino, _doc.persona.id).ubicacion"}}
+        {{set _destino="=calc.getPresetPersona('app.aliasUbicacion', aliasDestino, _doc.persona.id)._ubicacion"}}
+      {{/onChange}}
+    {{/field}}
+  {{/section}}
+  
+  {{#grid id="articulos" section="articulos" allowInsert="false" allowRemove="false" allowSort="true" sortBy="referencia,_articulo"}}
+    {{column field="_articulo" label="Artículo" width="400" readOnly="true"}}
+    {{column field="_origen" label="Origen" width="150" readOnly="true"}}
+    {{column field="aliasDestino" label="Destino" width="60" defaultValue="=_params.aliasDestino"}}
+    {{column field="_destino" label="Ubicación" width="150"}}
+    {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
+  {{/grid}}
+{{/define}}

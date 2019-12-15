@@ -6,7 +6,7 @@
   {{param startOnOpen="aplicacion"}}
 
   {{#grid id="aplicacion" section="aplicacion" allowInsert="false" allowRemove="false" applyBaseColumn="saldo" applyTo="importe" applySuggest="saldo" applyValidateNetZero="true"}}
-    {{column field="lote" label="Referencia" width="200"}}
+    {{column field="referencia" label="Referencia" width="200"}}
     {{column field="vencimiento" label="Vencimiento" validateDate="true" width="110"}}
     {{!-- {{column field="ivaFactor" label="Factor IVA" width="80"}} --}}
     {{column field="saldo" label="Saldo" width="150" type="numeric" format="#,.##" readOnly="true"}}

@@ -1,0 +1,7 @@
+{{#define id="agendaExcepcion"}}
+  {{#section id="base"}}
+    {{field id="esFecha" type="expr" value="=@motivo==='dia-festivo'"}}
+    {{field id="esRango" type="expr" value="=!@esFecha"}}
+    {{validator type="expr" validIf="=@esFecha||(moment().diff(@desde, 'days')>=moment().diff(@hasta, 'days'))" message="Fecha Incorecta"}}
+  {{/section}}
+{{/define}} 
