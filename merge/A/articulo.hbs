@@ -32,6 +32,7 @@
   {{/view}}
   {{#view id="porCodigoUpc"}}
     {{#find limit="-1"}}
+      {{include field="base.codigo"}}
       {{include field="base.codigoUpc"}}
       {{include field="_name"}}
       {{include field="base.precioLista"}}
@@ -40,6 +41,7 @@
   {{/view}}
   {{#view id="porCodigoSku"}}
     {{#find limit="-1"}}
+      {{include field="base.codigo"}}
       {{include field="base.codigoSku"}}
       {{include field="_name"}}
       {{include field="base.precioLista"}}
@@ -48,6 +50,7 @@
   {{/view}}
   {{#view id="porCodigoLocal"}}
     {{#find limit="-1"}}
+      {{include field="base.codigo"}}
       {{include field="base.codigoLocal"}}
       {{include field="_name"}}
       {{include field="base.precioLista"}}
