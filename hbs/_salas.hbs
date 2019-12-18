@@ -8,7 +8,7 @@
   {{/menu}}
 
   {{browser id="agendas" menu="menu"}}
-  {{scheduler id="agendas" type="free" views="week, day" currentView="week" firstDayOfWeek="0" startDayHour="9" endDayHour="24" source="planAgenda" view="_salas" multiResources="true" resourceLabel="Salas" resourceId="actor" resourceName="_actor"}}
+  {{scheduler id="agendas" type="free" views="week, day" currentView="week" firstDayOfWeek="0" startDayHour="9" endDayHour="24" source="planAgenda" view="_salas" multiResources="true" resourceLabel="Salas" resourceId="actor" resourceName="_actor" template="verAgenda"}}
 {{/define}}
 
 {{#markup}}
@@ -19,4 +19,10 @@
       {{/col}}
     {{/row}}
   {{/page}}
+  {{#template id="verAgenda"}}
+    <div style="margin:-7px;padding:7px;height:110%;width:auto;color:white;background-color:{{color}};">
+      {{text}}<br>
+      {{date startDate "HH:mm A"}} - {{date endDate "HH:mm A"}}
+    </div>
+  {{/template}}
 {{/markup}}

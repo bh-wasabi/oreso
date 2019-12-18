@@ -3556,10 +3556,10 @@
 {"name":"estatusNota","code":"afectado","display":"Afectado","order":2}
 {"index":{"_id":"estatusNota/cancelado"}}
 {"name":"estatusNota","code":"cancelado","display":"Cancelado","order":3}
-{"index":{"_id":"area/normal"}}
-{"name":"area","code":"normal","display":"Normal","order":1}
+{"index":{"_id":"area/tradicional"}}
+{"name":"area","code":"tradicional","display":"Tradicional","order":1}
 {"index":{"_id":"area/lux"}}
-{"name":"area","code":"lux","display":"Lux","order":1780}
+{"name":"area","code":"lux","display":"Lux","order":2}
 {"index":{"_id":"tipoEspacio/sala"}}
 {"name":"tipoEspacio","code":"sala","display":"Sala","order":1}
 {"index":{"_id":"tipoEspacio/sillon"}}

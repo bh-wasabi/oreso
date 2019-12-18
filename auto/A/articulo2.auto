@@ -110,10 +110,10 @@
 					{{row image="logo" alignment="left" imageWidth="90" margin="0,-15,0,0"}}
 				{{/column}}
 				{{#column margin="0,-10,0,0"}}
-					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Leibnitz 83-1" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Anzures 11590 CDMX" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Xtra Cinemas" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Reforma 215" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Lomas de Chapultepec 11000 CDMX" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Teléfono 55 5284 8500" alignment="left" fontSize="6" color="grey"}}
 				{{/column}}
 				{{#column}}
 					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
@@ -124,17 +124,17 @@
 	{{/report}}
 	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true"}}
 		{{#stack}}
-			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
+			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="articulo2" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+			{{#record title="articulo2" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-15,0,0,10" widths="100,450"}}
 				{{row field="codigo" align="left"}}
 				{{row field="descripcion" align="left"}}
 				{{row field="precioLista" align="left"}}
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Clasificadores" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+			{{#record title="Clasificadores" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-15,0,0,10" widths="100,450"}}
 				{{row field="marca" align="left"}}
 				{{row field="estilo" align="left"}}
 				{{row field="tamano" align="left"}}
@@ -148,7 +148,7 @@
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Comentarios" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+			{{#record title="Comentarios" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-15,0,0,10" widths="100,450"}}
 				{{row field="comentarios" align="left"}}
 			{{/record}}
 		{{/stack}}

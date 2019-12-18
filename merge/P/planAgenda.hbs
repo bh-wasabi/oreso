@@ -88,11 +88,12 @@
   {{#template id="lista"}}
     <div>
       {{_name}}
-      <span style="font-size:12px;float:right;">{{base._estatus}}</span>
+      <span style="float:right;">{{base._recurso}}</span>
       </br>
-      {{base.comentarios}}
-      <span style="font-size:12px;">{{base._recurso}}</span>
-      <span style="float:right;">{{base._area}}{{#if base.subArea}} / {{base._subArea}}{{/if}}</span>
+      <span style="font-size:12px;">{{base.comentarios}}</span>
+      <span style="font-size:12px;float:right;">{{base._area}}{{#if base.subArea}} / {{base._subArea}}{{/if}}</span>
+      {{!-- <br>
+      <span style="font-size:12px;float:right;">{{base._estatus}}</span> --}}
     </div>
   {{/template}}
 {{/markup}}

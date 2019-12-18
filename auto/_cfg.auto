@@ -459,7 +459,7 @@
 		{{item id="cancelado" nombre="Cancelado"}}
 	{{/config}}
 	{{#config id="area"}}
-		{{item id="normal" nombre="Normal"}}
+		{{item id="tradicional" nombre="Tradicional"}}
 		{{item id="lux" nombre="Lux"}}
 	{{/config}}
 	{{#config id="tipoEspacio"}}

@@ -147,10 +147,10 @@
 					{{row image="logo" alignment="left" imageWidth="90" margin="0,-15,0,0"}}
 				{{/column}}
 				{{#column margin="0,-10,0,0"}}
-					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Leibnitz 83-1" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Anzures 11590 CDMX" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Xtra Cinemas" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Reforma 215" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Lomas de Chapultepec 11000 CDMX" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Teléfono 55 5284 8500" alignment="left" fontSize="6" color="grey"}}
 				{{/column}}
 				{{#column}}
 					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
@@ -181,10 +181,10 @@
 	{{/report}}
 	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true" pageMargins="30,130,30,40"}}
 		{{#stack}}
-			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
+			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Planeación Agenda" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+			{{#record title="Planeación Agenda" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-15,0,0,10" widths="100,450"}}
 				{{row expr="=calc.format('date', _updated.date||_created.date, 'DD/MMM/YYYY h:mma')" label="Fecha Emisión"}}
 				{{row expr="=_created._service" label="Servicio"}}
 				{{row field="comentarios" align="left"}}
@@ -195,7 +195,7 @@
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Recurso" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+			{{#record title="Recurso" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-15,0,0,10" widths="100,450"}}
 				{{row expr="=calc.format('date', _updated.date||_created.date, 'DD/MMM/YYYY h:mma')" label="Fecha Emisión"}}
 				{{row expr="=_created._service" label="Servicio"}}
 				{{row field="tipoRecurso" align="left"}}
@@ -210,7 +210,7 @@
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Horizonte Planeación" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+			{{#record title="Horizonte Planeación" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-15,0,0,10" widths="100,450"}}
 				{{row expr="=calc.format('date', _updated.date||_created.date, 'DD/MMM/YYYY h:mma')" label="Fecha Emisión"}}
 				{{row expr="=_created._service" label="Servicio"}}
 				{{row field="zonaHoraria" align="left"}}

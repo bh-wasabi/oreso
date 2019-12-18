@@ -93,7 +93,7 @@
 	{{/section}}
 	{{#section id="aplicacion" type="array"}}
 		{{field id="lote" label="Lote" type="text" column="A"}}
-		{{#field id="vencimiento" label="Fecha" type="text" column="A"}}
+		{{#field id="vencimiento" label="Vencimiento" type="text" column="A"}}
 			{{#editor case="YYYY-MM-DD"}}
 			{{/editor}}
 		{{/field}}
@@ -129,10 +129,10 @@
 					{{row image="logo" alignment="left" imageWidth="90" margin="0,-15,0,0"}}
 				{{/column}}
 				{{#column margin="0,-10,0,0"}}
-					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Leibnitz 83-1" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Anzures 11590 CDMX" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Xtra Cinemas" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Reforma 215" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Lomas de Chapultepec 11000 CDMX" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Teléfono 55 5284 8500" alignment="left" fontSize="6" color="grey"}}
 				{{/column}}
 				{{#column}}
 					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
@@ -143,19 +143,19 @@
 	{{/report}}
 	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true"}}
 		{{#stack}}
-			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
+			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-15,0,0,10" widths="100,450"}}
 				{{row field="responsableAcademico" condition="esEstudiante" align="left"}}
 				{{row field="estatus" align="left"}}
 				{{row field="comentarios" align="left"}}
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
-			{{#row text="Aplicación" fontSize="10" bold="true"}}
+			{{#row text="Aplicación" fontSize="10" bold="true" margin="-15,0,0,10"}}
 			{{/row}}
-			{{#table title="Aplicación" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="aplicacion" headerStyle="field" margin="0,5,10,10" removeEmptyCols="true"}}
+			{{#table title="Aplicación" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="aplicacion" headerStyle="field" margin="-15,0,0,10" removeEmptyCols="true"}}
 				{{column field="lote"}}
 				{{column field="vencimiento"}}
 				{{column field="ivaFactor"}}
@@ -170,7 +170,7 @@
 			{{/table}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Firmas" titleStyle="title" layout="lightHorizontalLines" fontSize="8" section="_stamp" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
+			{{#record title="Firmas" titleStyle="title" layout="lightHorizontalLines" fontSize="8" section="_stamp" headerStyle="field" margin="-15,0,0,10" widths="100,450"}}
 				{{row expr="=_created._user" label="Elabora"}}
 				{{row expr="=_created._identification" label="Especialidad Elabora"}}
 				{{row expr="=''" label="Firma Elabora"}}

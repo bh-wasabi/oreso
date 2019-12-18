@@ -1,9 +1,9 @@
 {{#define id="espacio"}}
   {{#action id="ver" condition="=true" label="Ver Planeación" type="view-scheduler" color="cyan"}}
-    {{scheduler type="plan" startDayHour="=base.horaInicioDia" endDayHour="=base.horaFinDia" cellDuration="30" resourceSource="planAgenda" resourceView="agendasActivas" resourceField="schedule" views="month,week,day" currentView="month"}}
+    {{scheduler type="plan" startDayHour="=base.horaInicioDia" endDayHour="=base.horaFinDia" cellDuration="30" resourceSource="planAgenda" resourceView="lista" resourceField="schedule" views="month,week,day" currentView="month"}}
   {{/action}}
 {{!--   {{#action id="ver2" condition="=true" label="Ver Agenda" type="view-scheduler" btnSolid="false" color="green"}}
-    {{scheduler type="busy" startDayHour="=base.horaInicioDia" endDayHour="=base.horaFinDia" cellDuration="30" resourceSource="planAgenda" resourceView="agendasActivas" resourceField="schedule" views="month,week,day" currentView="week"}}
+    {{scheduler type="busy" startDayHour="=base.horaInicioDia" endDayHour="=base.horaFinDia" cellDuration="30" resourceSource="planAgenda" resourceView="lista" resourceField="schedule" views="month,week,day" currentView="week"}}
   {{/action}} --}}
   {{#view id="lista"}}
     {{#find}}
