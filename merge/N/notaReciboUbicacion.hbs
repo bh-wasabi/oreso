@@ -14,11 +14,12 @@
     {{/field}}
   {{/section}}
   
-  {{#grid id="articulos" section="articulos" allowInsert="false" allowRemove="false" allowSort="true" sortBy="referencia,_articulo"}}
-    {{column field="_articulo" label="Artículo" width="400" readOnly="true"}}
+  {{#grid id="articulos" section="articulos" keyField="cantidad" allowInsert="false" allowRemove="false" allowSort="true" sortBy="referencia,descripcion"}}
+    {{column field="codigo" label="Código" width="150" readOnly="true"}}
+    {{column field="descripcion" label="Artículo" width="350" readOnly="true"}}
     {{column field="_origen" label="Origen" width="150" readOnly="true"}}
     {{column field="aliasDestino" label="Destino" width="60" defaultValue="=_params.aliasDestino"}}
-    {{column field="_destino" label="Ubicación" width="150"}}
+    {{column field="_destino" label="Ubicación" width="150" required="true"}}
     {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
   {{/grid}}
 {{/define}}

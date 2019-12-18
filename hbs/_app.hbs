@@ -635,28 +635,32 @@
   {{#mapPreset source="articulo" view="porCodigo" preset="aliasArticulo"}}
     {{set id="=base.codigo"}}
     {{set articulo="=_id"}}
-    {{set _articulo="=_name"}}
+    {{set descripcion="=_name"}}
+    {{set codigo="=base.codigo"}}
     {{set precio="=base.precioLista"}}
   {{/mapPreset}}
 
   {{#mapPreset source="articulo" view="porCodigoUpc" preset="aliasArticulo"}}
     {{set id="=base.codigoUpc"}}
     {{set articulo="=_id"}}
-    {{set _articulo="=_name"}}
+    {{set descripcion="=_name"}}
+    {{set codigo="=base.codigo"}}
     {{set precio="=base.precioLista"}}
   {{/mapPreset}}
 
   {{#mapPreset source="articulo" view="porCodigoSku" preset="aliasArticulo"}}
     {{set id="=base.codigoSku"}}
     {{set articulo="=_id"}}
-    {{set _articulo="=_name"}}
+    {{set descripcion="=_name"}}
+    {{set codigo="=base.codigo"}}
     {{set precio="=base.precioLista"}}
   {{/mapPreset}}
 
   {{#mapPreset source="articulo" view="porCodigoLocal" preset="aliasArticulo"}}
     {{set id="=base.codigoLocal"}}
     {{set articulo="=_id"}}
-    {{set _articulo="=_name"}}
+    {{set descripcion="=_name"}}
+    {{set codigo="=base.codigo"}}
     {{set precio="=base.precioLista"}}
   {{/mapPreset}}
 

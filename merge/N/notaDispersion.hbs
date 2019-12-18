@@ -14,7 +14,7 @@
     {{/field}}
   {{/section}}
 
-  {{#grid id="aplicacion" section="aplicacion" allowInsert="true" allowRemove="true"}}
+  {{#grid id="aplicacion" section="aplicacion" keyField="importe" allowInsert="true" allowRemove="true"}}
     {{!-- {{column field="referencia" label="Referencia" width="250"}}
     {{column field="vencimiento" label="Vencimiento" validateDate="true" width="110"}} --}}
     {{!-- {{column field="ivaFactor" label="Factor IVA" width="80"}} --}}
@@ -22,6 +22,6 @@
     {{column field="formaPago" label="Forma Pago" width="150"}}
     {{column field="referenciaPago" label="Referencia Pago" width="250"}}
     {{column field="aliasDestino" label="Destino" width="60" defaultValue="=_params.aliasDestino"}}
-    {{column field="_destino" label="Cuenta Destino" width="150" required="false"}}
+    {{column field="_destino" label="Cuenta Destino" width="150" required="true"}}
   {{/grid}}
 {{/define}}

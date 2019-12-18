@@ -13,7 +13,7 @@
       {{group field="importeFactor" type="sum" as="importe"}}
       {{match field="cantidad" neq="=0"}}
     {{/pipeline}}
-    {{join source="articulo" view="lista" as="articulo" id="codigo"}}
+    {{join source="articulo" view="lista" as="articulo" id="codigo" key="base.codigo"}}
     {{join source="persona" view="lista" as="ubicacion" id="cuenta"}}
     {{join source="lote" view="lista" as="loteInfo" id="lote" key="base.lote"}}
     {{calc field="_lote" value="=calc.concat(lote, calc.format('date', vencimiento, 'DD/MMM/YYYY'))"}}
@@ -135,7 +135,7 @@
       {{group field="cantidadFactor" type="sum" as="cantidad"}}
       {{match field="cantidad" neq="=0"}}
     {{/pipeline}}
-    {{calc field="etiqueta" type="expr" value="=descripcion"}}
+    {{calc field="etiqueta" type="expr" value="=codigo"}}
     {{calc field="nombre" type="expr" value="=calc.concat(calc.format('number', cantidad, '#,'), @lote, @vencimiento&&calc.format('date', @vencimiento, 'DD/MMM/YYYY'))"}}
   {{/view}}
   {{#view id="resumenCaja"}}
@@ -189,12 +189,13 @@
       {{filter field="aux" eq="='comprasPorRecibir'"}}
       {{filter condition="=id" field="='cuenta'" eq="=id"}}
       {{group field="referencia"}}
+      {{group field="codigo"}}
       {{group field="descripcion"}}
       {{group field="cantidadFactor" type="sum" as="pendiente"}}
       {{match field="pendiente" gt="=0"}}
     {{/pipeline}}
-    {{calc field="etiqueta" value="=referencia"}}
-    {{calc field="nombre" type="expr" value="=calc.concat(descripcion, calc.format('number', pendiente, '#,'))"}}
+    {{calc field="etiqueta" value="=calc.concat(referencia)"}}
+    {{calc field="nombre" type="expr" value="=calc.concat(codigo, calc.format('number', pendiente, '#,'))"}}
   {{/view}}
   {{#view id="sugerirLiquidacion"}}
     {{#pipeline}}
@@ -223,8 +224,8 @@
     {{#pipeline}}
       {{filter field="aux" eq="='comprasPorRecibir'"}}
       {{filter field="='cuenta'" eq="=persona"}}
-      {{group field="codigo" as="articulo"}}
-      {{group field="descripcion" as="_articulo"}}
+      {{group field="codigo" as="codigo"}}
+      {{group field="descripcion" as="descripcion"}}
       {{group field="tasa" as="tasaIva"}}
       {{group field="referencia"}}
       {{group field="cantidadFactor" type="sum" as="cantidad"}}
@@ -238,8 +239,8 @@
     {{#pipeline}}
       {{filter field="aux" eq="='inv'"}}
       {{filter field="cuenta" eq="=persona"}}
-      {{group field="codigo" as="articulo"}}
-      {{group field="descripcion" as="_articulo"}}
+      {{group field="codigo" as="codigo"}}
+      {{group field="descripcion" as="descripcion"}}
       {{group field="cuenta" as="origen"}}
       {{group field="_cuenta" as="_origen"}}
       {{group field="referencia"}}
@@ -253,8 +254,8 @@
       {{filter field="aux" eq="='inv'"}}
       {{filter field="persona.id" eq="=persona"}}
       {{filter field="precio" exists="=true"}}
-      {{group field="codigo" as="articulo"}}
-      {{group field="descripcion" as="_articulo"}}
+      {{group field="codigo" as="codigo"}}
+      {{group field="descripcion" as="descripcion"}}
       {{group field="cuenta" as="origen"}}
       {{group field="_cuenta" as="_origen"}}
       {{group field="precio" as="valorUnitario"}}

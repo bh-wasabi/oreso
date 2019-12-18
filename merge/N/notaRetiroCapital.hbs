@@ -14,7 +14,7 @@
     {{/field}}
   {{/section}}
 
-  {{#grid id="aplicacion" section="aplicacion" allowInsert="false" allowRemove="false"}}
+  {{#grid id="aplicacion" section="aplicacion"  allowInsert="true" allowRemove="true" keyField="importe"}}
     {{column field="importe" label="Importe" width="150" type="numeric" format="#,.##"}}
     {{column field="formaPago" label="Forma Pago" width="150"}}
     {{column field="referenciaPago" label="Referencia Pago" width="150"}}

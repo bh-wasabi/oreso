@@ -46,7 +46,11 @@
 			{{/editor}}
 		{{/field}}
 		{{field id="articulo" label="Artículo ID" type="text" readOnly="true" hide="true" column="A"}}
-		{{field id="_articulo" label="Descripción Artículo" type="text" readOnly="true" column="A"}}
+		{{#field id="codigo" label="Código" type="text" readOnly="true" column="A"}}
+			{{#editor case="upper"}}
+			{{/editor}}
+		{{/field}}
+		{{field id="descripcion" label="Descripción" type="text" readOnly="true" column="A"}}
 		{{#field id="aliasOrigen" label="Origen" type="text" column="A"}}
 			{{#editor case="upper"}}
 			{{/editor}}
@@ -105,7 +109,8 @@
 		{{#stack}}
 			{{#record title="planArticulo" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="0,5,10,10" widths="100,440"}}
 				{{row field="aliasArticulo" align="left"}}
-				{{row field="_articulo" align="left"}}
+				{{row field="codigo" align="left"}}
+				{{row field="descripcion" align="left"}}
 				{{row field="aliasOrigen" align="left"}}
 				{{row field="_origen" align="left"}}
 				{{row field="aliasDestino" align="left"}}
@@ -147,7 +152,7 @@
 							planArticulo
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="aliasArticulo, _articulo, aliasOrigen, _origen, aliasDestino, _destino, cantidad, costoUnitario, valorUnitario, tasaIva, importe, iva, total, referencia, lote, vencimiento" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="aliasArticulo, codigo, descripcion, aliasOrigen, _origen, aliasDestino, _destino, cantidad, costoUnitario, valorUnitario, tasaIva, importe, iva, total, referencia, lote, vencimiento" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -159,7 +164,8 @@
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
 				{{field aliasArticulo}}
-				{{field _articulo}}
+				{{field codigo}}
+				{{field descripcion}}
 				{{field aliasOrigen}}
 				{{field _origen}}
 				{{field aliasDestino}}
@@ -179,7 +185,8 @@
 	{{/template}}
 	{{#template2 id="planArticulo"}}
 		<br>Artículo: {{aliasArticulo}}
-		<br>Descripción Artículo: {{_articulo}}
+		<br>Código: {{codigo}}
+		<br>Descripción: {{descripcion}}
 		<br>Origen: {{aliasOrigen}}
 		<br>Ubicación Origen: {{_origen}}
 		<br>Destino: {{aliasDestino}}
@@ -197,7 +204,8 @@
 	{{/template2}}
 	{{#template3 id="planArticulo"}}
 		{{#if aliasArticulo}}<br>Artículo: {{aliasArticulo}}{{/if}}
-		{{#if _articulo}}<br>Descripción Artículo: {{_articulo}}{{/if}}
+		{{#if codigo}}<br>Código: {{codigo}}{{/if}}
+		{{#if descripcion}}<br>Descripción: {{descripcion}}{{/if}}
 		{{#if aliasOrigen}}<br>Origen: {{aliasOrigen}}{{/if}}
 		{{#if _origen}}<br>Ubicación Origen: {{_origen}}{{/if}}
 		{{#if aliasDestino}}<br>Destino: {{aliasDestino}}{{/if}}

@@ -17,7 +17,8 @@
     {{#field id="aliasArticulo"}}
       {{#onChange}}
         {{set articulo="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).articulo"}}
-        {{set _articulo="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id)._articulo"}}
+        {{set codigo="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).codigo"}}
+        {{set descripcion="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).descripcion"}}
       {{/onChange}}
     {{/field}}
     {{#field id="aliasDestino"}}
@@ -31,11 +32,11 @@
     {{field id="total" type="calc" value="=importe+iva"}}
   {{/section}}
   
-  {{#grid id="articulos" section="articulos" allowInsert="true" allowRemove="true"}}
+  {{#grid id="articulos" section="articulos" keyField="cantidad" allowInsert="true" allowRemove="true"}}
     {{column field="aliasArticulo" label="Artículo" width="200"}}
-    {{column field="_articulo" label="Descripción" width="400"}}
+    {{column field="descripcion" label="Descripción" width="400"}}
     {{column field="aliasDestino" label="Destino" width="60" defaultValue="=_params.aliasDestino"}}
-    {{column field="_destino" label="Ubicación" width="150" required="false"}}
+    {{column field="_destino" label="Ubicación" width="150" required="true"}}
     {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
     {{column field="valorUnitario" label="Costo Unitario" width="110" type="numeric" format="#,.##"}}
     {{column field="tasaIva" label="% IVA" width="50" type="numeric" format="#.##" defaultValue="16"}}

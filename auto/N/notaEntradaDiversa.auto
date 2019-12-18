@@ -100,7 +100,11 @@
 			{{/editor}}
 		{{/field}}
 		{{field id="articulo" label="Artículo ID" type="text" readOnly="true" hide="true" column="A"}}
-		{{field id="_articulo" label="Descripción Artículo" type="text" readOnly="true" column="A"}}
+		{{#field id="codigo" label="Código" type="text" readOnly="true" column="A"}}
+			{{#editor case="upper"}}
+			{{/editor}}
+		{{/field}}
+		{{field id="descripcion" label="Descripción" type="text" readOnly="true" column="A"}}
 		{{#field id="aliasOrigen" label="Origen" type="text" column="A"}}
 			{{#editor case="upper"}}
 			{{/editor}}
@@ -182,7 +186,8 @@
 			{{/row}}
 			{{#table title="Artículos" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="articulos" headerStyle="field" margin="0,5,10,10" removeEmptyCols="true"}}
 				{{column field="aliasArticulo"}}
-				{{column field="_articulo"}}
+				{{column field="codigo"}}
+				{{column field="descripcion"}}
 				{{column field="aliasOrigen"}}
 				{{column field="_origen"}}
 				{{column field="aliasDestino"}}
@@ -314,7 +319,7 @@
 							Artículos
 						{{/h5}}
 						{{#div}}
-							{{table articulos class="auto-form-table" cols="aliasArticulo, _articulo, aliasOrigen, _origen, aliasDestino, _destino, cantidad, costoUnitario, valorUnitario, tasaIva, importe, iva, total, referencia, lote, vencimiento" removeEmptyCols="true" unlink="true"}}
+							{{table articulos class="auto-form-table" cols="aliasArticulo, codigo, descripcion, aliasOrigen, _origen, aliasDestino, _destino, cantidad, costoUnitario, valorUnitario, tasaIva, importe, iva, total, referencia, lote, vencimiento" removeEmptyCols="true" unlink="true"}}
 							{{br}}
 						{{/div}}
 					{{/col}}
