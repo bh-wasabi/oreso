@@ -82,6 +82,7 @@
 			{{#editor case="YYYY-MM-DD"}}
 			{{/editor}}
 		{{/field}}
+		{{field id="comentarios" label="Comentarios" type="text" column="A"}}
 	{{/section}}
 	{{#report id="preliminar-encabezado"}}
 		{{#stack}}
@@ -107,7 +108,7 @@
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="planArticulo" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-15,0,0,10" widths="100,450"}}
+			{{#record title="planArticulo" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="aliasArticulo" align="left"}}
 				{{row field="codigo" align="left"}}
 				{{row field="descripcion" align="left"}}
@@ -125,6 +126,7 @@
 				{{row field="referencia" align="left"}}
 				{{row field="lote" align="left"}}
 				{{row field="vencimiento" align="left"}}
+				{{row field="comentarios" align="left"}}
 			{{/record}}
 		{{/stack}}
 	{{/report}}
@@ -152,7 +154,7 @@
 							planArticulo
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="aliasArticulo, codigo, descripcion, aliasOrigen, _origen, aliasDestino, _destino, cantidad, costoUnitario, valorUnitario, tasaIva, importe, iva, total, referencia, lote, vencimiento" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="aliasArticulo, codigo, descripcion, aliasOrigen, _origen, aliasDestino, _destino, cantidad, costoUnitario, valorUnitario, tasaIva, importe, iva, total, referencia, lote, vencimiento, comentarios" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -177,6 +179,7 @@
 				{{field referencia}}
 				{{field lote}}
 				{{field vencimiento}}
+				{{field comentarios}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
@@ -201,6 +204,7 @@
 		<br>Referencia: {{referencia}}
 		<br>Lote: {{lote}}
 		<br>Vencimiento: {{vencimiento}}
+		<br>{{comentarios}}
 	{{/template2}}
 	{{#template3 id="planArticulo"}}
 		{{#if aliasArticulo}}<br>Artículo: {{aliasArticulo}}{{/if}}
@@ -220,5 +224,6 @@
 		{{#if referencia}}<br>Referencia: {{referencia}}{{/if}}
 		{{#if lote}}<br>Lote: {{lote}}{{/if}}
 		{{#if vencimiento}}<br>Vencimiento: {{vencimiento}}{{/if}}
+		{{#if comentarios}}<br>{{comentarios}}{{/if}}
 	{{/template3}}
 {{/markup}}

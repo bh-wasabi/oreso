@@ -142,14 +142,14 @@
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-15,0,0,10" widths="100,450"}}
+			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="fechaEmision" align="left"}}
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
-			{{#row text="Artículos" fontSize="10" bold="true" margin="-15,0,0,10"}}
+			{{#row text="Artículos" fontSize="10" bold="true" margin="-10,0,0,0"}}
 			{{/row}}
-			{{#table title="Artículos" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="articulos" headerStyle="field" margin="-15,0,0,10" removeEmptyCols="true"}}
+			{{#table title="Artículos" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="articulos" headerStyle="field" margin="-10,0,0,10" removeEmptyCols="true"}}
 				{{column field="codigo"}}
 				{{column field="descripcion"}}
 				{{column field="precioLista"}}

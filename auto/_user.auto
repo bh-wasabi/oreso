@@ -103,7 +103,7 @@
 			{{#editor type="date" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="nacionalidad" label="Nacionalidad" type="text" column="A" references="nacionalidad" modalColumn="A" sameLine="end" labelModalClass="full-width" defaultValue="'108'"}}
+		{{#field id="nacionalidad" label="Nacionalidad" type="text" column="A" references="nacionalidad" modalColumn="A" sameLine="end" labelModalClass="full-width" defaultValue="108"}}
 			{{#editor type="lookup" source="ver" view="codeSystem" unlink="true" forceCache="true" searchEnabled="true" width="100%"}}
 				{{param name="'nacionalidad'"}}
 			{{/editor}}
@@ -165,20 +165,20 @@
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Datos Usuario" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-15,0,0,10" widths="100,450"}}
+			{{#record title="Datos Usuario" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="nombre" align="left"}}
 				{{row field="correo" align="left"}}
 				{{row field="estatus" align="left"}}
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Ubicación" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-15,0,0,10" widths="100,450"}}
+			{{#record title="Ubicación" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="servicio" align="left"}}
 				{{row field="sucursal" align="left"}}
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Datos Prestador Servicios" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="prestadorServicios" headerStyle="field" margin="-15,0,0,10" widths="100,450"}}
+			{{#record title="Datos Prestador Servicios" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="prestadorServicios" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="clave" align="left"}}
 				{{row field="genero" align="left"}}
 				{{row field="fechaNacimiento" align="left"}}

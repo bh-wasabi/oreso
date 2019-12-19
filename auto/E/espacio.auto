@@ -105,7 +105,7 @@
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Espacios" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-15,0,0,10" widths="100,450"}}
+			{{#record title="Espacios" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="nombre" align="left"}}
 				{{row field="estatus" align="left"}}
 				{{row field="descripcion" align="left"}}
@@ -116,7 +116,7 @@
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Localización" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-15,0,0,10" widths="100,450"}}
+			{{#record title="Localización" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="area" align="left"}}
 			{{/record}}
 		{{/stack}}

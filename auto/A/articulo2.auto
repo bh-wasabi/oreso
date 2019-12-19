@@ -127,14 +127,14 @@
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="articulo2" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-15,0,0,10" widths="100,450"}}
+			{{#record title="articulo2" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="codigo" align="left"}}
 				{{row field="descripcion" align="left"}}
 				{{row field="precioLista" align="left"}}
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Clasificadores" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-15,0,0,10" widths="100,450"}}
+			{{#record title="Clasificadores" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="marca" align="left"}}
 				{{row field="estilo" align="left"}}
 				{{row field="tamano" align="left"}}
@@ -148,7 +148,7 @@
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Comentarios" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-15,0,0,10" widths="100,450"}}
+			{{#record title="Comentarios" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="comentarios" align="left"}}
 			{{/record}}
 		{{/stack}}

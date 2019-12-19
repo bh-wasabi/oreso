@@ -105,7 +105,7 @@
 			{{#editor type="select" preset="cfg.tipoEspacio" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="capacidad" label="Capacidad (personas)" type="number" recordHide="true" column="A" detach="Recurso" modalHide="true" labelModalClass="full-width" defaultValue="'1'"}}
+		{{#field id="capacidad" label="Capacidad (personas)" type="number" recordHide="true" column="A" detach="Recurso" modalHide="true" labelModalClass="full-width" defaultValue="1"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 			{{validator type="range" min="1" max="25"}}
@@ -115,7 +115,7 @@
 			{{/editor}}
 			{{validator type="required"}}
 		{{/field}}
-		{{#field id="duracionCita" label="Duración Cita (min)" type="number" column="A" modalColumn="B" detach="Horizonte Planeación" labelModalClass="full-width" defaultValue="'30'"}}
+		{{#field id="duracionCita" label="Duración Cita (min)" type="number" column="A" modalColumn="B" detach="Horizonte Planeación" labelModalClass="full-width" defaultValue="30"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
@@ -161,7 +161,7 @@
 		{{#stack}}
 			{{#columns margin="30,-20,0,30"}}
 				{{#column}}
-					{{#record layout="lightHorizontalLines" section="persona" headerStyle="field" margin="0,5,5,5" widths="80,170" fontSize="6"}}
+					{{#record layout="lightHorizontalLines" section="persona" headerStyle="field" margin="-10,5,5,5" widths="80,180" fontSize="6"}}
 						{{row field="nombreCompleto" label="Paciente"}}
 						{{row expr="=calc.concat3(_genero, calc.format('date', fechaNacimiento, 'DD/MMM/YYYY')+' ('+_edadActual+')')" label="Género / Fecha Nacimiento"}}
 						{{row field="clave" label="Expediente / CURP"}}
@@ -170,7 +170,7 @@
 					{{/record}}
 				{{/column}}
 				{{#column}}
-					{{#record layout="lightHorizontalLines" section="contexto" headerStyle="field" margin="0,5,5,5" widths="80,170" fontSize="6" condition="=contexto.ingreso"}}
+					{{#record layout="lightHorizontalLines" section="contexto" headerStyle="field" margin="-10,5,5,5" widths="80,180" fontSize="6" condition="=contexto.ingreso"}}
 						{{row expr="=calc.concat3(contexto._medico, calc.format('date', contexto.ingreso.fechaHora, 'DD/MMM/YYYY hh:mma'))" label="Médico / Fecha Ingreso"}}
 						{{row expr="=calc.concat3(contexto._servicio, contexto._cama)" label="Servicio / Cama Ingreso"}}
 						{{row expr="=contexto.ingreso._seleccionarDiagnostico" label="Diagnóstico Ingreso"}}
@@ -184,7 +184,7 @@
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Planeación Agenda" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-15,0,0,10" widths="100,450"}}
+			{{#record title="Planeación Agenda" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row expr="=calc.format('date', _updated.date||_created.date, 'DD/MMM/YYYY h:mma')" label="Fecha Emisión"}}
 				{{row expr="=_created._service" label="Servicio"}}
 				{{row field="comentarios" align="left"}}
@@ -195,7 +195,7 @@
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Recurso" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-15,0,0,10" widths="100,450"}}
+			{{#record title="Recurso" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row expr="=calc.format('date', _updated.date||_created.date, 'DD/MMM/YYYY h:mma')" label="Fecha Emisión"}}
 				{{row expr="=_created._service" label="Servicio"}}
 				{{row field="tipoRecurso" align="left"}}
@@ -210,7 +210,7 @@
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Horizonte Planeación" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-15,0,0,10" widths="100,450"}}
+			{{#record title="Horizonte Planeación" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row expr="=calc.format('date', _updated.date||_created.date, 'DD/MMM/YYYY h:mma')" label="Fecha Emisión"}}
 				{{row expr="=_created._service" label="Servicio"}}
 				{{row field="zonaHoraria" align="left"}}

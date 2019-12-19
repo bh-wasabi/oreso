@@ -100,7 +100,7 @@
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Disponibilidad" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-15,0,0,10" widths="100,450"}}
+			{{#record title="Disponibilidad" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="diaSemana" align="left"}}
 				{{row field="desde" condition="tieneHorarioEspecifico" align="left"}}
 				{{row field="hasta" condition="tieneHorarioEspecifico" align="left"}}

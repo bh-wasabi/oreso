@@ -67,21 +67,21 @@
 			{{#editor type="select" preset="cfg.tipoArticulo" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="precioLista" label="Precio Lista" type="number" format="currency" column="A" modalColumn="A" labelModalClass="full-width"}}
+		{{#field id="precioLista" label="Precio Lista" type="number" format="currency" if="esInventariable" column="A" modalColumn="A" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="codigoUpc" label="Código UPC" type="text" column="A" modalColumn="A" labelModalClass="full-width"}}
+		{{#field id="codigoUpc" label="Código UPC" type="text" if="esInventariable" column="A" modalColumn="A" labelModalClass="full-width"}}
 			{{#editor case="upper" width="100%"}}
 			{{/editor}}
 			{{validator type="unique"}}
 		{{/field}}
-		{{#field id="codigoSku" label="Código SKU" type="text" column="A" modalColumn="A" labelModalClass="full-width"}}
+		{{#field id="codigoSku" label="Código SKU" type="text" if="esInventariable" column="A" modalColumn="A" labelModalClass="full-width"}}
 			{{#editor case="upper" width="100%"}}
 			{{/editor}}
 			{{validator type="unique"}}
 		{{/field}}
-		{{#field id="codigoLocal" label="Código Local" type="text" column="A" modalColumn="A" labelModalClass="full-width"}}
+		{{#field id="codigoLocal" label="Código Local" type="text" if="esInventariable" column="A" modalColumn="A" labelModalClass="full-width"}}
 			{{#editor case="upper" width="100%"}}
 			{{/editor}}
 			{{validator type="unique"}}
@@ -143,17 +143,17 @@
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Artículo" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-15,0,0,10" widths="100,450"}}
+			{{#record title="Artículo" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="codigo" align="left"}}
 				{{row field="descripcion" align="left"}}
-				{{row field="precioLista" align="left"}}
-				{{row field="codigoUpc" align="left"}}
-				{{row field="codigoSku" align="left"}}
-				{{row field="codigoLocal" align="left"}}
+				{{row field="precioLista" condition="esInventariable" align="left"}}
+				{{row field="codigoUpc" condition="esInventariable" align="left"}}
+				{{row field="codigoSku" condition="esInventariable" align="left"}}
+				{{row field="codigoLocal" condition="esInventariable" align="left"}}
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Clasificadores" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-15,0,0,10" widths="100,450"}}
+			{{#record title="Clasificadores" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="marca" condition="esInventariable" align="left"}}
 				{{row field="estilo" condition="esInventariable" align="left"}}
 				{{row field="tamano" condition="esInventariable" align="left"}}
@@ -164,7 +164,7 @@
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Comentarios" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-15,0,0,10" widths="100,450"}}
+			{{#record title="Comentarios" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="comentarios" align="left"}}
 			{{/record}}
 		{{/stack}}
@@ -279,10 +279,10 @@
 	{{#template2 id="articulo"}}
 		<br>Código: {{codigo}}
 		<br>Descripción: {{descripcion}}
-		<br>Precio Lista: {{number precioLista "currency"}}
-		<br>Código UPC: {{codigoUpc}}
-		<br>Código SKU: {{codigoSku}}
-		<br>Código Local: {{codigoLocal}}
+		{{#if esInventariable}}<br>Precio Lista: {{number precioLista "currency"}}{{/if}}
+		{{#if esInventariable}}<br>Código UPC: {{codigoUpc}}{{/if}}
+		{{#if esInventariable}}<br>Código SKU: {{codigoSku}}{{/if}}
+		{{#if esInventariable}}<br>Código Local: {{codigoLocal}}{{/if}}
 		{{#if esInventariable}}<br>Marca: {{_marca}}{{/if}}
 		{{#if esInventariable}}<br>Estilo: {{_estilo}}{{/if}}
 		{{#if esInventariable}}<br>Tamaño: {{_tamano}}{{/if}}
@@ -295,10 +295,10 @@
 	{{#template3 id="articulo"}}
 		{{#if codigo}}<br>Código: {{codigo}}{{/if}}
 		{{#if descripcion}}<br>Descripción: {{descripcion}}{{/if}}
-		{{#if precioLista}}<br>Precio Lista: {{number precioLista "currency"}}{{/if}}
-		{{#if codigoUpc}}<br>Código UPC: {{codigoUpc}}{{/if}}
-		{{#if codigoSku}}<br>Código SKU: {{codigoSku}}{{/if}}
-		{{#if codigoLocal}}<br>Código Local: {{codigoLocal}}{{/if}}
+		{{#if esInventariable}}{{#if precioLista}}<br>Precio Lista: {{number precioLista "currency"}}{{/if}}{{/if}}
+		{{#if esInventariable}}{{#if codigoUpc}}<br>Código UPC: {{codigoUpc}}{{/if}}{{/if}}
+		{{#if esInventariable}}{{#if codigoSku}}<br>Código SKU: {{codigoSku}}{{/if}}{{/if}}
+		{{#if esInventariable}}{{#if codigoLocal}}<br>Código Local: {{codigoLocal}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if marca}}<br>Marca: {{_marca}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if estilo}}<br>Estilo: {{_estilo}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if tamano}}<br>Tamaño: {{_tamano}}{{/if}}{{/if}}
