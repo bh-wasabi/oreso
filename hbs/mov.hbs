@@ -205,7 +205,7 @@
       {{group field="vencimiento"}}
       {{group field="importeFactor" type="sum" as="saldo"}}
       {{sort field="vencimiento" direction="asc"}}
-      {{match field="saldo" gt="=0"}}
+      {{match field="saldo" gt="=0.01"}}
     {{/pipeline}}
   {{/view}}
   {{#view id="sugerirNeteo"}}
