@@ -27,7 +27,7 @@
       {{include field="base.codigo"}}
       {{include field="_name"}}
       {{include field="base.precioLista"}}
-      {{filter field="base.codigo" exists="=true"}}
+      {{filter field="base.codigo" gt="''"}}
     {{/find}}
   {{/view}}
   {{#view id="porCodigoUpc"}}
@@ -36,7 +36,7 @@
       {{include field="base.codigoUpc"}}
       {{include field="_name"}}
       {{include field="base.precioLista"}}
-      {{filter field="base.codigoUpc" exists="=true"}}
+      {{filter field="base.codigoUpc" gt="''"}}
     {{/find}}
   {{/view}}
   {{#view id="porCodigoSku"}}
@@ -45,7 +45,7 @@
       {{include field="base.codigoSku"}}
       {{include field="_name"}}
       {{include field="base.precioLista"}}
-      {{filter field="base.codigoSku" exists="=true"}}
+      {{filter field="base.codigoSku" gt="''"}}
     {{/find}}
   {{/view}}
   {{#view id="porCodigoLocal"}}
@@ -54,7 +54,7 @@
       {{include field="base.codigoLocal"}}
       {{include field="_name"}}
       {{include field="base.precioLista"}}
-      {{filter field="base.codigoLocal" exists="=true"}}
+      {{filter field="base.codigoLocal" gt="''"}}
     {{/find}}
   {{/view}}
 

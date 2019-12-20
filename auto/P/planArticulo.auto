@@ -78,7 +78,7 @@
 			{{#editor case="upper"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="vencimiento" label="Vencimiento" type="text" column="A"}}
+		{{#field id="vencimiento" label="Fecha" type="text" column="A"}}
 			{{#editor case="YYYY-MM-DD"}}
 			{{/editor}}
 		{{/field}}
@@ -91,10 +91,10 @@
 					{{row image="logo" alignment="left" imageWidth="90" margin="0,-15,0,0"}}
 				{{/column}}
 				{{#column margin="0,-10,0,0"}}
-					{{row text="Xtra Cinemas" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Reforma 215" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Lomas de Chapultepec 11000 CDMX" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Teléfono 55 5284 8500" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Leibnitz 83-1" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Anzures 11590 CDMX" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
 				{{/column}}
 				{{#column}}
 					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
@@ -105,7 +105,7 @@
 	{{/report}}
 	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true"}}
 		{{#stack}}
-			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
+			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
 		{{/stack}}
 		{{#stack}}
 			{{#record title="planArticulo" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
@@ -203,7 +203,7 @@
 		<br>Total: {{number total "currency"}}
 		<br>Referencia: {{referencia}}
 		<br>Lote: {{lote}}
-		<br>Vencimiento: {{vencimiento}}
+		<br>Fecha: {{vencimiento}}
 		<br>{{comentarios}}
 	{{/template2}}
 	{{#template3 id="planArticulo"}}
@@ -223,7 +223,7 @@
 		{{#if total}}<br>Total: {{number total "currency"}}{{/if}}
 		{{#if referencia}}<br>Referencia: {{referencia}}{{/if}}
 		{{#if lote}}<br>Lote: {{lote}}{{/if}}
-		{{#if vencimiento}}<br>Vencimiento: {{vencimiento}}{{/if}}
+		{{#if vencimiento}}<br>Fecha: {{vencimiento}}{{/if}}
 		{{#if comentarios}}<br>{{comentarios}}{{/if}}
 	{{/template3}}
 {{/markup}}

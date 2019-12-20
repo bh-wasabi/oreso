@@ -1,0 +1,13 @@
+{{#define id="skuAdicional"}}  
+  {{#section id="base"}}
+    {{field id="nombre" type="expr" value="=@codigo"}}
+  {{/section}}
+  {{#view id="porCodigo"}}
+    {{#find limit="-1"}}
+      {{include field="base.codigo"}}
+      {{include field="base.articulo"}}
+      {{include field="base.cliente"}}
+      {{include field="base.precioLista"}}
+    {{/find}}
+  {{/view}}  
+{{/define}}
