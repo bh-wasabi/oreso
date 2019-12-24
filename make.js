@@ -226,7 +226,7 @@ var genAuto = function(proyectId, callback){
     var wb = XLSX.read(buf, {type:'buffer'});
     codeSystem.generate(wb, proyectId, filename, subProyect, esHost+'/'+proyectId, function(err, codeSystem){
       console.log('codeSystem...', moment().diff(paso1)+'ms')
-      docSystem.generate(wb, proyectId, filename, subProyect, logo3, headers, codeSystem, {imageWidth: 90}, function(err){
+      docSystem.generate(wb, proyectId, filename, subProyect, logo3, headers, codeSystem, {imageWidth: 75}, function(err){
         console.log('hbs generated...', moment().diff(paso1)+'ms')
         console.log(proyectId+'.es generated...')
         callback(null, codeSystem);

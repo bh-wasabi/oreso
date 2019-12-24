@@ -128,9 +128,9 @@
 	{{section id="resumen" temp="true"}}
 	{{#report id="preliminar-encabezado"}}
 		{{#stack}}
-			{{#columns margin="20" widths="100,150,*"}}
+			{{#columns margin="20" widths="85,150,*"}}
 				{{#column}}
-					{{row image="logo" alignment="left" imageWidth="90" margin="0,-15,0,0"}}
+					{{row image="logo" alignment="left" imageWidth="75" margin="0,-15,0,0"}}
 				{{/column}}
 				{{#column margin="0,-10,0,0"}}
 					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
