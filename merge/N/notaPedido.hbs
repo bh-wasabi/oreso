@@ -40,17 +40,18 @@
   {{/section}}
   
   {{#grid id="articulos" section="articulos" keyField="cantidad" allowInsert="true" allowRemove="true"}}
-    {{column field="aliasArticulo" label="Artículo" width="200"}}
+    {{column field="aliasArticulo" label="Artículo" width="150"}}
     {{column field="codigo" label="Código" width="150"}}
-    {{column field="descripcion" label="Descripción" width="350"}}
+    {{column field="descripcion" label="Descripción" width="330"}}
     {{column field="aliasOrigen" label="Origen" width="60" defaultValue="=_params.aliasOrigen"}}
     {{column field="_origen" label="Ubicación" width="150" required="true"}}
     {{column field="aliasDestino" label="Destino" width="60" defaultValue="=_params.aliasDestino"}}
     {{column field="_destino" label="Ubicación" width="150" required="true"}}
     {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
     {{column field="valorUnitario" label="Precio Unitario" width="110" type="numeric" format="#,.##" required="true"}}
-    {{column field="tasaIva" label="% IVA" width="50" type="numeric" format="#.##" defaultValue="16"}}
+    {{column field="tasaIva" label="% IVA" width="45" type="numeric" format="#.##" defaultValue="16"}}
     {{column field="referencia" label="Referencia" width="150"}}
+    {{column field="caja" label="Caja" width="40" type="numeric" defaultValue="1"}}
   {{/grid}}
 
   {{#cube id="articulos" section="articulos" name="=_name||'Pedido'" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
@@ -63,4 +64,5 @@
   {{/cube}}
 
   {{action id="tool" condition="true" label="Analizar Pedido" type="viewCube" visibleMode="close" color="cyan" btnSolid="true" cube="articulos"}}
+  {{action id="tool2" condition="true" label="Descargar Checklist..." type="save-as" visibleMode="close" color="blue" btnSolid="true" fileName="=_name||'Pedido'" items="=_.union([fn('checkListTitulos')], fn('checkList', calc.mergeMasterDetail({persona, base}, calc.mergeArraysByKey(articulos, _items, 'codigo'))))" fromSource="articulo" fromView="todo"}}
 {{/define}}

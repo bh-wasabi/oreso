@@ -1,5 +1,12 @@
 {{#define id="articulo"}}  
   {{param name="=_params._tipoArticulo||'Artículo'"}}
+  {{#view id="todo"}}
+    {{#all flatten="true"}}
+      {{include field="base.codigo" as="codigo"}}
+      {{include field="base._unidad" as="_unidad"}}
+      {{include field="base.codigoLocal" as="codigoLocal"}}
+    {{/all}}
+  {{/view}}
   {{#view id="lista"}}
     {{editor display="base.codigo"}}
     {{#find}}
@@ -15,8 +22,8 @@
       {{search field="_name"}}
       {{search field="base.codigo"}}
       {{search field="base.codigoUpc"}}
-      {{search field="base.codigoSku"}}
       {{search field="base.codigoLocal"}}
+      {{search field="base.codigoSku"}}
       {{search field="base._marca"}}
       {{search field="base._estilo"}}
       {{search field="base._tamano"}}

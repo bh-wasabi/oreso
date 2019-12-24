@@ -70,6 +70,11 @@
 			{{/editor}}
 		{{/field}}
 		{{field id="precioLista" label="Precio Lista" type="number" format="currency" column="A"}}
+		{{#field id="unidad" label="Unidad" type="text" column="A" references="unidad"}}
+			{{#editor type="select" preset="cfg.unidad"}}
+			{{/editor}}
+		{{/field}}
+		{{field id="cantidadEmpaque" label="Cantidad Empaque" type="number" column="A"}}
 		{{#field id="marca" label="Marca" type="text" column="A" references="app.marca"}}
 			{{#editor type="select" preset="app.marca"}}
 			{{/editor}}
@@ -88,10 +93,6 @@
 		{{/field}}
 		{{#field id="temporada" label="Temporada" type="text" column="A" references="app.temporada"}}
 			{{#editor type="select" preset="app.temporada"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="empaque" label="Empaque" type="text" column="A" references="empaque"}}
-			{{#editor type="select" preset="cfg.empaque"}}
 			{{/editor}}
 		{{/field}}
 		{{#field id="codigoUpc" label="Código UPC" type="text" column="A"}}
@@ -153,12 +154,13 @@
 				{{column field="codigo"}}
 				{{column field="descripcion"}}
 				{{column field="precioLista"}}
+				{{column field="unidad"}}
+				{{column field="cantidadEmpaque"}}
 				{{column field="marca"}}
 				{{column field="estilo"}}
 				{{column field="tamano"}}
 				{{column field="color"}}
 				{{column field="temporada"}}
-				{{column field="empaque"}}
 				{{column field="codigoUpc"}}
 				{{column field="codigoSku"}}
 				{{column field="cliente"}}
@@ -232,7 +234,7 @@
 							Artículos
 						{{/h5}}
 						{{#div}}
-							{{table articulos class="auto-form-table" cols="codigo, descripcion, precioLista, marca, estilo, tamano, color, temporada, empaque, codigoUpc, codigoSku, cliente, codigoLocal, comentarios" removeEmptyCols="true" unlink="true"}}
+							{{table articulos class="auto-form-table" cols="codigo, descripcion, precioLista, unidad, cantidadEmpaque, marca, estilo, tamano, color, temporada, codigoUpc, codigoSku, cliente, codigoLocal, comentarios" removeEmptyCols="true" unlink="true"}}
 							{{br}}
 						{{/div}}
 					{{/col}}

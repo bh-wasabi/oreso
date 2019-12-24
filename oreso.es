@@ -3588,13 +3588,5 @@
 {"name":"diaSemana","code":"6","display":"Sábado","order":6}
 {"index":{"_id":"diaSemana/7"}}
 {"name":"diaSemana","code":"7","display":"Domingo","order":7}
-{"index":{"_id":"empaque/1"}}
-{"name":"empaque","code":"1","display":"1 Pieza","order":1}
-{"index":{"_id":"empaque/3"}}
-{"name":"empaque","code":"3","display":"3 Piezas","order":2}
-{"index":{"_id":"empaque/6"}}
-{"name":"empaque","code":"6","display":"6 Piezas","order":3}
-{"index":{"_id":"empaque/9"}}
-{"name":"empaque","code":"9","display":"9 Piezas","order":4}
-{"index":{"_id":"empaque/12"}}
-{"name":"empaque","code":"12","display":"12 Piezas","order":5}
+{"index":{"_id":"unidad/pieza"}}
+{"name":"unidad","code":"pieza","display":"Pieza","order":1}

@@ -71,6 +71,14 @@
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
+		{{#field id="unidad" label="Unidad" type="text" if="esInventariable" column="A" references="unidad" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.unidad" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="cantidadEmpaque" label="Cantidad Empaque" type="number" if="esInventariable" column="A" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
 		{{#field id="codigoUpc" label="Código UPC" type="text" if="esInventariable" column="A" modalColumn="A" labelModalClass="full-width"}}
 			{{#editor case="upper" width="100%"}}
 			{{/editor}}
@@ -110,10 +118,6 @@
 			{{#editor type="select" preset="app.temporada" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="empaque" label="Empaque" type="text" if="esInventariable" column="A" references="empaque" modalColumn="B" detach="Clasificadores" labelModalClass="full-width"}}
-			{{#editor type="select" preset="cfg.empaque" width="100%"}}
-			{{/editor}}
-		{{/field}}
 		{{#field id="comentarios" label="Comentarios" type="text" column="A" modalColumn="A" detach="Comentarios" labelModalClass="full-width"}}
 			{{#editor type="text-area" height="100" width="100%"}}
 			{{/editor}}
@@ -147,6 +151,8 @@
 				{{row field="codigo" align="left"}}
 				{{row field="descripcion" align="left"}}
 				{{row field="precioLista" condition="esInventariable" align="left"}}
+				{{row field="unidad" condition="esInventariable" align="left"}}
+				{{row field="cantidadEmpaque" condition="esInventariable" align="left"}}
 				{{row field="codigoUpc" condition="esInventariable" align="left"}}
 				{{row field="codigoLocal" condition="esInventariable" align="left"}}
 			{{/record}}
@@ -164,7 +170,6 @@
 				{{row field="tamano" condition="esInventariable" align="left"}}
 				{{row field="color" condition="esInventariable" align="left"}}
 				{{row field="temporada" condition="esInventariable" align="left"}}
-				{{row field="empaque" condition="esInventariable" align="left"}}
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
@@ -223,7 +228,7 @@
 							Artículo
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="codigo, descripcion, precioLista, codigoUpc, codigoLocal" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="codigo, descripcion, precioLista, unidad, cantidadEmpaque, codigoUpc, codigoLocal" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -245,7 +250,7 @@
 							Clasificadores
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="marca, estilo, tamano, color, temporada, empaque" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="marca, estilo, tamano, color, temporada" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -270,6 +275,8 @@
 				{{field codigo}}
 				{{field descripcion}}
 				{{field precioLista}}
+				{{field unidad}}
+				{{field cantidadEmpaque}}
 				{{field codigoUpc}}
 				{{field codigoLocal}}
 				{{field codigoSku}}
@@ -284,7 +291,6 @@
 				{{field tamano}}
 				{{field color}}
 				{{field temporada}}
-				{{field empaque}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
@@ -295,6 +301,8 @@
 		<br>Código: {{codigo}}
 		<br>Descripción: {{descripcion}}
 		{{#if esInventariable}}<br>Precio Lista: {{number precioLista "currency"}}{{/if}}
+		{{#if esInventariable}}<br>Unidad: {{_unidad}}{{/if}}
+		{{#if esInventariable}}<br>Cantidad Empaque: {{cantidadEmpaque}}{{/if}}
 		{{#if esInventariable}}<br>Código UPC: {{codigoUpc}}{{/if}}
 		{{#if esInventariable}}<br>Código Local: {{codigoLocal}}{{/if}}
 		{{#if esInventariable}}<br>Código SKU: {{codigoSku}}{{/if}}
@@ -304,13 +312,14 @@
 		{{#if esInventariable}}<br>Tamaño: {{_tamano}}{{/if}}
 		{{#if esInventariable}}<br>Color/Sabor: {{_color}}{{/if}}
 		{{#if esInventariable}}<br>Temporada: {{_temporada}}{{/if}}
-		{{#if esInventariable}}<br>Empaque: {{_empaque}}{{/if}}
 		<br>{{comentarios}}
 	{{/template2}}
 	{{#template3 id="articulo"}}
 		{{#if codigo}}<br>Código: {{codigo}}{{/if}}
 		{{#if descripcion}}<br>Descripción: {{descripcion}}{{/if}}
 		{{#if esInventariable}}{{#if precioLista}}<br>Precio Lista: {{number precioLista "currency"}}{{/if}}{{/if}}
+		{{#if esInventariable}}{{#if unidad}}<br>Unidad: {{_unidad}}{{/if}}{{/if}}
+		{{#if esInventariable}}{{#if cantidadEmpaque}}<br>Cantidad Empaque: {{cantidadEmpaque}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if codigoUpc}}<br>Código UPC: {{codigoUpc}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if codigoLocal}}<br>Código Local: {{codigoLocal}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if codigoSku}}<br>Código SKU: {{codigoSku}}{{/if}}{{/if}}
@@ -320,7 +329,6 @@
 		{{#if esInventariable}}{{#if tamano}}<br>Tamaño: {{_tamano}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if color}}<br>Color/Sabor: {{_color}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if temporada}}<br>Temporada: {{_temporada}}{{/if}}{{/if}}
-		{{#if esInventariable}}{{#if empaque}}<br>Empaque: {{_empaque}}{{/if}}{{/if}}
 		{{#if comentarios}}<br>{{comentarios}}{{/if}}
 	{{/template3}}
 {{/markup}}

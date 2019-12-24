@@ -55,6 +55,11 @@
 			{{/editor}}
 		{{/field}}
 		{{field id="precioLista" label="Precio Lista" type="number" format="currency" column="A"}}
+		{{#field id="unidad" label="Unidad" type="text" column="A" references="unidad"}}
+			{{#editor type="select" preset="cfg.unidad"}}
+			{{/editor}}
+		{{/field}}
+		{{field id="cantidadEmpaque" label="Cantidad Empaque" type="number" column="A"}}
 		{{#field id="marca" label="Marca" type="text" column="A" references="app.marca"}}
 			{{#editor type="select" preset="app.marca"}}
 			{{/editor}}
@@ -73,10 +78,6 @@
 		{{/field}}
 		{{#field id="temporada" label="Temporada" type="text" column="A" references="app.temporada"}}
 			{{#editor type="select" preset="app.temporada"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="empaque" label="Empaque" type="text" column="A" references="empaque"}}
-			{{#editor type="select" preset="cfg.empaque"}}
 			{{/editor}}
 		{{/field}}
 		{{#field id="codigoUpc" label="Código UPC" type="text" column="A"}}
@@ -131,12 +132,13 @@
 				{{row field="codigo" align="left"}}
 				{{row field="descripcion" align="left"}}
 				{{row field="precioLista" align="left"}}
+				{{row field="unidad" align="left"}}
+				{{row field="cantidadEmpaque" align="left"}}
 				{{row field="marca" align="left"}}
 				{{row field="estilo" align="left"}}
 				{{row field="tamano" align="left"}}
 				{{row field="color" align="left"}}
 				{{row field="temporada" align="left"}}
-				{{row field="empaque" align="left"}}
 				{{row field="codigoUpc" align="left"}}
 				{{row field="codigoSku" align="left"}}
 				{{row field="cliente" align="left"}}
@@ -169,7 +171,7 @@
 							articulo2
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="codigo, descripcion, precioLista, marca, estilo, tamano, color, temporada, empaque, codigoUpc, codigoSku, cliente, codigoLocal, comentarios" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="codigo, descripcion, precioLista, unidad, cantidadEmpaque, marca, estilo, tamano, color, temporada, codigoUpc, codigoSku, cliente, codigoLocal, comentarios" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -183,12 +185,13 @@
 				{{field codigo}}
 				{{field descripcion}}
 				{{field precioLista}}
+				{{field unidad}}
+				{{field cantidadEmpaque}}
 				{{field marca}}
 				{{field estilo}}
 				{{field tamano}}
 				{{field color}}
 				{{field temporada}}
-				{{field empaque}}
 				{{field codigoUpc}}
 				{{field codigoSku}}
 				{{field cliente}}
@@ -204,12 +207,13 @@
 		<br>Código: {{codigo}}
 		<br>Descripción: {{descripcion}}
 		<br>Precio Lista: {{number precioLista "currency"}}
+		<br>Unidad: {{_unidad}}
+		<br>Cantidad Empaque: {{cantidadEmpaque}}
 		<br>Marca: {{_marca}}
 		<br>Estilo: {{_estilo}}
 		<br>Tamaño: {{_tamano}}
 		<br>Color/Sabor: {{_color}}
 		<br>Temporada: {{_temporada}}
-		<br>Empaque: {{_empaque}}
 		<br>Código UPC: {{codigoUpc}}
 		<br>Código SKU: {{codigoSku}}
 		<br>Cliente: {{_cliente}}
@@ -220,12 +224,13 @@
 		{{#if codigo}}<br>Código: {{codigo}}{{/if}}
 		{{#if descripcion}}<br>Descripción: {{descripcion}}{{/if}}
 		{{#if precioLista}}<br>Precio Lista: {{number precioLista "currency"}}{{/if}}
+		{{#if unidad}}<br>Unidad: {{_unidad}}{{/if}}
+		{{#if cantidadEmpaque}}<br>Cantidad Empaque: {{cantidadEmpaque}}{{/if}}
 		{{#if marca}}<br>Marca: {{_marca}}{{/if}}
 		{{#if estilo}}<br>Estilo: {{_estilo}}{{/if}}
 		{{#if tamano}}<br>Tamaño: {{_tamano}}{{/if}}
 		{{#if color}}<br>Color/Sabor: {{_color}}{{/if}}
 		{{#if temporada}}<br>Temporada: {{_temporada}}{{/if}}
-		{{#if empaque}}<br>Empaque: {{_empaque}}{{/if}}
 		{{#if codigoUpc}}<br>Código UPC: {{codigoUpc}}{{/if}}
 		{{#if codigoSku}}<br>Código SKU: {{codigoSku}}{{/if}}
 		{{#if cliente}}<br>Cliente: {{_cliente}}{{/if}}

@@ -482,12 +482,8 @@
 		{{item id="6" nombre="Sábado"}}
 		{{item id="7" nombre="Domingo"}}
 	{{/config}}
-	{{#config id="empaque"}}
-		{{item id="1" nombre="1 Pieza"}}
-		{{item id="3" nombre="3 Piezas"}}
-		{{item id="6" nombre="6 Piezas"}}
-		{{item id="9" nombre="9 Piezas"}}
-		{{item id="12" nombre="12 Piezas"}}
+	{{#config id="unidad"}}
+		{{item id="pieza" nombre="Pieza"}}
 	{{/config}}
 	{{#function id="date" paramType="text" returnType="json"}}
 		{{define type="param" id="date"}}
