@@ -1,6 +1,7 @@
 {{#define id="articulo"}}  
   {{param name="=_params._tipoArticulo||'Artículo'"}}
   {{#view id="lista"}}
+    {{editor display="base.codigo"}}
     {{#find}}
       {{include field="_name"}}
       {{include field="base.codigo"}}
@@ -45,7 +46,9 @@
       {{include field="base.codigoSku"}}
       {{include field="_name"}}
       {{include field="base.precioLista"}}
+      {{include field="base.cliente"}}
       {{filter field="base.codigoSku" gt="''"}}
+      {{filter field="base.cliente" exists="=true"}}
     {{/find}}
   {{/view}}
   {{#view id="porCodigoLocal"}}

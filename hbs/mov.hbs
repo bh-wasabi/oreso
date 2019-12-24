@@ -21,10 +21,10 @@
   {{#cube id="inv" name="Inventario" view="inv" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
     {{column field="ubicacion.persona._grupo" label="Grupo"}}
     {{column field="_cuenta" label="Ubicación"}}
+    {{row field="codigo" label="Código" width="200"}}  
     {{row field="articulo.base._marca" label="Marca" width="100"}}  
     {{row field="articulo.base._tamano" label="Tamaño" width="100"}}  
     {{row field="articulo.base._color" label="Color/Sabor" width="100"}}      
-    {{row field="articulo.base._cliente" label="Cliente" width="200"}}
     {{row field="articulo._name" label="Descripción" width="100"}}  
     {{row field="_lote" label="Lote"}}
     {{row field="loteInfo.base.ordenCompra" label="Orden Compra"}}

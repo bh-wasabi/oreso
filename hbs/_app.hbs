@@ -658,15 +658,16 @@
     {{set articulo="=_id"}}
     {{set descripcion="=_name"}}
     {{set codigo="=base.codigo"}}
+    {{set persona="=base.cliente"}}
     {{set precio="=base.precioLista"}}
   {{/mapPreset}}
 
-  {{#mapPreset source="skuAdicional" view="porCodigo" preset="aliasArticulo"}}
-    {{set id="=base.codigo"}}
+  {{#mapPreset source="skuAdicional" view="porCodigoSku" preset="aliasArticulo"}}
+    {{set id="=base.codigoSku"}}
     {{set articulo="=base.articulo"}}
-    {{set descripcion="=base._articulo"}}
-    {{set persona="=base.cliente"}}
+    {{set descripcion="=base.descripcion"}}
     {{set codigo="=base.codigo"}}
+    {{set persona="=base.cliente"}}
     {{set precio="=base.precioLista"}}
   {{/mapPreset}}
 

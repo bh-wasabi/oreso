@@ -1,13 +1,36 @@
 {{#define id="skuAdicional"}}  
   {{#section id="base"}}
-    {{field id="nombre" type="expr" value="=@codigo"}}
+    {{field id="nombre" type="expr" value="=@codigoSku"}}
+    {{#field id="articulo"}}
+      {{#onChange}}
+        {{set codigo="=base.codigo"}}
+        {{set descripcion="=_name"}}
+      {{/onChange}}
+    {{/field}}
   {{/section}}
-  {{#view id="porCodigo"}}
+  {{#view id="porCodigoSku"}}
     {{#find limit="-1"}}
+      {{include field="base.codigoSku"}}
       {{include field="base.codigo"}}
-      {{include field="base.articulo"}}
+      {{include field="base.descripcion"}}
       {{include field="base.cliente"}}
       {{include field="base.precioLista"}}
     {{/find}}
   {{/view}}  
+  {{#view id="lista"}}
+    {{#find}}
+      {{include field="base"}}
+      {{search field="_name"}}
+      {{sort field="base.codigoSku" direction="asc"}}
+    {{/find}}
+  {{/view}}  
 {{/define}}
+{{#markup}}
+  {{#template id="lista"}}
+    <div>
+      {{_name}}</span>
+      <span style="font-size:12px;float:right;">{{base.codigo}}</span><br>
+      <span style="font-size:12px;white-space:pre-wrap;font-style:italic;">{{base.descripcion}}</span>
+    </div>
+  {{/template}}
+{{/markup}}

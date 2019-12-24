@@ -1,4 +1,4 @@
-{{#define type="doc" id="articuloSku"}}
+{{#define type="doc" id="planFaltante"}}
 	{{param defaultDisplay="_name"}}
 	{{param defaultView="lista"}}
 	{{param pageStart="1"}}
@@ -12,18 +12,13 @@
 	{{param attachSection="adjuntos"}}
 	{{param attachLanguage="es"}}
 	{{param confirmUnSaved="true"}}
-	{{param showChangeHistory="true"}}
+	{{param showChangeHistory="false"}}
 	{{param pdfPageSize="letter"}}
 	{{param startOnOpen="base"}}
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="base.nombre"}}
-	{{param name="Artículo SKU"}}
-	{{param typeName="Artículo SKU"}}
-	{{param group="Registro"}}
-	{{param fullWidth="true"}}
-	{{param autoOpenEditors="true"}}
-	{{param autoAffect="node-direct"}}
-	{{param bannerTopTemplate="banner1"}}
+	{{param name="planFaltante"}}
+	{{param typeName="planFaltante"}}
 	{{action id="subdoc" condition="=false"}}
 	{{action id="subdoc2" condition="=false"}}
 	{{action id="subdoc3" condition="=false"}}
@@ -43,25 +38,13 @@
 	{{action id="importarDatos" type="pasteText" label="Importar Datos..." color="green" condition="=false"}}
 	{{action id="eliminar" type="remove" label="Eliminar"}}
 	{{action id="abrir" type="open" label="Editar" condition="=!@_isAffected"}}
-	{{action id="afectar" label="Procesar" type="affect-direct" workflow="afectar"}}
 	{{section id="_options" temp="true"}}
 	{{section id="_params" temp="true"}}
 	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
-		{{#field id="codigoSku" label="Código SKU" type="text" column="A" modalColumn="A" labelModalClass="full-width"}}
-			{{#editor case="upper" width="100%"}}
-			{{/editor}}
-			{{validator type="required"}}
-			{{validator type="unique"}}
-		{{/field}}
-		{{#field id="articulo" label="Artículo" type="reference" column="A" references="articulo" modalColumn="A" labelModalClass="full-width"}}
-			{{#editor type="select" source="articulo" view="lista" width="100%"}}
-			{{/editor}}
-			{{validator type="required"}}
-		{{/field}}
-		{{#field id="cliente" label="Cliente" type="reference" hide="true" column="A" references="persona" modalColumn="A" labelModalClass="full-width" defaultValue="'activo'"}}
-			{{#editor type="select" source="persona" view="clientes" width="100%"}}
-			{{/editor}}
-		{{/field}}
+		{{field id="codigo" label="Código" type="text" column="A"}}
+		{{field id="descripcion" label="Descripción" type="text" column="A"}}
+		{{field id="_cuenta" label="Ubicación" type="text" column="A"}}
+		{{field id="faltante" label="Faltante" type="number" format="#," column="A"}}
 	{{/section}}
 	{{#report id="preliminar-encabezado"}}
 		{{#stack}}
@@ -87,9 +70,11 @@
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Artículo SKU" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
-				{{row field="codigoSku" align="left"}}
-				{{row field="articulo" align="left"}}
+			{{#record title="planFaltante" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
+				{{row field="codigo" align="left"}}
+				{{row field="descripcion" align="left"}}
+				{{row field="_cuenta" align="left"}}
+				{{row field="faltante" align="left"}}
 			{{/record}}
 		{{/stack}}
 	{{/report}}
@@ -104,35 +89,9 @@
 	{{#browser id="lista" view="lista" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%"}}
 		{{list itemTemplate="lista" allowSearch="true" allowRefresh="true" allowEdit="true" allowInsert="true"}}
 	{{/browser}}
-	{{#workflow id="afectar" start="afectar"}}
-		{{#step id="afectar"}}
-			{{#user}}
-				{{#validate condition="=!_name" error="Nombre Incorrecto"}}
-				{{/validate}}
-				{{#spAffect engine="node"}}
-					{{#update section="base"}}
-						{{set estatus="afectado"}}
-						{{set _estatus="Afectado"}}
-					{{/update}}
-				{{/spAffect}}
-			{{/user}}
-		{{/step}}
-	{{/workflow}}
-	{{#workflow id="cancelar" start="cancelar"}}
-		{{#step id="cancelar"}}
-			{{#user}}
-				{{#spAffect engine="node" action="cancel"}}
-					{{#update section="base"}}
-						{{set estatus="cancelado"}}
-						{{set _estatus="Cancelado"}}
-					{{/update}}
-				{{/spAffect}}
-			{{/user}}
-		{{/step}}
-	{{/workflow}}
 {{/define}}
 {{#markup}}
-	{{#page name="Artículo SKU"}}
+	{{#page name="planFaltante"}}
 		{{row}}
 		{{row}}
 		{{#row}}
@@ -140,10 +99,10 @@
 				{{#row class="auto-form-row"}}
 					{{#col medium="100%" class="auto-form-col"}}
 						{{#h5 class="auto-form-h5"}}
-							Artículo SKU
+							planFaltante
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="codigoSku, articulo" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="codigo, descripcion, _cuenta, faltante" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -151,23 +110,29 @@
 			{{/zone}}
 		{{/row}}
 	{{/page}}
-	{{#modal base id="base" name="Artículo SKU"}}
+	{{#modal base id="base" name="planFaltante"}}
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
-				{{field codigoSku}}
-				{{field articulo}}
+				{{field codigo}}
+				{{field descripcion}}
+				{{field _cuenta}}
+				{{field faltante}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
 	{{#template id="lista"}}
 		<div>{{_name}}</div>
 	{{/template}}
-	{{#template2 id="articuloSku"}}
-		<br>Código SKU: {{codigoSku}}
-		<br>Artículo: {{_articulo}}
+	{{#template2 id="planFaltante"}}
+		<br>Código: {{codigo}}
+		<br>Descripción: {{descripcion}}
+		<br>Ubicación: {{_cuenta}}
+		<br>Faltante: {{number faltante "#,"}}
 	{{/template2}}
-	{{#template3 id="articuloSku"}}
-		{{#if codigoSku}}<br>Código SKU: {{codigoSku}}{{/if}}
-		{{#if articulo}}<br>Artículo: {{_articulo}}{{/if}}
+	{{#template3 id="planFaltante"}}
+		{{#if codigo}}<br>Código: {{codigo}}{{/if}}
+		{{#if descripcion}}<br>Descripción: {{descripcion}}{{/if}}
+		{{#if _cuenta}}<br>Ubicación: {{_cuenta}}{{/if}}
+		{{#if faltante}}<br>Faltante: {{number faltante "#,"}}{{/if}}
 	{{/template3}}
 {{/markup}}

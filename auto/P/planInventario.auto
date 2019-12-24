@@ -41,7 +41,8 @@
 	{{section id="_options" temp="true"}}
 	{{section id="_params" temp="true"}}
 	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
-		{{field id="descripcion" label="Artículo" type="text" column="A"}}
+		{{field id="codigo" label="Código" type="text" column="A"}}
+		{{field id="descripcion" label="Descripción" type="text" column="A"}}
 		{{field id="_cuenta" label="Ubicación" type="text" column="A"}}
 		{{field id="salida" label="Salida" type="number" format="#," column="A"}}
 		{{field id="entrada" label="Entrada" type="number" format="#," column="A"}}
@@ -77,6 +78,7 @@
 		{{/stack}}
 		{{#stack}}
 			{{#record title="planInventario" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
+				{{row field="codigo" align="left"}}
 				{{row field="descripcion" align="left"}}
 				{{row field="_cuenta" align="left"}}
 				{{row field="salida" align="left"}}
@@ -111,7 +113,7 @@
 							planInventario
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="descripcion, _cuenta, salida, entrada, costoUnitario, lote, vencimiento" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="codigo, descripcion, _cuenta, salida, entrada, costoUnitario, lote, vencimiento" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -122,6 +124,7 @@
 	{{#modal base id="base" name="planInventario"}}
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
+				{{field codigo}}
 				{{field descripcion}}
 				{{field _cuenta}}
 				{{field salida}}
@@ -136,7 +139,8 @@
 		<div>{{_name}}</div>
 	{{/template}}
 	{{#template2 id="planInventario"}}
-		<br>Artículo: {{descripcion}}
+		<br>Código: {{codigo}}
+		<br>Descripción: {{descripcion}}
 		<br>Ubicación: {{_cuenta}}
 		<br>Salida: {{number salida "#,"}}
 		<br>Entrada: {{number entrada "#,"}}
@@ -145,7 +149,8 @@
 		<br>Fecha: {{date vencimiento "DD/MMM/YYYY"}}
 	{{/template2}}
 	{{#template3 id="planInventario"}}
-		{{#if descripcion}}<br>Artículo: {{descripcion}}{{/if}}
+		{{#if codigo}}<br>Código: {{codigo}}{{/if}}
+		{{#if descripcion}}<br>Descripción: {{descripcion}}{{/if}}
 		{{#if _cuenta}}<br>Ubicación: {{_cuenta}}{{/if}}
 		{{#if salida}}<br>Salida: {{number salida "#,"}}{{/if}}
 		{{#if entrada}}<br>Entrada: {{number entrada "#,"}}{{/if}}

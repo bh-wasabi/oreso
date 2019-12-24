@@ -52,4 +52,15 @@
     {{column field="tasaIva" label="% IVA" width="50" type="numeric" format="#.##" defaultValue="16"}}
     {{column field="referencia" label="Referencia" width="150"}}
   {{/grid}}
+
+  {{#cube id="articulos" section="articulos" name="=_name||'Pedido'" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
+    {{column field="_origen" label="Origen" width="150"}}
+    {{column field="_destino" label="Destino" width="150"}}
+    {{row field="codigo" label="Código" width="150"}}
+    {{row field="descripcion" label="Descripción" width="350"}}
+    {{sum field="cantidad" label="Cantidad" format="#,"}}
+    {{sum field="importe" label="Importe" format="#,"}}
+  {{/cube}}
+
+  {{action id="tool" condition="true" label="Analizar Pedido" type="viewCube" visibleMode="close" color="cyan" btnSolid="true" cube="articulos"}}
 {{/define}}

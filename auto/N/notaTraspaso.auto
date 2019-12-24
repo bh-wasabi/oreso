@@ -139,7 +139,8 @@
 		{{field id="comentarios" label="Comentarios" type="text" column="A"}}
 	{{/section}}
 	{{#section id="inv" type="array"}}
-		{{field id="descripcion" label="Artículo" type="text" column="A"}}
+		{{field id="codigo" label="Código" type="text" column="A"}}
+		{{field id="descripcion" label="Descripción" type="text" column="A"}}
 		{{field id="_cuenta" label="Ubicación" type="text" column="A"}}
 		{{field id="salida" label="Salida" type="number" format="#," column="A"}}
 		{{field id="entrada" label="Entrada" type="number" format="#," column="A"}}
@@ -149,6 +150,12 @@
 			{{#editor type="date"}}
 			{{/editor}}
 		{{/field}}
+	{{/section}}
+	{{#section id="faltantes" type="array"}}
+		{{field id="codigo" label="Código" type="text" column="A"}}
+		{{field id="descripcion" label="Descripción" type="text" column="A"}}
+		{{field id="_cuenta" label="Ubicación" type="text" column="A"}}
+		{{field id="faltante" label="Faltante" type="number" format="#," column="A"}}
 	{{/section}}
 	{{section id="resumen" temp="true"}}
 	{{#report id="preliminar-encabezado"}}
@@ -210,6 +217,7 @@
 			{{#row text="Movimiento del Inventario" fontSize="10" bold="true" margin="-10,0,0,0"}}
 			{{/row}}
 			{{#table title="Movimiento del Inventario" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="inv" headerStyle="field" margin="-10,0,0,10" removeEmptyCols="true"}}
+				{{column field="codigo"}}
 				{{column field="descripcion"}}
 				{{column field="_cuenta"}}
 				{{column field="salida"}}
@@ -217,6 +225,16 @@
 				{{column field="costoUnitario"}}
 				{{column field="lote"}}
 				{{column field="vencimiento"}}
+			{{/table}}
+		{{/stack}}
+		{{#stack condition="=faltantes"}}
+			{{#row text="Faltantes" fontSize="10" bold="true" margin="-10,0,0,0"}}
+			{{/row}}
+			{{#table title="Faltantes" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="faltantes" headerStyle="field" margin="-10,0,0,10" removeEmptyCols="true"}}
+				{{column field="codigo"}}
+				{{column field="descripcion"}}
+				{{column field="_cuenta"}}
+				{{column field="faltante"}}
 			{{/table}}
 		{{/stack}}
 		{{#stack}}
@@ -337,7 +355,7 @@
 								Movimiento del Inventario
 							{{/h5}}
 							{{#div}}
-								{{table inv class="auto-form-table" cols="descripcion, _cuenta, salida, entrada, costoUnitario, lote, vencimiento" removeEmptyCols="false" unlink="true"}}
+								{{table inv class="auto-form-table" cols="codigo, descripcion, _cuenta, salida, entrada, costoUnitario, lote, vencimiento" removeEmptyCols="false" unlink="true"}}
 								{{br}}
 							{{/div}}
 						{{/col}}
@@ -346,7 +364,24 @@
 			{{/zone}}
 		{{/row}}
 		{{#row}}
-			{{#zone id="inv" modal="inv"}}
+			{{#zone id="faltantes" modal="faltantes"}}
+				{{#row class="auto-form-row"}}
+					{{#if context="=faltantes"}}
+						{{#col medium="100%" class="auto-form-col"}}
+							{{#h5 class="auto-form-h5"}}
+								Faltantes
+							{{/h5}}
+							{{#div}}
+								{{table faltantes class="auto-form-table" cols="codigo, descripcion, _cuenta, faltante" removeEmptyCols="false" unlink="true"}}
+								{{br}}
+							{{/div}}
+						{{/col}}
+					{{/if}}
+				{{/row}}
+			{{/zone}}
+		{{/row}}
+		{{#row}}
+			{{#zone id="faltantes" modal="faltantes"}}
 			{{/zone}}
 		{{/row}}
 	{{/page}}
@@ -365,6 +400,13 @@
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
 				{{field inv}}
+			{{/fieldSet}}
+		{{/col}}
+	{{/modal}}
+	{{#modal faltantes id="faltantes" name="Faltantes" size="xwide"}}
+		{{#col medium="100%" vertical="100%"}}
+			{{#fieldSet}}
+				{{field faltantes}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}

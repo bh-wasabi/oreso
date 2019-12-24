@@ -111,12 +111,17 @@
   {{/view}}
 
   {{#browser id="lista" view="lista" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%"}}
-    {{list itemTemplate="persona" allowSearch="true" allowRefresh="true"}}
+    {{list itemTemplate="verNota" allowSearch="true" allowRefresh="true"}}
   {{/browser}}  
 {{/define}}
 
 {{#markup}}  
-  {{#template id="verNotaPendiente"}}
+{{#template id="verNota"}}
+  <div>{{_name}}</div>
+  <span style="font-size:12px;">{{persona.nombreCompleto}}</span>
+  <span style="font-size:12px;float:right;">{{date _created.date "DD/MMM/YYYY hh:mma"}}</span>
+{{/template}}
+{{#template id="verNotaPendiente"}}
     <div class="list-material">
       <li class="has-action-left">
         <div class="list-action-left"><i class="icon ion-{{flujo.icono}} text-{{flujo.color}}"></i></div>

@@ -47,7 +47,7 @@
 	{{section id="_options" temp="true"}}
 	{{section id="_params" temp="true"}}
 	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
-		{{#field id="codigo" label="Código SKU" type="text" column="A" modalColumn="A" labelModalClass="full-width"}}
+		{{#field id="codigoSku" label="Código SKU" type="text" column="A" modalColumn="A" labelModalClass="full-width"}}
 			{{#editor case="upper" width="100%"}}
 			{{/editor}}
 			{{validator type="required"}}
@@ -57,6 +57,14 @@
 			{{#editor type="lookup" source="articulo" view="lista" searchEnabled="true" width="100%"}}
 			{{/editor}}
 			{{validator type="required"}}
+		{{/field}}
+		{{#field id="codigo" label="Código" type="text" readOnly="true" recordHide="true" column="A" modalHide="true" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="descripcion" label="Descripción" type="text" readOnly="true" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
 		{{/field}}
 		{{#field id="cliente" label="Cliente" type="reference" column="A" references="persona" modalColumn="A" labelModalClass="full-width"}}
 			{{#editor type="lookup" source="persona" view="clientes" searchEnabled="true" width="100%"}}
@@ -93,8 +101,9 @@
 		{{/stack}}
 		{{#stack}}
 			{{#record title="SKU Adicional" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
-				{{row field="codigo" align="left"}}
+				{{row field="codigoSku" align="left"}}
 				{{row field="articulo" align="left"}}
+				{{row field="descripcion" align="left"}}
 				{{row field="cliente" align="left"}}
 				{{row field="precioLista" align="left"}}
 			{{/record}}
@@ -150,7 +159,7 @@
 							SKU Adicional
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="codigo, articulo, cliente, precioLista" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="codigoSku, articulo, descripcion, cliente, precioLista" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -161,8 +170,10 @@
 	{{#modal base id="base" name="SKU Adicional"}}
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
-				{{field codigo}}
+				{{field codigoSku}}
 				{{field articulo}}
+				{{field codigo hide="true"}}
+				{{field descripcion}}
 				{{field cliente}}
 				{{field precioLista}}
 			{{/fieldSet}}
@@ -172,14 +183,16 @@
 		<div>{{_name}}</div>
 	{{/template}}
 	{{#template2 id="skuAdicional"}}
-		<br>Código SKU: {{codigo}}
+		<br>Código SKU: {{codigoSku}}
 		<br>Artículo: {{_articulo}}
+		<br>Descripción: {{descripcion}}
 		<br>Cliente: {{_cliente}}
 		<br>Precio Lista: {{number precioLista "currency"}}
 	{{/template2}}
 	{{#template3 id="skuAdicional"}}
-		{{#if codigo}}<br>Código SKU: {{codigo}}{{/if}}
+		{{#if codigoSku}}<br>Código SKU: {{codigoSku}}{{/if}}
 		{{#if articulo}}<br>Artículo: {{_articulo}}{{/if}}
+		{{#if descripcion}}<br>Descripción: {{descripcion}}{{/if}}
 		{{#if cliente}}<br>Cliente: {{_cliente}}{{/if}}
 		{{#if precioLista}}<br>Precio Lista: {{number precioLista "currency"}}{{/if}}
 	{{/template3}}

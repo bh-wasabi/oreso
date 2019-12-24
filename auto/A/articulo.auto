@@ -76,15 +76,19 @@
 			{{/editor}}
 			{{validator type="unique"}}
 		{{/field}}
-		{{#field id="codigoSku" label="Código SKU" type="text" if="esInventariable" column="A" modalColumn="A" labelModalClass="full-width"}}
-			{{#editor case="upper" width="100%"}}
-			{{/editor}}
-			{{validator type="unique"}}
-		{{/field}}
 		{{#field id="codigoLocal" label="Código Local" type="text" if="esInventariable" column="A" modalColumn="A" labelModalClass="full-width"}}
 			{{#editor case="upper" width="100%"}}
 			{{/editor}}
 			{{validator type="unique"}}
+		{{/field}}
+		{{#field id="codigoSku" label="Código SKU" type="text" if="esInventariable" column="A" modalColumn="A" detach="Cliente" labelModalClass="full-width"}}
+			{{#editor case="upper" width="100%"}}
+			{{/editor}}
+			{{validator type="unique"}}
+		{{/field}}
+		{{#field id="cliente" label="Cliente" type="reference" if="esInventariable" column="A" references="persona" modalColumn="B" detach="Cliente" labelModalClass="full-width"}}
+			{{#editor type="lookup" source="persona" view="clientes" searchEnabled="true" width="100%"}}
+			{{/editor}}
 		{{/field}}
 		{{#field id="marca" label="Marca" type="text" if="esInventariable" column="A" references="app.marca" modalColumn="B" detach="Clasificadores" labelModalClass="full-width"}}
 			{{#editor type="select" preset="app.marca" width="100%"}}
@@ -108,10 +112,6 @@
 		{{/field}}
 		{{#field id="empaque" label="Empaque" type="text" if="esInventariable" column="A" references="empaque" modalColumn="B" detach="Clasificadores" labelModalClass="full-width"}}
 			{{#editor type="select" preset="cfg.empaque" width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="cliente" label="Cliente" type="reference" if="esInventariable" column="A" references="persona" modalColumn="B" detach="Clasificadores" labelModalClass="full-width"}}
-			{{#editor type="lookup" source="persona" view="clientes" searchEnabled="true" width="100%"}}
 			{{/editor}}
 		{{/field}}
 		{{#field id="comentarios" label="Comentarios" type="text" column="A" modalColumn="A" detach="Comentarios" labelModalClass="full-width"}}
@@ -148,8 +148,13 @@
 				{{row field="descripcion" align="left"}}
 				{{row field="precioLista" condition="esInventariable" align="left"}}
 				{{row field="codigoUpc" condition="esInventariable" align="left"}}
-				{{row field="codigoSku" condition="esInventariable" align="left"}}
 				{{row field="codigoLocal" condition="esInventariable" align="left"}}
+			{{/record}}
+		{{/stack}}
+		{{#stack}}
+			{{#record title="Cliente" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
+				{{row field="codigoSku" condition="esInventariable" align="left"}}
+				{{row field="cliente" condition="esInventariable" align="left"}}
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
@@ -160,7 +165,6 @@
 				{{row field="color" condition="esInventariable" align="left"}}
 				{{row field="temporada" condition="esInventariable" align="left"}}
 				{{row field="empaque" condition="esInventariable" align="left"}}
-				{{row field="cliente" condition="esInventariable" align="left"}}
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
@@ -219,7 +223,18 @@
 							Artículo
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="codigo, descripcion, precioLista, codigoUpc, codigoSku, codigoLocal" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="codigo, descripcion, precioLista, codigoUpc, codigoLocal" class="auto-form-record"}}
+							{{br}}
+						{{/with}}
+					{{/col}}
+				{{/row}}
+				{{#row class="auto-form-row"}}
+					{{#col medium="100%" class="auto-form-col"}}
+						{{#h5 class="auto-form-h5"}}
+							Cliente
+						{{/h5}}
+						{{#with base}}
+							{{record this widths="20%,80%" rows="codigoSku, cliente" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -230,7 +245,7 @@
 							Clasificadores
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="marca, estilo, tamano, color, temporada, empaque, cliente" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="marca, estilo, tamano, color, temporada, empaque" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -256,20 +271,20 @@
 				{{field descripcion}}
 				{{field precioLista}}
 				{{field codigoUpc}}
-				{{field codigoSku}}
 				{{field codigoLocal}}
+				{{field codigoSku}}
 				{{field comentarios}}
 			{{/fieldSet}}
 		{{/col}}
 		{{#col medium="50%" vertical="50%"}}
 			{{#fieldSet}}
+				{{field cliente}}
 				{{field marca}}
 				{{field estilo}}
 				{{field tamano}}
 				{{field color}}
 				{{field temporada}}
 				{{field empaque}}
-				{{field cliente}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
@@ -281,15 +296,15 @@
 		<br>Descripción: {{descripcion}}
 		{{#if esInventariable}}<br>Precio Lista: {{number precioLista "currency"}}{{/if}}
 		{{#if esInventariable}}<br>Código UPC: {{codigoUpc}}{{/if}}
-		{{#if esInventariable}}<br>Código SKU: {{codigoSku}}{{/if}}
 		{{#if esInventariable}}<br>Código Local: {{codigoLocal}}{{/if}}
+		{{#if esInventariable}}<br>Código SKU: {{codigoSku}}{{/if}}
+		{{#if esInventariable}}<br>Cliente: {{_cliente}}{{/if}}
 		{{#if esInventariable}}<br>Marca: {{_marca}}{{/if}}
 		{{#if esInventariable}}<br>Estilo: {{_estilo}}{{/if}}
 		{{#if esInventariable}}<br>Tamaño: {{_tamano}}{{/if}}
 		{{#if esInventariable}}<br>Color/Sabor: {{_color}}{{/if}}
 		{{#if esInventariable}}<br>Temporada: {{_temporada}}{{/if}}
 		{{#if esInventariable}}<br>Empaque: {{_empaque}}{{/if}}
-		{{#if esInventariable}}<br>Cliente: {{_cliente}}{{/if}}
 		<br>{{comentarios}}
 	{{/template2}}
 	{{#template3 id="articulo"}}
@@ -297,15 +312,15 @@
 		{{#if descripcion}}<br>Descripción: {{descripcion}}{{/if}}
 		{{#if esInventariable}}{{#if precioLista}}<br>Precio Lista: {{number precioLista "currency"}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if codigoUpc}}<br>Código UPC: {{codigoUpc}}{{/if}}{{/if}}
-		{{#if esInventariable}}{{#if codigoSku}}<br>Código SKU: {{codigoSku}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if codigoLocal}}<br>Código Local: {{codigoLocal}}{{/if}}{{/if}}
+		{{#if esInventariable}}{{#if codigoSku}}<br>Código SKU: {{codigoSku}}{{/if}}{{/if}}
+		{{#if esInventariable}}{{#if cliente}}<br>Cliente: {{_cliente}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if marca}}<br>Marca: {{_marca}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if estilo}}<br>Estilo: {{_estilo}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if tamano}}<br>Tamaño: {{_tamano}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if color}}<br>Color/Sabor: {{_color}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if temporada}}<br>Temporada: {{_temporada}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if empaque}}<br>Empaque: {{_empaque}}{{/if}}{{/if}}
-		{{#if esInventariable}}{{#if cliente}}<br>Cliente: {{_cliente}}{{/if}}{{/if}}
 		{{#if comentarios}}<br>{{comentarios}}{{/if}}
 	{{/template3}}
 {{/markup}}
