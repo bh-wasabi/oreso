@@ -52,7 +52,7 @@
   {{/function}}
   {{#function id="checkList" multi="true"}}
     {{define type="param" id="item"}}
-    {{default return="=calc.concatTab('Salida',calc.format('date', item.base.fechaEmision, 'DD/MM/YYYY'),item.persona.nombreCompleto,'',item.referencia,item.codigoLocal,item.codigo,item.descripcion,item.aliasArticulo,item.aliasDestino,item._destino,item._unidad,item.cantidad,'',item.caja,item.caja,'','','')"}}
+    {{default return="=calc.concatTab('Salida',calc.format('date', item.base.fechaEmision, 'DD/MM/YYYY'),item.persona.nombreCompleto,'',item.referencia,item.codigoLocal,item.codigo,item.descripcion,item.aliasArticulo,item.aliasDestino,item._destino,item._unidad,item.cantidad-(item._missing||0),'',item.caja,item.caja,'','','')"}}
   {{/function}}
   {{#transform id="copiarPersona"}}
     {{set id="=_id"}}
