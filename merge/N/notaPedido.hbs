@@ -57,10 +57,10 @@
   {{#cube id="articulos" section="articulos" name="=_name||'Pedido'" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
     {{column field="_origen" label="Origen"}}
     {{column field="_destino" label="Destino"}}
-    {{row field="codigo" label="Código" width="200"}}
+    {{row field="codigo" label="Código" width="250"}}
     {{row field="descripcion" label="Descripción" width="350"}}
-    {{row field="codigoLocal" label="Código Local" width="200"}}
-    {{row field="codigoUpc" label="Código UPC" width="200"}}
+    {{row field="codigoLocal" label="Código Local" width="250"}}
+    {{row field="codigoUpc" label="Código UPC" width="250"}}
     {{sum field="cantidad" label="Cantidad" format="#,"}}
     {{sum field="_missing" label="Faltante" format="#,"}}
     {{!-- {{sum field="importe" label="Importe" format="currency"}} --}}
