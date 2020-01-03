@@ -30,5 +30,7 @@
     {{column field="_destino" label="Ubicación" width="150" required="true"}}
     {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
     {{column field="valorUnitario" label="Costo Unitario" width="110" type="numeric" format="#,.##" required="true"}}
+    {{column field="lote" width="100" required="true"}}
+    {{column field="vencimiento" validateDate="true" width="100" required="true"}}
   {{/grid}}
 {{/define}}

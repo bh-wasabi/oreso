@@ -42,6 +42,9 @@
 	{{action id="excel" type="openFile" label="Cargar Excel..." color="green" condition="=false"}}
 	{{action id="importarDatos" type="pasteText" label="Importar Datos..." color="green" condition="=false"}}
 	{{action id="eliminar" type="remove" label="Eliminar"}}
+	{{action id="tool4" condition="=false"}}
+	{{action id="tool5" condition="=false"}}
+	{{action id="tool6" condition="=false"}}
 	{{action id="abrir" type="open" label="Editar" condition="=!@_isAffected"}}
 	{{section id="_options" temp="true"}}
 	{{section id="_params" temp="true"}}
