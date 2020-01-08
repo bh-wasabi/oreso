@@ -88,11 +88,6 @@
 			{{/editor}}
 			{{validator type="unique"}}
 		{{/field}}
-		{{#field id="codigoSku" label="Código SKU" type="text" column="A"}}
-			{{#editor case="upper"}}
-			{{/editor}}
-			{{validator type="unique"}}
-		{{/field}}
 		{{#field id="cliente" label="Cliente" type="reference" column="A" references="persona"}}
 			{{#editor type="lookup" source="persona" view="clientes" searchEnabled="true"}}
 			{{/editor}}
@@ -143,7 +138,6 @@
 				{{row field="color" align="left"}}
 				{{row field="temporada" align="left"}}
 				{{row field="codigoUpc" align="left"}}
-				{{row field="codigoSku" align="left"}}
 				{{row field="cliente" align="left"}}
 				{{row field="codigoLocal" align="left"}}
 				{{row field="comentarios" align="left"}}
@@ -174,7 +168,7 @@
 							articulo2
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="codigo, descripcion, precioLista, unidad, cantidadEmpaque, marca, estilo, tamano, color, temporada, codigoUpc, codigoSku, cliente, codigoLocal, comentarios" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="codigo, descripcion, precioLista, unidad, cantidadEmpaque, marca, estilo, tamano, color, temporada, codigoUpc, cliente, codigoLocal, comentarios" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -196,7 +190,6 @@
 				{{field color}}
 				{{field temporada}}
 				{{field codigoUpc}}
-				{{field codigoSku}}
 				{{field cliente}}
 				{{field codigoLocal}}
 				{{field comentarios}}
@@ -218,7 +211,6 @@
 		<br>Color/Sabor: {{_color}}
 		<br>Temporada: {{_temporada}}
 		<br>Código UPC: {{codigoUpc}}
-		<br>Código SKU: {{codigoSku}}
 		<br>Cliente: {{_cliente}}
 		<br>Código Local: {{codigoLocal}}
 		<br>{{comentarios}}
@@ -235,7 +227,6 @@
 		{{#if color}}<br>Color/Sabor: {{_color}}{{/if}}
 		{{#if temporada}}<br>Temporada: {{_temporada}}{{/if}}
 		{{#if codigoUpc}}<br>Código UPC: {{codigoUpc}}{{/if}}
-		{{#if codigoSku}}<br>Código SKU: {{codigoSku}}{{/if}}
 		{{#if cliente}}<br>Cliente: {{_cliente}}{{/if}}
 		{{#if codigoLocal}}<br>Código Local: {{codigoLocal}}{{/if}}
 		{{#if comentarios}}<br>{{comentarios}}{{/if}}

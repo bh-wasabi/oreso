@@ -92,11 +92,6 @@
 			{{/editor}}
 			{{validator type="unique"}}
 		{{/field}}
-		{{#field id="codigoSku" label="Código SKU" type="text" if="esInventariable" column="A" modalColumn="A" detach="Cliente" labelModalClass="full-width"}}
-			{{#editor case="upper" width="100%"}}
-			{{/editor}}
-			{{validator type="unique"}}
-		{{/field}}
 		{{#field id="cliente" label="Cliente" type="reference" if="esInventariable" column="A" references="persona" modalColumn="B" detach="Cliente" labelModalClass="full-width"}}
 			{{#editor type="lookup" source="persona" view="clientes" searchEnabled="true" width="100%"}}
 			{{/editor}}
@@ -162,7 +157,6 @@
 		{{/stack}}
 		{{#stack}}
 			{{#record title="Cliente" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
-				{{row field="codigoSku" condition="esInventariable" align="left"}}
 				{{row field="cliente" condition="esInventariable" align="left"}}
 			{{/record}}
 		{{/stack}}
@@ -242,7 +236,7 @@
 							Cliente
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="codigoSku, cliente" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="cliente" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -282,7 +276,6 @@
 				{{field cantidadEmpaque}}
 				{{field codigoUpc}}
 				{{field codigoLocal}}
-				{{field codigoSku}}
 				{{field comentarios}}
 			{{/fieldSet}}
 		{{/col}}
@@ -308,7 +301,6 @@
 		{{#if esInventariable}}<br>Cantidad Empaque: {{cantidadEmpaque}}{{/if}}
 		{{#if esInventariable}}<br>Código UPC: {{codigoUpc}}{{/if}}
 		{{#if esInventariable}}<br>Código Local: {{codigoLocal}}{{/if}}
-		{{#if esInventariable}}<br>Código SKU: {{codigoSku}}{{/if}}
 		{{#if esInventariable}}<br>Cliente: {{_cliente}}{{/if}}
 		{{#if esInventariable}}<br>Marca: {{_marca}}{{/if}}
 		{{#if esInventariable}}<br>Estilo: {{_estilo}}{{/if}}
@@ -325,7 +317,6 @@
 		{{#if esInventariable}}{{#if cantidadEmpaque}}<br>Cantidad Empaque: {{cantidadEmpaque}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if codigoUpc}}<br>Código UPC: {{codigoUpc}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if codigoLocal}}<br>Código Local: {{codigoLocal}}{{/if}}{{/if}}
-		{{#if esInventariable}}{{#if codigoSku}}<br>Código SKU: {{codigoSku}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if cliente}}<br>Cliente: {{_cliente}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if marca}}<br>Marca: {{_marca}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if estilo}}<br>Estilo: {{_estilo}}{{/if}}{{/if}}

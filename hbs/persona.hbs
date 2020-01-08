@@ -40,7 +40,7 @@
     {{/find}}
   {{/view}}
   {{#view id="ubicaciones"}}
-    {{#find}}
+    {{#find limit="500"}}
       {{sort field="_name" direction="asc"}}
       {{search field="persona.nombreCompleto"}}
       {{search field="persona.clave"}}

@@ -77,7 +77,9 @@
 			{{#editor case="upper"}}
 			{{/editor}}
 		{{/field}}
-		{{field id="caja" label="Caja" type="number" column="A"}}
+		{{field id="contenedor" label="Contenedor" type="number" column="A"}}
+		{{field id="cajaInicial" label="Caja Inicial" type="number" column="A"}}
+		{{field id="cajaFinal" label="Caja Final" type="number" column="A"}}
 		{{#field id="lote" label="Lote" type="text" column="A"}}
 			{{#editor case="upper"}}
 			{{/editor}}
@@ -128,7 +130,9 @@
 				{{row field="iva" align="left"}}
 				{{row field="total" align="left"}}
 				{{row field="referencia" align="left"}}
-				{{row field="caja" align="left"}}
+				{{row field="contenedor" align="left"}}
+				{{row field="cajaInicial" align="left"}}
+				{{row field="cajaFinal" align="left"}}
 				{{row field="lote" align="left"}}
 				{{row field="vencimiento" align="left"}}
 				{{row field="comentarios" align="left"}}
@@ -159,7 +163,7 @@
 							planArticulo
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="aliasArticulo, codigo, descripcion, aliasOrigen, _origen, aliasDestino, _destino, cantidad, costoUnitario, valorUnitario, tasaIva, importe, iva, total, referencia, caja, lote, vencimiento, comentarios" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="aliasArticulo, codigo, descripcion, aliasOrigen, _origen, aliasDestino, _destino, cantidad, costoUnitario, valorUnitario, tasaIva, importe, iva, total, referencia, contenedor, cajaInicial, cajaFinal, lote, vencimiento, comentarios" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -182,7 +186,9 @@
 				{{field valorUnitario}}
 				{{field tasaIva}}
 				{{field referencia}}
-				{{field caja}}
+				{{field contenedor}}
+				{{field cajaInicial}}
+				{{field cajaFinal}}
 				{{field lote}}
 				{{field vencimiento}}
 				{{field comentarios}}
@@ -208,7 +214,9 @@
 		<br>IVA: {{number iva "currency"}}
 		<br>Total: {{number total "currency"}}
 		<br>Referencia: {{referencia}}
-		<br>Caja: {{caja}}
+		<br>Contenedor: {{contenedor}}
+		<br>Caja Inicial: {{cajaInicial}}
+		<br>Caja Final: {{cajaFinal}}
 		<br>Lote: {{lote}}
 		<br>Fecha: {{vencimiento}}
 		<br>{{comentarios}}
@@ -229,7 +237,9 @@
 		{{#if iva}}<br>IVA: {{number iva "currency"}}{{/if}}
 		{{#if total}}<br>Total: {{number total "currency"}}{{/if}}
 		{{#if referencia}}<br>Referencia: {{referencia}}{{/if}}
-		{{#if caja}}<br>Caja: {{caja}}{{/if}}
+		{{#if contenedor}}<br>Contenedor: {{contenedor}}{{/if}}
+		{{#if cajaInicial}}<br>Caja Inicial: {{cajaInicial}}{{/if}}
+		{{#if cajaFinal}}<br>Caja Final: {{cajaFinal}}{{/if}}
 		{{#if lote}}<br>Lote: {{lote}}{{/if}}
 		{{#if vencimiento}}<br>Fecha: {{vencimiento}}{{/if}}
 		{{#if comentarios}}<br>{{comentarios}}{{/if}}

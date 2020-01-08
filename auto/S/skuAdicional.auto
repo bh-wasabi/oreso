@@ -50,12 +50,6 @@
 	{{section id="_options" temp="true"}}
 	{{section id="_params" temp="true"}}
 	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
-		{{#field id="codigoSku" label="Código SKU" type="text" column="A" modalColumn="A" labelModalClass="full-width"}}
-			{{#editor case="upper" width="100%"}}
-			{{/editor}}
-			{{validator type="required"}}
-			{{validator type="unique"}}
-		{{/field}}
 		{{#field id="articulo" label="Artículo" type="reference" column="A" references="articulo" modalColumn="A" labelModalClass="full-width"}}
 			{{#editor type="lookup" source="articulo" view="lista" searchEnabled="true" width="100%"}}
 			{{/editor}}
@@ -104,7 +98,6 @@
 		{{/stack}}
 		{{#stack}}
 			{{#record title="SKU Adicional" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
-				{{row field="codigoSku" align="left"}}
 				{{row field="articulo" align="left"}}
 				{{row field="descripcion" align="left"}}
 				{{row field="cliente" align="left"}}
@@ -162,7 +155,7 @@
 							SKU Adicional
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="codigoSku, articulo, descripcion, cliente, precioLista" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="articulo, descripcion, cliente, precioLista" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -173,7 +166,6 @@
 	{{#modal base id="base" name="SKU Adicional"}}
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
-				{{field codigoSku}}
 				{{field articulo}}
 				{{field codigo hide="true"}}
 				{{field descripcion}}
@@ -186,14 +178,12 @@
 		<div>{{_name}}</div>
 	{{/template}}
 	{{#template2 id="skuAdicional"}}
-		<br>Código SKU: {{codigoSku}}
 		<br>Artículo: {{_articulo}}
 		<br>Descripción: {{descripcion}}
 		<br>Cliente: {{_cliente}}
 		<br>Precio Lista: {{number precioLista "currency"}}
 	{{/template2}}
 	{{#template3 id="skuAdicional"}}
-		{{#if codigoSku}}<br>Código SKU: {{codigoSku}}{{/if}}
 		{{#if articulo}}<br>Artículo: {{_articulo}}{{/if}}
 		{{#if descripcion}}<br>Descripción: {{descripcion}}{{/if}}
 		{{#if cliente}}<br>Cliente: {{_cliente}}{{/if}}

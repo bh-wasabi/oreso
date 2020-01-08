@@ -103,11 +103,6 @@
 			{{/editor}}
 			{{validator type="unique"}}
 		{{/field}}
-		{{#field id="codigoSku" label="Código SKU" type="text" column="A"}}
-			{{#editor case="upper"}}
-			{{/editor}}
-			{{validator type="unique"}}
-		{{/field}}
 		{{#field id="cliente" label="Cliente" type="reference" column="A" references="persona"}}
 			{{#editor type="lookup" source="persona" view="clientes" searchEnabled="true"}}
 			{{/editor}}
@@ -165,7 +160,6 @@
 				{{column field="color"}}
 				{{column field="temporada"}}
 				{{column field="codigoUpc"}}
-				{{column field="codigoSku"}}
 				{{column field="cliente"}}
 				{{column field="codigoLocal"}}
 				{{column field="comentarios"}}
@@ -237,7 +231,7 @@
 							Artículos
 						{{/h5}}
 						{{#div}}
-							{{table articulos class="auto-form-table" cols="codigo, descripcion, precioLista, unidad, cantidadEmpaque, marca, estilo, tamano, color, temporada, codigoUpc, codigoSku, cliente, codigoLocal, comentarios" removeEmptyCols="true" unlink="true"}}
+							{{table articulos class="auto-form-table" cols="codigo, descripcion, precioLista, unidad, cantidadEmpaque, marca, estilo, tamano, color, temporada, codigoUpc, cliente, codigoLocal, comentarios" removeEmptyCols="true" unlink="true"}}
 							{{br}}
 						{{/div}}
 					{{/col}}

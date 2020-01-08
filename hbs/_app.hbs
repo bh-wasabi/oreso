@@ -46,7 +46,7 @@
       {{item text="Servicios" href="/articulo/servicios"}}
       {{item text="Lotes" href="/lote/lista"}}
       {{item text="Agregar / Modificar en Lote" href="/articuloLote/lista" beginGroup="true"}}
-      {{item text="SKU Adicionales" href="/skuAdicional/lista"}}
+      {{!-- {{item text="SKU Adicionales" href="/skuAdicional/lista"}} --}}
     {{/item}}
     {{#item text="Configuración"}}
       {{item text="Configuración General" href="/_app"}}
@@ -662,14 +662,14 @@
     {{set precio="=base.precioLista"}}
   {{/mapPreset}}
 
-  {{#mapPreset source="skuAdicional" view="porCodigoSku" preset="aliasArticulo"}}
+  {{!-- {{#mapPreset source="skuAdicional" view="porCodigoSku" preset="aliasArticulo"}}
     {{set id="=base.codigoSku"}}
     {{set articulo="=base.articulo"}}
     {{set descripcion="=base.descripcion"}}
     {{set codigo="=base.codigo"}}
     {{set persona="=base.cliente"}}
     {{set precio="=base.precioLista"}}
-  {{/mapPreset}}
+  {{/mapPreset}} --}}
 
   {{#mapPreset source="articulo" view="porCodigoLocal" preset="aliasArticulo"}}
     {{set id="=base.codigoLocal"}}

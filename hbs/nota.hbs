@@ -13,6 +13,7 @@
       {{search field="contexto._diagnostico"}}
       {{search field="persona.nombreCompleto"}}
       {{search field="persona.clave"}}
+      {{search field="_created._user"}}
       {{filter condition="=id" field="persona.id" eq="=id"}}
       {{filter condition="=request" field="_created.request" eq="=request"}}
     {{/find}}
@@ -117,8 +118,9 @@
 
 {{#markup}}  
 {{#template id="verNota"}}
-  <div>{{_name}}</div>
-  <span style="font-size:12px;">{{persona.nombreCompleto}}</span>
+  <span>{{_name}}</span>
+  <span style="font-size:12px;float:right;">{{_created._user}}</span>
+  <br><span style="font-size:12px;">{{persona.nombreCompleto}}</span>
   <span style="font-size:12px;float:right;">{{date _created.date "DD/MMM/YYYY hh:mma"}}</span>
 {{/template}}
 {{#template id="verNotaPendiente"}}

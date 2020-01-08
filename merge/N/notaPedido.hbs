@@ -53,7 +53,9 @@
     {{column field="valorUnitario" label="Precio Unitario" width="110" type="numeric" format="#,.##" required="true"}}
     {{column field="tasaIva" label="% IVA" width="45" type="numeric" format="#.##" defaultValue="16"}}
     {{column field="referencia" label="Referencia" width="150"}}
-    {{column field="caja" label="Caja" width="40" type="numeric" defaultValue="1"}}
+    {{column field="contenedor" label="Contenedor" width="80" type="numeric"}}
+    {{column field="cajaInicial" label="Caja Inicial" width="80" type="numeric"}}
+    {{column field="cajaFinal" label="Caja Final" width="80" type="numeric"}}
   {{/grid}}
 
   {{#cube id="articulos" section="articulos" name="=_name||'Pedido'" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
@@ -66,9 +68,27 @@
     {{sum field="cantidad" label="Cantidad" format="#,"}}
     {{sum field="faltante" label="Faltante" format="#,"}}
     {{sum field="neto" label="Neto" format="#,"}}
-    {{!-- {{sum field="importe" label="Importe" format="currency"}} --}}
+    {{sum field="importe" label="Importe" format="currency"}}
   {{/cube}}
+
+  {{#report id="preliminar2" fontSize="8" header="preliminar-encabezado" showStandarFooter="true"}}
+    {{#stack}}
+      {{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
+    {{/stack}}
+    {{#stack}}
+      {{#row text="Artículos" fontSize="10" bold="true" margin="-10,0,0,0"}}
+      {{/row}}
+      {{#table title="Artículos" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="_items" headerStyle="field" margin="-10,0,0,10" removeEmptyCols="true"}}
+        {{column field="codigo" label="Código"}}
+        {{column field="descripcion" label="Descripción"}}
+        {{column field="codigoUpc" label="Código UPC"}}
+        {{column field="referencia" label="Referencia"}}
+        {{column field="cantidad" align="right" label="Cantidad"}}
+      {{/table}}
+    {{/stack}}
+  {{/report}}  
 
   {{action id="tool" condition="true" label="Analizar Pedido" type="viewCube" visibleMode="close" color="cyan" btnSolid="true" cube="articulos" items="=calc.mergeArraysByKey(articulos, _items, 'codigo')" fromSource="articulo" fromView="todo"}}
   {{action id="tool2" condition="true" label="Descargar Checklist..." type="save-as" visibleMode="close" color="blue" btnSolid="true" fileName="=_name||'Pedido'" items="=_.union([fn('checkListTitulos')], fn('checkList', calc.mergeMasterDetail({persona, base}, calc.mergeArraysByKey(articulos, _items, 'codigo'))))" fromSource="articulo" fromView="todo"}}
+  {{action id="tool4" condition="true" type="report-pdf" label="Reporte Bodega" report="preliminar2" fileName="=_name" visibleMode="close" color="grey" items="=calc.mapReduce(calc.mergeArraysByKey(articulos, _items, 'codigo'), 'codigo,descripcion,codigoUpc,referencia', 'cantidad')" fromSource="articulo" fromView="todo"}}
 {{/define}}
