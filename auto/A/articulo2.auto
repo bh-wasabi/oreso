@@ -63,26 +63,11 @@
 			{{/editor}}
 		{{/field}}
 		{{field id="cantidadEmpaque" label="Cantidad Empaque" type="number" column="A"}}
-		{{#field id="marca" label="Marca" type="text" column="A" references="app.marca"}}
-			{{#editor type="select" preset="app.marca"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="estilo" label="Estilo" type="text" column="A" references="app.estilo"}}
-			{{#editor type="select" preset="app.estilo"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="tamano" label="Tamaño" type="text" column="A" references="app.tamano"}}
-			{{#editor type="select" preset="app.tamano"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="color" label="Color/Sabor" type="text" column="A" references="app.color"}}
-			{{#editor type="select" preset="app.color"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="temporada" label="Temporada" type="text" column="A" references="app.temporada"}}
-			{{#editor type="select" preset="app.temporada"}}
-			{{/editor}}
-		{{/field}}
+		{{field id="marca" label="Marca" type="text" column="A"}}
+		{{field id="estilo" label="Estilo" type="text" column="A"}}
+		{{field id="tamano" label="Tamaño" type="text" column="A"}}
+		{{field id="color" label="Color/Sabor" type="text" column="A"}}
+		{{field id="temporada" label="Temporada" type="text" column="A"}}
 		{{#field id="codigoUpc" label="Código UPC" type="text" column="A"}}
 			{{#editor case="upper"}}
 			{{/editor}}
@@ -205,11 +190,11 @@
 		<br>Precio Lista: {{number precioLista "currency"}}
 		<br>Unidad: {{_unidad}}
 		<br>Cantidad Empaque: {{cantidadEmpaque}}
-		<br>Marca: {{_marca}}
-		<br>Estilo: {{_estilo}}
-		<br>Tamaño: {{_tamano}}
-		<br>Color/Sabor: {{_color}}
-		<br>Temporada: {{_temporada}}
+		<br>Marca: {{marca}}
+		<br>Estilo: {{estilo}}
+		<br>Tamaño: {{tamano}}
+		<br>Color/Sabor: {{color}}
+		<br>Temporada: {{temporada}}
 		<br>Código UPC: {{codigoUpc}}
 		<br>Cliente: {{_cliente}}
 		<br>Código Local: {{codigoLocal}}
@@ -221,11 +206,11 @@
 		{{#if precioLista}}<br>Precio Lista: {{number precioLista "currency"}}{{/if}}
 		{{#if unidad}}<br>Unidad: {{_unidad}}{{/if}}
 		{{#if cantidadEmpaque}}<br>Cantidad Empaque: {{cantidadEmpaque}}{{/if}}
-		{{#if marca}}<br>Marca: {{_marca}}{{/if}}
-		{{#if estilo}}<br>Estilo: {{_estilo}}{{/if}}
-		{{#if tamano}}<br>Tamaño: {{_tamano}}{{/if}}
-		{{#if color}}<br>Color/Sabor: {{_color}}{{/if}}
-		{{#if temporada}}<br>Temporada: {{_temporada}}{{/if}}
+		{{#if marca}}<br>Marca: {{marca}}{{/if}}
+		{{#if estilo}}<br>Estilo: {{estilo}}{{/if}}
+		{{#if tamano}}<br>Tamaño: {{tamano}}{{/if}}
+		{{#if color}}<br>Color/Sabor: {{color}}{{/if}}
+		{{#if temporada}}<br>Temporada: {{temporada}}{{/if}}
 		{{#if codigoUpc}}<br>Código UPC: {{codigoUpc}}{{/if}}
 		{{#if cliente}}<br>Cliente: {{_cliente}}{{/if}}
 		{{#if codigoLocal}}<br>Código Local: {{codigoLocal}}{{/if}}

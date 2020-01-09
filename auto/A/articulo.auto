@@ -96,24 +96,24 @@
 			{{#editor type="lookup" source="persona" view="clientes" searchEnabled="true" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="marca" label="Marca" type="text" if="esInventariable" column="A" references="app.marca" modalColumn="B" detach="Clasificadores" labelModalClass="full-width"}}
-			{{#editor type="select" preset="app.marca" width="100%"}}
+		{{#field id="marca" label="Marca" type="text" if="esInventariable" column="A" modalColumn="B" detach="Clasificadores" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="estilo" label="Estilo" type="text" if="esInventariable" column="A" references="app.estilo" modalColumn="B" detach="Clasificadores" labelModalClass="full-width"}}
-			{{#editor type="select" preset="app.estilo" width="100%"}}
+		{{#field id="estilo" label="Estilo" type="text" if="esInventariable" column="A" modalColumn="B" detach="Clasificadores" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="tamano" label="Tamaño" type="text" if="esInventariable" column="A" references="app.tamano" modalColumn="B" detach="Clasificadores" labelModalClass="full-width"}}
-			{{#editor type="select" preset="app.tamano" width="100%"}}
+		{{#field id="tamano" label="Tamaño" type="text" if="esInventariable" column="A" modalColumn="B" detach="Clasificadores" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="color" label="Color/Sabor" type="text" if="esInventariable" column="A" references="app.color" modalColumn="B" detach="Clasificadores" labelModalClass="full-width"}}
-			{{#editor type="select" preset="app.color" width="100%"}}
+		{{#field id="color" label="Color/Sabor" type="text" if="esInventariable" column="A" modalColumn="B" detach="Clasificadores" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="temporada" label="Temporada" type="text" if="esInventariable" column="A" references="app.temporada" modalColumn="B" detach="Clasificadores" labelModalClass="full-width"}}
-			{{#editor type="select" preset="app.temporada" width="100%"}}
+		{{#field id="temporada" label="Temporada" type="text" if="esInventariable" column="A" modalColumn="B" detach="Clasificadores" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
 		{{#field id="comentarios" label="Comentarios" type="text" column="A" modalColumn="A" detach="Comentarios" labelModalClass="full-width"}}
@@ -302,11 +302,11 @@
 		{{#if esInventariable}}<br>Código UPC: {{codigoUpc}}{{/if}}
 		{{#if esInventariable}}<br>Código Local: {{codigoLocal}}{{/if}}
 		{{#if esInventariable}}<br>Cliente: {{_cliente}}{{/if}}
-		{{#if esInventariable}}<br>Marca: {{_marca}}{{/if}}
-		{{#if esInventariable}}<br>Estilo: {{_estilo}}{{/if}}
-		{{#if esInventariable}}<br>Tamaño: {{_tamano}}{{/if}}
-		{{#if esInventariable}}<br>Color/Sabor: {{_color}}{{/if}}
-		{{#if esInventariable}}<br>Temporada: {{_temporada}}{{/if}}
+		{{#if esInventariable}}<br>Marca: {{marca}}{{/if}}
+		{{#if esInventariable}}<br>Estilo: {{estilo}}{{/if}}
+		{{#if esInventariable}}<br>Tamaño: {{tamano}}{{/if}}
+		{{#if esInventariable}}<br>Color/Sabor: {{color}}{{/if}}
+		{{#if esInventariable}}<br>Temporada: {{temporada}}{{/if}}
 		<br>{{comentarios}}
 	{{/template2}}
 	{{#template3 id="articulo"}}
@@ -318,11 +318,11 @@
 		{{#if esInventariable}}{{#if codigoUpc}}<br>Código UPC: {{codigoUpc}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if codigoLocal}}<br>Código Local: {{codigoLocal}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if cliente}}<br>Cliente: {{_cliente}}{{/if}}{{/if}}
-		{{#if esInventariable}}{{#if marca}}<br>Marca: {{_marca}}{{/if}}{{/if}}
-		{{#if esInventariable}}{{#if estilo}}<br>Estilo: {{_estilo}}{{/if}}{{/if}}
-		{{#if esInventariable}}{{#if tamano}}<br>Tamaño: {{_tamano}}{{/if}}{{/if}}
-		{{#if esInventariable}}{{#if color}}<br>Color/Sabor: {{_color}}{{/if}}{{/if}}
-		{{#if esInventariable}}{{#if temporada}}<br>Temporada: {{_temporada}}{{/if}}{{/if}}
+		{{#if esInventariable}}{{#if marca}}<br>Marca: {{marca}}{{/if}}{{/if}}
+		{{#if esInventariable}}{{#if estilo}}<br>Estilo: {{estilo}}{{/if}}{{/if}}
+		{{#if esInventariable}}{{#if tamano}}<br>Tamaño: {{tamano}}{{/if}}{{/if}}
+		{{#if esInventariable}}{{#if color}}<br>Color/Sabor: {{color}}{{/if}}{{/if}}
+		{{#if esInventariable}}{{#if temporada}}<br>Temporada: {{temporada}}{{/if}}{{/if}}
 		{{#if comentarios}}<br>{{comentarios}}{{/if}}
 	{{/template3}}
 {{/markup}}

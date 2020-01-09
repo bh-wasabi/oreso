@@ -48,11 +48,11 @@
     {{when tipoRecurso="espacio" return="=base._espacio"}}
   {{/function}}
   {{#function id="checkListTitulos"}}
-    {{default return="=calc.concatTab('Tipo','Fecha','Cliente final','# factura','# OC','Código Tecs','Grupo','Descripción','Sku','# Sucursal','Nombre sucursal','Unidad','Cantidad','Factor','Contenedor',Caja inicial','Caja final','Fecha Cita','# Cita','Observación')"}}
+    {{default return="=calc.concatTab('Tipo','Fecha','Cliente final','# factura','# OC','Código Tecs','Grupo','Descripción','Sku','# Sucursal','Nombre sucursal','Unidad','Cantidad','Factor','Contenedor','Caja inicial','Caja final','Fecha Cita','# Cita','Observación')"}}
   {{/function}}
   {{#function id="checkList" multi="true"}}
     {{define type="param" id="item"}}
-    {{default return="=(item.neto)?calc.concatTab('Salida',calc.format('date', item.base.fechaEmision, 'DD/MM/YYYY'),item.persona.nombreCompleto,'',item.referencia,item.codigoLocal,item.codigo,item.descripcion,item.aliasArticulo,item.aliasDestino,item._destino,item._unidad,item.neto,'',item.contenedor,item.cajaInicial,item.cajaFinal,'','',''):null"}}
+    {{default return="=(item.neto)?calc.concatTab('Salida',calc.format('date', item.base.fechaEmision, 'DD/MM/YYYY'),item.persona.nombreCompleto,'',item.referencia2,item.codigoLocal,item.codigo,item.descripcion,item.referencia,item.aliasDestino,item._destino,item._unidad,item.neto,'',item.contenedor,item.cajaInicial,item.cajaFinal,'','',''):null"}}
   {{/function}}
   {{#transform id="copiarPersona"}}
     {{set id="=_id"}}

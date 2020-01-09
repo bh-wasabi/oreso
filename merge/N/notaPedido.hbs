@@ -52,7 +52,12 @@
     {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
     {{column field="valorUnitario" label="Precio Unitario" width="110" type="numeric" format="#,.##" required="true"}}
     {{column field="tasaIva" label="% IVA" width="45" type="numeric" format="#.##" defaultValue="16"}}
+[.#if esOreso.]
+    {{column field="referencia" label="SKU" width="150"}}
+    {{column field="referencia2" label="Orden Compra" width="150"}}
+[.else.]
     {{column field="referencia" label="Referencia" width="150"}}
+[./if.]
     {{column field="contenedor" label="Contenedor" width="80" type="numeric"}}
     {{column field="cajaInicial" label="Caja Inicial" width="80" type="numeric"}}
     {{column field="cajaFinal" label="Caja Final" width="80" type="numeric"}}
@@ -82,13 +87,18 @@
         {{column field="codigo" label="Código"}}
         {{column field="descripcion" label="Descripción"}}
         {{column field="codigoUpc" label="Código UPC"}}
+[.#if esOreso.]        
+        {{column field="referencia" label="SKU"}}
+        {{column field="referencia2" label="Orden Compra"}}
+[.else.]
         {{column field="referencia" label="Referencia"}}
-        {{column field="cantidad" align="right" label="Cantidad"}}
+[./if.]
+        {{column field="neto" align="right" label="Cantidad"}}
       {{/table}}
     {{/stack}}
   {{/report}}  
 
   {{action id="tool" condition="true" label="Analizar Pedido" type="viewCube" visibleMode="close" color="cyan" btnSolid="true" cube="articulos" items="=calc.mergeArraysByKey(articulos, _items, 'codigo')" fromSource="articulo" fromView="todo"}}
   {{action id="tool2" condition="true" label="Descargar Checklist..." type="save-as" visibleMode="close" color="blue" btnSolid="true" fileName="=_name||'Pedido'" items="=_.union([fn('checkListTitulos')], fn('checkList', calc.mergeMasterDetail({persona, base}, calc.mergeArraysByKey(articulos, _items, 'codigo'))))" fromSource="articulo" fromView="todo"}}
-  {{action id="tool4" condition="true" type="report-pdf" label="Reporte Bodega" report="preliminar2" fileName="=_name" visibleMode="close" color="grey" items="=calc.mapReduce(calc.mergeArraysByKey(articulos, _items, 'codigo'), 'codigo,descripcion,codigoUpc,referencia', 'cantidad')" fromSource="articulo" fromView="todo"}}
+  {{action id="tool4" condition="true" type="report-pdf" label="Reporte Bodega" report="preliminar2" fileName="=_name" visibleMode="close" color="grey" items="=calc.mapReduce(calc.mergeArraysByKey(articulos, _items, 'codigo'), 'codigo,descripcion,codigoUpc,referencia', 'neto')" fromSource="articulo" fromView="todo"}}
 {{/define}}

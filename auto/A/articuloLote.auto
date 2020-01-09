@@ -78,26 +78,11 @@
 			{{/editor}}
 		{{/field}}
 		{{field id="cantidadEmpaque" label="Cantidad Empaque" type="number" column="A"}}
-		{{#field id="marca" label="Marca" type="text" column="A" references="app.marca"}}
-			{{#editor type="select" preset="app.marca"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="estilo" label="Estilo" type="text" column="A" references="app.estilo"}}
-			{{#editor type="select" preset="app.estilo"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="tamano" label="Tamaño" type="text" column="A" references="app.tamano"}}
-			{{#editor type="select" preset="app.tamano"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="color" label="Color/Sabor" type="text" column="A" references="app.color"}}
-			{{#editor type="select" preset="app.color"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="temporada" label="Temporada" type="text" column="A" references="app.temporada"}}
-			{{#editor type="select" preset="app.temporada"}}
-			{{/editor}}
-		{{/field}}
+		{{field id="marca" label="Marca" type="text" column="A"}}
+		{{field id="estilo" label="Estilo" type="text" column="A"}}
+		{{field id="tamano" label="Tamaño" type="text" column="A"}}
+		{{field id="color" label="Color/Sabor" type="text" column="A"}}
+		{{field id="temporada" label="Temporada" type="text" column="A"}}
 		{{#field id="codigoUpc" label="Código UPC" type="text" column="A"}}
 			{{#editor case="upper"}}
 			{{/editor}}

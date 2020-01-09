@@ -527,7 +527,7 @@
   {{action id="abrir" type="open" label="Editar"}}
   {{action id="cerrar" type="close"}}
 
-  {{#section id="marca" type="array"}}
+  {{!-- {{#section id="marca" type="array"}}
     {{field id="id" type="text" label="Identificador"}}
     {{field id="nombre" type="text" label="Nombre"}}
     {{field id="orden" type="number" label="Orden"}}
@@ -576,7 +576,7 @@
     {{column field="id" width="150"}}
     {{column field="nombre" width="350"}}
     {{column field="orden" width="50"}}
-  {{/grid}}  
+  {{/grid}}   --}}
 
   {{#section id="aliasUbicacion" type="array"}}
     {{#field id="id" type="text" label="Identificador"}}
@@ -762,7 +762,7 @@
       {{/col}}
     {{/row}}
   {{/page}}
-  {{#page name="Clasificadores"}}
+  {{!-- {{#page name="Clasificadores"}}
     {{#row}}
       {{#col medium="50%"}}
         {{#zone id="marca" modalGrid="marca"}}
@@ -806,7 +806,7 @@
         {{/zone}}
       {{/col}}
     {{/row}}
-  {{/page}}
+  {{/page}} --}}
   {{#page name="Cuentas Mayor"}}
     {{#row}}
       {{#col medium="100%"}}
@@ -1051,11 +1051,11 @@
       </div>  
     </div>
   {{/template}}  
-  {{modal marca id="marca" grid="marca" name="Marcas" size="long"}}
+  {{!-- {{modal marca id="marca" grid="marca" name="Marcas" size="long"}}
   {{modal estilo id="estilo" grid="estilo" name="Estilos" size="long"}}
   {{modal tamano id="tamano" grid="tamano" name="Tamaños" size="long"}}
   {{modal color id="color" grid="color" name="Colores/Sabores" size="long"}}
-  {{modal temporada id="temporada" grid="temporada" name="Temporadas" size="long"}}
+  {{modal temporada id="temporada" grid="temporada" name="Temporadas" size="long"}} --}}
   {{!-- {{modal aliasArticulo id="aliasArticulo" grid="aliasArticulo" name="Alias Artículos" size="xwide"}} --}}
   {{modal aliasUbicacion id="aliasUbicacion" grid="aliasUbicacion" name="Alias Ubicaciones" size="xwide"}}
   {{modal grupoUbicacion id="grupoUbicacion" grid="grupoUbicacion" name="Grupos Ubicaciones" size="xwide"}}
