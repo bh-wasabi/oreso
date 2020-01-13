@@ -131,7 +131,11 @@
 			{{#editor case="upper"}}
 			{{/editor}}
 		{{/field}}
-		{{field id="contenedor" label="Contenedor" type="number" column="A"}}
+		{{#field id="referencia2" label="Referencia 2" type="text" column="A"}}
+			{{#editor case="upper"}}
+			{{/editor}}
+		{{/field}}
+		{{field id="contenedor" label="Contenedor" type="number" format="upper" column="A"}}
 		{{field id="cajaInicial" label="Caja Inicial" type="number" column="A"}}
 		{{field id="cajaFinal" label="Caja Final" type="number" column="A"}}
 		{{#field id="lote" label="Lote" type="text" column="A"}}
@@ -214,6 +218,7 @@
 				{{column field="iva"}}
 				{{column field="total"}}
 				{{column field="referencia"}}
+				{{column field="referencia2"}}
 				{{column field="contenedor"}}
 				{{column field="cajaInicial"}}
 				{{column field="cajaFinal"}}
@@ -348,7 +353,7 @@
 							Artículos
 						{{/h5}}
 						{{#div}}
-							{{table articulos class="auto-form-table" cols="aliasArticulo, codigo, descripcion, aliasOrigen, _origen, aliasDestino, _destino, cantidad, costoUnitario, valorUnitario, tasaIva, importe, iva, total, referencia, contenedor, cajaInicial, cajaFinal, lote, vencimiento, comentarios" removeEmptyCols="true" unlink="true"}}
+							{{table articulos class="auto-form-table" cols="aliasArticulo, codigo, descripcion, aliasOrigen, _origen, aliasDestino, _destino, cantidad, costoUnitario, valorUnitario, tasaIva, importe, iva, total, referencia, referencia2, contenedor, cajaInicial, cajaFinal, lote, vencimiento, comentarios" removeEmptyCols="true" unlink="true"}}
 							{{br}}
 						{{/div}}
 					{{/col}}

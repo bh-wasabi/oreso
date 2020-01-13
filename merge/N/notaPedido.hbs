@@ -16,10 +16,17 @@
   {{#section id="articulos"}}
     {{#field id="aliasArticulo"}}
       {{#onChange}}
+[.#if esOreso.]      
         {{set articulo="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).articulo"}}
         {{set codigo="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).codigo"}}
         {{set descripcion="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).descripcion"}}
         {{set valorUnitario="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).precio"}}
+[.else.]
+        {{set articulo="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).articulo"}}
+        {{set codigo="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).codigo"}}
+        {{set descripcion="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).descripcion"}}
+        {{set valorUnitario="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).precio"}}
+[./if.]
       {{/onChange}}
     {{/field}}
     {{#field id="aliasOrigen"}}

@@ -637,7 +637,21 @@
     {{field id="orden" type="number" label="Orden"}}
   {{/section}}
 
-  {{#mapPreset source="articulo" view="porCodigo" preset="aliasArticulo"}}
+  {{#section id="aliasArticulo2" type="array"}}
+    {{#field id="id" type="text" label="Identificador"}}
+      {{editor case="upper"}}
+    {{/field}}
+    {{#field id="persona" type="text" label="Sujeto"}}
+      {{editor type="lookup" source="persona" view="clientesProveedores" searchEnabled="true"}}
+    {{/field}}
+    {{#field id="articulo" type="text" label="Artículo"}}
+      {{editor type="lookup" source="articulo" view="lista" searchEnabled="true"}}
+    {{/field}}
+    {{field id="precio" type="number" format="currency" label="Precio"}}
+    {{field id="orden" type="number" label="Orden"}}
+  {{/section}}
+
+  {{#mapPreset source="articulo" view="porCodigo" toPreset="aliasArticulo"}}
     {{set id="=base.codigo"}}
     {{set articulo="=_id"}}
     {{set descripcion="=_name"}}
@@ -645,7 +659,7 @@
     {{set precio="=base.precioLista"}}
   {{/mapPreset}}
 
-  {{#mapPreset source="articulo" view="porCodigoUpc" preset="aliasArticulo"}}
+  {{#mapPreset source="articulo" view="porCodigoUpc" toPreset="aliasArticulo"}}
     {{set id="=base.codigoUpc"}}
     {{set articulo="=_id"}}
     {{set descripcion="=_name"}}
@@ -653,7 +667,7 @@
     {{set precio="=base.precioLista"}}
   {{/mapPreset}}
 
-  {{#mapPreset source="articulo" view="porCodigoSku" preset="aliasArticulo"}}
+  {{#mapPreset source="articulo" view="porCodigoSku" toPreset="aliasArticulo"}}
     {{set id="=base.codigoSku"}}
     {{set articulo="=_id"}}
     {{set descripcion="=_name"}}
@@ -662,7 +676,7 @@
     {{set precio="=base.precioLista"}}
   {{/mapPreset}}
 
-  {{!-- {{#mapPreset source="skuAdicional" view="porCodigoSku" preset="aliasArticulo"}}
+  {{!-- {{#mapPreset source="skuAdicional" view="porCodigoSku" toPreset="aliasArticulo"}}
     {{set id="=base.codigoSku"}}
     {{set articulo="=base.articulo"}}
     {{set descripcion="=base.descripcion"}}
@@ -671,7 +685,7 @@
     {{set precio="=base.precioLista"}}
   {{/mapPreset}} --}}
 
-  {{#mapPreset source="articulo" view="porCodigoLocal" preset="aliasArticulo"}}
+  {{#mapPreset source="articulo" view="porCodigoLocal" toPreset="aliasArticulo"}}
     {{set id="=base.codigoLocal"}}
     {{set articulo="=_id"}}
     {{set descripcion="=_name"}}
@@ -679,13 +693,21 @@
     {{set precio="=base.precioLista"}}
   {{/mapPreset}}
 
-  {{!-- {{#grid id="aliasArticulo" section="aliasArticulo" allowInsert="true" allowRemove="true" allowSort="true" sortBy="persona,orden,id"}}
+  {{#mapPreset fromPreset="aliasArticulo2" toPreset="aliasArticulo"}}
+    {{set id="=id"}}
+    {{set articulo="=articulo"}}
+    {{set descripcion="=_articulo"}}
+    {{set codigo="=id"}}
+    {{set precio="=precio"}}
+  {{/mapPreset}}
+
+  {{#grid id="aliasArticulo2" section="aliasArticulo2" allowInsert="true" allowRemove="true" allowSort="true" sortBy="persona,orden,id"}}
     {{column field="id" width="200"}}
     {{column field="persona" width="350"}}
     {{column field="articulo" width="350"}}
     {{column field="precio" width="150"}}
     {{column field="orden" width="50"}}
-  {{/grid}}   --}}
+  {{/grid}}
 
   {{#section id="mayor" type="array"}}
     {{field id="id" type="text" label="Identificador"}}
@@ -719,17 +741,17 @@
 {{/define}}
 
 {{#markup}}
-  {{!-- {{#page name="Artículos"}}
+  {{#page name="Artículos"}}
     {{#row}}
       {{#col medium="80%"}}
-        {{#zone id="aliasArticulo" modalGrid="aliasArticulo"}}
+        {{#zone id="aliasArticulo2" modalGrid="aliasArticulo2"}}
           {{br}}
           {{#h5}}Alias Artículos{{/h5}}
-          {{table aliasArticulo cols="id,persona,articulo,precio" medium="20%,40%,40%"}}
+          {{table aliasArticulo2 cols="id,persona,articulo,precio" medium="20%,40%,40%"}}
         {{/zone}}
       {{/col}}
     {{/row}}
-  {{/page}} --}}
+  {{/page}}
   {{#page name="Ubicaciones"}}
     {{#row}}
       {{#col medium="80%"}}
@@ -1056,7 +1078,7 @@
   {{modal tamano id="tamano" grid="tamano" name="Tamaños" size="long"}}
   {{modal color id="color" grid="color" name="Colores/Sabores" size="long"}}
   {{modal temporada id="temporada" grid="temporada" name="Temporadas" size="long"}} --}}
-  {{!-- {{modal aliasArticulo id="aliasArticulo" grid="aliasArticulo" name="Alias Artículos" size="xwide"}} --}}
+  {{modal aliasArticulo2 id="aliasArticulo2" grid="aliasArticulo2" name="Alias Artículos" size="xwide"}}
   {{modal aliasUbicacion id="aliasUbicacion" grid="aliasUbicacion" name="Alias Ubicaciones" size="xwide"}}
   {{modal grupoUbicacion id="grupoUbicacion" grid="grupoUbicacion" name="Grupos Ubicaciones" size="xwide"}}
   {{modal aliasTesoreria id="aliasTesoreria" grid="aliasTesoreria" name="Alias Tesorería" size="xwide"}}
