@@ -61,7 +61,7 @@
 	{{action id="tool5" condition="=false"}}
 	{{action id="tool6" condition="=false"}}
 	{{action id="abrir" type="open" label="Editar" condition="=!@_isAffected"}}
-	{{action id="guardar" label="Guardar" btnFlat="true" color="grey" type="affect" workflow="guardar" condition="=!_inWorkflow" confirm="true" confirmMessage="¿Está seguro que desea guardar el borrador?"}}
+	{{action id="guardar" label="Guardar" btnFlat="true" color="grey" keepTempSections="true" type="affect" workflow="guardar" condition="=!_inWorkflow" confirm="true" confirmMessage="¿Está seguro que desea guardar el borrador?"}}
 	{{action id="afectar" label="Procesar" type="affect" workflow="afectar"}}
 	{{#transform id="copiarNota"}}
 		{{#update section="base"}}
@@ -96,7 +96,7 @@
 	{{/section}}
 	{{#section id="aplicacion" type="array"}}
 		{{field id="lote" label="Lote" type="text" column="A"}}
-		{{#field id="vencimiento" label="Fecha" type="text" column="A"}}
+		{{#field id="vencimiento" label="Vencimiento" type="text" column="A"}}
 			{{#editor case="YYYY-MM-DD"}}
 			{{/editor}}
 		{{/field}}
@@ -132,10 +132,10 @@
 					{{row image="logo" alignment="left" imageWidth="75" margin="0,-15,0,0"}}
 				{{/column}}
 				{{#column margin="0,-10,0,0"}}
-					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Leibnitz 83-1" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Anzures 11590 CDMX" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Xtra Cinemas" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Reforma 215" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Lomas de Chapultepec 11000 CDMX" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Teléfono 55 5284 8500" alignment="left" fontSize="6" color="grey"}}
 				{{/column}}
 				{{#column}}
 					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
@@ -146,7 +146,7 @@
 	{{/report}}
 	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true"}}
 		{{#stack}}
-			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
+			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
 		{{/stack}}
 		{{#stack}}
 			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}

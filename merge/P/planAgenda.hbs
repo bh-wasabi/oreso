@@ -7,6 +7,7 @@
     {{#find}}
       {{include field="_name"}}
       {{include field="base.comentarios"}}
+      {{include field="base._sucursal"}}
       {{include field="base._area"}}
       {{include field="base._subArea"}}
       {{include field="base._recurso"}}
@@ -38,6 +39,11 @@
     {{calc field="text" value="=fn('areaSubArea', @area, @subArea)"}}
   {{/view}}
   {{#section id="base"}}
+    {{#field id="pelicula"}}
+      {{#onChange}}
+        {{set comentarios="=_name"}}
+      {{/onChange}}
+    {{/field}}
     {{#field id="tipoRecurso"}}
       {{onChange clearFields="prestadorServicios,seleccionarEspecialidad,especialidad,equipoMedico,tipoEquipoMedico,espacio,tipoEspacio"}}
     {{/field}}
@@ -58,7 +64,13 @@
         {{set tipoEquipoMedico="=base.tipoEquipoMedico"}}
       {{/onChange}}
     {{/field}}
+    {{#field id="sucursal"}}
+      {{onChange clearFields="espacio"}}
+    {{/field}}
     {{#field id="espacio"}}
+      {{#editor alwaysLoad="true"}}
+        {{param sucursal="=sucursal"}}
+      {{/editor}}
       {{#onChange}}
         {{set tipoEspacio="=base.tipoEspacio"}}
       {{/onChange}}
@@ -91,7 +103,7 @@
       <span style="float:right;">{{base._recurso}}</span>
       </br>
       <span style="font-size:12px;">{{base.comentarios}}</span>
-      <span style="font-size:12px;float:right;">{{base._area}}{{#if base.subArea}} / {{base._subArea}}{{/if}}</span>
+      <span style="font-size:12px;float:right;">{{base._sucursal}}</span>
       {{!-- <br>
       <span style="font-size:12px;float:right;">{{base._estatus}}</span> --}}
     </div>

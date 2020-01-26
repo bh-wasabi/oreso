@@ -1,4 +1,4 @@
-{{#define type="doc" id="agendaExcepcion"}}
+{{#define type="doc" id="articuloPermisos"}}
 	{{param defaultDisplay="_name"}}
 	{{param defaultView="lista"}}
 	{{param pageStart="1"}}
@@ -17,9 +17,10 @@
 	{{param startOnOpen="base"}}
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="base.nombre"}}
-	{{param name="Excepción"}}
-	{{param typeName="Excepción"}}
-	{{param tplName="agendaExcepcion"}}
+	{{param name="Permisos"}}
+	{{param typeName="Permisos"}}
+	{{param group="Registro"}}
+	{{param tplName="articuloPermisos"}}
 	{{param fullWidth="true"}}
 	{{param hideTitle="true"}}
 	{{param autoClose="true"}}
@@ -49,33 +50,23 @@
 	{{section id="_options" temp="true"}}
 	{{section id="_params" temp="true"}}
 	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
-		{{#field id="motivo" label="Motivo" type="text" column="A" references="motivoAgendaExcepcion" labelModalClass="full-width"}}
-			{{#editor type="select" preset="cfg.motivoAgendaExcepcion" width="100%"}}
-			{{/editor}}
-			{{validator type="required"}}
-			{{#onChange refresh="true"}}
-			{{/onChange}}
-		{{/field}}
-		{{#field id="fecha" label="Fecha" type="date" if="esFecha" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD"}}
-			{{#editor type="date" width="100%"}}
-			{{/editor}}
-			{{validator type="required"}}
-		{{/field}}
-		{{#field id="desde" label="Desde" type="date" if="esRango" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD"}}
-			{{#editor type="date" width="100%"}}
-			{{/editor}}
-			{{validator type="required"}}
-		{{/field}}
-		{{#field id="hasta" label="Hasta" type="date" if="esRango" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD"}}
-			{{#editor type="date" width="100%"}}
-			{{/editor}}
-			{{validator type="required"}}
-		{{/field}}
-		{{#field id="comentarios" label="Comentarios" type="text" column="A" labelModalClass="full-width"}}
-			{{#editor type="text-area" height="110" width="100%"}}
+		{{#field id="gratis" label="Es Gratis" type="text" column="A" references="siNo" labelModalClass="full-width" defaultValue="'no'"}}
+			{{#editor type="select" preset="siNo" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{field id="nombre" label="Nombre" hide="true" type="expr" value="=calc.tpl('agendaExcepcion', base)"}}
+		{{#field id="autorizacion" label="Necesita Autorización" type="text" column="A" references="siNo" labelModalClass="full-width" defaultValue="'no'"}}
+			{{#editor type="select" preset="siNo" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="inactivo" label="Esta Inactivo" type="text" column="A" references="siNo" labelModalClass="full-width" defaultValue="'no'"}}
+			{{#editor type="select" preset="siNo" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="rolesAcceso" label="Roles Acceso" type="array" column="A" references="userRole" labelModalClass="full-width"}}
+			{{#editor type="tags" preset="cfg.userRole" searchEnabled="false" searchTimeout="100" showSelectionControls="false" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{field id="nombre" label="Nombre" hide="true" type="expr" value="=calc.tpl('articuloPermisos', base)"}}
 	{{/section}}
 	{{#report id="preliminar-encabezado"}}
 		{{#stack}}
@@ -101,12 +92,11 @@
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Excepción" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
-				{{row field="motivo" align="left"}}
-				{{row field="fecha" condition="esFecha" align="left"}}
-				{{row field="desde" condition="esRango" align="left"}}
-				{{row field="hasta" condition="esRango" align="left"}}
-				{{row field="comentarios" align="left"}}
+			{{#record title="Permisos" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
+				{{row field="gratis" align="left"}}
+				{{row field="autorizacion" align="left"}}
+				{{row field="inactivo" align="left"}}
+				{{row field="rolesAcceso" align="left"}}
 			{{/record}}
 		{{/stack}}
 	{{/report}}
@@ -123,7 +113,7 @@
 	{{/browser}}
 {{/define}}
 {{#markup}}
-	{{#page name="Excepción"}}
+	{{#page name="Permisos"}}
 		{{row}}
 		{{row}}
 		{{#row}}
@@ -131,7 +121,7 @@
 				{{#row class="auto-form-row"}}
 					{{#col medium="100%" class="auto-form-col"}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="motivo, fecha, desde, hasta, comentarios" class="auto-form-record auto-hide-title"}}
+							{{record this widths="20%,80%" rows="gratis, autorizacion, inactivo, rolesAcceso" class="auto-form-record auto-hide-title"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -139,32 +129,29 @@
 			{{/zone}}
 		{{/row}}
 	{{/page}}
-	{{#modal base id="base" name="Excepción"}}
+	{{#modal base id="base" name="Permisos"}}
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
-				{{field motivo}}
-				{{field fecha}}
-				{{field desde}}
-				{{field hasta}}
-				{{field comentarios}}
+				{{field gratis}}
+				{{field autorizacion}}
+				{{field inactivo}}
+				{{field rolesAcceso}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
 	{{#template id="lista"}}
 		<div>{{_name}}</div>
 	{{/template}}
-	{{#template2 id="agendaExcepcion"}}
-		<br>Motivo: {{_motivo}}
-		{{#if esFecha}}<br>Fecha: {{fecha}}{{/if}}
-		{{#if esRango}}<br>Desde: {{desde}}{{/if}}
-		{{#if esRango}}<br>Hasta: {{hasta}}{{/if}}
-		<br>{{comentarios}}
+	{{#template2 id="articuloPermisos"}}
+		<br>Es Gratis: {{_gratis}}
+		<br>Necesita Autorización: {{_autorizacion}}
+		<br>Esta Inactivo: {{_inactivo}}
+		<br>Roles Acceso: {{_rolesAcceso}}
 	{{/template2}}
-	{{#template3 id="agendaExcepcion"}}
-		{{#if motivo}}<br>Motivo: {{_motivo}}{{/if}}
-		{{#if esFecha}}{{#if fecha}}<br>Fecha: {{fecha}}{{/if}}{{/if}}
-		{{#if esRango}}{{#if desde}}<br>Desde: {{desde}}{{/if}}{{/if}}
-		{{#if esRango}}{{#if hasta}}<br>Hasta: {{hasta}}{{/if}}{{/if}}
-		{{#if comentarios}}<br>{{comentarios}}{{/if}}
+	{{#template3 id="articuloPermisos"}}
+		{{#if gratis}}<br>Es Gratis: {{_gratis}}{{/if}}
+		{{#if autorizacion}}<br>Necesita Autorización: {{_autorizacion}}{{/if}}
+		{{#if inactivo}}<br>Esta Inactivo: {{_inactivo}}{{/if}}
+		{{#if rolesAcceso}}<br>Roles Acceso: {{_rolesAcceso}}{{/if}}
 	{{/template3}}
 {{/markup}}

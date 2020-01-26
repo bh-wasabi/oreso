@@ -1,4 +1,4 @@
-{{#define type="doc" id="ubicacion"}}
+{{#define type="doc" id="dispositivo"}}
 	{{param defaultDisplay="_name"}}
 	{{param defaultView="lista"}}
 	{{param pageStart="1"}}
@@ -17,11 +17,12 @@
 	{{param startOnOpen="base"}}
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="base.nombre"}}
-	{{param name="Ubicación"}}
-	{{param typeName="Ubicación"}}
+	{{param name="Dispositivo"}}
+	{{param typeName="Dispositivo"}}
 	{{param group="Registro"}}
+	{{param tplName="dispositivo"}}
 	{{param fullWidth="true"}}
-	{{param modalSize="xlong"}}
+	{{param modalSize="xwide"}}
 	{{param autoOpenEditors="true"}}
 	{{param autoAffect="node-direct"}}
 	{{param bannerTopTemplate="banner1"}}
@@ -51,20 +52,52 @@
 	{{section id="_options" temp="true"}}
 	{{section id="_params" temp="true"}}
 	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
-		{{#field id="nombre" label="Nombre" type="text" column="A" labelModalClass="full-width"}}
+		{{#field id="identificador" label="Identificador" type="text" column="A" modalColumn="A" total="unique" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="grupo" label="Grupo" type="text" column="A" references="app.grupoUbicacion" labelModalClass="full-width"}}
-			{{#editor type="select" preset="app.grupoUbicacion" width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="direccion" label="Dirección" type="doc" column="A" references="direccion" labelModalClass="full-width" source="direccion"}}
+		{{#field id="nombre" label="Nombre" type="text" column="A" modalColumn="A" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="contacto" label="Contactos" type="docs" column="A" references="contacto" labelModalClass="full-width" source="contacto"}}
+		{{#field id="caja" label="Caja" type="number" column="A" modalColumn="A" total="unique" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="sucursal" label="Sucursal" type="reference" column="A" references="sucursal" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor type="select" source="sucursal" view="lista" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="servidor" label="Servidor" type="text" column="A" references="servidor" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.servidor" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="empresa" label="Empresa" type="text" column="A" references="empresa" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.empresa" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="area" label="Área" type="text" column="A" references="area" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.area" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="subArea" label="Sub área" type="text" column="A" references="subArea" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.subArea" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="estatus" label="Estatus" type="text" column="A" references="estatusGeneral" modalColumn="B" labelModalClass="full-width" defaultValue="'activo'"}}
+			{{#editor type="select" preset="cfg.estatusGeneral" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="permisos" label="Permisos" type="doc" column="A" references="dispositivoPermisos" modalColumn="B" labelModalClass="full-width" source="dispositivoPermisos"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="zoom" label="% Zoom" type="number" column="A" modalColumn="B" labelModalClass="full-width" defaultValue="60"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="comentarios" label="Comentarios" type="text" column="A" modalColumn="B" labelModalClass="full-width"}}
+			{{#editor type="text-area" height="110" width="100%"}}
 			{{/editor}}
 		{{/field}}
 	{{/section}}
@@ -92,11 +125,19 @@
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Ubicación" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
+			{{#record title="Dispositivo" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
+				{{row field="identificador" align="left"}}
 				{{row field="nombre" align="left"}}
-				{{row field="grupo" align="left"}}
-				{{row field="direccion" align="left"}}
-				{{row field="contacto" align="left"}}
+				{{row field="caja" align="left"}}
+				{{row field="sucursal" align="left"}}
+				{{row field="servidor" align="left"}}
+				{{row field="empresa" align="left"}}
+				{{row field="area" align="left"}}
+				{{row field="subArea" align="left"}}
+				{{row field="estatus" align="left"}}
+				{{row field="permisos" align="left"}}
+				{{row field="zoom" align="left"}}
+				{{row field="comentarios" align="left"}}
 			{{/record}}
 		{{/stack}}
 	{{/report}}
@@ -139,7 +180,7 @@
 	{{/workflow}}
 {{/define}}
 {{#markup}}
-	{{#page name="Ubicación"}}
+	{{#page name="Dispositivo"}}
 		{{row}}
 		{{row}}
 		{{#row}}
@@ -147,10 +188,10 @@
 				{{#row class="auto-form-row"}}
 					{{#col medium="100%" class="auto-form-col"}}
 						{{#h5 class="auto-form-h5"}}
-							Ubicación
+							Dispositivo
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="nombre, grupo, direccion, contacto" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="identificador, nombre, caja, sucursal, servidor, empresa, area, subArea, estatus, permisos, zoom, comentarios" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -158,29 +199,57 @@
 			{{/zone}}
 		{{/row}}
 	{{/page}}
-	{{#modal base id="base" name="Ubicación" size="xlong"}}
-		{{#col medium="100%" vertical="100%"}}
+	{{#modal base id="base" name="Dispositivo" size="xwide"}}
+		{{#col medium="50%" vertical="50%"}}
 			{{#fieldSet}}
+				{{field identificador}}
 				{{field nombre}}
-				{{field grupo}}
-				{{field direccion}}
-				{{field contacto}}
+				{{field caja}}
+				{{field sucursal}}
+				{{field servidor}}
+				{{field empresa}}
+				{{field area}}
+				{{field subArea}}
+			{{/fieldSet}}
+		{{/col}}
+		{{#col medium="50%" vertical="50%"}}
+			{{#fieldSet}}
+				{{field estatus}}
+				{{field permisos}}
+				{{field zoom}}
+				{{field comentarios}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
 	{{#template id="lista"}}
 		<div>{{_name}}</div>
 	{{/template}}
-	{{#template2 id="ubicacion"}}
+	{{#template2 id="dispositivo"}}
+		<br>Identificador: {{identificador}}
 		<br>Nombre: {{nombre}}
-		<br>Grupo: {{_grupo}}
-		<br>Dirección: {{_direccion}}
-		<br>Contactos: {{_contacto}}
+		<br>Caja: {{caja}}
+		<br>Sucursal: {{_sucursal}}
+		<br>Servidor: {{_servidor}}
+		<br>Empresa: {{_empresa}}
+		<br>Área: {{_area}}
+		<br>Sub área: {{_subArea}}
+		<br>Estatus: {{_estatus}}
+		<br>Permisos: {{_permisos}}
+		<br>% Zoom: {{zoom}}
+		<br>{{comentarios}}
 	{{/template2}}
-	{{#template3 id="ubicacion"}}
+	{{#template3 id="dispositivo"}}
+		{{#if identificador}}<br>Identificador: {{identificador}}{{/if}}
 		{{#if nombre}}<br>Nombre: {{nombre}}{{/if}}
-		{{#if grupo}}<br>Grupo: {{_grupo}}{{/if}}
-		{{#if direccion}}<br>Dirección: {{_direccion}}{{/if}}
-		{{#if contacto}}<br>Contactos: {{_contacto}}{{/if}}
+		{{#if caja}}<br>Caja: {{caja}}{{/if}}
+		{{#if sucursal}}<br>Sucursal: {{_sucursal}}{{/if}}
+		{{#if servidor}}<br>Servidor: {{_servidor}}{{/if}}
+		{{#if empresa}}<br>Empresa: {{_empresa}}{{/if}}
+		{{#if area}}<br>Área: {{_area}}{{/if}}
+		{{#if subArea}}<br>Sub área: {{_subArea}}{{/if}}
+		{{#if estatus}}<br>Estatus: {{_estatus}}{{/if}}
+		{{#if permisos}}<br>Permisos: {{_permisos}}{{/if}}
+		{{#if zoom}}<br>% Zoom: {{zoom}}{{/if}}
+		{{#if comentarios}}<br>{{comentarios}}{{/if}}
 	{{/template3}}
 {{/markup}}

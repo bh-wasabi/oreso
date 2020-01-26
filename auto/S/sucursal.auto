@@ -1,4 +1,4 @@
-{{#define type="doc" id="socio"}}
+{{#define type="doc" id="sucursal"}}
 	{{param defaultDisplay="_name"}}
 	{{param defaultView="lista"}}
 	{{param pageStart="1"}}
@@ -17,11 +17,11 @@
 	{{param startOnOpen="base"}}
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="base.nombre"}}
-	{{param name="Socio"}}
-	{{param typeName="Socio"}}
+	{{param name="Complejo"}}
+	{{param typeName="Complejo"}}
 	{{param group="Registro"}}
 	{{param fullWidth="true"}}
-	{{param modalSize="xlong"}}
+	{{param modalSize="xwide"}}
 	{{param autoOpenEditors="true"}}
 	{{param autoAffect="node-direct"}}
 	{{param bannerTopTemplate="banner1"}}
@@ -51,54 +51,62 @@
 	{{section id="_options" temp="true"}}
 	{{section id="_params" temp="true"}}
 	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
-		{{#field id="nombre" label="Nombre" type="text" column="A" labelModalClass="full-width"}}
+		{{#field id="codigo" label="Código" type="text" column="A" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor case="upper" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="numero" label="Número" type="number" column="A" modalColumn="A" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="tipoPersona" label="Tipo Persona" type="text" column="A" references="tipoPersona" labelModalClass="full-width" defaultValue="'personaMoral'"}}
-			{{#editor type="select" preset="cfg.tipoPersona" width="100%"}}
-			{{/editor}}
-			{{#onChange refresh="true"}}
-			{{/onChange}}
-		{{/field}}
-		{{#field id="personaFisica" label="Persona Física" type="doc" if="esPersonaFisica" column="A" references="personaFisica" labelModalClass="full-width" source="personaFisica"}}
+		{{#field id="nombre" label="Nombre" type="text" column="A" modalColumn="A" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="formaContacto" label="Forma Contacto" type="doc" column="A" references="formaContacto" labelModalClass="full-width" source="formaContacto"}}
+		{{#field id="precioLista" label="Precio Lista" type="text" column="A" references="precioLista" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.precioLista" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="activoWeb" label="Activo App" type="text" column="A" references="siNo" modalColumn="A" labelModalClass="full-width" defaultValue="'no'"}}
+			{{#editor type="select" preset="siNo" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="nivelInventario" label="Nivel Inventario" type="docs" column="A" references="sucursalNivelInventario" modalColumn="A" labelModalClass="full-width" source="sucursalNivelInventario"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="personaMoral" label="Persona Moral" type="doc" if="esPersonaMoral" column="A" references="personaMoral" labelModalClass="full-width" source="personaMoral"}}
+		{{#field id="encabezado1" label="Encabezado 1" type="text" column="A" modalColumn="B" detach="Dirección" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="direccion" label="Dirección" type="doc" column="A" references="direccion" labelModalClass="full-width" source="direccion"}}
+		{{#field id="encabezado2" label="Encabezado 2" type="text" column="A" modalColumn="B" detach="Dirección" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="contacto" label="Contactos" type="docs" column="A" references="contacto" labelModalClass="full-width" source="contacto"}}
+		{{#field id="encabezado3" label="Encabezado 3" type="text" column="A" modalColumn="B" detach="Dirección" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-	{{/section}}
-	{{#section id="adjuntos" type="array"}}
-		{{field id="id" label="ID" type="text" hide="true" column="A"}}
-		{{field id="url" label="URL" type="text" hide="true" column="A"}}
-		{{field id="nombre" label="Nombre" type="text" column="A" defaultValue="'url'"}}
-		{{#field id="tipo" label="Tipo" type="text" column="A" references="tipoAdjunto"}}
-			{{#editor type="select" preset="cfg.tipoAdjunto"}}
+		{{#field id="encabezado4" label="Encabezado 4" type="text" column="A" modalColumn="B" detach="Dirección" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{field id="tamano" label="Tamaño (KB)" type="number" format="#" column="A"}}
-		{{#field id="fecha" label="Fecha" type="date" format="DD/MMM/YYYY" column="A" saveFormat="YYYY-MM-DD"}}
-			{{#editor type="date"}}
+		{{#field id="encabezado5" label="Encabezado 5" type="text" column="A" modalColumn="B" detach="Dirección" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{field id="ext" label="Extensión" type="text" column="A"}}
-		{{field id="tipoMIME" label="Tipo MIME" type="text" hide="true" column="A"}}
-		{{field id="subTipoMIME" label="Sub Tipo MIME" type="text" hide="true" column="A"}}
-		{{field id="orden" label="Orden" type="number" hide="true" column="A"}}
+		{{#field id="direccion" label="Dirección" type="text" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="latitud" label="Latitud" type="text" column="A" modalColumn="B" detach="Dirección" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="longitud" label="Longitud" type="text" column="A" modalColumn="B" detach="Dirección" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
 	{{/section}}
 	{{#report id="preliminar-encabezado"}}
 		{{#stack}}
@@ -124,26 +132,26 @@
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
+			{{#record title="Complejo" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
+				{{row field="codigo" align="left"}}
+				{{row field="numero" align="left"}}
 				{{row field="nombre" align="left"}}
-				{{row field="tipoPersona" align="left"}}
-				{{row field="personaFisica" condition="esPersonaFisica" align="left"}}
-				{{row field="formaContacto" align="left"}}
-				{{row field="personaMoral" condition="esPersonaMoral" align="left"}}
+				{{row field="precioLista" align="left"}}
+				{{row field="activoWeb" align="left"}}
+				{{row field="nivelInventario" align="left"}}
 				{{row field="direccion" align="left"}}
-				{{row field="contacto" align="left"}}
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
-			{{#row text="Adjuntos" fontSize="10" bold="true" margin="-10,0,0,0"}}
-			{{/row}}
-			{{#table title="Adjuntos" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="adjuntos" headerStyle="field" margin="-10,0,0,10" removeEmptyCols="true"}}
-				{{column field="nombre"}}
-				{{column field="tipo"}}
-				{{column field="tamano"}}
-				{{column field="fecha"}}
-				{{column field="ext"}}
-			{{/table}}
+			{{#record title="Dirección" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
+				{{row field="encabezado1" align="left"}}
+				{{row field="encabezado2" align="left"}}
+				{{row field="encabezado3" align="left"}}
+				{{row field="encabezado4" align="left"}}
+				{{row field="encabezado5" align="left"}}
+				{{row field="latitud" align="left"}}
+				{{row field="longitud" align="left"}}
+			{{/record}}
 		{{/stack}}
 	{{/report}}
 	{{#view id="lista" name="Lista"}}
@@ -185,7 +193,7 @@
 	{{/workflow}}
 {{/define}}
 {{#markup}}
-	{{#page name="Socio"}}
+	{{#page name="Complejo"}}
 		{{row}}
 		{{row}}
 		{{#row}}
@@ -193,67 +201,85 @@
 				{{#row class="auto-form-row"}}
 					{{#col medium="100%" class="auto-form-col"}}
 						{{#h5 class="auto-form-h5"}}
-							Datos Generales
+							Complejo
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="nombre, tipoPersona, personaFisica, formaContacto, personaMoral, direccion, contacto" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="codigo, numero, nombre, precioLista, activoWeb, nivelInventario, direccion" class="auto-form-record"}}
+							{{br}}
+						{{/with}}
+					{{/col}}
+				{{/row}}
+				{{#row class="auto-form-row"}}
+					{{#col medium="100%" class="auto-form-col"}}
+						{{#h5 class="auto-form-h5"}}
+							Dirección
+						{{/h5}}
+						{{#with base}}
+							{{record this widths="20%,80%" rows="encabezado1, encabezado2, encabezado3, encabezado4, encabezado5, latitud, longitud" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
 				{{/row}}
 			{{/zone}}
 		{{/row}}
-		{{#row}}
-			{{#if context="adjuntos"}}
-				{{#zone id="adjuntos" modalGrid="adjuntos"}}
-					{{#row class="auto-form-row"}}
-						{{#col medium="100%" class="auto-form-col"}}
-							{{#h5 class="auto-form-h5"}}
-								Adjuntos
-							{{/h5}}
-							{{#div}}
-								{{table adjuntos class="auto-form-table" cols="nombre, tipo, tamano, fecha, ext" medium="50,20,10,10,10" removeEmptyCols="false" unlink="true"}}
-								{{br}}
-							{{/div}}
-						{{/col}}
-					{{/row}}
-				{{/zone}}
-			{{/if}}
-		{{/row}}
 	{{/page}}
-	{{#modal base id="base" name="Datos Generales" size="xlong"}}
-		{{#col medium="100%" vertical="100%"}}
+	{{#modal base id="base" name="Complejo" size="xwide"}}
+		{{#col medium="50%" vertical="50%"}}
 			{{#fieldSet}}
+				{{field codigo}}
+				{{field numero}}
 				{{field nombre}}
-				{{field tipoPersona}}
-				{{field personaFisica}}
-				{{field formaContacto}}
-				{{field personaMoral}}
+				{{field precioLista}}
+				{{field activoWeb}}
+				{{field nivelInventario}}
 				{{field direccion}}
-				{{field contacto}}
+			{{/fieldSet}}
+		{{/col}}
+		{{#col medium="50%" vertical="50%"}}
+			{{#fieldSet}}
+				{{field encabezado1}}
+				{{field encabezado2}}
+				{{field encabezado3}}
+				{{field encabezado4}}
+				{{field encabezado5}}
+				{{field latitud}}
+				{{field longitud}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
-	{{modal adjuntos id="adjuntos" name="Adjuntos" grid="adjuntos" size="wide"}}
 	{{#template id="lista"}}
 		<div>{{_name}}</div>
 	{{/template}}
-	{{#template2 id="socio"}}
+	{{#template2 id="sucursal"}}
+		<br>Código: {{codigo}}
+		<br>Número: {{numero}}
 		<br>Nombre: {{nombre}}
-		<br>Tipo Persona: {{_tipoPersona}}
-		{{#if esPersonaFisica}}<br>Persona Física: {{_personaFisica}}{{/if}}
-		<br>Forma Contacto: {{_formaContacto}}
-		{{#if esPersonaMoral}}<br>Persona Moral: {{_personaMoral}}{{/if}}
-		<br>Dirección: {{_direccion}}
-		<br>Contactos: {{_contacto}}
+		<br>Precio Lista: {{_precioLista}}
+		<br>Activo App: {{_activoWeb}}
+		<br>Nivel Inventario: {{_nivelInventario}}
+		<br>Encabezado 1: {{encabezado1}}
+		<br>Encabezado 2: {{encabezado2}}
+		<br>Encabezado 3: {{encabezado3}}
+		<br>Encabezado 4: {{encabezado4}}
+		<br>Encabezado 5: {{encabezado5}}
+		<br>Dirección: {{direccion}}
+		<br>Latitud: {{latitud}}
+		<br>Longitud: {{longitud}}
 	{{/template2}}
-	{{#template3 id="socio"}}
+	{{#template3 id="sucursal"}}
+		{{#if codigo}}<br>Código: {{codigo}}{{/if}}
+		{{#if numero}}<br>Número: {{numero}}{{/if}}
 		{{#if nombre}}<br>Nombre: {{nombre}}{{/if}}
-		{{#if tipoPersona}}<br>Tipo Persona: {{_tipoPersona}}{{/if}}
-		{{#if esPersonaFisica}}{{#if personaFisica}}<br>Persona Física: {{_personaFisica}}{{/if}}{{/if}}
-		{{#if formaContacto}}<br>Forma Contacto: {{_formaContacto}}{{/if}}
-		{{#if esPersonaMoral}}{{#if personaMoral}}<br>Persona Moral: {{_personaMoral}}{{/if}}{{/if}}
-		{{#if direccion}}<br>Dirección: {{_direccion}}{{/if}}
-		{{#if contacto}}<br>Contactos: {{_contacto}}{{/if}}
+		{{#if precioLista}}<br>Precio Lista: {{_precioLista}}{{/if}}
+		{{#if activoWeb}}<br>Activo App: {{_activoWeb}}{{/if}}
+		{{#if nivelInventario}}<br>Nivel Inventario: {{_nivelInventario}}{{/if}}
+		{{#if encabezado1}}<br>Encabezado 1: {{encabezado1}}{{/if}}
+		{{#if encabezado2}}<br>Encabezado 2: {{encabezado2}}{{/if}}
+		{{#if encabezado3}}<br>Encabezado 3: {{encabezado3}}{{/if}}
+		{{#if encabezado4}}<br>Encabezado 4: {{encabezado4}}{{/if}}
+		{{#if encabezado5}}<br>Encabezado 5: {{encabezado5}}{{/if}}
+		{{#if direccion}}<br>Dirección: {{direccion}}{{/if}}
+		{{#if latitud}}<br>Latitud: {{latitud}}{{/if}}
+		{{#if longitud}}<br>Longitud: {{longitud}}{{/if}}
 	{{/template3}}
 {{/markup}}

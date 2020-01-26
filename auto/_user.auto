@@ -70,7 +70,7 @@
 			{{#editor mode="password" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="nivelAcceso" label="Nivel Acceso" type="text" recordHide="true" column="A" references="userLevel" modalColumn="A" labelModalClass="full-width" defaultValue="'normal'"}}
+		{{#field id="nivelAcceso" label="Nivel Acceso" type="text" column="A" references="userLevel" modalColumn="A" labelModalClass="full-width" defaultValue="'normal'"}}
 			{{#editor type="select" preset="cfg.userLevel" width="100%"}}
 			{{/editor}}
 		{{/field}}
@@ -82,12 +82,12 @@
 			{{#editor type="select" preset="cfg.estatusUsuario" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="servicio" label="Servicio" type="array" column="A" modalColumn="A" detach="Ubicación" fieldSetHeader="Ubicación" labelModalClass="full-width"}}
-			{{#editor type="tags" fieldEditEnabled="true" width="100%"}}
+		{{#field id="sucursal" label="Sucursal" type="reference" column="A" references="sucursal" modalColumn="A" detach="Ubicación" fieldSetHeader="Ubicación" labelModalClass="full-width"}}
+			{{#editor type="select" source="sucursal" view="lista" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="sucursal" label="Sucursal" type="text" column="A" references="sucursal" modalColumn="A" detach="Ubicación" labelModalClass="full-width"}}
-			{{#editor type="select" preset="cfg.sucursal" width="100%"}}
+		{{#field id="numero" label="Número" type="number" column="A" modalColumn="A" detach="Ubicación" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
 	{{/section}}
@@ -151,10 +151,10 @@
 					{{row image="logo" alignment="left" imageWidth="75" margin="0,-15,0,0"}}
 				{{/column}}
 				{{#column margin="0,-10,0,0"}}
-					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Leibnitz 83-1" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Anzures 11590 CDMX" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Xtra Cinemas" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Reforma 215" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Lomas de Chapultepec 11000 CDMX" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Teléfono 55 5284 8500" alignment="left" fontSize="6" color="grey"}}
 				{{/column}}
 				{{#column}}
 					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
@@ -165,19 +165,20 @@
 	{{/report}}
 	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true"}}
 		{{#stack}}
-			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
+			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
 		{{/stack}}
 		{{#stack}}
 			{{#record title="Datos Usuario" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="nombre" align="left"}}
 				{{row field="correo" align="left"}}
+				{{row field="nivelAcceso" align="left"}}
 				{{row field="estatus" align="left"}}
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
 			{{#record title="Ubicación" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
-				{{row field="servicio" align="left"}}
 				{{row field="sucursal" align="left"}}
+				{{row field="numero" align="left"}}
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
@@ -246,7 +247,7 @@
 							Datos Usuario
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="nombre, correo, estatus" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="nombre, correo, nivelAcceso, estatus" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -257,7 +258,7 @@
 							Ubicación
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="servicio, sucursal" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="sucursal, numero" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -299,8 +300,8 @@
 				{{field estatus}}
 			{{/fieldSet}}
 			{{#fieldSet header="Ubicación"}}
-				{{field servicio header="Ubicación"}}
-				{{field sucursal}}
+				{{field sucursal header="Ubicación"}}
+				{{field numero}}
 			{{/fieldSet}}
 		{{/col}}
 		{{#col medium="50%" vertical="50%"}}
@@ -337,15 +338,17 @@
 	{{#template2 id="_user"}}
 		<br>Nombre: {{nombre}}
 		<br>Correo Electrónico: {{correo}}
+		<br>Nivel Acceso: {{_nivelAcceso}}
 		<br>Estatus: {{_estatus}}
-		<br>Servicio: {{_servicio}}
 		<br>Sucursal: {{_sucursal}}
+		<br>Número: {{numero}}
 	{{/template2}}
 	{{#template3 id="_user"}}
 		{{#if nombre}}<br>Nombre: {{nombre}}{{/if}}
 		{{#if correo}}<br>Correo Electrónico: {{correo}}{{/if}}
+		{{#if nivelAcceso}}<br>Nivel Acceso: {{_nivelAcceso}}{{/if}}
 		{{#if estatus}}<br>Estatus: {{_estatus}}{{/if}}
-		{{#if servicio}}<br>Servicio: {{_servicio}}{{/if}}
 		{{#if sucursal}}<br>Sucursal: {{_sucursal}}{{/if}}
+		{{#if numero}}<br>Número: {{numero}}{{/if}}
 	{{/template3}}
 {{/markup}}

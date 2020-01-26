@@ -44,15 +44,21 @@
     {{#item text="Articulos"}}
       {{item text="Inventariables" href="/articulo/inventariables"}}
       {{item text="Servicios" href="/articulo/servicios"}}
-      {{item text="Lotes" href="/lote/lista"}}
+[.#if esCinetop.]
+      {{item text="Películas" href="/pelicula/lista" beginGroup="true"}}
+[.else.]
+      {{item text="Lotes" href="/lote/lista" beginGroup="true"}}
       {{item text="Agregar / Modificar en Lote" href="/articuloLote/lista" beginGroup="true"}}
       {{!-- {{item text="SKU Adicionales" href="/skuAdicional/lista"}} --}}
+[./if.]
     {{/item}}
     {{#item text="Configuración"}}
       {{item text="Configuración General" href="/_app"}}
+      {{item text="Dispositivos" href="/dispositivo/lista"}}
       {{item text="Usuarios" href="/_user/lista"}}
 [.#if esCinetop.]
-      {{item text="Espacios" href="/espacio/lista" beginGroup="true"}}
+      {{item text="Complejos" href="/sucursal/lista" beginGroup="true"}}
+      {{item text="Espacios" href="/espacio/lista"}}
       {{item text="Planeación Agendas" href="/planAgenda/lista"}}
 [./if.]
     {{/item}}
@@ -623,7 +629,7 @@
     {{column field="orden" width="50"}}
   {{/grid}}  
 
-  {{#section id="aliasArticulo" type="array"}}
+  {{#section id="aliasArticulo" type="array" temp="true"}}
     {{#field id="id" type="text" label="Identificador"}}
       {{editor case="upper"}}
     {{/field}}
@@ -645,8 +651,13 @@
       {{editor type="lookup" source="persona" view="clientesProveedores" searchEnabled="true"}}
     {{/field}}
     {{#field id="articulo" type="text" label="Artículo"}}
-      {{editor type="lookup" source="articulo" view="lista" searchEnabled="true"}}
+      {{editor type="lookup" source="articulo" view="porCodigo" searchEnabled="true" display="base.codigo"}}
+      {{#onChange}}
+        {{set descripcion="=_name"}}
+        {{set precio="base.precioLista"}}
+      {{/onChange}}
     {{/field}}
+    {{field id="descripcion" type="text" label="Descripción"}}
     {{field id="precio" type="number" format="currency" label="Precio"}}
     {{field id="orden" type="number" label="Orden"}}
   {{/section}}
@@ -696,7 +707,7 @@
   {{#mapPreset fromPreset="aliasArticulo2" toPreset="aliasArticulo"}}
     {{set id="=id"}}
     {{set articulo="=articulo"}}
-    {{set descripcion="=_articulo"}}
+    {{set descripcion="=descripcion"}}
     {{set codigo="=id"}}
     {{set precio="=precio"}}
   {{/mapPreset}}
@@ -704,7 +715,8 @@
   {{#grid id="aliasArticulo2" section="aliasArticulo2" allowInsert="true" allowRemove="true" allowSort="true" sortBy="persona,orden,id"}}
     {{column field="id" width="200"}}
     {{column field="persona" width="350"}}
-    {{column field="articulo" width="350"}}
+    {{column field="articulo" width="150"}}
+    {{column field="descripcion" width="350" readOnly="true"}}
     {{column field="precio" width="150"}}
     {{column field="orden" width="50"}}
   {{/grid}}
@@ -747,7 +759,7 @@
         {{#zone id="aliasArticulo2" modalGrid="aliasArticulo2"}}
           {{br}}
           {{#h5}}Alias Artículos{{/h5}}
-          {{table aliasArticulo2 cols="id,persona,articulo,precio" medium="20%,40%,40%"}}
+          {{table aliasArticulo2 cols="id,persona,articulo,descripcion,precio" medium="10%,15%,15%,40%,10%"}}
         {{/zone}}
       {{/col}}
     {{/row}}

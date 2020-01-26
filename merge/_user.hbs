@@ -15,10 +15,12 @@
       {{include field="base.estatus"}}
       {{include field="base.area"}}
       {{include field="base.correo"}}
-      {{include field="base.especialidad"}}    
+      {{include field="base.numero"}}
+      {{include field="base.nivelAcceso"}}
+      {{sort field="base.numero" direction="asc"}}
       {{sort field="_name" direction="asc"}}
       {{search field="_name"}}
-      {{search field="base._especialidad"}}
+      {{search field="base.numero"}}
     {{/find}}
   {{/view}}
   {{#section id="base"}}
@@ -53,9 +55,10 @@
 {{#markup}}
   {{#template id="lista"}}
     <div>
-      {{_name}}</br>
-      <span style="font-size:12px;">{{base.correo}}</span>
-      <span style="font-size:12px;float:right;">{{base._area}}</span>
+      {{_name}}
+      <span style="font-size:12px;float:right;">{{base.numero}}</span>
+      </br><span style="font-size:12px;">{{base.correo}}</span>
+      <span style="font-size:12px;float:right;">{{base._nivelAcceso}}</span>
     </div>    
   {{/template}}
 {{/markup}}

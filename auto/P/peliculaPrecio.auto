@@ -1,4 +1,4 @@
-{{#define type="doc" id="agendaExcepcion"}}
+{{#define type="doc" id="peliculaPrecio"}}
 	{{param defaultDisplay="_name"}}
 	{{param defaultView="lista"}}
 	{{param pageStart="1"}}
@@ -17,10 +17,12 @@
 	{{param startOnOpen="base"}}
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="base.nombre"}}
-	{{param name="Excepción"}}
-	{{param typeName="Excepción"}}
-	{{param tplName="agendaExcepcion"}}
+	{{param name="Precios"}}
+	{{param typeName="Precios"}}
+	{{param group="Registro"}}
+	{{param tplName="peliculaPrecio"}}
 	{{param fullWidth="true"}}
+	{{param modalSize="xlong"}}
 	{{param hideTitle="true"}}
 	{{param autoClose="true"}}
 	{{param autoOpenEditors="true"}}
@@ -49,33 +51,41 @@
 	{{section id="_options" temp="true"}}
 	{{section id="_params" temp="true"}}
 	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
-		{{#field id="motivo" label="Motivo" type="text" column="A" references="motivoAgendaExcepcion" labelModalClass="full-width"}}
-			{{#editor type="select" preset="cfg.motivoAgendaExcepcion" width="100%"}}
+		{{#field id="publicoGeneral" label="Publico General" type="number" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
 			{{/editor}}
-			{{validator type="required"}}
+		{{/field}}
+		{{#field id="adultosMayores" label="Adultos Mayores" type="number" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="ninos" label="Niños" type="number" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="estudiantes" label="Estudiantes" type="number" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="acuerdos" label="Acuerdos" type="number" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="tipoPromocion" label="Tipo de Promoción" type="text" column="A" references="tipoPromocion" labelModalClass="full-width" defaultValue="'no'"}}
+			{{#editor type="select" preset="cfg.tipoPromocion" width="100%"}}
+			{{/editor}}
 			{{#onChange refresh="true"}}
 			{{/onChange}}
 		{{/field}}
-		{{#field id="fecha" label="Fecha" type="date" if="esFecha" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD"}}
-			{{#editor type="date" width="100%"}}
-			{{/editor}}
-			{{validator type="required"}}
-		{{/field}}
-		{{#field id="desde" label="Desde" type="date" if="esRango" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD"}}
-			{{#editor type="date" width="100%"}}
-			{{/editor}}
-			{{validator type="required"}}
-		{{/field}}
-		{{#field id="hasta" label="Hasta" type="date" if="esRango" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD"}}
-			{{#editor type="date" width="100%"}}
-			{{/editor}}
-			{{validator type="required"}}
-		{{/field}}
-		{{#field id="comentarios" label="Comentarios" type="text" column="A" labelModalClass="full-width"}}
-			{{#editor type="text-area" height="110" width="100%"}}
+		{{#field id="cantidadPromocion" label="Cantidad Promoción" type="number" if="tienePromocion" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{field id="nombre" label="Nombre" hide="true" type="expr" value="=calc.tpl('agendaExcepcion', base)"}}
+		{{#field id="precioPromocion" label="Precio Promoción" type="number" if="tienePromocion" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{field id="nombre" label="Nombre" hide="true" type="expr" value="=calc.tpl('peliculaPrecio', base)"}}
 	{{/section}}
 	{{#report id="preliminar-encabezado"}}
 		{{#stack}}
@@ -101,12 +111,15 @@
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Excepción" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
-				{{row field="motivo" align="left"}}
-				{{row field="fecha" condition="esFecha" align="left"}}
-				{{row field="desde" condition="esRango" align="left"}}
-				{{row field="hasta" condition="esRango" align="left"}}
-				{{row field="comentarios" align="left"}}
+			{{#record title="Precios" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
+				{{row field="publicoGeneral" align="left"}}
+				{{row field="adultosMayores" align="left"}}
+				{{row field="ninos" align="left"}}
+				{{row field="estudiantes" align="left"}}
+				{{row field="acuerdos" align="left"}}
+				{{row field="tipoPromocion" align="left"}}
+				{{row field="cantidadPromocion" condition="tienePromocion" align="left"}}
+				{{row field="precioPromocion" condition="tienePromocion" align="left"}}
 			{{/record}}
 		{{/stack}}
 	{{/report}}
@@ -123,7 +136,7 @@
 	{{/browser}}
 {{/define}}
 {{#markup}}
-	{{#page name="Excepción"}}
+	{{#page name="Precios"}}
 		{{row}}
 		{{row}}
 		{{#row}}
@@ -131,7 +144,7 @@
 				{{#row class="auto-form-row"}}
 					{{#col medium="100%" class="auto-form-col"}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="motivo, fecha, desde, hasta, comentarios" class="auto-form-record auto-hide-title"}}
+							{{record this widths="20%,80%" rows="publicoGeneral, adultosMayores, ninos, estudiantes, acuerdos, tipoPromocion, cantidadPromocion, precioPromocion" class="auto-form-record auto-hide-title"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -139,32 +152,41 @@
 			{{/zone}}
 		{{/row}}
 	{{/page}}
-	{{#modal base id="base" name="Excepción"}}
+	{{#modal base id="base" name="Precios" size="xlong"}}
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
-				{{field motivo}}
-				{{field fecha}}
-				{{field desde}}
-				{{field hasta}}
-				{{field comentarios}}
+				{{field publicoGeneral}}
+				{{field adultosMayores}}
+				{{field ninos}}
+				{{field estudiantes}}
+				{{field acuerdos}}
+				{{field tipoPromocion}}
+				{{field cantidadPromocion}}
+				{{field precioPromocion}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
 	{{#template id="lista"}}
 		<div>{{_name}}</div>
 	{{/template}}
-	{{#template2 id="agendaExcepcion"}}
-		<br>Motivo: {{_motivo}}
-		{{#if esFecha}}<br>Fecha: {{fecha}}{{/if}}
-		{{#if esRango}}<br>Desde: {{desde}}{{/if}}
-		{{#if esRango}}<br>Hasta: {{hasta}}{{/if}}
-		<br>{{comentarios}}
+	{{#template2 id="peliculaPrecio"}}
+		<br>Publico General: {{publicoGeneral}}
+		<br>Adultos Mayores: {{adultosMayores}}
+		<br>Niños: {{ninos}}
+		<br>Estudiantes: {{estudiantes}}
+		<br>Acuerdos: {{acuerdos}}
+		<br>Tipo de Promoción: {{_tipoPromocion}}
+		{{#if tienePromocion}}<br>Cantidad Promoción: {{cantidadPromocion}}{{/if}}
+		{{#if tienePromocion}}<br>Precio Promoción: {{precioPromocion}}{{/if}}
 	{{/template2}}
-	{{#template3 id="agendaExcepcion"}}
-		{{#if motivo}}<br>Motivo: {{_motivo}}{{/if}}
-		{{#if esFecha}}{{#if fecha}}<br>Fecha: {{fecha}}{{/if}}{{/if}}
-		{{#if esRango}}{{#if desde}}<br>Desde: {{desde}}{{/if}}{{/if}}
-		{{#if esRango}}{{#if hasta}}<br>Hasta: {{hasta}}{{/if}}{{/if}}
-		{{#if comentarios}}<br>{{comentarios}}{{/if}}
+	{{#template3 id="peliculaPrecio"}}
+		{{#if publicoGeneral}}<br>Publico General: {{publicoGeneral}}{{/if}}
+		{{#if adultosMayores}}<br>Adultos Mayores: {{adultosMayores}}{{/if}}
+		{{#if ninos}}<br>Niños: {{ninos}}{{/if}}
+		{{#if estudiantes}}<br>Estudiantes: {{estudiantes}}{{/if}}
+		{{#if acuerdos}}<br>Acuerdos: {{acuerdos}}{{/if}}
+		{{#if tipoPromocion}}<br>Tipo de Promoción: {{_tipoPromocion}}{{/if}}
+		{{#if tienePromocion}}{{#if cantidadPromocion}}<br>Cantidad Promoción: {{cantidadPromocion}}{{/if}}{{/if}}
+		{{#if tienePromocion}}{{#if precioPromocion}}<br>Precio Promoción: {{precioPromocion}}{{/if}}{{/if}}
 	{{/template3}}
 {{/markup}}

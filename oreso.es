@@ -3518,10 +3518,12 @@
 {"name":"userLevel","code":"consulta","display":"Consulta","order":1}
 {"index":{"_id":"userLevel/normal"}}
 {"name":"userLevel","code":"normal","display":"Normal","order":2}
-{"index":{"_id":"userRole/auxiliar"}}
-{"name":"userRole","code":"auxiliar","display":"Auxiliar","order":1,"partOf":""}
-{"index":{"_id":"userRole/sistemas"}}
-{"name":"userRole","code":"sistemas","display":"Sistemas","order":2}
+{"index":{"_id":"userLevel/super"}}
+{"name":"userLevel","code":"super","display":"Supervisor","order":3}
+{"index":{"_id":"servidor/local"}}
+{"name":"servidor","code":"local","display":"(Local)","order":1}
+{"index":{"_id":"servidor/lab"}}
+{"name":"servidor","code":"lab","display":"(Laboratorio)","order":2}
 {"index":{"_id":"usoDireccion/trabajo"}}
 {"name":"usoDireccion","code":"trabajo","display":"Trabajo","order":1}
 {"index":{"_id":"usoDireccion/casa"}}
@@ -3562,12 +3564,8 @@
 {"name":"area","code":"lux","display":"Lux","order":2}
 {"index":{"_id":"tipoEspacio/sala"}}
 {"name":"tipoEspacio","code":"sala","display":"Sala","order":1}
-{"index":{"_id":"tipoEspacio/sillon"}}
-{"name":"tipoEspacio","code":"sillon","display":"Sillón","order":2}
-{"index":{"_id":"tipoEspacio/almacen"}}
-{"name":"tipoEspacio","code":"almacen","display":"Almacén","order":3}
-{"index":{"_id":"tipoEspacio/otro"}}
-{"name":"tipoEspacio","code":"otro","display":"Otro","order":4}
+{"index":{"_id":"tipoEspacio/looby"}}
+{"name":"tipoEspacio","code":"looby","display":"Lobby","order":2}
 {"index":{"_id":"estatusUbicacion/activo"}}
 {"name":"estatusUbicacion","code":"activo","display":"Activo","order":1}
 {"index":{"_id":"estatusUbicacion/suspendido"}}
@@ -3590,3 +3588,79 @@
 {"name":"diaSemana","code":"7","display":"Domingo","order":7}
 {"index":{"_id":"unidad/pieza"}}
 {"name":"unidad","code":"pieza","display":"Pieza","order":1}
+{"index":{"_id":"precioLista/price1"}}
+{"name":"precioLista","code":"price1","display":"Precio 1","order":1}
+{"index":{"_id":"precioLista/price2"}}
+{"name":"precioLista","code":"price2","display":"Precio 2","order":2}
+{"index":{"_id":"precioLista/price3"}}
+{"name":"precioLista","code":"price3","display":"Precio 3","order":3}
+{"index":{"_id":"precioLista/price3x"}}
+{"name":"precioLista","code":"price3x","display":"Precio 3x","order":4}
+{"index":{"_id":"precioLista/price4"}}
+{"name":"precioLista","code":"price4","display":"Precio 4","order":5}
+{"index":{"_id":"peliculaFormato/2d"}}
+{"name":"peliculaFormato","code":"2d","display":"2D","order":1}
+{"index":{"_id":"peliculaFormato/3d"}}
+{"name":"peliculaFormato","code":"3d","display":"3D","order":2}
+{"index":{"_id":"peliculaLenguaje/espanol"}}
+{"name":"peliculaLenguaje","code":"español","display":"Español","order":1}
+{"index":{"_id":"peliculaLenguaje/ingles"}}
+{"name":"peliculaLenguaje","code":"ingles","display":"Ingles","order":2}
+{"index":{"_id":"peliculaLenguaje/doblado"}}
+{"name":"peliculaLenguaje","code":"doblado","display":"Doblado","order":3}
+{"index":{"_id":"tipoPromocion/no"}}
+{"name":"tipoPromocion","code":"no","display":"No","order":1}
+{"index":{"_id":"tipoPromocion/volume"}}
+{"name":"tipoPromocion","code":"volume","display":"Volumen","order":2}
+{"index":{"_id":"nivelInventario/low"}}
+{"name":"nivelInventario","code":"low","display":"Bajo","order":1}
+{"index":{"_id":"nivelInventario/low2"}}
+{"name":"nivelInventario","code":"low2","display":"Bajo 2","order":2}
+{"index":{"_id":"nivelInventario/medium"}}
+{"name":"nivelInventario","code":"medium","display":"Medio","order":3}
+{"index":{"_id":"nivelInventario/medium2"}}
+{"name":"nivelInventario","code":"medium2","display":"Medio 2","order":4}
+{"index":{"_id":"nivelInventario/high"}}
+{"name":"nivelInventario","code":"high","display":"Alto","order":5}
+{"index":{"_id":"nivelInventario/high"}}
+{"name":"nivelInventario","code":"high","display":"Alto 2","order":6}
+{"index":{"_id":"empresa/cinetop"}}
+{"name":"empresa","code":"cinetop","display":"Cinetop","order":1813}
+{"index":{"_id":"subArea/taquilla"}}
+{"name":"subArea","code":"taquilla","display":"Taquilla","order":1814}
+{"index":{"_id":"subArea/dulceria"}}
+{"name":"subArea","code":"dulceria","display":"Dulcería","order":1815}
+{"index":{"_id":"subArea/cafeteria"}}
+{"name":"subArea","code":"cafeteria","display":"Cafetería","order":1816}
+{"index":{"_id":"subArea/lux"}}
+{"name":"subArea","code":"lux","display":"Lux","order":1817}
+{"index":{"_id":"subArea/staff"}}
+{"name":"subArea","code":"staff","display":"Staff","order":1818}
+{"index":{"_id":"servidor/azc"}}
+{"name":"servidor","code":"azc","display":"Azcapozalco","order":3}
+{"index":{"_id":"servidor/eca"}}
+{"name":"servidor","code":"eca","display":"Ecatepec","order":4}
+{"index":{"_id":"servidor/teq"}}
+{"name":"servidor","code":"teq","display":"Tequisquiapan","order":5}
+{"index":{"_id":"servidor/ate"}}
+{"name":"servidor","code":"ate","display":"Atemajac","order":6}
+{"index":{"_id":"userRole/azc"}}
+{"name":"userRole","code":"azc","display":"Azcapozalco","order":1}
+{"index":{"_id":"userRole/eca"}}
+{"name":"userRole","code":"eca","display":"Ecatepec","order":2}
+{"index":{"_id":"userRole/teq"}}
+{"name":"userRole","code":"teq","display":"Tequisquiapan","order":3}
+{"index":{"_id":"userRole/ate"}}
+{"name":"userRole","code":"ate","display":"Atemajac","order":4}
+{"index":{"_id":"userRole/general"}}
+{"name":"userRole","code":"general","display":"General","order":10}
+{"index":{"_id":"userRole/boletos"}}
+{"name":"userRole","code":"boletos","display":"Boletos","order":11,"partOf":""}
+{"index":{"_id":"userRole/cafeteria"}}
+{"name":"userRole","code":"cafeteria","display":"Cafetería","order":12}
+{"index":{"_id":"userRole/dulceria"}}
+{"name":"userRole","code":"dulceria","display":"Dulcería","order":13}
+{"index":{"_id":"userRole/accessPoint"}}
+{"name":"userRole","code":"accessPoint","display":"Acceso Películas","order":14}
+{"index":{"_id":"userRole/lux"}}
+{"name":"userRole","code":"lux","display":"Lux","order":15}

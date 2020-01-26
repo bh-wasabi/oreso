@@ -22,9 +22,9 @@
     {{column field="ubicacion.persona._grupo" label="Grupo"}}
     {{column field="_cuenta" label="Ubicación"}}
     {{row field="codigo" label="Código" width="200"}}  
-    {{row field="articulo.base._marca" label="Marca" width="100"}}  
-    {{row field="articulo.base._tamano" label="Tamaño" width="100"}}  
-    {{row field="articulo.base._color" label="Color/Sabor" width="100"}}      
+    {{row field="articulo.base.marca" label="Marca" width="100"}}  
+    {{row field="articulo.base.tamano" label="Tamaño" width="100"}}  
+    {{row field="articulo.base.color" label="Color" width="100"}}      
     {{row field="articulo._name" label="Descripción" width="100"}}  
     {{row field="_lote" label="Lote"}}
     {{row field="loteInfo.base.ordenCompra" label="Orden Compra"}}
@@ -52,9 +52,9 @@
     {{column field="proveedor" label="Proveedor"}}
     {{column field="referencia" label="Referencia"}}
     {{column field="_cuenta" label="Ubicación"}}
-    {{row field="articulo.base._marca" label="Marca" width="100"}}  
-    {{row field="articulo.base._tamano" label="Tamaño" width="100"}}  
-    {{row field="articulo.base._color" label="Color/Sabor" width="100"}}
+    {{row field="articulo.base.marca" label="Marca" width="100"}}  
+    {{row field="articulo.base.tamano" label="Tamaño" width="100"}}  
+    {{row field="articulo.base.color" label="Color" width="100"}}
     {{row field="articulo.base._cliente" label="Cliente" width="200"}}
     {{row field="articulo._name" label="Descripción" width="100"}}  
     {{sum field="cantidad" label="Cantidad" format="#,"}}
@@ -228,6 +228,7 @@
       {{group field="descripcion" as="descripcion"}}
       {{group field="tasa" as="tasaIva"}}
       {{group field="referencia"}}
+      {{group field="referencia2"}}
       {{group field="cantidadFactor" type="sum" as="cantidad"}}
       {{group field="importeFactor" type="sum" as="importe"}}
       {{!-- {{sort field="descripcion" direction="asc"}} --}}
@@ -244,6 +245,7 @@
       {{group field="cuenta" as="origen"}}
       {{group field="_cuenta" as="_origen"}}
       {{group field="referencia"}}
+      {{group field="referencia2"}}
       {{group field="cantidadFactor" type="sum" as="cantidad"}}
       {{!-- {{sort field="descripcion" direction="asc"}} --}}
       {{match field="cantidad" gt="=0"}}
@@ -261,6 +263,7 @@
       {{group field="precio" as="valorUnitario"}}
       {{group field="tasa" as="tasaIva"}}
       {{group field="referencia"}}
+      {{group field="referencia2"}}
       {{group field="cantidadFactor" type="sum" as="cantidad"}}
       {{!-- {{sort field="descripcion" direction="asc"}} --}}
       {{match field="cantidad" gt="=0"}}

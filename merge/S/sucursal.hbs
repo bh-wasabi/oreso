@@ -1,0 +1,21 @@
+{{#define id="sucursal"}}  
+  {{#view id="lista"}}
+    {{#find}}
+      {{include field="base.nombre"}}
+      {{include field="base.codigo"}}
+      {{include field="base.numero"}}
+      {{sort field="base.numero" direction="asc"}}
+      {{search field="base.nombre"}}
+      {{search field="base.codigo"}}
+      {{search field="base.numero"}}
+    {{/find}}
+  {{/view}}
+{{/define}}
+{{#markup}}
+  {{#template id="lista"}}
+    <div>
+      {{base.nombre}}
+      <br><span style="font-size:12px;">{{base.codigo}} #{{base.numero}}</span>
+    </div>
+  {{/template}}
+{{/markup}}

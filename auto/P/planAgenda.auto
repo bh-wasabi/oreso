@@ -52,7 +52,11 @@
 	{{section id="_options" temp="true"}}
 	{{section id="_params" temp="true"}}
 	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
-		{{#field id="comentarios" label="Concepto" type="text" column="A" modalColumn="A" labelModalClass="full-width"}}
+		{{#field id="pelicula" label="Película" type="reference" column="A" references="pelicula" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor type="lookup" source="pelicula" view="lista" searchEnabled="true" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="comentarios" label="Concepto" type="text" readOnly="true" recordHide="true" column="A" modalColumn="A" modalHide="true" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 			{{validator type="required"}}
@@ -100,6 +104,10 @@
 			{{#editor type="select" preset="cfg.tipoEquipoMedico" width="100%"}}
 			{{/editor}}
 		{{/field}}
+		{{#field id="sucursal" label="Complejo" type="reference" if="esEspacio" column="A" references="sucursal" detach="Recurso" labelModalClass="full-width"}}
+			{{#editor type="select" source="sucursal" view="lista" width="100%"}}
+			{{/editor}}
+		{{/field}}
 		{{#field id="espacio" label="Espacio" type="reference" if="esEspacio" column="A" references="espacio" detach="Recurso" labelModalClass="full-width"}}
 			{{#editor type="lookup" source="espacio" view="lista" searchEnabled="true" width="100%"}}
 			{{/editor}}
@@ -108,7 +116,19 @@
 			{{#editor type="select" preset="cfg.tipoEspacio" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="capacidad" label="Capacidad (personas)" type="number" recordHide="true" column="A" detach="Recurso" modalHide="true" labelModalClass="full-width" defaultValue="1"}}
+		{{#field id="peliculaLenguaje" label="Lenguaje" type="text" if="esEspacio" column="A" references="peliculaLenguaje" modalColumn="B" detach="Recurso" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.peliculaLenguaje" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="peliculaFormato" label="Formato" type="text" if="esEspacio" column="A" references="peliculaFormato" modalColumn="B" detach="Recurso" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.peliculaFormato" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="peliculaPrecio" label="Precios" type="doc" if="esEspacio" column="A" references="peliculaPrecio" modalColumn="B" detach="Recurso" labelModalClass="full-width" source="peliculaPrecio"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="capacidad" label="Capacidad (personas)" type="number" recordHide="true" column="A" modalColumn="B" detach="Recurso" modalHide="true" labelModalClass="full-width" defaultValue="1"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 			{{validator type="range" min="1" max="25"}}
@@ -150,10 +170,10 @@
 					{{row image="logo" alignment="left" imageWidth="75" margin="0,-15,0,0"}}
 				{{/column}}
 				{{#column margin="0,-10,0,0"}}
-					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Leibnitz 83-1" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Anzures 11590 CDMX" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Xtra Cinemas" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Reforma 215" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Lomas de Chapultepec 11000 CDMX" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Teléfono 55 5284 8500" alignment="left" fontSize="6" color="grey"}}
 				{{/column}}
 				{{#column}}
 					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
@@ -184,13 +204,13 @@
 	{{/report}}
 	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true" pageMargins="30,130,30,40"}}
 		{{#stack}}
-			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
+			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
 		{{/stack}}
 		{{#stack}}
 			{{#record title="Planeación Agenda" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row expr="=calc.format('date', _updated.date||_created.date, 'DD/MMM/YYYY h:mma')" label="Fecha Emisión"}}
 				{{row expr="=_created._service" label="Servicio"}}
-				{{row field="comentarios" align="left"}}
+				{{row field="pelicula" align="left"}}
 				{{row field="area" align="left"}}
 				{{row field="subArea" align="left"}}
 				{{row field="color" align="left"}}
@@ -207,8 +227,12 @@
 				{{row field="especialidad" condition="esPrestadorServicios" align="left"}}
 				{{row field="equipoMedico" condition="esEquipoMedico" align="left"}}
 				{{row field="tipoEquipoMedico" condition="esEquipoMedico" align="left"}}
+				{{row field="sucursal" condition="esEspacio" align="left"}}
 				{{row field="espacio" condition="esEspacio" align="left"}}
 				{{row field="tipoEspacio" condition="esEspacio" align="left"}}
+				{{row field="peliculaLenguaje" condition="esEspacio" align="left"}}
+				{{row field="peliculaFormato" condition="esEspacio" align="left"}}
+				{{row field="peliculaPrecio" condition="esEspacio" align="left"}}
 				{{row field="capacidad" align="left"}}
 			{{/record}}
 		{{/stack}}
@@ -249,7 +273,7 @@
 							Planeación Agenda
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="comentarios, area, subArea, color, estatus" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="pelicula, area, subArea, color, estatus" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -260,7 +284,7 @@
 							Recurso
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="tipoRecurso, prestadorServicios, especialidad, equipoMedico, tipoEquipoMedico, espacio, tipoEspacio" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="tipoRecurso, prestadorServicios, especialidad, equipoMedico, tipoEquipoMedico, sucursal, espacio, tipoEspacio, peliculaLenguaje, peliculaFormato, peliculaPrecio" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -286,7 +310,8 @@
 	{{#modal base id="base" name="Planeación Agenda" size="full"}}
 		{{#col medium="50%" vertical="50%"}}
 			{{#fieldSet}}
-				{{field comentarios}}
+				{{field pelicula}}
+				{{field comentarios hide="true"}}
 				{{field area}}
 				{{field subArea}}
 				{{field color}}
@@ -299,12 +324,18 @@
 				{{field especialidad}}
 				{{field equipoMedico}}
 				{{field tipoEquipoMedico}}
+				{{field sucursal}}
 				{{field espacio}}
 				{{field tipoEspacio}}
-				{{field capacidad hide="true"}}
 			{{/fieldSet}}
 		{{/col}}
 		{{#col medium="50%" vertical="50%"}}
+			{{#fieldSet}}
+				{{field peliculaLenguaje}}
+				{{field peliculaFormato}}
+				{{field peliculaPrecio}}
+				{{field capacidad hide="true"}}
+			{{/fieldSet}}
 			{{#fieldSet header="Horizonte Planeación"}}
 				{{field zonaHoraria header="Horizonte Planeación"}}
 				{{field duracionCita}}
@@ -319,7 +350,7 @@
 		<div>{{_name}}</div>
 	{{/template}}
 	{{#template2 id="planAgenda"}}
-		<br>{{comentarios}}
+		<br>Película: {{_pelicula}}
 		<br>Área: {{_area}}
 		<br>Sub área: {{_subArea}}
 		<br>Color: {{_color}}
@@ -329,8 +360,12 @@
 		{{#if esPrestadorServicios}}<br>Especialidad: {{_especialidad}}{{/if}}
 		{{#if esEquipoMedico}}<br>Equipo Apoyo: {{_equipoMedico}}{{/if}}
 		{{#if esEquipoMedico}}<br>Tipo Equipo Apoyo: {{_tipoEquipoMedico}}{{/if}}
+		{{#if esEspacio}}<br>Complejo: {{_sucursal}}{{/if}}
 		{{#if esEspacio}}<br>Espacio: {{_espacio}}{{/if}}
 		{{#if esEspacio}}<br>Tipo Espacio: {{_tipoEspacio}}{{/if}}
+		{{#if esEspacio}}<br>Lenguaje: {{_peliculaLenguaje}}{{/if}}
+		{{#if esEspacio}}<br>Formato: {{_peliculaFormato}}{{/if}}
+		{{#if esEspacio}}<br>Precios: {{_peliculaPrecio}}{{/if}}
 		<br>Zona Horaria: {{_zonaHoraria}}
 		<br>Duración Cita (min): {{duracionCita}}
 		<br>Desde: {{date desde "DD/MMM/YYYY"}}
@@ -339,7 +374,7 @@
 		<br>Excepciones: {{_excepcion}}
 	{{/template2}}
 	{{#template3 id="planAgenda"}}
-		{{#if comentarios}}<br>{{comentarios}}{{/if}}
+		{{#if pelicula}}<br>Película: {{_pelicula}}{{/if}}
 		{{#if area}}<br>Área: {{_area}}{{/if}}
 		{{#if subArea}}<br>Sub área: {{_subArea}}{{/if}}
 		{{#if color}}<br>Color: {{_color}}{{/if}}
@@ -349,8 +384,12 @@
 		{{#if esPrestadorServicios}}{{#if especialidad}}<br>Especialidad: {{_especialidad}}{{/if}}{{/if}}
 		{{#if esEquipoMedico}}{{#if equipoMedico}}<br>Equipo Apoyo: {{_equipoMedico}}{{/if}}{{/if}}
 		{{#if esEquipoMedico}}{{#if tipoEquipoMedico}}<br>Tipo Equipo Apoyo: {{_tipoEquipoMedico}}{{/if}}{{/if}}
+		{{#if esEspacio}}{{#if sucursal}}<br>Complejo: {{_sucursal}}{{/if}}{{/if}}
 		{{#if esEspacio}}{{#if espacio}}<br>Espacio: {{_espacio}}{{/if}}{{/if}}
 		{{#if esEspacio}}{{#if tipoEspacio}}<br>Tipo Espacio: {{_tipoEspacio}}{{/if}}{{/if}}
+		{{#if esEspacio}}{{#if peliculaLenguaje}}<br>Lenguaje: {{_peliculaLenguaje}}{{/if}}{{/if}}
+		{{#if esEspacio}}{{#if peliculaFormato}}<br>Formato: {{_peliculaFormato}}{{/if}}{{/if}}
+		{{#if esEspacio}}{{#if peliculaPrecio}}<br>Precios: {{_peliculaPrecio}}{{/if}}{{/if}}
 		{{#if zonaHoraria}}<br>Zona Horaria: {{_zonaHoraria}}{{/if}}
 		{{#if duracionCita}}<br>Duración Cita (min): {{duracionCita}}{{/if}}
 		{{#if desde}}<br>Desde: {{date desde "DD/MMM/YYYY"}}{{/if}}

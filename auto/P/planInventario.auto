@@ -51,7 +51,7 @@
 		{{field id="entrada" label="Entrada" type="number" format="#," column="A"}}
 		{{field id="costoUnitario" label="Costo Unitario" type="number" format="currency" column="A"}}
 		{{field id="lote" label="Lote" type="text" column="A"}}
-		{{#field id="vencimiento" label="Fecha" type="date" format="DD/MMM/YYYY" column="A" saveFormat="YYYY-MM-DD"}}
+		{{#field id="vencimiento" label="Vencimiento" type="date" format="DD/MMM/YYYY" column="A" saveFormat="YYYY-MM-DD"}}
 			{{#editor type="date"}}
 			{{/editor}}
 		{{/field}}
@@ -63,10 +63,10 @@
 					{{row image="logo" alignment="left" imageWidth="75" margin="0,-15,0,0"}}
 				{{/column}}
 				{{#column margin="0,-10,0,0"}}
-					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Leibnitz 83-1" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Anzures 11590 CDMX" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Xtra Cinemas" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Reforma 215" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Lomas de Chapultepec 11000 CDMX" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Teléfono 55 5284 8500" alignment="left" fontSize="6" color="grey"}}
 				{{/column}}
 				{{#column}}
 					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
@@ -77,7 +77,7 @@
 	{{/report}}
 	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true"}}
 		{{#stack}}
-			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
+			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
 		{{/stack}}
 		{{#stack}}
 			{{#record title="planInventario" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
@@ -149,7 +149,7 @@
 		<br>Entrada: {{number entrada "#,"}}
 		<br>Costo Unitario: {{number costoUnitario "currency"}}
 		<br>Lote: {{lote}}
-		<br>Fecha: {{date vencimiento "DD/MMM/YYYY"}}
+		<br>Vencimiento: {{date vencimiento "DD/MMM/YYYY"}}
 	{{/template2}}
 	{{#template3 id="planInventario"}}
 		{{#if codigo}}<br>Código: {{codigo}}{{/if}}
@@ -159,6 +159,6 @@
 		{{#if entrada}}<br>Entrada: {{number entrada "#,"}}{{/if}}
 		{{#if costoUnitario}}<br>Costo Unitario: {{number costoUnitario "currency"}}{{/if}}
 		{{#if lote}}<br>Lote: {{lote}}{{/if}}
-		{{#if vencimiento}}<br>Fecha: {{date vencimiento "DD/MMM/YYYY"}}{{/if}}
+		{{#if vencimiento}}<br>Vencimiento: {{date vencimiento "DD/MMM/YYYY"}}{{/if}}
 	{{/template3}}
 {{/markup}}

@@ -52,7 +52,15 @@
   {{/function}}
   {{#function id="checkList" multi="true"}}
     {{define type="param" id="item"}}
-    {{default return="=(item.neto)?calc.concatTab('Salida',calc.format('date', item.base.fechaEmision, 'DD/MM/YYYY'),item.persona.nombreCompleto,'',item.referencia2,item.codigoLocal,item.codigo,item.descripcion,item.referencia,item.aliasDestino,item._destino,item._unidad,item.neto,'',item.contenedor,item.cajaInicial,item.cajaFinal,'','',''):null"}}
+    {{default return="=(item.neto)?calc.concatTab('Salida',calc.format('date', item.base.fechaEmision, 'DD/MM/YYYY'),item.persona.nombreCompleto,'',item.referencia,item.codigoLocal,item.codigo,item.descripcion,item.referencia2,item.aliasDestino,item._destino,item._unidad,item.neto,'',item.contenedor,item.cajaInicial,item.cajaFinal,'','',''):null"}}
+  {{/function}}
+  {{#function id="felTitulos"}}
+    {{define type="param" id="item"}}
+    {{default return="=[calc.concat('NOMCAD', 'LIVERPOOL'),calc.concat('NUMEOC', item.ordenCompra),calc.concat('FECHOC', moment(item.fechaOrdenCompra).format('DD-MM-YYYY')),calc.concat('FECHEM', moment(item.fechaEmbarque).format('DD-MM-YYYY')),calc.concat('FECHCA', moment(item.fechaCancelacion).format('DD-MM-YYYY')),calc.concat('NUMDPT', item.departamento),calc.concat('NUMEMI', '134494'),calc.concat('EANENT', '00090'),calc.concat('NOMENT', 'BODEGA TULTITLAN'),calc.concat('PRDESG', item.logistica)]"}}
+  {{/function}}
+  {{#function id="fel" multi="true"}}
+    {{define type="param" id="item"}}
+    {{default return="=[calc.concat('CANTID', item.cantidad),calc.concat('CANTIP', item.cantidad),calc.concat('CVESKU', item.referencia2),calc.concat('DESCRI', item.descripcion),calc.concat('CODUPC', item.codigoUpc),calc.concat('ESTILV', item.modelo),calc.concat('COLORV', item.color),calc.concat('TALLAV', item.tamano),calc.concat('PBRUDE', item.valorUnitario),calc.concat('PUNITN', item.precioPublico),calc.concat('PUNITR', null),calc.concat('UNIDAD', calc.upperCase(item.unidad))]"}}
   {{/function}}
   {{#transform id="copiarPersona"}}
     {{set id="=_id"}}
@@ -125,5 +133,60 @@
     {{#if numero}}<br>Número Móvil: {{numero}}{{/if}}
     {{#if nombreCompleto}}<br>Nombre: {{nombreCompleto}}{{/if}}
     {{#if tipoRelacion}}<br>Relación: {{_tipoRelacion}}{{/if}}
+  {{/template}}
+  {{#template id="peliculaPrecio"}}
+    {{#if publicoGeneral}}<br>Publico General: {{publicoGeneral}}{{/if}}
+    {{#if adultosMayores}}<br>Adultos Mayores: {{adultosMayores}}{{/if}}
+    {{#if ninos}}<br>Niños: {{ninos}}{{/if}}
+    {{#if estudiantes}}<br>Estudiantes: {{estudiantes}}{{/if}}
+    {{#if acuerdos}}<br>Acuerdos: {{acuerdos}}{{/if}}
+    {{#if tipoPromocion}}<br>Tipo Promoción: {{_tipoPromocion}}{{/if}}
+    {{#if tienePromocion}}{{#if cantidadPromocion}}<br>Cantidad Promoción: {{cantidadPromocion}}{{/if}}{{/if}}
+    {{#if tienePromocion}}{{#if precioPromocion}}<br>Precio Promoción: {{precioPromocion}}{{/if}}{{/if}}
+  {{/template}}
+  {{#template id="sucursalNivelInventario"}}
+    {{_nivelInventario}}: {{_diaSemana}} 
+  {{/template}}
+  {{#template id="articuloNiveles"}}
+    {{#if minBajo}}<br>Bajo Mínimo: {{minBajo}}{{/if}}
+    {{#if maxBajo}}<br>Bajo Máximo: {{maxBajo}}{{/if}}
+    {{#if minMedio}}<br>Medio Mínimo: {{minMedio}}{{/if}}
+    {{#if maxMedio}}<br>Medio Máximo: {{maxMedio}}{{/if}}
+    {{#if minAlto}}<br>Alto Mínimo: {{minAlto}}{{/if}}
+    {{#if maxAlto}}<br>Alto Máximo: {{maxAlto}}{{/if}}
+    {{#if minBajo2}}<br>Bajo Mínimo 2: {{minBajo2}}{{/if}}
+    {{#if maxBajo2}}<br>Bajo Máximo 2: {{maxBajo2}}{{/if}}
+    {{#if minMedio2}}<br>Medio Mínimo 2: {{minMedio2}}{{/if}}
+    {{#if maxMedio2}}<br>Medio Máximo 2: {{maxMedio2}}{{/if}}
+    {{#if minAlto2}}<br>Alto Mínimo 2: {{minAlto2}}{{/if}}
+    {{#if maxAlto2}}<br>Alto Máximo 2: {{maxAlto2}}{{/if}}
+  {{/template}}
+  {{#template id="articuloPermisos"}}
+    {{#if gratis}}<br>Es Gratis: {{_gratis}}{{/if}}
+    {{#if autorizacion}}<br>Necesita Autorización: {{_autorizacion}}{{/if}}
+    {{#if inactivo}}<br>Esta Inactivo: {{_inactivo}}{{/if}}
+    {{#if rolesAcceso}}<br>Roles Acceso: {{_rolesAcceso}}{{/if}}
+  {{/template}}
+  {{#template id="articuloPrecios"}}
+    {{#if precio1}}<br>Precio 1: {{number precio1 "currency"}}{{/if}}
+    {{#if precio2}}<br>Precio 2: {{number precio2 "currency"}}{{/if}}
+    {{#if precio3}}<br>Precio 3: {{number precio3 "currency"}}{{/if}}
+    {{#if precio3x}}<br>Precio 3x: {{number precio3x "currency"}}{{/if}}
+    {{#if precio4}}<br>Precio 4: {{number precio4 "currency"}}{{/if}}
+    {{#if tipoPromocion}}<br>Tipo Promoción: {{_tipoPromocion}}{{/if}}
+    {{#if tienePromocion}}{{#if cantidadPromocion}}<br>Cantidad Promoción: {{cantidadPromocion}}{{/if}}{{/if}}
+    {{#if tienePromocion}}{{#if precioPromocion}}<br>Precio Promoción: {{precioPromocion}}{{/if}}{{/if}}
+  {{/template}}
+  {{#template id="dispositivoPermisos"}}
+    {{#if verMateriales}}<br>Ver Materiales: {{_verMateriales}}{{/if}}
+    {{#if verCostos}}<br>Ver Costos: {{_verCostos}}{{/if}}
+    {{#if sinExistencias}}<br>Sin Existencias: {{_sinExistencias}}{{/if}}
+    {{#if venderFechasPasadas}}<br>Vender Fechas Pasadas: {{_venderFechasPasadas}}{{/if}}
+    {{#if deshabilitarImpresora}}<br>Deshabilitar Impresora: {{_deshabilitarImpresora}}{{/if}}
+    {{#if deshabilitarPinPad}}<br>Deshabilitar Pin Pad: {{_deshabilitarPinPad}}{{/if}}
+    {{#if segundoMonitor}}<br>Segundo Monitor: {{_segundoMonitor}}{{/if}}
+    {{#if tieneSegundoMonitor}}{{#if posicionSegundoMonitor}}<br>Posición Segundo Monitor: {{posicionSegundoMonitor}}{{/if}}{{/if}}
+    {{#if precioLista}}<br>Precio Lista: {{_precioLista}}{{/if}}
+    {{#if rolesAcceso}}<br>Roles Acceso: {{_rolesAcceso}}{{/if}}
   {{/template}}
 {{/markup}}

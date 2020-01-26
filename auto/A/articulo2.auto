@@ -58,15 +58,17 @@
 			{{/editor}}
 		{{/field}}
 		{{field id="precioLista" label="Precio Lista" type="number" format="currency" column="A"}}
+		{{field id="precioPublico" label="Precio Público" type="number" format="currency" if="esInventariable" column="A" modalColumn="A"}}
 		{{#field id="unidad" label="Unidad" type="text" column="A" references="unidad"}}
 			{{#editor type="select" preset="cfg.unidad"}}
 			{{/editor}}
 		{{/field}}
 		{{field id="cantidadEmpaque" label="Cantidad Empaque" type="number" column="A"}}
 		{{field id="marca" label="Marca" type="text" column="A"}}
-		{{field id="estilo" label="Estilo" type="text" column="A"}}
+		{{field id="grupo" label="Grupo" type="text" column="A"}}
+		{{field id="modelo" label="Modelo" type="text" column="A"}}
 		{{field id="tamano" label="Tamaño" type="text" column="A"}}
-		{{field id="color" label="Color/Sabor" type="text" column="A"}}
+		{{field id="color" label="Color" type="text" column="A"}}
 		{{field id="temporada" label="Temporada" type="text" column="A"}}
 		{{#field id="codigoUpc" label="Código UPC" type="text" column="A"}}
 			{{#editor case="upper"}}
@@ -94,10 +96,10 @@
 					{{row image="logo" alignment="left" imageWidth="75" margin="0,-15,0,0"}}
 				{{/column}}
 				{{#column margin="0,-10,0,0"}}
-					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Leibnitz 83-1" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Anzures 11590 CDMX" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Xtra Cinemas" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Reforma 215" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Lomas de Chapultepec 11000 CDMX" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Teléfono 55 5284 8500" alignment="left" fontSize="6" color="grey"}}
 				{{/column}}
 				{{#column}}
 					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
@@ -108,17 +110,19 @@
 	{{/report}}
 	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true"}}
 		{{#stack}}
-			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
+			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
 		{{/stack}}
 		{{#stack}}
 			{{#record title="articulo2" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="codigo" align="left"}}
 				{{row field="descripcion" align="left"}}
 				{{row field="precioLista" align="left"}}
+				{{row field="precioPublico" condition="esInventariable" align="left"}}
 				{{row field="unidad" align="left"}}
 				{{row field="cantidadEmpaque" align="left"}}
 				{{row field="marca" align="left"}}
-				{{row field="estilo" align="left"}}
+				{{row field="grupo" align="left"}}
+				{{row field="modelo" align="left"}}
 				{{row field="tamano" align="left"}}
 				{{row field="color" align="left"}}
 				{{row field="temporada" align="left"}}
@@ -153,7 +157,7 @@
 							articulo2
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="codigo, descripcion, precioLista, unidad, cantidadEmpaque, marca, estilo, tamano, color, temporada, codigoUpc, cliente, codigoLocal, comentarios" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="codigo, descripcion, precioLista, precioPublico, unidad, cantidadEmpaque, marca, grupo, modelo, tamano, color, temporada, codigoUpc, cliente, codigoLocal, comentarios" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -167,10 +171,12 @@
 				{{field codigo}}
 				{{field descripcion}}
 				{{field precioLista}}
+				{{field precioPublico}}
 				{{field unidad}}
 				{{field cantidadEmpaque}}
 				{{field marca}}
-				{{field estilo}}
+				{{field grupo}}
+				{{field modelo}}
 				{{field tamano}}
 				{{field color}}
 				{{field temporada}}
@@ -188,12 +194,14 @@
 		<br>Código: {{codigo}}
 		<br>Descripción: {{descripcion}}
 		<br>Precio Lista: {{number precioLista "currency"}}
+		{{#if esInventariable}}<br>Precio Público: {{number precioPublico "currency"}}{{/if}}
 		<br>Unidad: {{_unidad}}
 		<br>Cantidad Empaque: {{cantidadEmpaque}}
 		<br>Marca: {{marca}}
-		<br>Estilo: {{estilo}}
+		<br>Grupo: {{grupo}}
+		<br>Modelo: {{modelo}}
 		<br>Tamaño: {{tamano}}
-		<br>Color/Sabor: {{color}}
+		<br>Color: {{color}}
 		<br>Temporada: {{temporada}}
 		<br>Código UPC: {{codigoUpc}}
 		<br>Cliente: {{_cliente}}
@@ -204,12 +212,14 @@
 		{{#if codigo}}<br>Código: {{codigo}}{{/if}}
 		{{#if descripcion}}<br>Descripción: {{descripcion}}{{/if}}
 		{{#if precioLista}}<br>Precio Lista: {{number precioLista "currency"}}{{/if}}
+		{{#if esInventariable}}{{#if precioPublico}}<br>Precio Público: {{number precioPublico "currency"}}{{/if}}{{/if}}
 		{{#if unidad}}<br>Unidad: {{_unidad}}{{/if}}
 		{{#if cantidadEmpaque}}<br>Cantidad Empaque: {{cantidadEmpaque}}{{/if}}
 		{{#if marca}}<br>Marca: {{marca}}{{/if}}
-		{{#if estilo}}<br>Estilo: {{estilo}}{{/if}}
+		{{#if grupo}}<br>Grupo: {{grupo}}{{/if}}
+		{{#if modelo}}<br>Modelo: {{modelo}}{{/if}}
 		{{#if tamano}}<br>Tamaño: {{tamano}}{{/if}}
-		{{#if color}}<br>Color/Sabor: {{color}}{{/if}}
+		{{#if color}}<br>Color: {{color}}{{/if}}
 		{{#if temporada}}<br>Temporada: {{temporada}}{{/if}}
 		{{#if codigoUpc}}<br>Código UPC: {{codigoUpc}}{{/if}}
 		{{#if cliente}}<br>Cliente: {{_cliente}}{{/if}}

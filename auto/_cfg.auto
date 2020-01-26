@@ -80,6 +80,7 @@
 		{{item id="notaSalidaDiversa" nombre="Salida Diversa"}}
 		{{item id="notaTraspaso" nombre="Traspaso"}}
 	{{/config}}
+	{{config id="printAll"}}
 	{{#config id="entidad"}}
 		{{item id="BC" nombre="Baja California"}}
 		{{item id="BS" nombre="Baja California Sur"}}
@@ -424,10 +425,15 @@
 	{{#config id="userLevel"}}
 		{{item id="consulta" nombre="Consulta"}}
 		{{item id="normal" nombre="Normal"}}
+		{{item id="super" nombre="Supervisor"}}
 	{{/config}}
-	{{#config id="userRole"}}
-		{{item id="auxiliar" nombre="Auxiliar"}}
-		{{item id="sistemas" nombre="Sistemas"}}
+	{{#config id="servidor"}}
+		{{item id="local" nombre="(Local)"}}
+		{{item id="lab" nombre="(Laboratorio)"}}
+		{{item id="azc" nombre="Azcapozalco"}}
+		{{item id="eca" nombre="Ecatepec"}}
+		{{item id="teq" nombre="Tequisquiapan"}}
+		{{item id="ate" nombre="Atemajac"}}
 	{{/config}}
 	{{#config id="usoDireccion"}}
 		{{item id="trabajo" nombre="Trabajo"}}
@@ -464,9 +470,7 @@
 	{{/config}}
 	{{#config id="tipoEspacio"}}
 		{{item id="sala" nombre="Sala"}}
-		{{item id="sillon" nombre="Sillón"}}
-		{{item id="almacen" nombre="Almacén"}}
-		{{item id="otro" nombre="Otro"}}
+		{{item id="looby" nombre="Lobby"}}
 	{{/config}}
 	{{#config id="estatusUbicacion"}}
 		{{item id="activo" nombre="Activo"}}
@@ -484,6 +488,56 @@
 	{{/config}}
 	{{#config id="unidad"}}
 		{{item id="pieza" nombre="Pieza"}}
+	{{/config}}
+	{{#config id="precioLista"}}
+		{{item id="price1" nombre="Precio 1"}}
+		{{item id="price2" nombre="Precio 2"}}
+		{{item id="price3" nombre="Precio 3"}}
+		{{item id="price3x" nombre="Precio 3x"}}
+		{{item id="price4" nombre="Precio 4"}}
+	{{/config}}
+	{{#config id="peliculaFormato"}}
+		{{item id="2d" nombre="2D"}}
+		{{item id="3d" nombre="3D"}}
+	{{/config}}
+	{{#config id="peliculaLenguaje"}}
+		{{item id="espanol" nombre="Español"}}
+		{{item id="ingles" nombre="Ingles"}}
+		{{item id="doblado" nombre="Doblado"}}
+	{{/config}}
+	{{#config id="tipoPromocion"}}
+		{{item id="no" nombre="No"}}
+		{{item id="volume" nombre="Volumen"}}
+	{{/config}}
+	{{#config id="nivelInventario"}}
+		{{item id="low" nombre="Bajo"}}
+		{{item id="low2" nombre="Bajo 2"}}
+		{{item id="medium" nombre="Medio"}}
+		{{item id="medium2" nombre="Medio 2"}}
+		{{item id="high" nombre="Alto"}}
+		{{item id="high" nombre="Alto 2"}}
+	{{/config}}
+	{{#config id="empresa"}}
+		{{item id="cinetop" nombre="Cinetop"}}
+	{{/config}}
+	{{#config id="subArea"}}
+		{{item id="taquilla" nombre="Taquilla"}}
+		{{item id="dulceria" nombre="Dulcería"}}
+		{{item id="cafeteria" nombre="Cafetería"}}
+		{{item id="lux" nombre="Lux"}}
+		{{item id="staff" nombre="Staff"}}
+	{{/config}}
+	{{#config id="userRole"}}
+		{{item id="azc" nombre="Azcapozalco"}}
+		{{item id="eca" nombre="Ecatepec"}}
+		{{item id="teq" nombre="Tequisquiapan"}}
+		{{item id="ate" nombre="Atemajac"}}
+		{{item id="general" nombre="General"}}
+		{{item id="boletos" nombre="Boletos"}}
+		{{item id="cafeteria" nombre="Cafetería"}}
+		{{item id="dulceria" nombre="Dulcería"}}
+		{{item id="accessPoint" nombre="Acceso Películas"}}
+		{{item id="lux" nombre="Lux"}}
 	{{/config}}
 	{{#function id="date" paramType="text" returnType="json"}}
 		{{define type="param" id="date"}}
@@ -606,7 +660,7 @@
 		{{when document="notaSalidaDiversa" push="{\"document\":\"notaSalidaDiversa\",\"order\":1,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"inv\",\"code\":\"=codigo\",\"description\":\"=descripcion\",\"quantity\":\"=cantidad\",\"getCost\":true,\"from\":\"=origen\",\"fromName\":\"=_origen\",\"debit\":\"ajustes\",\"credit\":\"inventario\"}"}}
 		{{when document="notaTraspaso" push="{\"document\":\"notaTraspaso\",\"order\":1,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"inv\",\"code\":\"=codigo\",\"description\":\"=descripcion\",\"quantity\":\"=cantidad\",\"getCost\":true,\"from\":\"=origen\",\"fromName\":\"=_origen\",\"to\":\"=destino\",\"toName\":\"=_destino\",\"debit\":\"inventario\",\"credit\":\"inventario\"}"}}
 		{{when document="notaReciboUbicacion" push="{\"document\":\"notaReciboUbicacion\",\"order\":1,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"inv\",\"code\":\"=codigo\",\"description\":\"=descripcion\",\"quantity\":\"=cantidad\",\"getCost\":true,\"from\":\"=origen\",\"fromName\":\"=_origen\",\"to\":\"=destino\",\"toName\":\"=_destino\",\"debit\":\"inventario\",\"credit\":\"inventario\"}"}}
-		{{when document="notaPedido" push="{\"document\":\"notaPedido\",\"order\":1,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"inv\",\"code\":\"=codigo\",\"description\":\"=descripcion\",\"quantity\":\"=cantidad\",\"rate\":\"=tasaIva\",\"price\":\"=valorUnitario\",\"reference\":\"=referencia\",\"getCost\":true,\"from\":\"=origen\",\"fromName\":\"=_origen\",\"to\":\"=destino\",\"toName\":\"=_destino\",\"debit\":\"inventario\",\"credit\":\"inventario\"}"}}
+		{{when document="notaPedido" push="{\"document\":\"notaPedido\",\"order\":1,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"inv\",\"code\":\"=codigo\",\"description\":\"=descripcion\",\"quantity\":\"=cantidad\",\"rate\":\"=tasaIva\",\"price\":\"=valorUnitario\",\"reference\":\"=referencia\",\"reference2\":\"=referencia2\",\"getCost\":true,\"from\":\"=origen\",\"fromName\":\"=_origen\",\"to\":\"=destino\",\"toName\":\"=_destino\",\"debit\":\"inventario\",\"credit\":\"inventario\"}"}}
 	{{/function}}
 	{{#function id="edi" paramType="text" returnType="json"}}
 		{{define type="param" id="document"}}

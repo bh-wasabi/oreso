@@ -60,8 +60,8 @@
     {{column field="valorUnitario" label="Precio Unitario" width="110" type="numeric" format="#,.##" required="true"}}
     {{column field="tasaIva" label="% IVA" width="45" type="numeric" format="#.##" defaultValue="16"}}
 [.#if esOreso.]
-    {{column field="referencia" label="SKU" width="150"}}
-    {{column field="referencia2" label="Orden Compra" width="150"}}
+    {{column field="referencia" label="Orden Compra" width="150"}}
+    {{column field="referencia2" label="SKU" width="150"}}
 [.else.]
     {{column field="referencia" label="Referencia" width="150"}}
 [./if.]
@@ -88,18 +88,19 @@
       {{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
     {{/stack}}
     {{#stack}}
+      {{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
+        {{row field="fechaEmision" align="left"}}
+        {{row field="estatus" align="left"}}
+        {{row field="comentarios" align="left"}}
+      {{/record}}
       {{#row text="Artículos" fontSize="10" bold="true" margin="-10,0,0,0"}}
       {{/row}}
       {{#table title="Artículos" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="_items" headerStyle="field" margin="-10,0,0,10" removeEmptyCols="true"}}
+        {{column field="referencia" label="Orden Compra"}}
         {{column field="codigo" label="Código"}}
         {{column field="descripcion" label="Descripción"}}
         {{column field="codigoUpc" label="Código UPC"}}
-[.#if esOreso.]        
-        {{column field="referencia" label="SKU"}}
-        {{column field="referencia2" label="Orden Compra"}}
-[.else.]
-        {{column field="referencia" label="Referencia"}}
-[./if.]
+        {{column field="referencia2" label="SKU"}}
         {{column field="neto" align="right" label="Cantidad"}}
       {{/table}}
     {{/stack}}
@@ -107,5 +108,5 @@
 
   {{action id="tool" condition="true" label="Analizar Pedido" type="viewCube" visibleMode="close" color="cyan" btnSolid="true" cube="articulos" items="=calc.mergeArraysByKey(articulos, _items, 'codigo')" fromSource="articulo" fromView="todo"}}
   {{action id="tool2" condition="true" label="Descargar Checklist..." type="save-as" visibleMode="close" color="blue" btnSolid="true" fileName="=_name||'Pedido'" items="=_.union([fn('checkListTitulos')], fn('checkList', calc.mergeMasterDetail({persona, base}, calc.mergeArraysByKey(articulos, _items, 'codigo'))))" fromSource="articulo" fromView="todo"}}
-  {{action id="tool4" condition="true" type="report-pdf" label="Reporte Bodega" report="preliminar2" fileName="=_name" visibleMode="close" color="grey" items="=calc.mapReduce(calc.mergeArraysByKey(articulos, _items, 'codigo'), 'codigo,descripcion,codigoUpc,referencia', 'neto')" fromSource="articulo" fromView="todo"}}
+  {{action id="tool4" condition="true" type="report-pdf" label="Reporte Bodega" report="preliminar2" fileName="=_name" visibleMode="close" color="grey" items="=calc.mapReduce(calc.mergeArraysByKey(articulos, _items, 'codigo'), 'codigo,descripcion,codigoUpc,referencia,referencia2', 'neto')" fromSource="articulo" fromView="todo"}}
 {{/define}}

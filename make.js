@@ -30,21 +30,23 @@ var makeToken = "58c41f52-6fcb-43c2-82a0-760b435d344a";
 
 // host
 var wasabiHost = 'demo.enlanube.io'
-wasabiHost = 'oreso.enlanube.io'
+//wasabiHost = 'oreso.enlanube.io'
+//wasabiHost = 'cinetop.enlanube.io'
 
 // ssh -i "jheffes2.pem" ec2-user@oreso.enlanube.io
+// ssh -i "jheffes2.pem" ec2-user@cinetop.enlanube.io
 
-var logo = 'https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png';
-var logo3 = 'https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png';
-var headers = ['Grupo Oreso', 'Leibnitz 83-1','Anzures 11590 CDMX','Teléfono +52 (55) 5580 6118']
-params = '&esOreso=true';
-subProyect = 'oreso';
+// var logo = 'https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png';
+// var logo3 = 'https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png';
+// var headers = ['Grupo Oreso', 'Leibnitz 83-1','Anzures 11590 CDMX','Teléfono +52 (55) 5580 6118']
+// params = '&esOreso=true';
+// subProyect = 'oreso';
 
-// var logo = 'https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png';
-// var logo3 = 'https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png';
-// var headers = ['Xtra Cinemas', 'Reforma 215','Lomas de Chapultepec 11000 CDMX','Teléfono 55 5284 8500']
-// params = '&esCinetop=true';
-// subProyect = 'cinetop';
+var logo = 'https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png';
+var logo3 = 'https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png';
+var headers = ['Xtra Cinemas', 'Reforma 215','Lomas de Chapultepec 11000 CDMX','Teléfono 55 5284 8500']
+params = '&esCinetop=true';
+subProyect = 'cinetop';
 
 
 var logo2;

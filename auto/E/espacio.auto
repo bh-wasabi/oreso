@@ -17,8 +17,8 @@
 	{{param startOnOpen="base"}}
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="base.nombre"}}
-	{{param name="Espacios"}}
-	{{param typeName="Espacios"}}
+	{{param name="Espacio"}}
+	{{param typeName="Espacio"}}
 	{{param fullWidth="true"}}
 	{{param modalSize="xxlong"}}
 	{{param bannerTopTemplate="banner1"}}
@@ -51,16 +51,20 @@
 			{{#editor case="capitalize" width="100%"}}
 			{{/editor}}
 		{{/field}}
+		{{#field id="codigo" label="Código" type="text" column="A" labelModalClass="full-width"}}
+			{{#editor case="upper" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="sucursal" label="Complejo" type="reference" column="A" references="sucursal" labelModalClass="full-width"}}
+			{{#editor type="select" source="sucursal" view="lista" width="100%"}}
+			{{/editor}}
+		{{/field}}
 		{{#field id="estatus" label="Estatus" type="text" column="A" references="estatusUbicacion" modalColumn="A" labelModalClass="full-width" defaultValue="'activo'"}}
 			{{#editor type="select" preset="cfg.estatusUbicacion" width="100%"}}
 			{{/editor}}
 		{{/field}}
 		{{#field id="descripcion" label="Descripción" type="text" column="A" modalColumn="A" labelModalClass="full-width"}}
 			{{#editor type="text-area" height="80" width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="formaContacto" label="Formas Contacto" type="docs" column="A" references="formaContacto" modalColumn="A" labelModalClass="full-width" source="formaContacto"}}
-			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
 		{{#field id="disponibilidad" label="Disponibilidad" type="text" hide="true" column="A" references="v2BedStatus" modalColumn="A" labelModalClass="full-width"}}
@@ -71,16 +75,20 @@
 			{{#editor type="select" preset="cfg.tipoEspacio" width="100%"}}
 			{{/editor}}
 		{{/field}}
+		{{#field id="area" label="Área" type="text" column="A" references="area" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.area" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="capacidad" label="Capacidad" type="number" column="A" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
 		{{#field id="horaInicioDia" label="Hora Inicio Día" type="date" format="hh:mm a" column="A" modalColumn="A" fieldSetHeader="Visualización Agenda" labelModalClass="full-width" saveFormat="YYYY-MM-DDTHH:mm"}}
 			{{#editor type="time" width="100%"}}
 			{{/editor}}
 		{{/field}}
 		{{#field id="horaFinDia" label="Hora Fin Día" type="date" format="hh:mm a" column="A" modalColumn="A" labelModalClass="full-width" saveFormat="YYYY-MM-DDTHH:mm"}}
 			{{#editor type="time" width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="area" label="Área" type="text" column="A" references="area" modalColumn="A" detach="Localización" labelModalClass="full-width"}}
-			{{#editor type="select" preset="cfg.area" width="100%"}}
 			{{/editor}}
 		{{/field}}
 	{{/section}}
@@ -91,10 +99,10 @@
 					{{row image="logo" alignment="left" imageWidth="75" margin="0,-15,0,0"}}
 				{{/column}}
 				{{#column margin="0,-10,0,0"}}
-					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Leibnitz 83-1" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Anzures 11590 CDMX" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Xtra Cinemas" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Reforma 215" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Lomas de Chapultepec 11000 CDMX" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Teléfono 55 5284 8500" alignment="left" fontSize="6" color="grey"}}
 				{{/column}}
 				{{#column}}
 					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
@@ -105,22 +113,20 @@
 	{{/report}}
 	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true"}}
 		{{#stack}}
-			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
+			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Espacios" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
+			{{#record title="Espacio" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="nombre" align="left"}}
+				{{row field="codigo" align="left"}}
+				{{row field="sucursal" align="left"}}
 				{{row field="estatus" align="left"}}
 				{{row field="descripcion" align="left"}}
-				{{row field="formaContacto" align="left"}}
 				{{row field="tipoEspacio" align="left"}}
+				{{row field="area" align="left"}}
+				{{row field="capacidad" align="left"}}
 				{{row field="horaInicioDia" align="left"}}
 				{{row field="horaFinDia" align="left"}}
-			{{/record}}
-		{{/stack}}
-		{{#stack}}
-			{{#record title="Localización" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
-				{{row field="area" align="left"}}
 			{{/record}}
 		{{/stack}}
 	{{/report}}
@@ -137,7 +143,7 @@
 	{{/browser}}
 {{/define}}
 {{#markup}}
-	{{#page name="Espacios"}}
+	{{#page name="Espacio"}}
 		{{row}}
 		{{row}}
 		{{#row}}
@@ -145,21 +151,10 @@
 				{{#row class="auto-form-row"}}
 					{{#col medium="100%" class="auto-form-col"}}
 						{{#h5 class="auto-form-h5"}}
-							Espacios
+							Espacio
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="nombre, estatus, descripcion, formaContacto, tipoEspacio, horaInicioDia, horaFinDia" class="auto-form-record"}}
-							{{br}}
-						{{/with}}
-					{{/col}}
-				{{/row}}
-				{{#row class="auto-form-row"}}
-					{{#col medium="100%" class="auto-form-col"}}
-						{{#h5 class="auto-form-h5"}}
-							Localización
-						{{/h5}}
-						{{#with base}}
-							{{record this widths="20%,80%" rows="area" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="nombre, codigo, sucursal, estatus, descripcion, tipoEspacio, area, capacidad, horaInicioDia, horaFinDia" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -167,19 +162,21 @@
 			{{/zone}}
 		{{/row}}
 	{{/page}}
-	{{#modal base id="base" name="Espacios" size="xxlong"}}
+	{{#modal base id="base" name="Espacio" size="xxlong"}}
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
 				{{field nombre}}
+				{{field codigo}}
+				{{field sucursal}}
 				{{field estatus}}
 				{{field descripcion}}
-				{{field formaContacto}}
 				{{field tipoEspacio}}
+				{{field area}}
+				{{field capacidad}}
 			{{/fieldSet}}
 			{{#fieldSet header="Visualización Agenda"}}
 				{{field horaInicioDia header="Visualización Agenda"}}
 				{{field horaFinDia}}
-				{{field area}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
@@ -188,22 +185,26 @@
 	{{/template}}
 	{{#template2 id="espacio"}}
 		<br>Nombre: {{nombre}}
+		<br>Código: {{codigo}}
+		<br>Complejo: {{_sucursal}}
 		<br>Estatus: {{_estatus}}
 		<br>Descripción: {{descripcion}}
-		<br>Formas Contacto: {{_formaContacto}}
 		<br>Tipo Espacio: {{_tipoEspacio}}
+		<br>Área: {{_area}}
+		<br>Capacidad: {{capacidad}}
 		<br>Hora Inicio Día: {{date horaInicioDia "hh:mm a"}}
 		<br>Hora Fin Día: {{date horaFinDia "hh:mm a"}}
-		<br>Área: {{_area}}
 	{{/template2}}
 	{{#template3 id="espacio"}}
 		{{#if nombre}}<br>Nombre: {{nombre}}{{/if}}
+		{{#if codigo}}<br>Código: {{codigo}}{{/if}}
+		{{#if sucursal}}<br>Complejo: {{_sucursal}}{{/if}}
 		{{#if estatus}}<br>Estatus: {{_estatus}}{{/if}}
 		{{#if descripcion}}<br>Descripción: {{descripcion}}{{/if}}
-		{{#if formaContacto}}<br>Formas Contacto: {{_formaContacto}}{{/if}}
 		{{#if tipoEspacio}}<br>Tipo Espacio: {{_tipoEspacio}}{{/if}}
+		{{#if area}}<br>Área: {{_area}}{{/if}}
+		{{#if capacidad}}<br>Capacidad: {{capacidad}}{{/if}}
 		{{#if horaInicioDia}}<br>Hora Inicio Día: {{date horaInicioDia "hh:mm a"}}{{/if}}
 		{{#if horaFinDia}}<br>Hora Fin Día: {{date horaFinDia "hh:mm a"}}{{/if}}
-		{{#if area}}<br>Área: {{_area}}{{/if}}
 	{{/template3}}
 {{/markup}}

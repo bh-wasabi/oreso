@@ -1,0 +1,19 @@
+{{#define id="pelicula"}}  
+  {{#view id="lista"}}
+    {{#find}}
+      {{include field="base.nombre"}}
+      {{include field="base.codigo"}}
+      {{sort field="base.codigo" direction="asc"}}
+      {{search field="base.nombre"}}
+      {{search field="base.codigo"}}
+    {{/find}}
+  {{/view}}
+{{/define}}
+{{#markup}}
+  {{#template id="lista"}}
+    <div>
+      {{base.nombre}}
+      <br><span style="font-size:12px;">{{base.codigo}}</span>
+    </div>
+  {{/template}}
+{{/markup}}

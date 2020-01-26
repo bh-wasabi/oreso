@@ -6,6 +6,11 @@
       {{include field="base._unidad" as="_unidad"}}
       {{include field="base.codigoUpc" as="codigoUpc"}}
       {{include field="base.codigoLocal" as="codigoLocal"}}
+      {{include field="base.modelo" as="modelo"}}
+      {{include field="base.tamano" as="tamano"}}
+      {{include field="base.color" as="color"}}
+      {{include field="base.precioPublico" as="precioPublico"}}
+      {{include field="base.unidad" as="unidad"}}
     {{/all}}
   {{/view}}
   {{#view id="lista"}}
@@ -14,7 +19,7 @@
       {{include field="_name"}}
       {{include field="base.codigo"}}
       {{include field="base.marca"}}
-      {{include field="base.estilo"}}
+      {{include field="base.modelo"}}
       {{include field="base.tamano"}}
       {{include field="base.color"}}
       {{include field="base.cliente"}}
@@ -26,7 +31,7 @@
       {{search field="base.codigoLocal"}}
       {{search field="base.codigoSku"}}
       {{search field="base._marca"}}
-      {{search field="base._estilo"}}
+      {{search field="base._modelo"}}
       {{search field="base._tamano"}}
       {{search field="base._color"}}
     {{/find}}

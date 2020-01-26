@@ -60,7 +60,7 @@
 	{{action id="tool5" condition="=false"}}
 	{{action id="tool6" condition="=false"}}
 	{{action id="abrir" type="open" label="Editar" condition="=!@_isAffected"}}
-	{{action id="guardar" label="Guardar" btnFlat="true" color="grey" type="affect" workflow="guardar" condition="=!_inWorkflow" confirm="true" confirmMessage="¿Está seguro que desea guardar el borrador?"}}
+	{{action id="guardar" label="Guardar" btnFlat="true" color="grey" keepTempSections="true" type="affect" workflow="guardar" condition="=!_inWorkflow" confirm="true" confirmMessage="¿Está seguro que desea guardar el borrador?"}}
 	{{action id="afectar" label="Procesar" type="affect" workflow="afectar"}}
 	{{#transform id="copiarNota"}}
 		{{#update section="base"}}
@@ -87,6 +87,22 @@
 			{{#editor type="date" width="100%"}}
 			{{/editor}}
 		{{/field}}
+		{{#field id="ordenCompra" label="Orden Compra" type="text" column="A" labelModalClass="full-width"}}
+			{{#editor case="upper" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="fechaOrdenCompra" label="Fecha Orden Compra" type="date" format="DD/MMM/YYYY" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD"}}
+			{{#editor type="date" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="fechaEmbarque" label="Fecha Embarque" type="date" format="DD/MMM/YYYY" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD"}}
+			{{#editor type="date" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="fechaCancelacion" label="Fecha Cancelacion" type="date" format="DD/MMM/YYYY" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD"}}
+			{{#editor type="date" width="100%"}}
+			{{/editor}}
+		{{/field}}
 		{{#field id="diasCredito" label="Días Crédito" type="number" column="A" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
@@ -95,12 +111,20 @@
 			{{#editor type="date" width="100%"}}
 			{{/editor}}
 		{{/field}}
+		{{#field id="departamento" label="Departamento" type="text" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="logistica" label="% Logística" type="number" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
 		{{#field id="estatus" label="Estatus" type="text" readOnly="true" column="A" references="estatusNota" modalHide="true" labelModalClass="full-width" defaultValue="'borrador'"}}
 			{{#editor type="select" preset="cfg.estatusNota" width="100%"}}
 			{{/editor}}
 		{{/field}}
 		{{#field id="comentarios" label="Comentarios" type="text" column="A" labelModalClass="full-width"}}
-			{{#editor type="text-area" height="300" width="100%"}}
+			{{#editor type="text-area" height="110" width="100%"}}
 			{{/editor}}
 		{{/field}}
 		{{field id="nombre" label="Nombre" hide="true" type="expr" value="=fn('dynamicName', 'Factura', @_created)"}}
@@ -132,6 +156,8 @@
 		{{field id="costoUnitario" label="Costo Unitario" type="number" format="currency" column="A"}}
 		{{field id="valorUnitario" label="Valor Unitario" type="number" format="currency" column="A"}}
 		{{field id="tasaIva" label="% IVA" type="number" format="#.##" column="A"}}
+		{{field id="descuentoLinea" label="% Desc" type="number" format="#.##" column="A"}}
+		{{field id="descuentos" label="Descuentos" type="calc" format="currency" column="A"}}
 		{{field id="importe" label="Importe" type="calc" format="currency" column="A"}}
 		{{field id="iva" label="IVA" type="calc" format="currency" column="A"}}
 		{{field id="total" label="Total" type="calc" format="currency" column="A"}}
@@ -150,7 +176,7 @@
 			{{#editor case="upper"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="vencimiento" label="Fecha" type="text" column="A"}}
+		{{#field id="vencimiento" label="Vencimiento" type="text" column="A"}}
 			{{#editor case="YYYY-MM-DD"}}
 			{{/editor}}
 		{{/field}}
@@ -164,7 +190,7 @@
 		{{field id="entrada" label="Entrada" type="number" format="#," column="A"}}
 		{{field id="costoUnitario" label="Costo Unitario" type="number" format="currency" column="A"}}
 		{{field id="lote" label="Lote" type="text" column="A"}}
-		{{#field id="vencimiento" label="Fecha" type="date" format="DD/MMM/YYYY" column="A" saveFormat="YYYY-MM-DD"}}
+		{{#field id="vencimiento" label="Vencimiento" type="date" format="DD/MMM/YYYY" column="A" saveFormat="YYYY-MM-DD"}}
 			{{#editor type="date"}}
 			{{/editor}}
 		{{/field}}
@@ -183,10 +209,10 @@
 					{{row image="logo" alignment="left" imageWidth="75" margin="0,-15,0,0"}}
 				{{/column}}
 				{{#column margin="0,-10,0,0"}}
-					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Leibnitz 83-1" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Anzures 11590 CDMX" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Xtra Cinemas" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Reforma 215" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Lomas de Chapultepec 11000 CDMX" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Teléfono 55 5284 8500" alignment="left" fontSize="6" color="grey"}}
 				{{/column}}
 				{{#column}}
 					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
@@ -197,14 +223,20 @@
 	{{/report}}
 	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true"}}
 		{{#stack}}
-			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
+			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
 		{{/stack}}
 		{{#stack}}
 			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="responsableAcademico" condition="esEstudiante" align="left"}}
 				{{row field="fechaEmision" align="left"}}
+				{{row field="ordenCompra" align="left"}}
+				{{row field="fechaOrdenCompra" align="left"}}
+				{{row field="fechaEmbarque" align="left"}}
+				{{row field="fechaCancelacion" align="left"}}
 				{{row field="diasCredito" align="left"}}
 				{{row field="vencimiento" align="left"}}
+				{{row field="departamento" align="left"}}
+				{{row field="logistica" align="left"}}
 				{{row field="estatus" align="left"}}
 				{{row field="comentarios" align="left"}}
 			{{/record}}
@@ -224,6 +256,8 @@
 				{{column field="costoUnitario"}}
 				{{column field="valorUnitario"}}
 				{{column field="tasaIva"}}
+				{{column field="descuentoLinea"}}
+				{{column field="descuentos"}}
 				{{column field="importe"}}
 				{{column field="iva"}}
 				{{column field="total"}}
@@ -348,7 +382,7 @@
 							Datos Generales
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="responsableAcademico, fechaEmision, diasCredito, vencimiento, estatus, comentarios" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="responsableAcademico, fechaEmision, ordenCompra, fechaOrdenCompra, fechaEmbarque, fechaCancelacion, diasCredito, vencimiento, departamento, logistica, estatus, comentarios" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -363,7 +397,7 @@
 							Artículos
 						{{/h5}}
 						{{#div}}
-							{{table articulos class="auto-form-table" cols="aliasArticulo, codigo, descripcion, aliasOrigen, _origen, aliasDestino, _destino, cantidad, costoUnitario, valorUnitario, tasaIva, importe, iva, total, referencia, referencia2, contenedor, cajaInicial, cajaFinal, lote, vencimiento, comentarios" removeEmptyCols="true" unlink="true"}}
+							{{table articulos class="auto-form-table" cols="aliasArticulo, codigo, descripcion, aliasOrigen, _origen, aliasDestino, _destino, cantidad, costoUnitario, valorUnitario, tasaIva, descuentoLinea, descuentos, importe, iva, total, referencia, referencia2, contenedor, cajaInicial, cajaFinal, lote, vencimiento, comentarios" removeEmptyCols="true" unlink="true"}}
 							{{br}}
 						{{/div}}
 					{{/col}}
@@ -414,8 +448,14 @@
 			{{#fieldSet}}
 				{{field responsableAcademico}}
 				{{field fechaEmision}}
+				{{field ordenCompra}}
+				{{field fechaOrdenCompra}}
+				{{field fechaEmbarque}}
+				{{field fechaCancelacion}}
 				{{field diasCredito}}
 				{{field vencimiento}}
+				{{field departamento}}
+				{{field logistica}}
 				{{field estatus hide="true"}}
 				{{field comentarios}}
 			{{/fieldSet}}
@@ -442,16 +482,28 @@
 	{{#template2 id="notaFactura"}}
 		{{#if esEstudiante}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}
 		<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}
+		<br>Orden Compra: {{ordenCompra}}
+		<br>Fecha Orden Compra: {{date fechaOrdenCompra "DD/MMM/YYYY"}}
+		<br>Fecha Embarque: {{date fechaEmbarque "DD/MMM/YYYY"}}
+		<br>Fecha Cancelacion: {{date fechaCancelacion "DD/MMM/YYYY"}}
 		<br>Días Crédito: {{diasCredito}}
 		<br>Vencimiento: {{date vencimiento "DD/MMM/YYYY"}}
+		<br>Departamento: {{departamento}}
+		<br>% Logística: {{logistica}}
 		<br>Estatus: {{_estatus}}
 		<br>{{comentarios}}
 	{{/template2}}
 	{{#template3 id="notaFactura"}}
 		{{#if esEstudiante}}{{#if responsableAcademico}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}{{/if}}
 		{{#if fechaEmision}}<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}{{/if}}
+		{{#if ordenCompra}}<br>Orden Compra: {{ordenCompra}}{{/if}}
+		{{#if fechaOrdenCompra}}<br>Fecha Orden Compra: {{date fechaOrdenCompra "DD/MMM/YYYY"}}{{/if}}
+		{{#if fechaEmbarque}}<br>Fecha Embarque: {{date fechaEmbarque "DD/MMM/YYYY"}}{{/if}}
+		{{#if fechaCancelacion}}<br>Fecha Cancelacion: {{date fechaCancelacion "DD/MMM/YYYY"}}{{/if}}
 		{{#if diasCredito}}<br>Días Crédito: {{diasCredito}}{{/if}}
 		{{#if vencimiento}}<br>Vencimiento: {{date vencimiento "DD/MMM/YYYY"}}{{/if}}
+		{{#if departamento}}<br>Departamento: {{departamento}}{{/if}}
+		{{#if logistica}}<br>% Logística: {{logistica}}{{/if}}
 		{{#if estatus}}<br>Estatus: {{_estatus}}{{/if}}
 		{{#if comentarios}}<br>{{comentarios}}{{/if}}
 	{{/template3}}
