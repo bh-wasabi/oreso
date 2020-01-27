@@ -148,18 +148,12 @@
     {{_nivelInventario}}: {{_diaSemana}} 
   {{/template}}
   {{#template id="articuloNiveles"}}
-    {{#if minBajo}}<br>Bajo Mínimo: {{minBajo}}{{/if}}
-    {{#if maxBajo}}<br>Bajo Máximo: {{maxBajo}}{{/if}}
-    {{#if minMedio}}<br>Medio Mínimo: {{minMedio}}{{/if}}
-    {{#if maxMedio}}<br>Medio Máximo: {{maxMedio}}{{/if}}
-    {{#if minAlto}}<br>Alto Mínimo: {{minAlto}}{{/if}}
-    {{#if maxAlto}}<br>Alto Máximo: {{maxAlto}}{{/if}}
-    {{#if minBajo2}}<br>Bajo Mínimo 2: {{minBajo2}}{{/if}}
-    {{#if maxBajo2}}<br>Bajo Máximo 2: {{maxBajo2}}{{/if}}
-    {{#if minMedio2}}<br>Medio Mínimo 2: {{minMedio2}}{{/if}}
-    {{#if maxMedio2}}<br>Medio Máximo 2: {{maxMedio2}}{{/if}}
-    {{#if minAlto2}}<br>Alto Mínimo 2: {{minAlto2}}{{/if}}
-    {{#if maxAlto2}}<br>Alto Máximo 2: {{maxAlto2}}{{/if}}
+    {{#if minBajo}}<br>Bajo (Mín): {{minBajo}}{{/if}}
+    {{#if maxBajo}}<br>Bajo (Máx): {{maxBajo}}{{/if}}
+    {{#if minMedio}}<br>Medio (Mín): {{minMedio}}{{/if}}
+    {{#if maxMedio}}<br>Medio (Máx): {{maxMedio}}{{/if}}
+    {{#if minAlto}}<br>Alto (Mín): {{minAlto}}{{/if}}
+    {{#if maxAlto}}<br>Alto (Máx): {{maxAlto}}{{/if}}
   {{/template}}
   {{#template id="articuloPermisos"}}
     {{#if gratis}}<br>Es Gratis: {{_gratis}}{{/if}}

@@ -15,16 +15,21 @@
       {{include field="base.estatus"}}
       {{include field="base.area"}}
       {{include field="base.correo"}}
-      {{include field="base.numero"}}
       {{include field="base.nivelAcceso"}}
       {{sort field="base.numero" direction="asc"}}
       {{sort field="_name" direction="asc"}}
       {{search field="_name"}}
-      {{search field="base.numero"}}
+      {{search field="base.correo"}}
     {{/find}}
   {{/view}}
   {{#section id="base"}}
     {{field id="esLocal" type="expr" value="=@metodoAcceso==='local'"}}
+    {{#field id="contrasena"}}
+      {{#onChange}}
+        {{set hash="=calc.sha1(calc.text(contrasena))"}}
+        {{set contrasena="=calc.mask(contrasena)"}}
+      {{/onChange}}
+    {{/field}}    
     {{#field id="horaInicioDia"}}
       {{editor interval="60"}}
     {{/field}}
@@ -35,7 +40,7 @@
   {{#section id="_access"}}
     {{field id="method" type="expr" value="=base.metodoAcceso"}}
     {{field id="userId" type="expr" value="=base.correo"}}
-    {{field id="hash" type="expr" value="=calc.sha1(base.contrasena)"}}
+    {{field id="hash" type="expr" value="=base.hash"}}
     {{field id="isActive" type="expr" value="=calc.in(base.estatus, ['activo','afectado'])"}}
     {{field id="name" type="expr" value="=base.nombre"}}
     {{field id="level" type="expr" value="=base.nivelAcceso"}}
@@ -56,7 +61,6 @@
   {{#template id="lista"}}
     <div>
       {{_name}}
-      <span style="font-size:12px;float:right;">{{base.numero}}</span>
       </br><span style="font-size:12px;">{{base.correo}}</span>
       <span style="font-size:12px;float:right;">{{base._nivelAcceso}}</span>
     </div>    

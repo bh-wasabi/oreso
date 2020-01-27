@@ -31,7 +31,7 @@ var makeToken = "58c41f52-6fcb-43c2-82a0-760b435d344a";
 // host
 var wasabiHost = 'demo.enlanube.io'
 //wasabiHost = 'oreso.enlanube.io'
-//wasabiHost = 'cinetop.enlanube.io'
+wasabiHost = 'cinetop.enlanube.io'
 
 // ssh -i "jheffes2.pem" ec2-user@oreso.enlanube.io
 // ssh -i "jheffes2.pem" ec2-user@cinetop.enlanube.io

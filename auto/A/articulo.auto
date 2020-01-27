@@ -74,14 +74,6 @@
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="precioLista" label="Precio Lista" type="number" format="currency" column="A" modalColumn="A" labelModalClass="full-width"}}
-			{{#editor width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="precioPublico" label="Precio Público" type="number" format="currency" if="esInventariable" column="A" modalColumn="A" labelModalClass="full-width"}}
-			{{#editor width="100%"}}
-			{{/editor}}
-		{{/field}}
 		{{#field id="unidad" label="Unidad" type="text" if="esInventariable" column="A" references="unidad" modalColumn="A" labelModalClass="full-width"}}
 			{{#editor type="select" preset="cfg.unidad" width="100%"}}
 			{{/editor}}
@@ -93,16 +85,6 @@
 		{{#field id="cantidadEmpaque" label="Cantidad Empaque" type="number" if="esInventariable" column="A" modalColumn="A" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
-		{{/field}}
-		{{#field id="codigoUpc" label="Código UPC" type="text" if="esInventariable" column="A" modalColumn="A" labelModalClass="full-width"}}
-			{{#editor case="upper" width="100%"}}
-			{{/editor}}
-			{{validator type="unique"}}
-		{{/field}}
-		{{#field id="codigoLocal" label="Código Local" type="text" if="esInventariable" column="A" modalColumn="A" labelModalClass="full-width"}}
-			{{#editor case="upper" width="100%"}}
-			{{/editor}}
-			{{validator type="unique"}}
 		{{/field}}
 		{{#field id="comentarios" label="Comentarios" type="text" column="A" modalColumn="A" detach="Comentarios" labelModalClass="full-width"}}
 			{{#editor type="text-area" height="100" width="100%"}}
@@ -127,30 +109,6 @@
 		{{/field}}
 		{{#field id="grupo" label="Grupo" type="text" column="A" modalColumn="B" detach="Clasificadores" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="marca" label="Marca" type="text" column="A" modalColumn="B" detach="Clasificadores" labelModalClass="full-width"}}
-			{{#editor width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="modelo" label="Modelo" type="text" if="esInventariable" column="A" modalColumn="B" detach="Clasificadores" labelModalClass="full-width"}}
-			{{#editor width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="tamano" label="Tamaño" type="text" if="esInventariable" column="A" modalColumn="B" detach="Clasificadores" labelModalClass="full-width"}}
-			{{#editor width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="color" label="Color" type="text" if="esInventariable" column="A" modalColumn="B" detach="Clasificadores" labelModalClass="full-width"}}
-			{{#editor width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="temporada" label="Temporada" type="text" if="esInventariable" column="A" modalColumn="B" detach="Clasificadores" labelModalClass="full-width"}}
-			{{#editor width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="cliente" label="Cliente Específico" type="reference" if="esInventariable" column="A" references="persona" modalColumn="B" detach="Clasificadores" labelModalClass="full-width"}}
-			{{#editor type="lookup" source="persona" view="clientes" searchEnabled="true" width="100%"}}
 			{{/editor}}
 		{{/field}}
 	{{/section}}
@@ -182,13 +140,9 @@
 				{{row field="codigo" align="left"}}
 				{{row field="descripcion" align="left"}}
 				{{row field="costoUnitario" align="left"}}
-				{{row field="precioLista" align="left"}}
-				{{row field="precioPublico" condition="esInventariable" align="left"}}
 				{{row field="unidad" condition="esInventariable" align="left"}}
 				{{row field="factor" condition="esInventariable" align="left"}}
 				{{row field="cantidadEmpaque" condition="esInventariable" align="left"}}
-				{{row field="codigoUpc" condition="esInventariable" align="left"}}
-				{{row field="codigoLocal" condition="esInventariable" align="left"}}
 				{{row field="articuloPrecios" align="left"}}
 				{{row field="articuloNiveles" align="left"}}
 				{{row field="articuloPermisos" align="left"}}
@@ -203,12 +157,6 @@
 			{{#record title="Clasificadores" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="categoria" align="left"}}
 				{{row field="grupo" align="left"}}
-				{{row field="marca" align="left"}}
-				{{row field="modelo" condition="esInventariable" align="left"}}
-				{{row field="tamano" condition="esInventariable" align="left"}}
-				{{row field="color" condition="esInventariable" align="left"}}
-				{{row field="temporada" condition="esInventariable" align="left"}}
-				{{row field="cliente" condition="esInventariable" align="left"}}
 			{{/record}}
 		{{/stack}}
 	{{/report}}
@@ -262,7 +210,7 @@
 							Artículo
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="codigo, descripcion, costoUnitario, precioLista, precioPublico, unidad, factor, cantidadEmpaque, codigoUpc, codigoLocal, articuloPrecios, articuloNiveles, articuloPermisos" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="codigo, descripcion, costoUnitario, unidad, factor, cantidadEmpaque, articuloPrecios, articuloNiveles, articuloPermisos" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -284,7 +232,7 @@
 							Clasificadores
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="categoria, grupo, marca, modelo, tamano, color, temporada, cliente" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="categoria, grupo" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -298,13 +246,9 @@
 				{{field codigo}}
 				{{field descripcion}}
 				{{field costoUnitario}}
-				{{field precioLista}}
-				{{field precioPublico}}
 				{{field unidad}}
 				{{field factor}}
 				{{field cantidadEmpaque}}
-				{{field codigoUpc}}
-				{{field codigoLocal}}
 				{{field comentarios}}
 			{{/fieldSet}}
 		{{/col}}
@@ -315,12 +259,6 @@
 				{{field articuloPermisos}}
 				{{field categoria}}
 				{{field grupo}}
-				{{field marca}}
-				{{field modelo}}
-				{{field tamano}}
-				{{field color}}
-				{{field temporada}}
-				{{field cliente}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
@@ -331,48 +269,28 @@
 		<br>Código: {{codigo}}
 		<br>Descripción: {{descripcion}}
 		<br>Costo Unitario: {{number costoUnitario "currency"}}
-		<br>Precio Lista: {{number precioLista "currency"}}
-		{{#if esInventariable}}<br>Precio Público: {{number precioPublico "currency"}}{{/if}}
 		{{#if esInventariable}}<br>Unidad: {{_unidad}}{{/if}}
 		{{#if esInventariable}}<br>Factor: {{factor}}{{/if}}
 		{{#if esInventariable}}<br>Cantidad Empaque: {{cantidadEmpaque}}{{/if}}
-		{{#if esInventariable}}<br>Código UPC: {{codigoUpc}}{{/if}}
-		{{#if esInventariable}}<br>Código Local: {{codigoLocal}}{{/if}}
 		<br>{{comentarios}}
 		<br>Precios: {{_articuloPrecios}}
 		<br>Niveles Inventario: {{_articuloNiveles}}
 		<br>Permisos: {{_articuloPermisos}}
 		<br>Categoría: {{categoria}}
 		<br>Grupo: {{grupo}}
-		<br>Marca: {{marca}}
-		{{#if esInventariable}}<br>Modelo: {{modelo}}{{/if}}
-		{{#if esInventariable}}<br>Tamaño: {{tamano}}{{/if}}
-		{{#if esInventariable}}<br>Color: {{color}}{{/if}}
-		{{#if esInventariable}}<br>Temporada: {{temporada}}{{/if}}
-		{{#if esInventariable}}<br>Cliente Específico: {{_cliente}}{{/if}}
 	{{/template2}}
 	{{#template3 id="articulo"}}
 		{{#if codigo}}<br>Código: {{codigo}}{{/if}}
 		{{#if descripcion}}<br>Descripción: {{descripcion}}{{/if}}
 		{{#if costoUnitario}}<br>Costo Unitario: {{number costoUnitario "currency"}}{{/if}}
-		{{#if precioLista}}<br>Precio Lista: {{number precioLista "currency"}}{{/if}}
-		{{#if esInventariable}}{{#if precioPublico}}<br>Precio Público: {{number precioPublico "currency"}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if unidad}}<br>Unidad: {{_unidad}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if factor}}<br>Factor: {{factor}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if cantidadEmpaque}}<br>Cantidad Empaque: {{cantidadEmpaque}}{{/if}}{{/if}}
-		{{#if esInventariable}}{{#if codigoUpc}}<br>Código UPC: {{codigoUpc}}{{/if}}{{/if}}
-		{{#if esInventariable}}{{#if codigoLocal}}<br>Código Local: {{codigoLocal}}{{/if}}{{/if}}
 		{{#if comentarios}}<br>{{comentarios}}{{/if}}
 		{{#if articuloPrecios}}<br>Precios: {{_articuloPrecios}}{{/if}}
 		{{#if articuloNiveles}}<br>Niveles Inventario: {{_articuloNiveles}}{{/if}}
 		{{#if articuloPermisos}}<br>Permisos: {{_articuloPermisos}}{{/if}}
 		{{#if categoria}}<br>Categoría: {{categoria}}{{/if}}
 		{{#if grupo}}<br>Grupo: {{grupo}}{{/if}}
-		{{#if marca}}<br>Marca: {{marca}}{{/if}}
-		{{#if esInventariable}}{{#if modelo}}<br>Modelo: {{modelo}}{{/if}}{{/if}}
-		{{#if esInventariable}}{{#if tamano}}<br>Tamaño: {{tamano}}{{/if}}{{/if}}
-		{{#if esInventariable}}{{#if color}}<br>Color: {{color}}{{/if}}{{/if}}
-		{{#if esInventariable}}{{#if temporada}}<br>Temporada: {{temporada}}{{/if}}{{/if}}
-		{{#if esInventariable}}{{#if cliente}}<br>Cliente Específico: {{_cliente}}{{/if}}{{/if}}
 	{{/template3}}
 {{/markup}}

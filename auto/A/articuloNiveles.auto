@@ -50,55 +50,57 @@
 	{{section id="_options" temp="true"}}
 	{{section id="_params" temp="true"}}
 	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
-		{{#field id="minBajo" label="Bajo Mínimo" type="number" column="A" modalColumn="A" labelModalClass="full-width"}}
+		{{#field id="minBajo" label="Bajo (Mín)" type="number" column="A" modalColumn="A" detach="General" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="maxBajo" label="Bajo Máximo" type="number" column="A" modalColumn="A" labelModalClass="full-width"}}
+		{{#field id="maxBajo" label="Bajo (Máx)" type="number" column="A" modalColumn="B" detach="General" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="minMedio" label="Medio Mínimo" type="number" column="A" modalColumn="A" labelModalClass="full-width"}}
+		{{#field id="minMedio" label="Medio (Mín)" type="number" column="A" modalColumn="A" detach="General" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="maxMedio" label="Medio Máximo" type="number" column="A" modalColumn="A" labelModalClass="full-width"}}
+		{{#field id="maxMedio" label="Medio (Máx)" type="number" column="A" modalColumn="B" detach="General" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="minAlto" label="Alto Mínimo" type="number" column="A" modalColumn="A" labelModalClass="full-width"}}
+		{{#field id="minAlto" label="Alto (Mín)" type="number" column="A" modalColumn="A" detach="General" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="maxAlto" label="Alto Máximo" type="number" column="A" modalColumn="A" labelModalClass="full-width"}}
-			{{#editor width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="minBajo2" label="Bajo Mínimo 2" type="number" column="A" modalColumn="B" labelModalClass="full-width"}}
-			{{#editor width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="maxBajo2" label="Bajo Máximo 2" type="number" column="A" modalColumn="B" labelModalClass="full-width"}}
-			{{#editor width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="minMedio2" label="Medio Mínimo 2" type="number" column="A" modalColumn="B" labelModalClass="full-width"}}
-			{{#editor width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="maxMedio2" label="Medio Máximo 2" type="number" column="A" modalColumn="B" labelModalClass="full-width"}}
-			{{#editor width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="minAlto2" label="Alto Mínimo 2" type="number" column="A" modalColumn="B" labelModalClass="full-width"}}
-			{{#editor width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="maxAlto2" label="Alto Máximo 2" type="number" column="A" modalColumn="B" labelModalClass="full-width"}}
+		{{#field id="maxAlto" label="Alto (Máx)" type="number" column="A" modalColumn="B" detach="General" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
 		{{field id="nombre" label="Nombre" hide="true" type="expr" value="=calc.tpl('articuloNiveles', base)"}}
+	{{/section}}
+	{{#section id="alterno" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
+		{{#field id="minBajo" label="Bajo (Mín)" type="number" column="A" modalColumn="A" detach="Alterno" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="maxBajo" label="Bajo (Máx)" type="number" column="A" modalColumn="B" detach="Alterno" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="minMedio" label="Medio (Mín)" type="number" column="A" modalColumn="A" detach="Alterno" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="maxMedio" label="Medio (Máx)" type="number" column="A" modalColumn="B" detach="Alterno" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="minAlto" label="Alto (Mín)" type="number" column="A" modalColumn="A" detach="Alterno" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="maxAlto" label="Alto (Máx)" type="number" column="A" modalColumn="B" detach="Alterno" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
 	{{/section}}
 	{{#report id="preliminar-encabezado"}}
 		{{#stack}}
@@ -124,19 +126,31 @@
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Niveles Inventario" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
+			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
+			{{/record}}
+		{{/stack}}
+		{{#stack}}
+			{{#record title="General" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="minBajo" align="left"}}
 				{{row field="maxBajo" align="left"}}
 				{{row field="minMedio" align="left"}}
 				{{row field="maxMedio" align="left"}}
 				{{row field="minAlto" align="left"}}
 				{{row field="maxAlto" align="left"}}
-				{{row field="minBajo2" align="left"}}
-				{{row field="maxBajo2" align="left"}}
-				{{row field="minMedio2" align="left"}}
-				{{row field="maxMedio2" align="left"}}
-				{{row field="minAlto2" align="left"}}
-				{{row field="maxAlto2" align="left"}}
+			{{/record}}
+		{{/stack}}
+		{{#stack}}
+			{{#record title="Datos Alternos" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="alterno" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
+			{{/record}}
+		{{/stack}}
+		{{#stack}}
+			{{#record title="Alterno" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="alterno" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
+				{{row field="minBajo" align="left"}}
+				{{row field="maxBajo" align="left"}}
+				{{row field="minMedio" align="left"}}
+				{{row field="maxMedio" align="left"}}
+				{{row field="minAlto" align="left"}}
+				{{row field="maxAlto" align="left"}}
 			{{/record}}
 		{{/stack}}
 	{{/report}}
@@ -161,7 +175,41 @@
 				{{#row class="auto-form-row"}}
 					{{#col medium="100%" class="auto-form-col"}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="minBajo, maxBajo, minMedio, maxMedio, minAlto, maxAlto, minBajo2, maxBajo2, minMedio2, maxMedio2, minAlto2, maxAlto2" class="auto-form-record auto-hide-title"}}
+							{{record this widths="20%,80%" class="auto-form-record auto-hide-title"}}
+							{{br}}
+						{{/with}}
+					{{/col}}
+				{{/row}}
+				{{#row class="auto-form-row"}}
+					{{#col medium="100%" class="auto-form-col"}}
+						{{#h5 class="auto-form-h5"}}
+							General
+						{{/h5}}
+						{{#with base}}
+							{{record this widths="20%,80%" rows="minBajo, maxBajo, minMedio, maxMedio, minAlto, maxAlto" class="auto-form-record auto-hide-title"}}
+							{{br}}
+						{{/with}}
+					{{/col}}
+				{{/row}}
+			{{/zone}}
+		{{/row}}
+		{{#row}}
+			{{#zone id="alterno" modal="alterno"}}
+				{{#row class="auto-form-row"}}
+					{{#col medium="100%" class="auto-form-col"}}
+						{{#with alterno}}
+							{{record this widths="20%,80%" class="auto-form-record auto-hide-title"}}
+							{{br}}
+						{{/with}}
+					{{/col}}
+				{{/row}}
+				{{#row class="auto-form-row"}}
+					{{#col medium="100%" class="auto-form-col"}}
+						{{#h5 class="auto-form-h5"}}
+							Alterno
+						{{/h5}}
+						{{#with alterno}}
+							{{record this widths="20%,80%" rows="minBajo, maxBajo, minMedio, maxMedio, minAlto, maxAlto" class="auto-form-record auto-hide-title"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -169,25 +217,35 @@
 			{{/zone}}
 		{{/row}}
 	{{/page}}
-	{{#modal base id="base" name="Niveles Inventario"}}
+	{{#modal base id="base" name="Datos Generales" next="alterno"}}
 		{{#col medium="50%" vertical="50%"}}
 			{{#fieldSet}}
 				{{field minBajo}}
-				{{field maxBajo}}
 				{{field minMedio}}
-				{{field maxMedio}}
 				{{field minAlto}}
-				{{field maxAlto}}
 			{{/fieldSet}}
 		{{/col}}
 		{{#col medium="50%" vertical="50%"}}
 			{{#fieldSet}}
-				{{field minBajo2}}
-				{{field maxBajo2}}
-				{{field minMedio2}}
-				{{field maxMedio2}}
-				{{field minAlto2}}
-				{{field maxAlto2}}
+				{{field maxBajo}}
+				{{field maxMedio}}
+				{{field maxAlto}}
+			{{/fieldSet}}
+		{{/col}}
+	{{/modal}}
+	{{#modal alterno id="alterno" name="Datos Alternos" prev="base"}}
+		{{#col medium="50%" vertical="50%"}}
+			{{#fieldSet}}
+				{{field minBajo}}
+				{{field minMedio}}
+				{{field minAlto}}
+			{{/fieldSet}}
+		{{/col}}
+		{{#col medium="50%" vertical="50%"}}
+			{{#fieldSet}}
+				{{field maxBajo}}
+				{{field maxMedio}}
+				{{field maxAlto}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
@@ -195,31 +253,19 @@
 		<div>{{_name}}</div>
 	{{/template}}
 	{{#template2 id="articuloNiveles"}}
-		<br>Bajo Mínimo: {{minBajo}}
-		<br>Bajo Máximo: {{maxBajo}}
-		<br>Medio Mínimo: {{minMedio}}
-		<br>Medio Máximo: {{maxMedio}}
-		<br>Alto Mínimo: {{minAlto}}
-		<br>Alto Máximo: {{maxAlto}}
-		<br>Bajo Mínimo 2: {{minBajo2}}
-		<br>Bajo Máximo 2: {{maxBajo2}}
-		<br>Medio Mínimo 2: {{minMedio2}}
-		<br>Medio Máximo 2: {{maxMedio2}}
-		<br>Alto Mínimo 2: {{minAlto2}}
-		<br>Alto Máximo 2: {{maxAlto2}}
+		<br>Bajo (Mín): {{minBajo}}
+		<br>Bajo (Máx): {{maxBajo}}
+		<br>Medio (Mín): {{minMedio}}
+		<br>Medio (Máx): {{maxMedio}}
+		<br>Alto (Mín): {{minAlto}}
+		<br>Alto (Máx): {{maxAlto}}
 	{{/template2}}
 	{{#template3 id="articuloNiveles"}}
-		{{#if minBajo}}<br>Bajo Mínimo: {{minBajo}}{{/if}}
-		{{#if maxBajo}}<br>Bajo Máximo: {{maxBajo}}{{/if}}
-		{{#if minMedio}}<br>Medio Mínimo: {{minMedio}}{{/if}}
-		{{#if maxMedio}}<br>Medio Máximo: {{maxMedio}}{{/if}}
-		{{#if minAlto}}<br>Alto Mínimo: {{minAlto}}{{/if}}
-		{{#if maxAlto}}<br>Alto Máximo: {{maxAlto}}{{/if}}
-		{{#if minBajo2}}<br>Bajo Mínimo 2: {{minBajo2}}{{/if}}
-		{{#if maxBajo2}}<br>Bajo Máximo 2: {{maxBajo2}}{{/if}}
-		{{#if minMedio2}}<br>Medio Mínimo 2: {{minMedio2}}{{/if}}
-		{{#if maxMedio2}}<br>Medio Máximo 2: {{maxMedio2}}{{/if}}
-		{{#if minAlto2}}<br>Alto Mínimo 2: {{minAlto2}}{{/if}}
-		{{#if maxAlto2}}<br>Alto Máximo 2: {{maxAlto2}}{{/if}}
+		{{#if minBajo}}<br>Bajo (Mín): {{minBajo}}{{/if}}
+		{{#if maxBajo}}<br>Bajo (Máx): {{maxBajo}}{{/if}}
+		{{#if minMedio}}<br>Medio (Mín): {{minMedio}}{{/if}}
+		{{#if maxMedio}}<br>Medio (Máx): {{maxMedio}}{{/if}}
+		{{#if minAlto}}<br>Alto (Mín): {{minAlto}}{{/if}}
+		{{#if maxAlto}}<br>Alto (Máx): {{maxAlto}}{{/if}}
 	{{/template3}}
 {{/markup}}

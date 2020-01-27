@@ -51,15 +51,15 @@
 	{{section id="_options" temp="true"}}
 	{{section id="_params" temp="true"}}
 	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
+		{{#field id="nombre" label="Nombre" type="text" column="A" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
 		{{#field id="codigo" label="Código" type="text" column="A" modalColumn="A" labelModalClass="full-width"}}
 			{{#editor case="upper" width="100%"}}
 			{{/editor}}
 		{{/field}}
 		{{#field id="numero" label="Número" type="number" column="A" modalColumn="A" labelModalClass="full-width"}}
-			{{#editor width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="nombre" label="Nombre" type="text" column="A" modalColumn="A" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
@@ -95,7 +95,7 @@
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="direccion" label="Dirección" type="text" column="A" labelModalClass="full-width"}}
+		{{#field id="direccion" label="Dirección Completa" type="text" column="A" modalColumn="B" detach="Dirección" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
@@ -133,13 +133,12 @@
 		{{/stack}}
 		{{#stack}}
 			{{#record title="Complejo" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
+				{{row field="nombre" align="left"}}
 				{{row field="codigo" align="left"}}
 				{{row field="numero" align="left"}}
-				{{row field="nombre" align="left"}}
 				{{row field="precioLista" align="left"}}
 				{{row field="activoWeb" align="left"}}
 				{{row field="nivelInventario" align="left"}}
-				{{row field="direccion" align="left"}}
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
@@ -149,6 +148,7 @@
 				{{row field="encabezado3" align="left"}}
 				{{row field="encabezado4" align="left"}}
 				{{row field="encabezado5" align="left"}}
+				{{row field="direccion" align="left"}}
 				{{row field="latitud" align="left"}}
 				{{row field="longitud" align="left"}}
 			{{/record}}
@@ -204,7 +204,7 @@
 							Complejo
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="codigo, numero, nombre, precioLista, activoWeb, nivelInventario, direccion" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="nombre, codigo, numero, precioLista, activoWeb, nivelInventario" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -215,7 +215,7 @@
 							Dirección
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="encabezado1, encabezado2, encabezado3, encabezado4, encabezado5, latitud, longitud" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="encabezado1, encabezado2, encabezado3, encabezado4, encabezado5, direccion, latitud, longitud" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -226,13 +226,12 @@
 	{{#modal base id="base" name="Complejo" size="xwide"}}
 		{{#col medium="50%" vertical="50%"}}
 			{{#fieldSet}}
+				{{field nombre}}
 				{{field codigo}}
 				{{field numero}}
-				{{field nombre}}
 				{{field precioLista}}
 				{{field activoWeb}}
 				{{field nivelInventario}}
-				{{field direccion}}
 			{{/fieldSet}}
 		{{/col}}
 		{{#col medium="50%" vertical="50%"}}
@@ -242,6 +241,7 @@
 				{{field encabezado3}}
 				{{field encabezado4}}
 				{{field encabezado5}}
+				{{field direccion}}
 				{{field latitud}}
 				{{field longitud}}
 			{{/fieldSet}}
@@ -251,9 +251,9 @@
 		<div>{{_name}}</div>
 	{{/template}}
 	{{#template2 id="sucursal"}}
+		<br>Nombre: {{nombre}}
 		<br>Código: {{codigo}}
 		<br>Número: {{numero}}
-		<br>Nombre: {{nombre}}
 		<br>Precio Lista: {{_precioLista}}
 		<br>Activo App: {{_activoWeb}}
 		<br>Nivel Inventario: {{_nivelInventario}}
@@ -262,14 +262,14 @@
 		<br>Encabezado 3: {{encabezado3}}
 		<br>Encabezado 4: {{encabezado4}}
 		<br>Encabezado 5: {{encabezado5}}
-		<br>Dirección: {{direccion}}
+		<br>Dirección Completa: {{direccion}}
 		<br>Latitud: {{latitud}}
 		<br>Longitud: {{longitud}}
 	{{/template2}}
 	{{#template3 id="sucursal"}}
+		{{#if nombre}}<br>Nombre: {{nombre}}{{/if}}
 		{{#if codigo}}<br>Código: {{codigo}}{{/if}}
 		{{#if numero}}<br>Número: {{numero}}{{/if}}
-		{{#if nombre}}<br>Nombre: {{nombre}}{{/if}}
 		{{#if precioLista}}<br>Precio Lista: {{_precioLista}}{{/if}}
 		{{#if activoWeb}}<br>Activo App: {{_activoWeb}}{{/if}}
 		{{#if nivelInventario}}<br>Nivel Inventario: {{_nivelInventario}}{{/if}}
@@ -278,7 +278,7 @@
 		{{#if encabezado3}}<br>Encabezado 3: {{encabezado3}}{{/if}}
 		{{#if encabezado4}}<br>Encabezado 4: {{encabezado4}}{{/if}}
 		{{#if encabezado5}}<br>Encabezado 5: {{encabezado5}}{{/if}}
-		{{#if direccion}}<br>Dirección: {{direccion}}{{/if}}
+		{{#if direccion}}<br>Dirección Completa: {{direccion}}{{/if}}
 		{{#if latitud}}<br>Latitud: {{latitud}}{{/if}}
 		{{#if longitud}}<br>Longitud: {{longitud}}{{/if}}
 	{{/template3}}

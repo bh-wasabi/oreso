@@ -72,28 +72,11 @@
 			{{#editor type="select" preset="cfg.estatusGeneral"}}
 			{{/editor}}
 		{{/field}}
-		{{field id="precioLista" label="Precio Lista" type="number" format="currency" column="A"}}
-		{{field id="precioPublico" label="Precio Público" type="number" format="currency" if="esInventariable" column="A" modalColumn="A"}}
 		{{#field id="unidad" label="Unidad" type="text" column="A" references="unidad"}}
 			{{#editor type="select" preset="cfg.unidad"}}
 			{{/editor}}
 		{{/field}}
 		{{field id="cantidadEmpaque" label="Cantidad Empaque" type="number" column="A"}}
-		{{field id="marca" label="Marca" type="text" column="A"}}
-		{{field id="grupo" label="Grupo" type="text" column="A"}}
-		{{field id="modelo" label="Modelo" type="text" column="A"}}
-		{{field id="tamano" label="Tamaño" type="text" column="A"}}
-		{{field id="color" label="Color" type="text" column="A"}}
-		{{field id="temporada" label="Temporada" type="text" column="A"}}
-		{{#field id="codigoUpc" label="Código UPC" type="text" column="A"}}
-			{{#editor case="upper"}}
-			{{/editor}}
-			{{validator type="unique"}}
-		{{/field}}
-		{{#field id="cliente" label="Cliente" type="reference" column="A" references="persona"}}
-			{{#editor type="lookup" source="persona" view="clientes" searchEnabled="true"}}
-			{{/editor}}
-		{{/field}}
 		{{#field id="codigoLocal" label="Código Local" type="text" column="A"}}
 			{{#editor case="upper"}}
 			{{/editor}}
@@ -138,18 +121,8 @@
 			{{#table title="Artículos" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="articulos" headerStyle="field" margin="-10,0,0,10" removeEmptyCols="true"}}
 				{{column field="codigo"}}
 				{{column field="descripcion"}}
-				{{column field="precioLista"}}
-				{{column field="precioPublico" condition="esInventariable"}}
 				{{column field="unidad"}}
 				{{column field="cantidadEmpaque"}}
-				{{column field="marca"}}
-				{{column field="grupo"}}
-				{{column field="modelo"}}
-				{{column field="tamano"}}
-				{{column field="color"}}
-				{{column field="temporada"}}
-				{{column field="codigoUpc"}}
-				{{column field="cliente"}}
 				{{column field="codigoLocal"}}
 				{{column field="comentarios"}}
 			{{/table}}
@@ -220,7 +193,7 @@
 							Artículos
 						{{/h5}}
 						{{#div}}
-							{{table articulos class="auto-form-table" cols="codigo, descripcion, precioLista, precioPublico, unidad, cantidadEmpaque, marca, grupo, modelo, tamano, color, temporada, codigoUpc, cliente, codigoLocal, comentarios" removeEmptyCols="true" unlink="true"}}
+							{{table articulos class="auto-form-table" cols="codigo, descripcion, unidad, cantidadEmpaque, codigoLocal, comentarios" removeEmptyCols="true" unlink="true"}}
 							{{br}}
 						{{/div}}
 					{{/col}}

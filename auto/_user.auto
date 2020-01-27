@@ -61,13 +61,17 @@
 			{{#onChange refresh="true"}}
 			{{/onChange}}
 		{{/field}}
-		{{#field id="correo" label="Correo Electrónico" type="text" column="A" modalColumn="A" labelModalClass="full-width"}}
+		{{#field id="correo" label="Usuario / Correo" type="text" column="A" modalColumn="A" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 			{{validator type="unique"}}
 		{{/field}}
 		{{#field id="contrasena" label="Contraseña" type="text" recordHide="true" if="esLocal" column="A" modalColumn="A" labelModalClass="full-width"}}
-			{{#editor mode="password" width="100%"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="hash" label="Hash" type="text" recordHide="true" column="A" modalColumn="A" modalHide="true" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
 		{{#field id="nivelAcceso" label="Nivel Acceso" type="text" column="A" references="userLevel" modalColumn="A" labelModalClass="full-width" defaultValue="'normal'"}}
@@ -82,12 +86,8 @@
 			{{#editor type="select" preset="cfg.estatusUsuario" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="sucursal" label="Sucursal" type="reference" column="A" references="sucursal" modalColumn="A" detach="Ubicación" fieldSetHeader="Ubicación" labelModalClass="full-width"}}
+		{{#field id="sucursal" label="Sucursal" type="reference" column="A" references="sucursal" modalColumn="A" labelModalClass="full-width"}}
 			{{#editor type="select" source="sucursal" view="lista" width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="numero" label="Número" type="number" column="A" modalColumn="A" detach="Ubicación" labelModalClass="full-width"}}
-			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
 	{{/section}}
@@ -173,12 +173,7 @@
 				{{row field="correo" align="left"}}
 				{{row field="nivelAcceso" align="left"}}
 				{{row field="estatus" align="left"}}
-			{{/record}}
-		{{/stack}}
-		{{#stack}}
-			{{#record title="Ubicación" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="sucursal" align="left"}}
-				{{row field="numero" align="left"}}
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
@@ -247,18 +242,7 @@
 							Datos Usuario
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="nombre, correo, nivelAcceso, estatus" class="auto-form-record"}}
-							{{br}}
-						{{/with}}
-					{{/col}}
-				{{/row}}
-				{{#row class="auto-form-row"}}
-					{{#col medium="100%" class="auto-form-col"}}
-						{{#h5 class="auto-form-h5"}}
-							Ubicación
-						{{/h5}}
-						{{#with base}}
-							{{record this widths="20%,80%" rows="sucursal, numero" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="nombre, correo, nivelAcceso, estatus, sucursal" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -296,12 +280,10 @@
 				{{field metodoAcceso}}
 				{{field correo}}
 				{{field contrasena}}
+				{{field hash hide="true"}}
 				{{field nivelAcceso}}
 				{{field estatus}}
-			{{/fieldSet}}
-			{{#fieldSet header="Ubicación"}}
-				{{field sucursal header="Ubicación"}}
-				{{field numero}}
+				{{field sucursal}}
 			{{/fieldSet}}
 		{{/col}}
 		{{#col medium="50%" vertical="50%"}}
@@ -337,18 +319,16 @@
 	{{/template}}
 	{{#template2 id="_user"}}
 		<br>Nombre: {{nombre}}
-		<br>Correo Electrónico: {{correo}}
+		<br>Usuario / Correo: {{correo}}
 		<br>Nivel Acceso: {{_nivelAcceso}}
 		<br>Estatus: {{_estatus}}
 		<br>Sucursal: {{_sucursal}}
-		<br>Número: {{numero}}
 	{{/template2}}
 	{{#template3 id="_user"}}
 		{{#if nombre}}<br>Nombre: {{nombre}}{{/if}}
-		{{#if correo}}<br>Correo Electrónico: {{correo}}{{/if}}
+		{{#if correo}}<br>Usuario / Correo: {{correo}}{{/if}}
 		{{#if nivelAcceso}}<br>Nivel Acceso: {{_nivelAcceso}}{{/if}}
 		{{#if estatus}}<br>Estatus: {{_estatus}}{{/if}}
 		{{#if sucursal}}<br>Sucursal: {{_sucursal}}{{/if}}
-		{{#if numero}}<br>Número: {{numero}}{{/if}}
 	{{/template3}}
 {{/markup}}
