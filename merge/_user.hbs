@@ -2,12 +2,12 @@
   {{param name="=_params.service==='tesoreria'?'Cajero':'Usuario'"}}
 
   {{action id="eliminar" hide="true"}}
-  {{#action id="ver" condition="=true" label="Ver Planeación" type="view-scheduler" color="cyan"}}
+  {{!-- {{#action id="ver" condition="=true" label="Ver Planeación" type="view-scheduler" color="cyan"}}
     {{scheduler type="plan" startDayHour="=prestadorServicios.horaInicioDia" endDayHour="=prestadorServicios.horaFinDia" cellDuration="30" resourceSource="planAgenda" resourceView="lista" resourceField="schedule" views="month,week,day" currentView="month"}}
   {{/action}}
   {{#action id="ver2" condition="=true" label="Ver Agenda" type="view-scheduler" btnSolid="false" color="green"}}
     {{scheduler type="busy" startDayHour="=prestadorServicios.horaInicioDia" endDayHour="=prestadorServicios.horaFinDia" cellDuration="30" resourceSource="planAgenda" resourceView="lista" resourceField="schedule" views="month,week,day" currentView="week"}}
-  {{/action}}
+  {{/action}} --}}
   {{#view id="lista"}}
     {{#find}}
       {{include field="_name"}}
@@ -16,6 +16,7 @@
       {{include field="base.area"}}
       {{include field="base.correo"}}
       {{include field="base.nivelAcceso"}}
+      {{filter condition="=sucursal" field="base.sucursal" in="=sucursal"}}
       {{sort field="base.numero" direction="asc"}}
       {{sort field="_name" direction="asc"}}
       {{search field="_name"}}
@@ -61,8 +62,8 @@
   {{#template id="lista"}}
     <div>
       {{_name}}
-      </br><span style="font-size:12px;">{{base.correo}}</span>
-      <span style="font-size:12px;float:right;">{{base._nivelAcceso}}</span>
+      </br><span style="font-size:12px;">{{base._nivelAcceso}}</span>
+      <span style="font-size:12px;float:right;">{{base.correo}}</span>
     </div>    
   {{/template}}
 {{/markup}}

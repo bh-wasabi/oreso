@@ -38,7 +38,7 @@
 	{{action id="ver2" condition="=false" visibleMode="close"}}
 	{{action id="copiar" type="copy" label="Copiar" condition="=false"}}
 	{{action id="copiar2" type="copy" label="Copiar" condition="=false"}}
-	{{action id="preliminar" type="report-pdf" label="PDF" report="preliminar" fileName="=_name" visibleMode="close" color="grey"}}
+	{{action id="preliminar" type="report-pdf" label="PDF" report="preliminar" title="=_name" fileName="=_name" visibleMode="close" color="grey"}}
 	{{action id="cancelar" type="cancel-edit" color="grey"}}
 	{{action id="sugerir1" condition="=false" visibleMode="close"}}
 	{{action id="adjuntar" type="attach" label="Adjuntar..." color="grey"}}
@@ -108,6 +108,10 @@
 			{{#editor type="select" source="sucursal" view="lista" width="100%"}}
 			{{/editor}}
 		{{/field}}
+		{{#field id="clave" label="Clave" type="text" readOnly="true" recordHide="true" if="esEspacio" column="A" detach="Recurso" modalHide="true" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
 		{{#field id="espacio" label="Espacio" type="reference" if="esEspacio" column="A" references="espacio" detach="Recurso" labelModalClass="full-width"}}
 			{{#editor type="lookup" source="espacio" view="lista" searchEnabled="true" width="100%"}}
 			{{/editor}}
@@ -170,10 +174,10 @@
 					{{row image="logo" alignment="left" imageWidth="75" margin="0,-15,0,0"}}
 				{{/column}}
 				{{#column margin="0,-10,0,0"}}
-					{{row text="Xtra Cinemas" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Reforma 215" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Lomas de Chapultepec 11000 CDMX" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Teléfono 55 5284 8500" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Leibnitz 83-1" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Anzures 11590 CDMX" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
 				{{/column}}
 				{{#column}}
 					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
@@ -204,7 +208,7 @@
 	{{/report}}
 	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true" pageMargins="30,130,30,40"}}
 		{{#stack}}
-			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
+			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
 		{{/stack}}
 		{{#stack}}
 			{{#record title="Planeación Agenda" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
@@ -228,6 +232,7 @@
 				{{row field="equipoMedico" condition="esEquipoMedico" align="left"}}
 				{{row field="tipoEquipoMedico" condition="esEquipoMedico" align="left"}}
 				{{row field="sucursal" condition="esEspacio" align="left"}}
+				{{row field="clave" condition="esEspacio" align="left"}}
 				{{row field="espacio" condition="esEspacio" align="left"}}
 				{{row field="tipoEspacio" condition="esEspacio" align="left"}}
 				{{row field="peliculaLenguaje" condition="esEspacio" align="left"}}
@@ -325,6 +330,7 @@
 				{{field equipoMedico}}
 				{{field tipoEquipoMedico}}
 				{{field sucursal}}
+				{{field clave hide="true"}}
 				{{field espacio}}
 				{{field tipoEspacio}}
 			{{/fieldSet}}

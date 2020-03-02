@@ -1,0 +1,82 @@
+{{#define id="notaCierreDia"}}
+  {{param attribute1="=_created.service"}}
+  {{param attribute2="=_created.subType"}}
+  {{param removeIfEmptySection="ventas"}}
+  {{param removeIfEmptyField="cantidad"}}
+  {{param startOnOpen="ventas"}}
+
+  {{#section id="base"}}
+    {{#field id="diasCredito"}}
+      {{#onChange}}
+        {{set vencimiento="=moment().add(diasCredito,'d').format('YYYY-MM-DD')"}}
+      {{/onChange}}
+    {{/field}}
+  {{/section}}
+
+  {{#section id="ventas"}}
+    {{#field id="aliasArticulo"}}
+      {{#onChange}}
+        {{set articulo="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).articulo"}}
+        {{set codigo="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).codigo"}}
+        {{set descripcion="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).descripcion"}}
+      {{/onChange}}
+    {{/field}}
+    {{field id="importe" type="calc" value="=valorUnitario*cantidad"}}
+    {{field id="iva" type="calc" value="=importe*(tasaIva/100)"}}
+    {{field id="total" type="calc" value="=importe+iva"}}
+  {{/section}}
+  
+  {{#grid id="ingresos" section="ingresos" keyField="importe" allowInsert="true" allowRemove="true"}}
+    {{column field="importe" label="Importe" width="200" type="numeric" format="#,.##" required="true"}}
+    {{column field="formaPago" label="Forma Pago" width="250"}}
+    {{column field="agente" label="Agente" width="250"}}
+    {{column field="caja" label="Caja" width="50"}}
+  {{/grid}}
+
+  {{#grid id="ventas" section="ventas" keyField="cantidad" allowInsert="true" allowRemove="true"}}
+    {{column field="codigo" label="Código" width="150"}}
+    {{column field="descripcion" label="Descripción" width="330"}}
+    {{column field="uen" label="UEN" width="200"}}
+    {{column field="categoria" label="Categoría" width="200"}}
+    {{column field="grupo" label="Grupo" width="200"}}
+    {{column field="familia" label="Familia" width="200"}}
+    {{column field="agente" label="Agente" width="200"}}
+    {{column field="caja" label="Caja" width="50"}}
+    {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
+    {{column field="valorUnitario" label="Precio Unitario" width="110" type="numeric" format="#,.##" required="true"}}
+    {{column field="tasaIva" label="% IVA" width="50" type="numeric" format="#.##" defaultValue="16"}}
+  {{/grid}}
+  {{#grid id="materiales" section="materiales" keyField="cantidad" allowInsert="true" allowRemove="true"}}
+    {{column field="codigo" label="Código" width="150"}}
+    {{column field="descripcion" label="Descripción" width="330"}}
+    {{column field="categoria" label="Categoría" width="200"}}
+    {{column field="unidad" label="Unidad" width="100"}}
+    {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
+  {{/grid}}
+  {{#cube id="ingresos" section="ingresos" name="=_name||'Ingresos'" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
+    {{column field="agente" label="Agente"}}
+    {{row field="metodo" label="Método Pago" width="200"}}
+    {{sum field="importe" label="Importe" format="currency"}}
+  {{/cube}}
+
+  {{#cube id="ventas" section="ventas" name="=_name||'Ventas'" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
+    {{column field="grupo" label="Grupo"}}
+    {{column field="familia" label="Familia"}}
+    {{column field="categoria" label="Categoria"}}
+    {{row field="codigo" label="Código" width="200"}}
+    {{row field="descripcion" label="Descripción" width="300"}}
+    {{sum field="cantidad" label="Cantidad" format="#,"}}
+    {{sum field="importe" label="Importe" format="currency"}}
+  {{/cube}}
+
+  {{#cube id="materiales" section="materiales" name="=_name||'Materiales'" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
+    {{column field="categoria" label="Categoria"}}
+    {{row field="codigo" label="Código" width="200"}}
+    {{row field="descripcion" label="Descripción" width="300"}}
+    {{sum field="cantidad" label="Cantidad" format="#,.##"}}
+  {{/cube}}
+
+  {{action id="tool" condition="true" label="Analizar Ingreso" type="viewCube" visibleMode="close" color="cyan" cube="ingresos" items="=ingresos"}}
+  {{action id="tool2" condition="true" label="Analizar Venta" type="viewCube" visibleMode="close" color="cyan" cube="ventas" items="=ventas"}}
+  {{action id="tool3" condition="true" label="Analizar Materiales" type="viewCube" visibleMode="close" color="cyan" cube="materiales" items="=materiales"}}
+{{/define}}

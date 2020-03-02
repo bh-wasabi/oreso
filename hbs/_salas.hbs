@@ -15,7 +15,9 @@
   {{#page}}
     {{#row}}
       {{#col medium="100%"}}
-        {{widget type="scheduler" scheduler="agendas"}}
+        {{#widget type="scheduler" scheduler="agendas"}}
+          {{param sucursal="=_params.sucursal"}}
+        {{/widget}}
       {{/col}}
     {{/row}}
   {{/page}}

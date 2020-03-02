@@ -1,0 +1,20 @@
+{{#define id="dispositivo"}}
+  {{#view id="lista" name="Lista"}}
+    {{#find}}
+      {{include field="_name"}}
+      {{include field="base.caja"}}
+      {{include field="base.area"}}
+      {{search field="_name"}}
+      {{filter condition="=sucursal" field="base.sucursal" in="=sucursal"}}
+      {{sort field="base.area" direction="desc"}}
+      {{sort field="base.caja" direction="asc"}}
+    {{/find}}
+  {{/view}}
+{{/define}}
+{{#markup}}
+  {{#template id="lista"}}
+    {{_name}}<br>
+    <span style="font-size:12px;">{{base._area}}</span>
+    <span style="font-size:12px;float:right;">{{base.caja}}</span>
+  {{/template}}
+{{/markup}}

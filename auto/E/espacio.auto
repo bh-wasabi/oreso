@@ -33,7 +33,7 @@
 	{{action id="ver2" condition="=false" visibleMode="close"}}
 	{{action id="copiar" type="copy" label="Copiar" condition="=false"}}
 	{{action id="copiar2" type="copy" label="Copiar" condition="=false"}}
-	{{action id="preliminar" type="report-pdf" label="PDF" report="preliminar" fileName="=_name" visibleMode="close" color="grey"}}
+	{{action id="preliminar" type="report-pdf" label="PDF" report="preliminar" title="=_name" fileName="=_name" visibleMode="close" color="grey"}}
 	{{action id="cancelar" type="cancel-edit" color="grey"}}
 	{{action id="sugerir1" condition="=false" visibleMode="close"}}
 	{{action id="adjuntar" type="attach" label="Adjuntar..." color="grey"}}
@@ -51,7 +51,7 @@
 			{{#editor case="capitalize" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="codigo" label="Código" type="text" column="A" labelModalClass="full-width"}}
+		{{#field id="clave" label="Clave" type="text" column="A" labelModalClass="full-width"}}
 			{{#editor case="upper" width="100%"}}
 			{{/editor}}
 		{{/field}}
@@ -99,10 +99,10 @@
 					{{row image="logo" alignment="left" imageWidth="75" margin="0,-15,0,0"}}
 				{{/column}}
 				{{#column margin="0,-10,0,0"}}
-					{{row text="Xtra Cinemas" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Reforma 215" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Lomas de Chapultepec 11000 CDMX" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Teléfono 55 5284 8500" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Leibnitz 83-1" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Anzures 11590 CDMX" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
 				{{/column}}
 				{{#column}}
 					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
@@ -113,12 +113,12 @@
 	{{/report}}
 	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true"}}
 		{{#stack}}
-			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
+			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
 		{{/stack}}
 		{{#stack}}
 			{{#record title="Espacio" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="nombre" align="left"}}
-				{{row field="codigo" align="left"}}
+				{{row field="clave" align="left"}}
 				{{row field="sucursal" align="left"}}
 				{{row field="estatus" align="left"}}
 				{{row field="descripcion" align="left"}}
@@ -154,7 +154,7 @@
 							Espacio
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="nombre, codigo, sucursal, estatus, descripcion, tipoEspacio, area, capacidad, horaInicioDia, horaFinDia" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="nombre, clave, sucursal, estatus, descripcion, tipoEspacio, area, capacidad, horaInicioDia, horaFinDia" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -166,7 +166,7 @@
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
 				{{field nombre}}
-				{{field codigo}}
+				{{field clave}}
 				{{field sucursal}}
 				{{field estatus}}
 				{{field descripcion}}
@@ -185,7 +185,7 @@
 	{{/template}}
 	{{#template2 id="espacio"}}
 		<br>Nombre: {{nombre}}
-		<br>Código: {{codigo}}
+		<br>Clave: {{clave}}
 		<br>Complejo: {{_sucursal}}
 		<br>Estatus: {{_estatus}}
 		<br>Descripción: {{descripcion}}
@@ -197,7 +197,7 @@
 	{{/template2}}
 	{{#template3 id="espacio"}}
 		{{#if nombre}}<br>Nombre: {{nombre}}{{/if}}
-		{{#if codigo}}<br>Código: {{codigo}}{{/if}}
+		{{#if clave}}<br>Clave: {{clave}}{{/if}}
 		{{#if sucursal}}<br>Complejo: {{_sucursal}}{{/if}}
 		{{#if estatus}}<br>Estatus: {{_estatus}}{{/if}}
 		{{#if descripcion}}<br>Descripción: {{descripcion}}{{/if}}

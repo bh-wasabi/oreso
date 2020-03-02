@@ -50,7 +50,7 @@
 	{{action id="ver2" condition="=false" visibleMode="close"}}
 	{{action id="copiar" type="copy" label="Copiar" condition="=false"}}
 	{{action id="copiar2" type="copy" label="Copiar" condition="=false"}}
-	{{action id="preliminar" type="report-pdf" label="PDF" report="preliminar" fileName="=_name" visibleMode="close" color="grey"}}
+	{{action id="preliminar" type="report-pdf" label="PDF" report="preliminar" title="=_name" fileName="=_name" visibleMode="close" color="grey"}}
 	{{action id="cancelar" type="cancel-edit" color="grey"}}
 	{{action id="sugerir1" condition="=false" visibleMode="close"}}
 	{{action id="adjuntar" type="attach" label="Adjuntar..." color="grey"}}
@@ -88,7 +88,7 @@
 			{{#editor type="date" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="estatus" label="Estatus" type="text" readOnly="true" column="A" references="estatusNota" labelModalClass="full-width" defaultValue="'borrador'"}}
+		{{#field id="estatus" label="Estatus" type="text" readOnly="true" column="A" references="estatusNota" modalHide="true" labelModalClass="full-width" defaultValue="'borrador'"}}
 			{{#editor type="select" preset="cfg.estatusNota" width="100%"}}
 			{{/editor}}
 		{{/field}}
@@ -100,7 +100,7 @@
 	{{/section}}
 	{{#section id="aplicacion" type="array"}}
 		{{field id="lote" label="Lote" type="text" column="A"}}
-		{{#field id="vencimiento" label="Vencimiento" type="text" column="A"}}
+		{{#field id="vencimiento" label="Fecha" type="text" column="A"}}
 			{{#editor case="YYYY-MM-DD"}}
 			{{/editor}}
 		{{/field}}
@@ -128,6 +128,24 @@
 		{{field id="destino" label="Destino ID" type="text" readOnly="true" hide="true" column="A"}}
 		{{field id="_destino" label="Ubicación Destino" type="text" readOnly="true" column="A"}}
 	{{/section}}
+	{{#section id="adjuntos" type="array"}}
+		{{field id="id" label="ID" type="text" hide="true" column="A"}}
+		{{field id="url" label="URL" type="text" hide="true" column="A"}}
+		{{field id="nombre" label="Nombre" type="text" column="A" defaultValue="'url'"}}
+		{{#field id="tipo" label="Tipo" type="text" column="A" references="tipoAdjunto"}}
+			{{#editor type="select" preset="cfg.tipoAdjunto"}}
+			{{/editor}}
+		{{/field}}
+		{{field id="tamano" label="Tamaño (KB)" type="number" format="#" column="A"}}
+		{{#field id="fecha" label="Fecha" type="date" format="DD/MMM/YYYY" column="A" saveFormat="YYYY-MM-DD"}}
+			{{#editor type="date"}}
+			{{/editor}}
+		{{/field}}
+		{{field id="ext" label="Extensión" type="text" column="A"}}
+		{{field id="tipoMIME" label="Tipo MIME" type="text" hide="true" column="A"}}
+		{{field id="subTipoMIME" label="Sub Tipo MIME" type="text" hide="true" column="A"}}
+		{{field id="orden" label="Orden" type="number" hide="true" column="A"}}
+	{{/section}}
 	{{section id="resumen" temp="true"}}
 	{{#report id="preliminar-encabezado"}}
 		{{#stack}}
@@ -136,10 +154,10 @@
 					{{row image="logo" alignment="left" imageWidth="75" margin="0,-15,0,0"}}
 				{{/column}}
 				{{#column margin="0,-10,0,0"}}
-					{{row text="Xtra Cinemas" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Reforma 215" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Lomas de Chapultepec 11000 CDMX" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Teléfono 55 5284 8500" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Leibnitz 83-1" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Anzures 11590 CDMX" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
 				{{/column}}
 				{{#column}}
 					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
@@ -150,7 +168,7 @@
 	{{/report}}
 	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true"}}
 		{{#stack}}
-			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
+			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
 		{{/stack}}
 		{{#stack}}
 			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
@@ -178,8 +196,20 @@
 			{{/table}}
 		{{/stack}}
 		{{#stack}}
+			{{#row text="Adjuntos" fontSize="10" bold="true" margin="-10,0,0,0"}}
+			{{/row}}
+			{{#table title="Adjuntos" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="adjuntos" headerStyle="field" margin="-10,0,0,10" removeEmptyCols="true"}}
+				{{column field="nombre"}}
+				{{column field="tipo"}}
+				{{column field="tamano"}}
+				{{column field="fecha"}}
+				{{column field="ext"}}
+			{{/table}}
+		{{/stack}}
+		{{#stack}}
 			{{#record title="Firmas" titleStyle="title" layout="lightHorizontalLines" fontSize="8" section="_stamp" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row expr="=_created._user" label="Elabora"}}
+				{{row expr="=_created._turn" label="Turno Elabora"}}
 				{{row expr="=_created._identification" label="Especialidad Elabora"}}
 				{{row expr="=''" label="Firma Elabora"}}
 				{{row condition="=!base.esEstudiante" expr="=_created._responsable" label="Responsable"}}
@@ -287,7 +317,24 @@
 			{{/zone}}
 		{{/row}}
 		{{#row}}
-			{{#zone id="aplicacion" modalGrid="aplicacion"}}
+			{{#if context="adjuntos"}}
+				{{#zone id="adjuntos" modalGrid="adjuntos"}}
+					{{#row class="auto-form-row"}}
+						{{#col medium="100%" class="auto-form-col"}}
+							{{#h5 class="auto-form-h5"}}
+								Adjuntos
+							{{/h5}}
+							{{#div}}
+								{{table adjuntos class="auto-form-table" cols="nombre, tipo, tamano, fecha, ext" medium="50,20,10,10,10" removeEmptyCols="false" unlink="true"}}
+								{{br}}
+							{{/div}}
+						{{/col}}
+					{{/row}}
+				{{/zone}}
+			{{/if}}
+		{{/row}}
+		{{#row}}
+			{{#zone id="adjuntos" modalGrid="adjuntos"}}
 			{{/zone}}
 		{{/row}}
 	{{/page}}
@@ -296,12 +343,13 @@
 			{{#fieldSet}}
 				{{field responsableAcademico}}
 				{{field fechaEmision}}
-				{{field estatus}}
+				{{field estatus hide="true"}}
 				{{field comentarios}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
 	{{modal aplicacion id="aplicacion" name="Aplicación" grid="aplicacion" size="xwide" prev="base"}}
+	{{modal adjuntos id="adjuntos" name="Adjuntos" grid="adjuntos" size="wide"}}
 	{{#template id="lista"}}
 		<div>{{_name}}</div>
 	{{/template}}

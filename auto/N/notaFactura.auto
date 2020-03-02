@@ -37,6 +37,7 @@
 	{{param autoStamp="true"}}
 	{{param allowDraft="true"}}
 	{{param isAction="true"}}
+	{{param autoExportItems="articulos"}}
 	{{action id="fix-user" type="add-subdoc" transform="copiarNota" source="notaAjusteUsuario" label="Ajustar Usuario" btnFlat="true" color="grey" superUser="true" visibleMode="close" onlyPost="true"}}
 	{{action id="subdoc" condition="=false"}}
 	{{action id="subdoc2" condition="=false"}}
@@ -49,7 +50,7 @@
 	{{action id="ver2" condition="=false" visibleMode="close"}}
 	{{action id="copiar" type="copy" label="Copiar" condition="=false"}}
 	{{action id="copiar2" type="copy" label="Copiar" condition="=false"}}
-	{{action id="preliminar" type="report-pdf" label="PDF" report="preliminar" fileName="=_name" visibleMode="close" color="grey"}}
+	{{action id="preliminar" type="report-pdf" label="PDF" report="preliminar" title="=_name" fileName="=_name" visibleMode="close" color="grey"}}
 	{{action id="cancelar" type="cancel-edit" color="grey"}}
 	{{action id="sugerir1" condition="=false" visibleMode="close"}}
 	{{action id="adjuntar" type="attach" label="Adjuntar..." color="grey"}}
@@ -139,7 +140,14 @@
 			{{#editor case="upper"}}
 			{{/editor}}
 		{{/field}}
+		{{#field id="codigoUpc" label="UPC" type="text" readOnly="true" column="A"}}
+			{{#editor case="upper"}}
+			{{/editor}}
+		{{/field}}
 		{{field id="descripcion" label="Descripción" type="text" readOnly="true" column="A"}}
+		{{field id="categoria" label="Categoría" type="text" readOnly="true" column="A"}}
+		{{field id="grupo" label="Grupo" type="text" readOnly="true" column="A"}}
+		{{field id="familia" label="Familia" type="text" readOnly="true" column="A"}}
 		{{#field id="aliasOrigen" label="Origen" type="text" column="A"}}
 			{{#editor case="upper"}}
 			{{/editor}}
@@ -152,6 +160,9 @@
 		{{/field}}
 		{{field id="destino" label="Destino ID" type="text" readOnly="true" hide="true" column="A"}}
 		{{field id="_destino" label="Ubicación Destino" type="text" readOnly="true" column="A"}}
+		{{field id="uen" label="UEN" type="text" readOnly="true" column="A"}}
+		{{field id="agente" label="Agente" type="text" readOnly="true" column="A"}}
+		{{field id="caja" label="Caja" type="text" column="A"}}
 		{{field id="cantidad" label="Cantidad" type="number" format="#,.##" column="A"}}
 		{{field id="costoUnitario" label="Costo Unitario" type="number" format="currency" column="A"}}
 		{{field id="valorUnitario" label="Valor Unitario" type="number" format="currency" column="A"}}
@@ -161,22 +172,19 @@
 		{{field id="importe" label="Importe" type="calc" format="currency" column="A"}}
 		{{field id="iva" label="IVA" type="calc" format="currency" column="A"}}
 		{{field id="total" label="Total" type="calc" format="currency" column="A"}}
-		{{#field id="referencia" label="Referencia" type="text" column="A"}}
+		{{#field id="referencia" label="Orden Compra" type="text" column="A"}}
 			{{#editor case="upper"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="referencia2" label="Referencia 2" type="text" column="A"}}
+		{{#field id="referencia2" label="SKU" type="text" column="A"}}
 			{{#editor case="upper"}}
 			{{/editor}}
 		{{/field}}
-		{{field id="contenedor" label="Contenedor" type="number" format="upper" column="A"}}
-		{{field id="cajaInicial" label="Caja Inicial" type="number" column="A"}}
-		{{field id="cajaFinal" label="Caja Final" type="number" column="A"}}
 		{{#field id="lote" label="Lote" type="text" column="A"}}
 			{{#editor case="upper"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="vencimiento" label="Vencimiento" type="text" column="A"}}
+		{{#field id="vencimiento" label="Fecha" type="text" column="A"}}
 			{{#editor case="YYYY-MM-DD"}}
 			{{/editor}}
 		{{/field}}
@@ -190,7 +198,8 @@
 		{{field id="entrada" label="Entrada" type="number" format="#," column="A"}}
 		{{field id="costoUnitario" label="Costo Unitario" type="number" format="currency" column="A"}}
 		{{field id="lote" label="Lote" type="text" column="A"}}
-		{{#field id="vencimiento" label="Vencimiento" type="date" format="DD/MMM/YYYY" column="A" saveFormat="YYYY-MM-DD"}}
+		{{field id="loteReferencia" label="Tecsmart" type="text" column="A"}}
+		{{#field id="vencimiento" label="Fecha" type="date" format="DD/MMM/YYYY" column="A" saveFormat="YYYY-MM-DD"}}
 			{{#editor type="date"}}
 			{{/editor}}
 		{{/field}}
@@ -201,6 +210,24 @@
 		{{field id="_cuenta" label="Ubicación" type="text" column="A"}}
 		{{field id="faltante" label="Faltante" type="number" format="#," column="A"}}
 	{{/section}}
+	{{#section id="adjuntos" type="array"}}
+		{{field id="id" label="ID" type="text" hide="true" column="A"}}
+		{{field id="url" label="URL" type="text" hide="true" column="A"}}
+		{{field id="nombre" label="Nombre" type="text" column="A" defaultValue="'url'"}}
+		{{#field id="tipo" label="Tipo" type="text" column="A" references="tipoAdjunto"}}
+			{{#editor type="select" preset="cfg.tipoAdjunto"}}
+			{{/editor}}
+		{{/field}}
+		{{field id="tamano" label="Tamaño (KB)" type="number" format="#" column="A"}}
+		{{#field id="fecha" label="Fecha" type="date" format="DD/MMM/YYYY" column="A" saveFormat="YYYY-MM-DD"}}
+			{{#editor type="date"}}
+			{{/editor}}
+		{{/field}}
+		{{field id="ext" label="Extensión" type="text" column="A"}}
+		{{field id="tipoMIME" label="Tipo MIME" type="text" hide="true" column="A"}}
+		{{field id="subTipoMIME" label="Sub Tipo MIME" type="text" hide="true" column="A"}}
+		{{field id="orden" label="Orden" type="number" hide="true" column="A"}}
+	{{/section}}
 	{{section id="resumen" temp="true"}}
 	{{#report id="preliminar-encabezado"}}
 		{{#stack}}
@@ -209,10 +236,10 @@
 					{{row image="logo" alignment="left" imageWidth="75" margin="0,-15,0,0"}}
 				{{/column}}
 				{{#column margin="0,-10,0,0"}}
-					{{row text="Xtra Cinemas" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Reforma 215" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Lomas de Chapultepec 11000 CDMX" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Teléfono 55 5284 8500" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Leibnitz 83-1" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Anzures 11590 CDMX" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
 				{{/column}}
 				{{#column}}
 					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
@@ -221,9 +248,9 @@
 			{{/columns}}
 		{{/stack}}
 	{{/report}}
-	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true"}}
+	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true" exportItems="articulos"}}
 		{{#stack}}
-			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
+			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
 		{{/stack}}
 		{{#stack}}
 			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
@@ -247,11 +274,18 @@
 			{{#table title="Artículos" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="articulos" headerStyle="field" margin="-10,0,0,10" removeEmptyCols="true"}}
 				{{column field="aliasArticulo"}}
 				{{column field="codigo"}}
+				{{column field="codigoUpc"}}
 				{{column field="descripcion"}}
+				{{column field="categoria"}}
+				{{column field="grupo"}}
+				{{column field="familia"}}
 				{{column field="aliasOrigen"}}
 				{{column field="_origen"}}
 				{{column field="aliasDestino"}}
 				{{column field="_destino"}}
+				{{column field="uen"}}
+				{{column field="agente"}}
+				{{column field="caja"}}
 				{{column field="cantidad"}}
 				{{column field="costoUnitario"}}
 				{{column field="valorUnitario"}}
@@ -263,9 +297,6 @@
 				{{column field="total"}}
 				{{column field="referencia"}}
 				{{column field="referencia2"}}
-				{{column field="contenedor"}}
-				{{column field="cajaInicial"}}
-				{{column field="cajaFinal"}}
 				{{column field="lote"}}
 				{{column field="vencimiento"}}
 				{{column field="comentarios"}}
@@ -282,6 +313,7 @@
 				{{column field="entrada"}}
 				{{column field="costoUnitario"}}
 				{{column field="lote"}}
+				{{column field="loteReferencia"}}
 				{{column field="vencimiento"}}
 			{{/table}}
 		{{/stack}}
@@ -296,8 +328,20 @@
 			{{/table}}
 		{{/stack}}
 		{{#stack}}
+			{{#row text="Adjuntos" fontSize="10" bold="true" margin="-10,0,0,0"}}
+			{{/row}}
+			{{#table title="Adjuntos" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="adjuntos" headerStyle="field" margin="-10,0,0,10" removeEmptyCols="true"}}
+				{{column field="nombre"}}
+				{{column field="tipo"}}
+				{{column field="tamano"}}
+				{{column field="fecha"}}
+				{{column field="ext"}}
+			{{/table}}
+		{{/stack}}
+		{{#stack}}
 			{{#record title="Firmas" titleStyle="title" layout="lightHorizontalLines" fontSize="8" section="_stamp" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row expr="=_created._user" label="Elabora"}}
+				{{row expr="=_created._turn" label="Turno Elabora"}}
 				{{row expr="=_created._identification" label="Especialidad Elabora"}}
 				{{row expr="=''" label="Firma Elabora"}}
 				{{row condition="=!base.esEstudiante" expr="=_created._responsable" label="Responsable"}}
@@ -397,7 +441,7 @@
 							Artículos
 						{{/h5}}
 						{{#div}}
-							{{table articulos class="auto-form-table" cols="aliasArticulo, codigo, descripcion, aliasOrigen, _origen, aliasDestino, _destino, cantidad, costoUnitario, valorUnitario, tasaIva, descuentoLinea, descuentos, importe, iva, total, referencia, referencia2, contenedor, cajaInicial, cajaFinal, lote, vencimiento, comentarios" removeEmptyCols="true" unlink="true"}}
+							{{table articulos class="auto-form-table" cols="aliasArticulo, codigo, codigoUpc, descripcion, categoria, grupo, familia, aliasOrigen, _origen, aliasDestino, _destino, uen, agente, caja, cantidad, costoUnitario, valorUnitario, tasaIva, descuentoLinea, descuentos, importe, iva, total, referencia, referencia2, lote, vencimiento, comentarios" removeEmptyCols="true" unlink="true"}}
 							{{br}}
 						{{/div}}
 					{{/col}}
@@ -413,7 +457,7 @@
 								Movimiento del Inventario
 							{{/h5}}
 							{{#div}}
-								{{table inv class="auto-form-table" cols="codigo, descripcion, _cuenta, salida, entrada, costoUnitario, lote, vencimiento" removeEmptyCols="false" unlink="true"}}
+								{{table inv class="auto-form-table" cols="codigo, descripcion, _cuenta, salida, entrada, costoUnitario, lote, loteReferencia, vencimiento" removeEmptyCols="false" unlink="true"}}
 								{{br}}
 							{{/div}}
 						{{/col}}
@@ -439,7 +483,24 @@
 			{{/zone}}
 		{{/row}}
 		{{#row}}
-			{{#zone id="faltantes" modal="faltantes"}}
+			{{#if context="adjuntos"}}
+				{{#zone id="adjuntos" modalGrid="adjuntos"}}
+					{{#row class="auto-form-row"}}
+						{{#col medium="100%" class="auto-form-col"}}
+							{{#h5 class="auto-form-h5"}}
+								Adjuntos
+							{{/h5}}
+							{{#div}}
+								{{table adjuntos class="auto-form-table" cols="nombre, tipo, tamano, fecha, ext" medium="50,20,10,10,10" removeEmptyCols="false" unlink="true"}}
+								{{br}}
+							{{/div}}
+						{{/col}}
+					{{/row}}
+				{{/zone}}
+			{{/if}}
+		{{/row}}
+		{{#row}}
+			{{#zone id="adjuntos" modalGrid="adjuntos"}}
 			{{/zone}}
 		{{/row}}
 	{{/page}}
@@ -476,6 +537,7 @@
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
+	{{modal adjuntos id="adjuntos" name="Adjuntos" grid="adjuntos" size="wide"}}
 	{{#template id="lista"}}
 		<div>{{_name}}</div>
 	{{/template}}

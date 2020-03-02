@@ -12,6 +12,10 @@
       {{search field="base.fechaEmision"}}
     {{/find}}
   {{/view}}
+  {{#section id="articulos"}}
+    {{field id="nombre" type="expr" value="=@descripcion"}}
+    {{field id="descripcion2" type="expr" value="=calc.concat(@composicion,@modelo)"}}
+  {{/section}}  
   {{#grid id="articulos" section="articulos" allowInsert="true" allowRemove="true"}}
     {{column field="codigo" label="Código" width="150"}}
     {{column field="descripcion" label="Descripción" width="200"}}
@@ -28,7 +32,7 @@
     {{column field="cliente" label="Cliente" width="100"}}
     {{column field="codigoUpc" label="Código UPC" width="100"}}
     {{column field="codigoSku" label="Código SKU" width="100"}}
-    {{column field="codigoLocal" label="Código Local" width="100"}}
+    {{!-- {{column field="codigoLocal" label="Código Local" width="100"}} --}}
     {{column field="comentarios" label="Comentarios" width="100"}}
   {{/grid}}
 {{/define}}

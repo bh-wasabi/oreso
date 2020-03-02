@@ -126,6 +126,10 @@
   {{#action id="pedido" source="notaPedido" label="Pedido" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
     {{param aliasOrigen="='AG'"}}
   {{/action}}
+  {{#action id="devolucionPedido" source="notaDevolucionPedido" label="Devolución Pedido" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true" fromSource="mov" fromView="sugerirDevolucionPedido" toSection="articulos"}}
+    {{param persona="_id"}}
+    {{param aliasDestino="='AG'"}}
+  {{/action}}
   {{#action id="factura" source="notaFactura" label="Factura" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true" fromSource="mov" fromView="sugerirFactura" toSection="articulos"}}
     {{param persona="_id"}}
     {{param aliasOrigen="='AG'"}}
@@ -146,6 +150,8 @@
   {{#action id="aportacionCapital" source="notaAportacionCapital" label="Aportación Capital" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
   {{/action}}
   {{#action id="retiroCapital" source="notaRetiroCapital" label="Retiro Capital" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+  {{/action}}
+  {{#action id="cierreDia" source="notaCierreDia" label="Cierre Día" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
   {{/action}}
 {{/define}}
 {{#markup}}

@@ -36,7 +36,7 @@
 	{{action id="ver2" condition="=false" visibleMode="close"}}
 	{{action id="copiar" type="copy" label="Copiar" condition="=false"}}
 	{{action id="copiar2" type="copy" label="Copiar" condition="=false"}}
-	{{action id="preliminar" type="report-pdf" label="PDF" report="preliminar" fileName="=_name" visibleMode="close" color="grey"}}
+	{{action id="preliminar" type="report-pdf" label="PDF" report="preliminar" title="=_name" fileName="=_name" visibleMode="close" color="grey"}}
 	{{action id="cancelar" type="cancel-edit" color="grey"}}
 	{{action id="sugerir1" condition="=false" visibleMode="close"}}
 	{{action id="adjuntar" type="attach" label="Adjuntar..." color="grey"}}
@@ -82,12 +82,12 @@
 			{{#editor type="tags" preset="cfg.userRole" searchEnabled="false" searchTimeout="100" showSelectionControls="true" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="estatus" label="Estatus" type="text" column="A" references="estatusUsuario" modalColumn="A" labelModalClass="full-width" defaultValue="'activo'"}}
-			{{#editor type="select" preset="cfg.estatusUsuario" width="100%"}}
+		{{#field id="sucursal" label="Complejo" type="text" column="A" references="sucursal" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.sucursal" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="sucursal" label="Sucursal" type="reference" column="A" references="sucursal" modalColumn="A" labelModalClass="full-width"}}
-			{{#editor type="select" source="sucursal" view="lista" width="100%"}}
+		{{#field id="estatus" label="Estatus" type="text" column="A" references="estatusUsuario" modalColumn="A" labelModalClass="full-width" defaultValue="'activo'"}}
+			{{#editor type="select" preset="cfg.estatusUsuario" width="100%"}}
 			{{/editor}}
 		{{/field}}
 	{{/section}}
@@ -151,10 +151,10 @@
 					{{row image="logo" alignment="left" imageWidth="75" margin="0,-15,0,0"}}
 				{{/column}}
 				{{#column margin="0,-10,0,0"}}
-					{{row text="Xtra Cinemas" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Reforma 215" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Lomas de Chapultepec 11000 CDMX" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Teléfono 55 5284 8500" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Leibnitz 83-1" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Anzures 11590 CDMX" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
 				{{/column}}
 				{{#column}}
 					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
@@ -165,15 +165,15 @@
 	{{/report}}
 	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true"}}
 		{{#stack}}
-			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
+			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
 		{{/stack}}
 		{{#stack}}
 			{{#record title="Datos Usuario" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="nombre" align="left"}}
 				{{row field="correo" align="left"}}
 				{{row field="nivelAcceso" align="left"}}
-				{{row field="estatus" align="left"}}
 				{{row field="sucursal" align="left"}}
+				{{row field="estatus" align="left"}}
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
@@ -242,7 +242,7 @@
 							Datos Usuario
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="nombre, correo, nivelAcceso, estatus, sucursal" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="nombre, correo, nivelAcceso, sucursal, estatus" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -282,8 +282,8 @@
 				{{field contrasena}}
 				{{field hash hide="true"}}
 				{{field nivelAcceso}}
-				{{field estatus}}
 				{{field sucursal}}
+				{{field estatus}}
 			{{/fieldSet}}
 		{{/col}}
 		{{#col medium="50%" vertical="50%"}}
@@ -321,14 +321,14 @@
 		<br>Nombre: {{nombre}}
 		<br>Usuario / Correo: {{correo}}
 		<br>Nivel Acceso: {{_nivelAcceso}}
+		<br>Complejo: {{_sucursal}}
 		<br>Estatus: {{_estatus}}
-		<br>Sucursal: {{_sucursal}}
 	{{/template2}}
 	{{#template3 id="_user"}}
 		{{#if nombre}}<br>Nombre: {{nombre}}{{/if}}
 		{{#if correo}}<br>Usuario / Correo: {{correo}}{{/if}}
 		{{#if nivelAcceso}}<br>Nivel Acceso: {{_nivelAcceso}}{{/if}}
+		{{#if sucursal}}<br>Complejo: {{_sucursal}}{{/if}}
 		{{#if estatus}}<br>Estatus: {{_estatus}}{{/if}}
-		{{#if sucursal}}<br>Sucursal: {{_sucursal}}{{/if}}
 	{{/template3}}
 {{/markup}}

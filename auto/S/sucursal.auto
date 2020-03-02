@@ -36,7 +36,7 @@
 	{{action id="ver2" condition="=false" visibleMode="close"}}
 	{{action id="copiar" type="copy" label="Copiar" condition="=false"}}
 	{{action id="copiar2" type="copy" label="Copiar" condition="=false"}}
-	{{action id="preliminar" type="report-pdf" label="PDF" report="preliminar" fileName="=_name" visibleMode="close" color="grey"}}
+	{{action id="preliminar" type="report-pdf" label="PDF" report="preliminar" title="=_name" fileName="=_name" visibleMode="close" color="grey"}}
 	{{action id="cancelar" type="cancel-edit" color="grey"}}
 	{{action id="sugerir1" condition="=false" visibleMode="close"}}
 	{{action id="adjuntar" type="attach" label="Adjuntar..." color="grey"}}
@@ -55,8 +55,8 @@
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="codigo" label="Código" type="text" column="A" modalColumn="A" labelModalClass="full-width"}}
-			{{#editor case="upper" width="100%"}}
+		{{#field id="clave" label="Clave" type="text" column="A" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor case="lower" width="100%"}}
 			{{/editor}}
 		{{/field}}
 		{{#field id="numero" label="Número" type="number" column="A" modalColumn="A" labelModalClass="full-width"}}
@@ -69,10 +69,6 @@
 		{{/field}}
 		{{#field id="activoWeb" label="Activo App" type="text" column="A" references="siNo" modalColumn="A" labelModalClass="full-width" defaultValue="'no'"}}
 			{{#editor type="select" preset="siNo" width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="nivelInventario" label="Nivel Inventario" type="docs" column="A" references="sucursalNivelInventario" modalColumn="A" labelModalClass="full-width" source="sucursalNivelInventario"}}
-			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
 		{{#field id="encabezado1" label="Encabezado 1" type="text" column="A" modalColumn="B" detach="Dirección" labelModalClass="full-width"}}
@@ -115,10 +111,10 @@
 					{{row image="logo" alignment="left" imageWidth="75" margin="0,-15,0,0"}}
 				{{/column}}
 				{{#column margin="0,-10,0,0"}}
-					{{row text="Xtra Cinemas" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Reforma 215" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Lomas de Chapultepec 11000 CDMX" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Teléfono 55 5284 8500" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Leibnitz 83-1" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Anzures 11590 CDMX" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
 				{{/column}}
 				{{#column}}
 					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
@@ -129,16 +125,15 @@
 	{{/report}}
 	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true"}}
 		{{#stack}}
-			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
+			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
 		{{/stack}}
 		{{#stack}}
 			{{#record title="Complejo" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="nombre" align="left"}}
-				{{row field="codigo" align="left"}}
+				{{row field="clave" align="left"}}
 				{{row field="numero" align="left"}}
 				{{row field="precioLista" align="left"}}
 				{{row field="activoWeb" align="left"}}
-				{{row field="nivelInventario" align="left"}}
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
@@ -204,7 +199,7 @@
 							Complejo
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="nombre, codigo, numero, precioLista, activoWeb, nivelInventario" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="nombre, clave, numero, precioLista, activoWeb" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -227,11 +222,10 @@
 		{{#col medium="50%" vertical="50%"}}
 			{{#fieldSet}}
 				{{field nombre}}
-				{{field codigo}}
+				{{field clave}}
 				{{field numero}}
 				{{field precioLista}}
 				{{field activoWeb}}
-				{{field nivelInventario}}
 			{{/fieldSet}}
 		{{/col}}
 		{{#col medium="50%" vertical="50%"}}
@@ -252,11 +246,10 @@
 	{{/template}}
 	{{#template2 id="sucursal"}}
 		<br>Nombre: {{nombre}}
-		<br>Código: {{codigo}}
+		<br>Clave: {{clave}}
 		<br>Número: {{numero}}
 		<br>Precio Lista: {{_precioLista}}
 		<br>Activo App: {{_activoWeb}}
-		<br>Nivel Inventario: {{_nivelInventario}}
 		<br>Encabezado 1: {{encabezado1}}
 		<br>Encabezado 2: {{encabezado2}}
 		<br>Encabezado 3: {{encabezado3}}
@@ -268,11 +261,10 @@
 	{{/template2}}
 	{{#template3 id="sucursal"}}
 		{{#if nombre}}<br>Nombre: {{nombre}}{{/if}}
-		{{#if codigo}}<br>Código: {{codigo}}{{/if}}
+		{{#if clave}}<br>Clave: {{clave}}{{/if}}
 		{{#if numero}}<br>Número: {{numero}}{{/if}}
 		{{#if precioLista}}<br>Precio Lista: {{_precioLista}}{{/if}}
 		{{#if activoWeb}}<br>Activo App: {{_activoWeb}}{{/if}}
-		{{#if nivelInventario}}<br>Nivel Inventario: {{_nivelInventario}}{{/if}}
 		{{#if encabezado1}}<br>Encabezado 1: {{encabezado1}}{{/if}}
 		{{#if encabezado2}}<br>Encabezado 2: {{encabezado2}}{{/if}}
 		{{#if encabezado3}}<br>Encabezado 3: {{encabezado3}}{{/if}}

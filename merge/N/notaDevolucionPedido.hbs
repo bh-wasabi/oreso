@@ -1,10 +1,9 @@
-{{#define id="notaFactura"}}
+{{#define id="notaDevolucionPedido"}}
   {{param attribute1="=_created.service"}}
   {{param attribute2="=_created.subType"}}
   {{param removeIfEmptySection="articulos"}}
   {{param removeIfEmptyField="cantidad"}}
   {{param startOnOpen="articulos"}}
-  {{action id="tool2" condition="true" label="Descargar FEL..." type="save-as" visibleMode="close" color="blue" btnSolid="true" fileName="=(_name||'Factura')+'.fel'" items="=[fn('felTitulos', base), fn('fel', calc.mapReduce(calc.mergeArraysByKey(articulos, _items, 'codigo'),'referencia2,descripcion2,codigoUpc,modelo,color,tamano,valorUnitario,precioPublico,unidad','cantidad'))]" flatten="true" fromSource="articulo" fromView="todo"}}
 
   {{#section id="base"}}
     {{#field id="diasCredito"}}
@@ -23,17 +22,17 @@
         {{set valorUnitario="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).precio"}}
       {{/onChange}}
     {{/field}}
-    {{#field id="aliasOrigen"}}
-      {{#onChange}}
-        {{set origen="=calc.getPresetPersona('app.aliasUbicacion', aliasOrigen, _doc.persona.id).ubicacion"}}
-        {{set _origen="=calc.getPresetPersona('app.aliasUbicacion', aliasOrigen, _doc.persona.id)._ubicacion"}}
-      {{/onChange}}
-    {{/field}}
     {{field id="subTotal" type="calc" value="=valorUnitario*cantidad"}}
     {{field id="descuentos" type="calc" value="=subTotal*(descuentoLinea/100)"}}
     {{field id="importe" type="calc" value="=subTotal-descuentos"}}
     {{field id="iva" type="calc" value="=importe*(tasaIva/100)"}}
     {{field id="total" type="calc" value="=importe+iva"}}
+    {{#field id="aliasDestino"}}
+      {{#onChange}}
+        {{set destino="=calc.getPresetPersona('app.aliasUbicacion', aliasDestino, _doc.persona.id).ubicacion"}}
+        {{set _destino="=calc.getPresetPersona('app.aliasUbicacion', aliasDestino, _doc.persona.id)._ubicacion"}}
+      {{/onChange}}
+    {{/field}}
   {{/section}}
   
   
@@ -46,7 +45,9 @@
 [./if.]
     {{column field="codigo" label="Código" width="150" readOnly="true"}}
     {{column field="descripcion" label="Artículo" width="350" readOnly="true"}}
-    {{column field="_origen" label="Ubicación" width="250" readOnly="true"}}
+    {{column field="_origen" label="Origen" width="150" readOnly="true"}}
+    {{column field="aliasDestino" label="Destino" width="55" defaultValue="=_params.aliasDestino"}}
+    {{column field="_destino" label="Ubicación" width="150" required="true"}}
     {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
     {{column field="valorUnitario" label="Precio Unitario" width="110" type="numeric" format="#,.##" required="true"}}
     {{column field="descuentoLinea" label="% Desc" width="55" type="numeric" format="#.##"}}
@@ -62,21 +63,6 @@
     {{column field="orden" width="60"}}
   {{/grid}}  
 
-  {{#cube id="articulos" section="articulos" name="=_name" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
-    {{row field="codigo" label="Código" width="250"}}
-    {{row field="descripcion" label="Descripción" width="350"}}
-    {{row field="codigoUpc" label="Código UPC"}}
-[.#if esOreso.]
-    {{row field="referencia2" label="SKU"}}
-[./if.]
-    {{sum field="cantidad" label="Cantidad" format="#,"}}
-    {{sum field="subTotal" label="Sub total" format="currency"}}
-    {{sum field="descuentos" label="Descuentos" format="currency"}}
-    {{sum field="importe" label="Importe" format="currency"}}
-    {{sum field="iva" label="IVA" format="currency"}}
-    {{sum field="total" label="Total" format="currency"}}
-  {{/cube}}
-  {{action id="tool" condition="true" label="Analizar" type="viewCube" visibleMode="close" color="cyan" btnSolid="true" cube="articulos" items="=calc.mergeArraysByKey(articulos, _items, 'codigo')" fromSource="articulo" fromView="todo"}}
   {{#action id="preliminar" type="report-pdf" label="Preliminar" report="preliminar" title="=_name" fileName="=_name" visibleMode="close" color="grey"}}
     {{ask field="_export" type="select" label="Formato" keys="pdf,xlsx,csv" names="PDF,Excel,CSV" value="pdf"}}
   {{/action}}

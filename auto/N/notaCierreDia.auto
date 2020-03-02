@@ -1,4 +1,4 @@
-{{#define type="doc" id="notaEntradaDiversa"}}
+{{#define type="doc" id="notaCierreDia"}}
 	{{param defaultDisplay="_name"}}
 	{{param defaultView="lista"}}
 	{{param pageStart="1"}}
@@ -17,8 +17,8 @@
 	{{param startOnOpen="base"}}
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="_name"}}
-	{{param name="=fn('dynamicName', 'Entrada Diversa', @_created)"}}
-	{{param typeName="Entrada Diversa"}}
+	{{param name="=fn('dynamicName', 'Cierre del Día', @_created)"}}
+	{{param typeName="Cierre del Día"}}
 	{{param group="General"}}
 	{{param fullWidth="true"}}
 	{{param modalSize="xwide"}}
@@ -32,11 +32,11 @@
 	{{param tempSections="resumen"}}
 	{{param autoAffect="node"}}
 	{{param bannerTopTemplate="banner1"}}
-	{{param folioServiceName="true"}}
 	{{param autoPrint="preliminar"}}
 	{{param autoStamp="true"}}
 	{{param allowDraft="true"}}
 	{{param isAction="true"}}
+	{{param disableCashier="true"}}
 	{{action id="fix-user" type="add-subdoc" transform="copiarNota" source="notaAjusteUsuario" label="Ajustar Usuario" btnFlat="true" color="grey" superUser="true" visibleMode="close" onlyPost="true"}}
 	{{action id="subdoc" condition="=false"}}
 	{{action id="subdoc2" condition="=false"}}
@@ -83,21 +83,104 @@
 			{{#editor type="lookup" source="persona" view="responsablesAcademicos" searchEnabled="true" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="fechaEmision" label="Fecha Emisión" type="date" format="DD/MMM/YYYY" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD" generator="now"}}
+		{{#field id="fechaEmision" label="Fecha Emisión" type="date" format="DD/MMM/YYYY" readOnly="true" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD" generator="now"}}
 			{{#editor type="date" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="sucursal" label="Complejo" type="reference" readOnly="true" column="A" references="persona" labelModalClass="full-width"}}
+			{{#editor type="select" source="persona" view="lista" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="tesoreria" label="Tesoreria" type="reference" readOnly="true" column="A" references="persona" labelModalClass="full-width"}}
+			{{#editor type="select" source="persona" view="tesoreria" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="ventaTotal" label="Venta del Día" type="number" format="currency" readOnly="true" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="ingresoTotal" label="Ingreso del Día" type="number" format="currency" readOnly="true" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
 		{{#field id="estatus" label="Estatus" type="text" readOnly="true" column="A" references="estatusNota" modalHide="true" labelModalClass="full-width" defaultValue="'borrador'"}}
 			{{#editor type="select" preset="cfg.estatusNota" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="comentarios" label="Comentarios" type="text" column="A" labelModalClass="full-width"}}
+		{{#field id="comentarios" label="Comentarios" type="text" readOnly="true" column="A" labelModalClass="full-width"}}
 			{{#editor type="text-area" height="300" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{field id="nombre" label="Nombre" hide="true" type="expr" value="=fn('dynamicName', 'Entrada Diversa', @_created)"}}
+		{{field id="nombre" label="Nombre" hide="true" type="expr" value="=fn('dynamicName', 'Cierre del Día', @_created)"}}
 	{{/section}}
-	{{#section id="articulos" type="array"}}
+	{{#section id="ingresos" type="array"}}
+		{{field id="uen" label="UEN" type="text" readOnly="true" column="A"}}
+		{{field id="agente" label="Agente" type="text" readOnly="true" column="A"}}
+		{{field id="caja" label="Caja" type="text" readOnly="true" column="A"}}
+		{{field id="metodo" label="Método Pago" type="text" readOnly="true" column="A"}}
+		{{field id="importe" label="Importe" type="number" format="currency" column="A"}}
+	{{/section}}
+	{{#section id="ventas" type="array"}}
+		{{#field id="aliasArticulo" label="Artículo" type="text" column="A"}}
+			{{#editor case="upper"}}
+			{{/editor}}
+		{{/field}}
+		{{field id="articulo" label="Artículo ID" type="text" readOnly="true" hide="true" column="A"}}
+		{{#field id="codigo" label="Código" type="text" readOnly="true" column="A"}}
+			{{#editor case="upper"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="codigoUpc" label="UPC" type="text" readOnly="true" column="A"}}
+			{{#editor case="upper"}}
+			{{/editor}}
+		{{/field}}
+		{{field id="descripcion" label="Descripción" type="text" readOnly="true" column="A"}}
+		{{field id="categoria" label="Categoría" type="text" readOnly="true" column="A"}}
+		{{field id="grupo" label="Grupo" type="text" readOnly="true" column="A"}}
+		{{field id="familia" label="Familia" type="text" readOnly="true" column="A"}}
+		{{#field id="aliasOrigen" label="Origen" type="text" column="A"}}
+			{{#editor case="upper"}}
+			{{/editor}}
+		{{/field}}
+		{{field id="origen" label="Origen ID" type="text" readOnly="true" hide="true" column="A"}}
+		{{field id="_origen" label="Ubicación Origen" type="text" readOnly="true" column="A"}}
+		{{#field id="aliasDestino" label="Destino" type="text" column="A"}}
+			{{#editor case="upper"}}
+			{{/editor}}
+		{{/field}}
+		{{field id="destino" label="Destino ID" type="text" readOnly="true" hide="true" column="A"}}
+		{{field id="_destino" label="Ubicación Destino" type="text" readOnly="true" column="A"}}
+		{{field id="uen" label="UEN" type="text" readOnly="true" column="A"}}
+		{{field id="agente" label="Agente" type="text" readOnly="true" column="A"}}
+		{{field id="caja" label="Caja" type="text" column="A"}}
+		{{field id="cantidad" label="Cantidad" type="number" format="#,.##" column="A"}}
+		{{field id="costoUnitario" label="Costo Unitario" type="number" format="currency" column="A"}}
+		{{field id="valorUnitario" label="Valor Unitario" type="number" format="currency" column="A"}}
+		{{field id="tasaIva" label="% IVA" type="number" format="#.##" column="A"}}
+		{{field id="descuentoLinea" label="% Desc" type="number" format="#.##" column="A"}}
+		{{field id="descuentos" label="Descuentos" type="calc" format="currency" column="A"}}
+		{{field id="importe" label="Importe" type="calc" format="currency" column="A"}}
+		{{field id="iva" label="IVA" type="calc" format="currency" column="A"}}
+		{{field id="total" label="Total" type="calc" format="currency" column="A"}}
+		{{#field id="referencia" label="Referencia" type="text" column="A"}}
+			{{#editor case="upper"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="referencia2" label="Referencia 2" type="text" column="A"}}
+			{{#editor case="upper"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="lote" label="Lote" type="text" column="A"}}
+			{{#editor case="upper"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="vencimiento" label="Fecha" type="text" column="A"}}
+			{{#editor case="YYYY-MM-DD"}}
+			{{/editor}}
+		{{/field}}
+		{{field id="comentarios" label="Comentarios" type="text" column="A"}}
+	{{/section}}
+	{{#section id="materiales" type="array"}}
 		{{#field id="aliasArticulo" label="Artículo" type="text" column="A"}}
 			{{#editor case="upper"}}
 			{{/editor}}
@@ -205,14 +288,63 @@
 			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="responsableAcademico" condition="esEstudiante" align="left"}}
 				{{row field="fechaEmision" align="left"}}
+				{{row field="sucursal" align="left"}}
+				{{row field="tesoreria" align="left"}}
+				{{row field="ventaTotal" align="left"}}
+				{{row field="ingresoTotal" align="left"}}
 				{{row field="estatus" align="left"}}
 				{{row field="comentarios" align="left"}}
 			{{/record}}
 		{{/stack}}
-		{{#stack}}
-			{{#row text="Artículos" fontSize="10" bold="true" margin="-10,0,0,0"}}
+		{{#stack condition="=ingresos"}}
+			{{#row text="Ingresos" fontSize="10" bold="true" margin="-10,0,0,0"}}
 			{{/row}}
-			{{#table title="Artículos" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="articulos" headerStyle="field" margin="-10,0,0,10" removeEmptyCols="true"}}
+			{{#table title="Ingresos" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="ingresos" headerStyle="field" margin="-10,0,0,10" removeEmptyCols="true"}}
+				{{column field="uen"}}
+				{{column field="agente"}}
+				{{column field="caja"}}
+				{{column field="metodo"}}
+				{{column field="importe"}}
+			{{/table}}
+		{{/stack}}
+		{{#stack condition="=ventas"}}
+			{{#row text="Ventas" fontSize="10" bold="true" margin="-10,0,0,0"}}
+			{{/row}}
+			{{#table title="Ventas" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="ventas" headerStyle="field" margin="-10,0,0,10" removeEmptyCols="true"}}
+				{{column field="aliasArticulo"}}
+				{{column field="codigo"}}
+				{{column field="codigoUpc"}}
+				{{column field="descripcion"}}
+				{{column field="categoria"}}
+				{{column field="grupo"}}
+				{{column field="familia"}}
+				{{column field="aliasOrigen"}}
+				{{column field="_origen"}}
+				{{column field="aliasDestino"}}
+				{{column field="_destino"}}
+				{{column field="uen"}}
+				{{column field="agente"}}
+				{{column field="caja"}}
+				{{column field="cantidad"}}
+				{{column field="costoUnitario"}}
+				{{column field="valorUnitario"}}
+				{{column field="tasaIva"}}
+				{{column field="descuentoLinea"}}
+				{{column field="descuentos"}}
+				{{column field="importe"}}
+				{{column field="iva"}}
+				{{column field="total"}}
+				{{column field="referencia"}}
+				{{column field="referencia2"}}
+				{{column field="lote"}}
+				{{column field="vencimiento"}}
+				{{column field="comentarios"}}
+			{{/table}}
+		{{/stack}}
+		{{#stack condition="=materiales"}}
+			{{#row text="Materiales" fontSize="10" bold="true" margin="-10,0,0,0"}}
+			{{/row}}
+			{{#table title="Materiales" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="materiales" headerStyle="field" margin="-10,0,0,10" removeEmptyCols="true"}}
 				{{column field="aliasArticulo"}}
 				{{column field="codigo"}}
 				{{column field="codigoUpc"}}
@@ -345,7 +477,7 @@
 	{{/workflow}}
 {{/define}}
 {{#markup}}
-	{{#page name="Entrada Diversa"}}
+	{{#page name="Cierre del Día"}}
 		{{row}}
 		{{row}}
 		{{#row}}
@@ -356,7 +488,7 @@
 							Datos Generales
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="responsableAcademico, fechaEmision, estatus, comentarios" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="responsableAcademico, fechaEmision, sucursal, tesoreria, ventaTotal, ingresoTotal, estatus, comentarios" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -364,17 +496,53 @@
 			{{/zone}}
 		{{/row}}
 		{{#row}}
-			{{#zone id="articulos" modalGrid="articulos"}}
+			{{#zone id="ingresos" modal="ingresos"}}
 				{{#row class="auto-form-row"}}
-					{{#col medium="100%" class="auto-form-col"}}
-						{{#h5 class="auto-form-h5"}}
-							Artículos
-						{{/h5}}
-						{{#div}}
-							{{table articulos class="auto-form-table" cols="aliasArticulo, codigo, codigoUpc, descripcion, categoria, grupo, familia, aliasOrigen, _origen, aliasDestino, _destino, uen, agente, caja, cantidad, costoUnitario, valorUnitario, tasaIva, descuentoLinea, descuentos, importe, iva, total, referencia, referencia2, lote, vencimiento, comentarios" removeEmptyCols="true" unlink="true"}}
-							{{br}}
-						{{/div}}
-					{{/col}}
+					{{#if context="=ingresos"}}
+						{{#col medium="100%" class="auto-form-col"}}
+							{{#h5 class="auto-form-h5"}}
+								Ingresos
+							{{/h5}}
+							{{#div}}
+								{{table ingresos class="auto-form-table" cols="uen, agente, caja, metodo, importe" removeEmptyCols="true" unlink="true"}}
+								{{br}}
+							{{/div}}
+						{{/col}}
+					{{/if}}
+				{{/row}}
+			{{/zone}}
+		{{/row}}
+		{{#row}}
+			{{#zone id="ventas" modal="ventas"}}
+				{{#row class="auto-form-row"}}
+					{{#if context="=ventas"}}
+						{{#col medium="100%" class="auto-form-col"}}
+							{{#h5 class="auto-form-h5"}}
+								Ventas
+							{{/h5}}
+							{{#div}}
+								{{table ventas class="auto-form-table" cols="aliasArticulo, codigo, codigoUpc, descripcion, categoria, grupo, familia, aliasOrigen, _origen, aliasDestino, _destino, uen, agente, caja, cantidad, costoUnitario, valorUnitario, tasaIva, descuentoLinea, descuentos, importe, iva, total, referencia, referencia2, lote, vencimiento, comentarios" removeEmptyCols="true" unlink="true"}}
+								{{br}}
+							{{/div}}
+						{{/col}}
+					{{/if}}
+				{{/row}}
+			{{/zone}}
+		{{/row}}
+		{{#row}}
+			{{#zone id="materiales" modal="materiales"}}
+				{{#row class="auto-form-row"}}
+					{{#if context="=materiales"}}
+						{{#col medium="100%" class="auto-form-col"}}
+							{{#h5 class="auto-form-h5"}}
+								Materiales
+							{{/h5}}
+							{{#div}}
+								{{table materiales class="auto-form-table" cols="aliasArticulo, codigo, codigoUpc, descripcion, categoria, grupo, familia, aliasOrigen, _origen, aliasDestino, _destino, uen, agente, caja, cantidad, costoUnitario, valorUnitario, tasaIva, descuentoLinea, descuentos, importe, iva, total, referencia, referencia2, lote, vencimiento, comentarios" removeEmptyCols="true" unlink="true"}}
+								{{br}}
+							{{/div}}
+						{{/col}}
+					{{/if}}
 				{{/row}}
 			{{/zone}}
 		{{/row}}
@@ -417,17 +585,41 @@
 			{{/zone}}
 		{{/row}}
 	{{/page}}
-	{{#modal base id="base" name="Datos Generales" size="xlong" next="articulos"}}
+	{{#modal base id="base" name="Datos Generales" size="xlong"}}
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
 				{{field responsableAcademico}}
 				{{field fechaEmision}}
+				{{field sucursal}}
+				{{field tesoreria}}
+				{{field ventaTotal}}
+				{{field ingresoTotal}}
 				{{field estatus hide="true"}}
 				{{field comentarios}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
-	{{modal articulos id="articulos" name="Artículos" grid="articulos" size="xxwide" prev="base"}}
+	{{#modal ingresos id="ingresos" name="Ingresos" size="xwide"}}
+		{{#col medium="100%" vertical="100%"}}
+			{{#fieldSet}}
+				{{field ingresos}}
+			{{/fieldSet}}
+		{{/col}}
+	{{/modal}}
+	{{#modal ventas id="ventas" name="Ventas" size="xwide"}}
+		{{#col medium="100%" vertical="100%"}}
+			{{#fieldSet}}
+				{{field ventas}}
+			{{/fieldSet}}
+		{{/col}}
+	{{/modal}}
+	{{#modal materiales id="materiales" name="Materiales" size="xwide"}}
+		{{#col medium="100%" vertical="100%"}}
+			{{#fieldSet}}
+				{{field materiales}}
+			{{/fieldSet}}
+		{{/col}}
+	{{/modal}}
 	{{#modal inv id="inv" name="Movimiento del Inventario" size="xwide"}}
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
@@ -445,15 +637,23 @@
 	{{#template id="lista"}}
 		<div>{{_name}}</div>
 	{{/template}}
-	{{#template2 id="notaEntradaDiversa"}}
+	{{#template2 id="notaCierreDia"}}
 		{{#if esEstudiante}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}
 		<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}
+		<br>Complejo: {{_sucursal}}
+		<br>Tesoreria: {{_tesoreria}}
+		<br>Venta del Día: {{number ventaTotal "currency"}}
+		<br>Ingreso del Día: {{number ingresoTotal "currency"}}
 		<br>Estatus: {{_estatus}}
 		<br>{{comentarios}}
 	{{/template2}}
-	{{#template3 id="notaEntradaDiversa"}}
+	{{#template3 id="notaCierreDia"}}
 		{{#if esEstudiante}}{{#if responsableAcademico}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}{{/if}}
 		{{#if fechaEmision}}<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}{{/if}}
+		{{#if sucursal}}<br>Complejo: {{_sucursal}}{{/if}}
+		{{#if tesoreria}}<br>Tesoreria: {{_tesoreria}}{{/if}}
+		{{#if ventaTotal}}<br>Venta del Día: {{number ventaTotal "currency"}}{{/if}}
+		{{#if ingresoTotal}}<br>Ingreso del Día: {{number ingresoTotal "currency"}}{{/if}}
 		{{#if estatus}}<br>Estatus: {{_estatus}}{{/if}}
 		{{#if comentarios}}<br>{{comentarios}}{{/if}}
 	{{/template3}}

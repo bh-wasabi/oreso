@@ -19,6 +19,8 @@
         {{set articulo="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).articulo"}}
         {{set codigo="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).codigo"}}
         {{set descripcion="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).descripcion"}}
+        {{set cantidad="=1"}}
+        {{set valorUnitario="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).costoUnitario"}}
       {{/onChange}}
     {{/field}}
     {{field id="importe" type="calc" value="=valorUnitario*cantidad"}}
@@ -33,6 +35,7 @@
     {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
     {{column field="valorUnitario" label="Costo Unitario" width="110" type="numeric" format="#,.##" required="true"}}
     {{column field="tasaIva" label="% IVA" width="50" type="numeric" format="#.##" defaultValue="16"}}
+    {{column field="referencia2" label="Referencia Proveedor" width="200"}}
     {{column field="comentarios" label="Comentarios" width="250"}}
   {{/grid}}
 {{/define}}

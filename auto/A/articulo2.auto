@@ -30,7 +30,7 @@
 	{{action id="ver2" condition="=false" visibleMode="close"}}
 	{{action id="copiar" type="copy" label="Copiar" condition="=false"}}
 	{{action id="copiar2" type="copy" label="Copiar" condition="=false"}}
-	{{action id="preliminar" type="report-pdf" label="PDF" report="preliminar" fileName="=_name" visibleMode="close" color="grey"}}
+	{{action id="preliminar" type="report-pdf" label="PDF" report="preliminar" title="=_name" fileName="=_name" visibleMode="close" color="grey"}}
 	{{action id="cancelar" type="cancel-edit" color="grey"}}
 	{{action id="sugerir1" condition="=false" visibleMode="close"}}
 	{{action id="adjuntar" type="attach" label="Adjuntar..." color="grey"}}
@@ -57,16 +57,26 @@
 			{{#editor type="select" preset="cfg.estatusGeneral"}}
 			{{/editor}}
 		{{/field}}
+		{{field id="precioLista" label="Precio Lista" type="number" format="currency" column="A"}}
+		{{field id="precioPublico" label="Precio Público" type="number" format="currency" column="A"}}
 		{{#field id="unidad" label="Unidad" type="text" column="A" references="unidad"}}
 			{{#editor type="select" preset="cfg.unidad"}}
 			{{/editor}}
 		{{/field}}
 		{{field id="cantidadEmpaque" label="Cantidad Empaque" type="number" column="A"}}
-		{{#field id="codigoLocal" label="Código Local" type="text" column="A"}}
+		{{field id="marca" label="Marca" type="text" column="A"}}
+		{{field id="grupo" label="Grupo" type="text" column="A"}}
+		{{field id="modelo" label="Modelo" type="text" column="A"}}
+		{{field id="composicion" label="Composición" type="text" column="A"}}
+		{{field id="tamano" label="Tamaño" type="text" column="A"}}
+		{{field id="color" label="Color" type="text" column="A"}}
+		{{field id="temporada" label="Temporada" type="text" column="A"}}
+		{{#field id="codigoUpc" label="UPC" type="text" column="A"}}
 			{{#editor case="upper"}}
 			{{/editor}}
 			{{validator type="unique"}}
 		{{/field}}
+		{{field id="cliente" label="Cliente Específico" type="text" column="A"}}
 		{{#field id="comentarios" label="Comentarios" type="text" column="A"}}
 			{{#editor type="text-area" height="100"}}
 			{{/editor}}
@@ -79,10 +89,10 @@
 					{{row image="logo" alignment="left" imageWidth="75" margin="0,-15,0,0"}}
 				{{/column}}
 				{{#column margin="0,-10,0,0"}}
-					{{row text="Xtra Cinemas" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Reforma 215" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Lomas de Chapultepec 11000 CDMX" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Teléfono 55 5284 8500" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Leibnitz 83-1" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Anzures 11590 CDMX" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
 				{{/column}}
 				{{#column}}
 					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
@@ -93,15 +103,25 @@
 	{{/report}}
 	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true"}}
 		{{#stack}}
-			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
+			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
 		{{/stack}}
 		{{#stack}}
 			{{#record title="articulo2" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="codigo" align="left"}}
 				{{row field="descripcion" align="left"}}
+				{{row field="precioLista" align="left"}}
+				{{row field="precioPublico" align="left"}}
 				{{row field="unidad" align="left"}}
 				{{row field="cantidadEmpaque" align="left"}}
-				{{row field="codigoLocal" align="left"}}
+				{{row field="marca" align="left"}}
+				{{row field="grupo" align="left"}}
+				{{row field="modelo" align="left"}}
+				{{row field="composicion" align="left"}}
+				{{row field="tamano" align="left"}}
+				{{row field="color" align="left"}}
+				{{row field="temporada" align="left"}}
+				{{row field="codigoUpc" align="left"}}
+				{{row field="cliente" align="left"}}
 				{{row field="comentarios" align="left"}}
 			{{/record}}
 		{{/stack}}
@@ -130,7 +150,7 @@
 							articulo2
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="codigo, descripcion, unidad, cantidadEmpaque, codigoLocal, comentarios" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="codigo, descripcion, precioLista, precioPublico, unidad, cantidadEmpaque, marca, grupo, modelo, composicion, tamano, color, temporada, codigoUpc, cliente, comentarios" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -143,9 +163,19 @@
 			{{#fieldSet}}
 				{{field codigo}}
 				{{field descripcion}}
+				{{field precioLista}}
+				{{field precioPublico}}
 				{{field unidad}}
 				{{field cantidadEmpaque}}
-				{{field codigoLocal}}
+				{{field marca}}
+				{{field grupo}}
+				{{field modelo}}
+				{{field composicion}}
+				{{field tamano}}
+				{{field color}}
+				{{field temporada}}
+				{{field codigoUpc}}
+				{{field cliente}}
 				{{field comentarios}}
 			{{/fieldSet}}
 		{{/col}}
@@ -156,17 +186,37 @@
 	{{#template2 id="articulo2"}}
 		<br>Código: {{codigo}}
 		<br>Descripción: {{descripcion}}
+		<br>Precio Lista: {{number precioLista "currency"}}
+		<br>Precio Público: {{number precioPublico "currency"}}
 		<br>Unidad: {{_unidad}}
 		<br>Cantidad Empaque: {{cantidadEmpaque}}
-		<br>Código Local: {{codigoLocal}}
+		<br>Marca: {{marca}}
+		<br>Grupo: {{grupo}}
+		<br>Modelo: {{modelo}}
+		<br>Composición: {{composicion}}
+		<br>Tamaño: {{tamano}}
+		<br>Color: {{color}}
+		<br>Temporada: {{temporada}}
+		<br>UPC: {{codigoUpc}}
+		<br>Cliente Específico: {{cliente}}
 		<br>{{comentarios}}
 	{{/template2}}
 	{{#template3 id="articulo2"}}
 		{{#if codigo}}<br>Código: {{codigo}}{{/if}}
 		{{#if descripcion}}<br>Descripción: {{descripcion}}{{/if}}
+		{{#if precioLista}}<br>Precio Lista: {{number precioLista "currency"}}{{/if}}
+		{{#if precioPublico}}<br>Precio Público: {{number precioPublico "currency"}}{{/if}}
 		{{#if unidad}}<br>Unidad: {{_unidad}}{{/if}}
 		{{#if cantidadEmpaque}}<br>Cantidad Empaque: {{cantidadEmpaque}}{{/if}}
-		{{#if codigoLocal}}<br>Código Local: {{codigoLocal}}{{/if}}
+		{{#if marca}}<br>Marca: {{marca}}{{/if}}
+		{{#if grupo}}<br>Grupo: {{grupo}}{{/if}}
+		{{#if modelo}}<br>Modelo: {{modelo}}{{/if}}
+		{{#if composicion}}<br>Composición: {{composicion}}{{/if}}
+		{{#if tamano}}<br>Tamaño: {{tamano}}{{/if}}
+		{{#if color}}<br>Color: {{color}}{{/if}}
+		{{#if temporada}}<br>Temporada: {{temporada}}{{/if}}
+		{{#if codigoUpc}}<br>UPC: {{codigoUpc}}{{/if}}
+		{{#if cliente}}<br>Cliente Específico: {{cliente}}{{/if}}
 		{{#if comentarios}}<br>{{comentarios}}{{/if}}
 	{{/template3}}
 {{/markup}}

@@ -1,0 +1,40 @@
+{{#define type="doc" id="_inbox" name="Inbox"}}
+  {{#view id="in"}}
+    {{#find}}
+      {{sort field="inbox.sent" direction="desc"}}
+      {{filter field="receiver._id" eq="user.id"}}
+      {{filter field="inbox.status" eq="'received'"}}
+      {{filter field="inbox.expires" gt="=moment().format()"}}
+      {{search field="inbox.name"}}
+      {{search field="inbox.subject"}}
+    {{/find}}
+    {{calc field="color" value="=functions.expireColor(inbox.expires)"}}
+  {{/view}}
+  {{#view id="out"}}
+    {{#find}}
+      {{sort field="inbox.affected" direction="desc"}}
+      {{filter field="receiver._id" eq="user.id"}}
+      {{filter field="inbox.status" eq="'affected'"}}
+      {{search field="inbox.name"}}
+      {{search field="inbox.subject"}}
+    {{/find}}
+    {{calc field="color" value="grey"}}
+  {{/view}}
+  {{#browser id="in" name="Inbox" view="in" docEmbedded="doc" showDoc="true" docOrientation="vertical" docPosition="75%"}}
+    {{list itemTemplate="item" allowSearch="true" allowRefresh="true" allowEdit="true"}}
+  {{/browser}}
+  {{#browser id="out" name="Outbox" view="out" docEmbedded="doc" showDoc="true" docOrientation="vertical" docPosition="75%"}}
+    {{list itemTemplate="item" allowSearch="true" allowRefresh="true" allowEdit="false"}}
+  {{/browser}}
+{{/define}}
+{{#markup}}
+  {{#template id="item"}}
+  <div class="list-material">
+    <li class="has-action-left">
+      <div class="list-action-left"><i class="icon ion-{{inbox.icon}} text-{{inbox.iconColor}}"></i></div>
+      <div class="list-content"><span class="title">{{inbox.name}}</span><span class="caption">{{inbox.subject}}</span>
+      <div class="list-action-right"><span class="top">{{#if inbox.affected}}{{date inbox.affected "DD/MMM/YYYY"}}{{else}}{{date inbox.sent "DD/MMM/YYYY"}}{{/if}}</span><i class="bottom signal ion-{{inbox.signal}} text-{{color}}"></i></div>
+    </li>
+  </div>
+  {{/template}}  
+{{/markup}}

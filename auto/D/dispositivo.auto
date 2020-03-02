@@ -37,7 +37,7 @@
 	{{action id="ver2" condition="=false" visibleMode="close"}}
 	{{action id="copiar" type="copy" label="Copiar" condition="=false"}}
 	{{action id="copiar2" type="copy" label="Copiar" condition="=false"}}
-	{{action id="preliminar" type="report-pdf" label="PDF" report="preliminar" fileName="=_name" visibleMode="close" color="grey"}}
+	{{action id="preliminar" type="report-pdf" label="PDF" report="preliminar" title="=_name" fileName="=_name" visibleMode="close" color="grey"}}
 	{{action id="cancelar" type="cancel-edit" color="grey"}}
 	{{action id="sugerir1" condition="=false" visibleMode="close"}}
 	{{action id="adjuntar" type="attach" label="Adjuntar..." color="grey"}}
@@ -64,8 +64,8 @@
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="sucursal" label="Sucursal" type="reference" column="A" references="sucursal" modalColumn="A" labelModalClass="full-width"}}
-			{{#editor type="select" source="sucursal" view="lista" width="100%"}}
+		{{#field id="sucursal" label="Complejo" type="text" column="A" references="sucursal" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.sucursal" width="100%"}}
 			{{/editor}}
 		{{/field}}
 		{{#field id="servidor" label="Servidor" type="text" column="A" references="servidor" modalColumn="A" labelModalClass="full-width"}}
@@ -108,10 +108,10 @@
 					{{row image="logo" alignment="left" imageWidth="75" margin="0,-15,0,0"}}
 				{{/column}}
 				{{#column margin="0,-10,0,0"}}
-					{{row text="Xtra Cinemas" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Reforma 215" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Lomas de Chapultepec 11000 CDMX" alignment="left" fontSize="6" color="grey"}}
-					{{row text="Teléfono 55 5284 8500" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Leibnitz 83-1" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Anzures 11590 CDMX" alignment="left" fontSize="6" color="grey"}}
+					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
 				{{/column}}
 				{{#column}}
 					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
@@ -122,7 +122,7 @@
 	{{/report}}
 	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true"}}
 		{{#stack}}
-			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
+			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
 		{{/stack}}
 		{{#stack}}
 			{{#record title="Dispositivo" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
@@ -228,7 +228,7 @@
 		<br>Identificador: {{identificador}}
 		<br>Nombre: {{nombre}}
 		<br>Caja: {{caja}}
-		<br>Sucursal: {{_sucursal}}
+		<br>Complejo: {{_sucursal}}
 		<br>Servidor: {{_servidor}}
 		<br>Empresa: {{_empresa}}
 		<br>Área: {{_area}}
@@ -242,7 +242,7 @@
 		{{#if identificador}}<br>Identificador: {{identificador}}{{/if}}
 		{{#if nombre}}<br>Nombre: {{nombre}}{{/if}}
 		{{#if caja}}<br>Caja: {{caja}}{{/if}}
-		{{#if sucursal}}<br>Sucursal: {{_sucursal}}{{/if}}
+		{{#if sucursal}}<br>Complejo: {{_sucursal}}{{/if}}
 		{{#if servidor}}<br>Servidor: {{_servidor}}{{/if}}
 		{{#if empresa}}<br>Empresa: {{_empresa}}{{/if}}
 		{{#if area}}<br>Área: {{_area}}{{/if}}

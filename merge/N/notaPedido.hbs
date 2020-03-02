@@ -3,7 +3,11 @@
   {{param attribute2="=_created.subType"}}
   {{param removeIfEmptySection="articulos"}}
   {{param removeIfEmptyField="cantidad"}}
+[.#if esOreso.]
+  {{param startOnOpen="n/a"}}
+[.else.]  
   {{param startOnOpen="articulos"}}
+[./if.]
 
   {{#section id="base"}}
     {{#field id="diasCredito"}}
@@ -46,9 +50,10 @@
     {{field id="total" type="calc" value="=importe+iva"}}
     {{field id="faltante" type="calc" value="=_missing||0"}}
     {{field id="neto" type="calc" value="=cantidad-faltante"}}
+    {{field id="importeNeto" type="calc" value="=valorUnitario*neto"}}
   {{/section}}
   
-  {{#grid id="articulos" section="articulos" keyField="cantidad" allowInsert="true" allowRemove="true"}}
+  {{#grid id="articulos" section="articulos" keyField="cantidad" allowInsert="true" allowRemove="true" allowSort="true"}}  {{!-- sortBy="_destino, codigo" --}}
     {{column field="aliasArticulo" label="Artículo" width="150"}}
     {{column field="codigo" label="Código" width="150"}}
     {{column field="descripcion" label="Descripción" width="300"}}
@@ -65,23 +70,19 @@
 [.else.]
     {{column field="referencia" label="Referencia" width="150"}}
 [./if.]
-    {{column field="contenedor" label="Contenedor" width="80" type="numeric"}}
+    {{!-- {{column field="contenedor" label="Contenedor" width="80" type="numeric"}}
     {{column field="cajaInicial" label="Caja Inicial" width="80" type="numeric"}}
-    {{column field="cajaFinal" label="Caja Final" width="80" type="numeric"}}
+    {{column field="cajaFinal" label="Caja Final" width="80" type="numeric"}} --}}
   {{/grid}}
-
-  {{#cube id="articulos" section="articulos" name="=_name||'Pedido'" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
-    {{column field="_origen" label="Origen"}}
-    {{column field="_destino" label="Destino"}}
-    {{row field="codigo" label="Código" width="250"}}
-    {{row field="descripcion" label="Descripción" width="350"}}
-    {{row field="codigoLocal" label="Código Local"}}
-    {{row field="codigoUpc" label="Código UPC"}}
-    {{sum field="cantidad" label="Cantidad" format="#,"}}
-    {{sum field="faltante" label="Faltante" format="#,"}}
-    {{sum field="neto" label="Neto" format="#,"}}
-    {{sum field="importe" label="Importe" format="currency"}}
-  {{/cube}}
+  {{#grid id="adjuntos" section="adjuntos" allowRemove="true" allowSort="true" sortBy="orden, fecha"}}
+    {{column field="nombre" width="400"}}
+    {{column field="tipo" width="200"}}
+    {{column field="fecha" width="100" readOnly="true"}}
+    {{column field="ext" width="100" readOnly="true"}}
+    {{column field="tamano" width="100" readOnly="true"}}
+    {{column field="orden" width="60"}}
+  {{/grid}}
+  
 
   {{#report id="preliminar2" fontSize="8" header="preliminar-encabezado" showStandarFooter="true"}}
     {{#stack}}
@@ -97,16 +98,50 @@
       {{/row}}
       {{#table title="Artículos" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="_items" headerStyle="field" margin="-10,0,0,10" removeEmptyCols="true"}}
         {{column field="referencia" label="Orden Compra"}}
+        {{column field="lote" label="Lote"}}
         {{column field="codigo" label="Código"}}
         {{column field="descripcion" label="Descripción"}}
+        {{column field="loteReferencia" label="Tecsmart"}}
         {{column field="codigoUpc" label="Código UPC"}}
-        {{column field="referencia2" label="SKU"}}
-        {{column field="neto" align="right" label="Cantidad"}}
+        {{column field="tamano" label="Tamaño"}}
+        {{column field="color" label="Color"}}
+        {{column field="marca" label="Marca"}}
+        {{column field="salida" align="right" label="Cantidad"}}
       {{/table}}
     {{/stack}}
   {{/report}}  
 
-  {{action id="tool" condition="true" label="Analizar Pedido" type="viewCube" visibleMode="close" color="cyan" btnSolid="true" cube="articulos" items="=calc.mergeArraysByKey(articulos, _items, 'codigo')" fromSource="articulo" fromView="todo"}}
-  {{action id="tool2" condition="true" label="Descargar Checklist..." type="save-as" visibleMode="close" color="blue" btnSolid="true" fileName="=_name||'Pedido'" items="=_.union([fn('checkListTitulos')], fn('checkList', calc.mergeMasterDetail({persona, base}, calc.mergeArraysByKey(articulos, _items, 'codigo'))))" fromSource="articulo" fromView="todo"}}
-  {{action id="tool4" condition="true" type="report-pdf" label="Reporte Bodega" report="preliminar2" fileName="=_name" visibleMode="close" color="grey" items="=calc.mapReduce(calc.mergeArraysByKey(articulos, _items, 'codigo'), 'codigo,descripcion,codigoUpc,referencia,referencia2', 'neto')" fromSource="articulo" fromView="todo"}}
+[.#if esOreso.]
+  {{#action id="excel" type="openFile" label="Cargar Excel..." color="blue-grey" btnSolid="true" condition="=true"}}
+    {{param persona="=persona.id"}}
+    {{param origen="='AG'"}}
+    {{#openFile type="xlsx" as="excel" subType="pedido-liverpool"}}
+      {{update section="articulos" value="=excel"}}
+    {{/openFile}}
+  {{/action}}
+[./if.]
+
+  {{#action id="preliminar" type="report-pdf" label="Preliminar" report="preliminar" title="=_name" fileName="=_name" visibleMode="close" color="grey"}}
+    {{ask field="_export" type="select" label="Formato" keys="pdf,xlsx,csv" names="PDF,Excel,CSV" value="pdf"}}
+  {{/action}}
+
+  {{#cube id="articulos" section="articulos" name="=_name" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
+    {{column field="_origen" label="Origen"}}
+    {{column field="_destino" label="Destino"}}
+    {{row field="codigo" label="Código" width="250"}}
+    {{row field="descripcion" label="Descripción" width="350"}}
+    {{row field="codigoUpc" label="Código UPC"}}
+[.#if esOreso.]
+    {{row field="referencia2" label="SKU"}}
+[./if.]
+    {{sum field="cantidad" label="Cantidad" format="#,"}}
+    {{sum field="faltante" label="Faltante" format="#,"}}
+    {{sum field="neto" label="Neto" format="#,"}}
+    {{sum field="importeNeto" label="Importe Neto" format="currency"}}
+  {{/cube}}
+  {{action id="tool" condition="true" label="Analizar" type="viewCube" visibleMode="close" color="cyan" btnSolid="true" cube="articulos" items="=calc.mergeArraysByKey(articulos, _items, 'codigo')" fromSource="articulo" fromView="todo"}}
+  
+  {{action id="tool2" condition="true" label="Descargar Checklist..." type="save-as" visibleMode="close" color="blue" btnSolid="true" fileName="=_name||'Pedido'" 
+    items="=[fn('checkListTitulos')].concat(fn('checkList', calc.mergeMasterDetail({persona, base}, calc.mergeArraysByKey(articulos, _items, 'codigo'))))" fromSource="articulo" fromView="todo"}}
+  {{action id="tool4" condition="true" type="report-pdf" label="Reporte Bodega" report="preliminar2" fileName="=_name" visibleMode="close" color="grey" items="=calc.mapReduce(calc.mergeArraysByKey(inv, _items, 'codigo'), 'codigo,descripcion,codigoUpc,lote,loteReferencia,tamano,color,marca', 'salida')" fromSource="articulo" fromView="todo"}}
 {{/define}}

@@ -1,3 +1,33 @@
+{"index":{"_id":"area/tradicional"}}
+{"name":"area","code":"tradicional","display":"Tradicional","order":1}
+{"index":{"_id":"area/lux"}}
+{"name":"area","code":"lux","display":"Lux","order":2}
+{"index":{"_id":"colorAgenda/blue"}}
+{"name":"colorAgenda","code":"blue","display":"Azul","order":1}
+{"index":{"_id":"colorAgenda/green"}}
+{"name":"colorAgenda","code":"green","display":"Verde","order":2}
+{"index":{"_id":"colorAgenda/orange"}}
+{"name":"colorAgenda","code":"orange","display":"Naranja","order":3}
+{"index":{"_id":"colorAgenda/violet"}}
+{"name":"colorAgenda","code":"violet","display":"Violeta","order":4}
+{"index":{"_id":"colorAgenda/red"}}
+{"name":"colorAgenda","code":"red","display":"Rojo","order":5}
+{"index":{"_id":"diaSemana/1"}}
+{"name":"diaSemana","code":"1","display":"Lunes","order":1}
+{"index":{"_id":"diaSemana/2"}}
+{"name":"diaSemana","code":"2","display":"Martes","order":2}
+{"index":{"_id":"diaSemana/3"}}
+{"name":"diaSemana","code":"3","display":"Miércoles","order":3}
+{"index":{"_id":"diaSemana/4"}}
+{"name":"diaSemana","code":"4","display":"Jueves","order":4}
+{"index":{"_id":"diaSemana/5"}}
+{"name":"diaSemana","code":"5","display":"Viernes","order":5}
+{"index":{"_id":"diaSemana/6"}}
+{"name":"diaSemana","code":"6","display":"Sábado","order":6}
+{"index":{"_id":"diaSemana/7"}}
+{"name":"diaSemana","code":"7","display":"Domingo","order":7}
+{"index":{"_id":"empresa/cinetop"}}
+{"name":"empresa","code":"cinetop","display":"Cinetop","order":14}
 {"index":{"_id":"entidad/BC"}}
 {"name":"entidad","code":"BC","display":"Baja California","order":1}
 {"index":{"_id":"entidad/BS"}}
@@ -114,6 +144,18 @@
 {"name":"estatusGeneral","code":"activo","display":"Activo","order":1}
 {"index":{"_id":"estatusGeneral/inactivo"}}
 {"name":"estatusGeneral","code":"inactivo","display":"Inactivo","order":2}
+{"index":{"_id":"estatusNota/borrador"}}
+{"name":"estatusNota","code":"borrador","display":"Borrador","order":1}
+{"index":{"_id":"estatusNota/afectado"}}
+{"name":"estatusNota","code":"afectado","display":"Afectado","order":2}
+{"index":{"_id":"estatusNota/cancelado"}}
+{"name":"estatusNota","code":"cancelado","display":"Cancelado","order":3}
+{"index":{"_id":"estatusUbicacion/activo"}}
+{"name":"estatusUbicacion","code":"activo","display":"Activo","order":1}
+{"index":{"_id":"estatusUbicacion/suspendido"}}
+{"name":"estatusUbicacion","code":"suspendido","display":"Suspendido","order":2}
+{"index":{"_id":"estatusUbicacion/inactivo"}}
+{"name":"estatusUbicacion","code":"inactivo","display":"Inactivo","order":3}
 {"index":{"_id":"estatusUsuario/activo"}}
 {"name":"estatusUsuario","code":"activo","display":"Activo","order":1}
 {"index":{"_id":"estatusUsuario/inactivo"}}
@@ -518,6 +560,18 @@
 {"name":"naturalezaCuenta","code":"deudora","display":"Deudora","order":1}
 {"index":{"_id":"naturalezaCuenta/acreedora"}}
 {"name":"naturalezaCuenta","code":"acreedora","display":"Acreedora","order":2}
+{"index":{"_id":"nivelInventario/low"}}
+{"name":"nivelInventario","code":"low","display":"Bajo","order":1}
+{"index":{"_id":"nivelInventario/low2"}}
+{"name":"nivelInventario","code":"low2","display":"Bajo 2","order":2}
+{"index":{"_id":"nivelInventario/medium"}}
+{"name":"nivelInventario","code":"medium","display":"Medio","order":3}
+{"index":{"_id":"nivelInventario/medium2"}}
+{"name":"nivelInventario","code":"medium2","display":"Medio 2","order":4}
+{"index":{"_id":"nivelInventario/high"}}
+{"name":"nivelInventario","code":"high","display":"Alto","order":5}
+{"index":{"_id":"nivelInventario/high"}}
+{"name":"nivelInventario","code":"high","display":"Alto 2","order":6}
 {"index":{"_id":"ocupacion/271111"}}
 {"name":"ocupacion","code":"271111","display":"Abogado","order":1}
 {"index":{"_id":"ocupacion/332000"}}
@@ -3444,6 +3498,48 @@
 {"name":"pais","code":"ZM","display":"Zambia","order":254}
 {"index":{"_id":"pais/ZW"}}
 {"name":"pais","code":"ZW","display":"Zimbabue","order":255}
+{"index":{"_id":"peliculaFormato/2d"}}
+{"name":"peliculaFormato","code":"2d","display":"2D","order":1}
+{"index":{"_id":"peliculaFormato/3d"}}
+{"name":"peliculaFormato","code":"3d","display":"3D","order":2}
+{"index":{"_id":"peliculaLenguaje/espanol"}}
+{"name":"peliculaLenguaje","code":"español","display":"Español","order":1}
+{"index":{"_id":"peliculaLenguaje/ingles"}}
+{"name":"peliculaLenguaje","code":"ingles","display":"Ingles","order":2}
+{"index":{"_id":"peliculaLenguaje/doblado"}}
+{"name":"peliculaLenguaje","code":"doblado","display":"Doblado","order":3}
+{"index":{"_id":"precioLista/price1"}}
+{"name":"precioLista","code":"price1","display":"Precio 1","order":1}
+{"index":{"_id":"precioLista/price2"}}
+{"name":"precioLista","code":"price2","display":"Precio 2","order":2}
+{"index":{"_id":"precioLista/price3"}}
+{"name":"precioLista","code":"price3","display":"Precio 3","order":3}
+{"index":{"_id":"precioLista/price3x"}}
+{"name":"precioLista","code":"price3x","display":"Precio 3x","order":4}
+{"index":{"_id":"precioLista/price4"}}
+{"name":"precioLista","code":"price4","display":"Precio 4","order":5}
+{"index":{"_id":"servidor/local"}}
+{"name":"servidor","code":"local","display":"(Local)","order":1}
+{"index":{"_id":"servidor/lab"}}
+{"name":"servidor","code":"lab","display":"(Laboratorio)","order":2}
+{"index":{"_id":"servidor/azc"}}
+{"name":"servidor","code":"azc","display":"Azcapozalco","order":3}
+{"index":{"_id":"servidor/eca"}}
+{"name":"servidor","code":"eca","display":"Ecatepec","order":4}
+{"index":{"_id":"servidor/teq"}}
+{"name":"servidor","code":"teq","display":"Tequisquiapan","order":5}
+{"index":{"_id":"servidor/ate"}}
+{"name":"servidor","code":"ate","display":"Atemajac","order":6}
+{"index":{"_id":"subArea/taquilla"}}
+{"name":"subArea","code":"taquilla","display":"Taquilla","order":1766}
+{"index":{"_id":"subArea/dulceria"}}
+{"name":"subArea","code":"dulceria","display":"Dulcería","order":1767}
+{"index":{"_id":"subArea/cafeteria"}}
+{"name":"subArea","code":"cafeteria","display":"Cafetería","order":1768}
+{"index":{"_id":"subArea/lux"}}
+{"name":"subArea","code":"lux","display":"Lux","order":1769}
+{"index":{"_id":"subArea/staff"}}
+{"name":"subArea","code":"staff","display":"Staff","order":1770}
 {"index":{"_id":"subTipoCuenta/cortoPlazo"}}
 {"name":"subTipoCuenta","code":"cortoPlazo","display":"Corto Plazo","order":1}
 {"index":{"_id":"subTipoCuenta/largoPlazo"}}
@@ -3460,6 +3556,16 @@
 {"name":"subTipoCuenta","code":"administracion","display":"Administración","order":7}
 {"index":{"_id":"subTipoCuenta/produccion"}}
 {"name":"subTipoCuenta","code":"produccion","display":"Producción","order":8}
+{"index":{"_id":"sucursal/azc"}}
+{"name":"sucursal","code":"azc","display":"Azcapozalco","order":1}
+{"index":{"_id":"sucursal/eca"}}
+{"name":"sucursal","code":"eca","display":"Ecatepec","order":2}
+{"index":{"_id":"sucursal/teq"}}
+{"name":"sucursal","code":"teq","display":"Tequisquiapan","order":3}
+{"index":{"_id":"sucursal/ate"}}
+{"name":"sucursal","code":"ate","display":"Atemajac","order":4}
+{"index":{"_id":"timeZones/America/Mexico_City"}}
+{"name":"timeZones","code":"America/Mexico_City","display":"México CDMX","order":99}
 {"index":{"_id":"tipoAdjunto/foto"}}
 {"name":"tipoAdjunto","code":"foto","display":"Foto","order":1}
 {"index":{"_id":"tipoAdjunto/doc"}}
@@ -3490,6 +3596,10 @@
 {"name":"tipoCuenta","code":"costos","display":"Costos","order":5}
 {"index":{"_id":"tipoCuenta/gastos"}}
 {"name":"tipoCuenta","code":"gastos","display":"Gastos","order":6}
+{"index":{"_id":"tipoEspacio/sala"}}
+{"name":"tipoEspacio","code":"sala","display":"Sala","order":1}
+{"index":{"_id":"tipoEspacio/looby"}}
+{"name":"tipoEspacio","code":"looby","display":"Lobby","order":2}
 {"index":{"_id":"tipoIdentificacion/ine"}}
 {"name":"tipoIdentificacion","code":"ine","display":"INE","order":1}
 {"index":{"_id":"tipoIdentificacion/pasaporte"}}
@@ -3510,20 +3620,68 @@
 {"name":"tipoPersona","code":"personaFisica","display":"Persona Física","order":1}
 {"index":{"_id":"tipoPersona/personaMoral"}}
 {"name":"tipoPersona","code":"personaMoral","display":"Persona Moral","order":2}
+{"index":{"_id":"tipoPromocion/no"}}
+{"name":"tipoPromocion","code":"no","display":"No","order":1}
+{"index":{"_id":"tipoPromocion/volume"}}
+{"name":"tipoPromocion","code":"volume","display":"Volumen","order":2}
 {"index":{"_id":"tipoProveedor/gastos"}}
 {"name":"tipoProveedor","code":"gastos","display":"Gastos","order":1}
 {"index":{"_id":"tipoProveedor/compras"}}
 {"name":"tipoProveedor","code":"compras","display":"Compras","order":2}
+{"index":{"_id":"tipoRecurso/espacio"}}
+{"name":"tipoRecurso","code":"espacio","display":"Espacio","order":99}
+{"index":{"_id":"unidad/pieza"}}
+{"name":"unidad","code":"pieza","display":"Pieza","order":1}
+{"index":{"_id":"unidad/kilo"}}
+{"name":"unidad","code":"kilo","display":"Kilo","order":2}
+{"index":{"_id":"unidad/litro"}}
+{"name":"unidad","code":"litro","display":"Litro","order":3}
+{"index":{"_id":"unidad/barra"}}
+{"name":"unidad","code":"barra","display":"Barra","order":4}
+{"index":{"_id":"unidad/bidon"}}
+{"name":"unidad","code":"bidon","display":"Bidon","order":5}
+{"index":{"_id":"unidad/bolsa"}}
+{"name":"unidad","code":"bolsa","display":"Bolsa","order":6}
+{"index":{"_id":"unidad/bote"}}
+{"name":"unidad","code":"bote","display":"Bote","order":7}
+{"index":{"_id":"unidad/botella"}}
+{"name":"unidad","code":"botella","display":"Botella","order":8}
+{"index":{"_id":"unidad/caja"}}
+{"name":"unidad","code":"caja","display":"Caja","order":9}
+{"index":{"_id":"unidad/costal"}}
+{"name":"unidad","code":"costal","display":"Costal","order":10}
+{"index":{"_id":"unidad/lata"}}
+{"name":"unidad","code":"lata","display":"Lata","order":11}
+{"index":{"_id":"unidad/paquete"}}
+{"name":"unidad","code":"paquete","display":"Paquete","order":12}
+{"index":{"_id":"unidad/tanque"}}
+{"name":"unidad","code":"tanque","display":"Tanque","order":13}
 {"index":{"_id":"userLevel/consulta"}}
 {"name":"userLevel","code":"consulta","display":"Consulta","order":1}
 {"index":{"_id":"userLevel/normal"}}
 {"name":"userLevel","code":"normal","display":"Normal","order":2}
 {"index":{"_id":"userLevel/super"}}
 {"name":"userLevel","code":"super","display":"Supervisor","order":3}
-{"index":{"_id":"servidor/local"}}
-{"name":"servidor","code":"local","display":"(Local)","order":1}
-{"index":{"_id":"servidor/lab"}}
-{"name":"servidor","code":"lab","display":"(Laboratorio)","order":2}
+{"index":{"_id":"userRole/azc"}}
+{"name":"userRole","code":"azc","display":"Azcapozalco","order":1,"include":"cinetop"}
+{"index":{"_id":"userRole/eca"}}
+{"name":"userRole","code":"eca","display":"Ecatepec","order":2,"include":"cinetop"}
+{"index":{"_id":"userRole/teq"}}
+{"name":"userRole","code":"teq","display":"Tequisquiapan","order":3,"include":"cinetop"}
+{"index":{"_id":"userRole/ate"}}
+{"name":"userRole","code":"ate","display":"Atemajac","order":4,"include":"cinetop"}
+{"index":{"_id":"userRole/general"}}
+{"name":"userRole","code":"general","display":"General","order":10}
+{"index":{"_id":"userRole/boletos"}}
+{"name":"userRole","code":"boletos","display":"Boletos","order":11,"partOf":"","include":"cinetop"}
+{"index":{"_id":"userRole/cafeteria"}}
+{"name":"userRole","code":"cafeteria","display":"Cafetería","order":12,"include":"cinetop"}
+{"index":{"_id":"userRole/dulceria"}}
+{"name":"userRole","code":"dulceria","display":"Dulcería","order":13,"include":"cinetop"}
+{"index":{"_id":"userRole/accessPoint"}}
+{"name":"userRole","code":"accessPoint","display":"Acceso Películas","order":14,"include":"cinetop"}
+{"index":{"_id":"userRole/lux"}}
+{"name":"userRole","code":"lux","display":"Lux","order":15,"include":"cinetop"}
 {"index":{"_id":"usoDireccion/trabajo"}}
 {"name":"usoDireccion","code":"trabajo","display":"Trabajo","order":1}
 {"index":{"_id":"usoDireccion/casa"}}
@@ -3538,129 +3696,25 @@
 {"name":"usoIdentificacion","code":"oficial","display":"Oficial","order":1}
 {"index":{"_id":"usoIdentificacion/secundario"}}
 {"name":"usoIdentificacion","code":"secundario","display":"Secundario","order":4}
-{"index":{"_id":"tipoRecurso/espacio"}}
-{"name":"tipoRecurso","code":"espacio","display":"Espacio","order":99}
-{"index":{"_id":"timeZones/America/Mexico_City"}}
-{"name":"timeZones","code":"America/Mexico_City","display":"México CDMX","order":99}
-{"index":{"_id":"colorAgenda/blue"}}
-{"name":"colorAgenda","code":"blue","display":"Azul","order":1}
-{"index":{"_id":"colorAgenda/green"}}
-{"name":"colorAgenda","code":"green","display":"Verde","order":2}
-{"index":{"_id":"colorAgenda/orange"}}
-{"name":"colorAgenda","code":"orange","display":"Naranja","order":3}
-{"index":{"_id":"colorAgenda/violet"}}
-{"name":"colorAgenda","code":"violet","display":"Violeta","order":4}
-{"index":{"_id":"colorAgenda/red"}}
-{"name":"colorAgenda","code":"red","display":"Rojo","order":5}
-{"index":{"_id":"estatusNota/borrador"}}
-{"name":"estatusNota","code":"borrador","display":"Borrador","order":1}
-{"index":{"_id":"estatusNota/afectado"}}
-{"name":"estatusNota","code":"afectado","display":"Afectado","order":2}
-{"index":{"_id":"estatusNota/cancelado"}}
-{"name":"estatusNota","code":"cancelado","display":"Cancelado","order":3}
-{"index":{"_id":"area/tradicional"}}
-{"name":"area","code":"tradicional","display":"Tradicional","order":1}
-{"index":{"_id":"area/lux"}}
-{"name":"area","code":"lux","display":"Lux","order":2}
-{"index":{"_id":"tipoEspacio/sala"}}
-{"name":"tipoEspacio","code":"sala","display":"Sala","order":1}
-{"index":{"_id":"tipoEspacio/looby"}}
-{"name":"tipoEspacio","code":"looby","display":"Lobby","order":2}
-{"index":{"_id":"estatusUbicacion/activo"}}
-{"name":"estatusUbicacion","code":"activo","display":"Activo","order":1}
-{"index":{"_id":"estatusUbicacion/suspendido"}}
-{"name":"estatusUbicacion","code":"suspendido","display":"Suspendido","order":2}
-{"index":{"_id":"estatusUbicacion/inactivo"}}
-{"name":"estatusUbicacion","code":"inactivo","display":"Inactivo","order":3}
-{"index":{"_id":"diaSemana/1"}}
-{"name":"diaSemana","code":"1","display":"Lunes","order":1}
-{"index":{"_id":"diaSemana/2"}}
-{"name":"diaSemana","code":"2","display":"Martes","order":2}
-{"index":{"_id":"diaSemana/3"}}
-{"name":"diaSemana","code":"3","display":"Miércoles","order":3}
-{"index":{"_id":"diaSemana/4"}}
-{"name":"diaSemana","code":"4","display":"Jueves","order":4}
-{"index":{"_id":"diaSemana/5"}}
-{"name":"diaSemana","code":"5","display":"Viernes","order":5}
-{"index":{"_id":"diaSemana/6"}}
-{"name":"diaSemana","code":"6","display":"Sábado","order":6}
-{"index":{"_id":"diaSemana/7"}}
-{"name":"diaSemana","code":"7","display":"Domingo","order":7}
-{"index":{"_id":"unidad/pieza"}}
-{"name":"unidad","code":"pieza","display":"Pieza","order":1}
-{"index":{"_id":"precioLista/price1"}}
-{"name":"precioLista","code":"price1","display":"Precio 1","order":1}
-{"index":{"_id":"precioLista/price2"}}
-{"name":"precioLista","code":"price2","display":"Precio 2","order":2}
-{"index":{"_id":"precioLista/price3"}}
-{"name":"precioLista","code":"price3","display":"Precio 3","order":3}
-{"index":{"_id":"precioLista/price3x"}}
-{"name":"precioLista","code":"price3x","display":"Precio 3x","order":4}
-{"index":{"_id":"precioLista/price4"}}
-{"name":"precioLista","code":"price4","display":"Precio 4","order":5}
-{"index":{"_id":"peliculaFormato/2d"}}
-{"name":"peliculaFormato","code":"2d","display":"2D","order":1}
-{"index":{"_id":"peliculaFormato/3d"}}
-{"name":"peliculaFormato","code":"3d","display":"3D","order":2}
-{"index":{"_id":"peliculaLenguaje/espanol"}}
-{"name":"peliculaLenguaje","code":"español","display":"Español","order":1}
-{"index":{"_id":"peliculaLenguaje/ingles"}}
-{"name":"peliculaLenguaje","code":"ingles","display":"Ingles","order":2}
-{"index":{"_id":"peliculaLenguaje/doblado"}}
-{"name":"peliculaLenguaje","code":"doblado","display":"Doblado","order":3}
-{"index":{"_id":"tipoPromocion/no"}}
-{"name":"tipoPromocion","code":"no","display":"No","order":1}
-{"index":{"_id":"tipoPromocion/volume"}}
-{"name":"tipoPromocion","code":"volume","display":"Volumen","order":2}
-{"index":{"_id":"nivelInventario/low"}}
-{"name":"nivelInventario","code":"low","display":"Bajo","order":1}
-{"index":{"_id":"nivelInventario/low2"}}
-{"name":"nivelInventario","code":"low2","display":"Bajo 2","order":2}
-{"index":{"_id":"nivelInventario/medium"}}
-{"name":"nivelInventario","code":"medium","display":"Medio","order":3}
-{"index":{"_id":"nivelInventario/medium2"}}
-{"name":"nivelInventario","code":"medium2","display":"Medio 2","order":4}
-{"index":{"_id":"nivelInventario/high"}}
-{"name":"nivelInventario","code":"high","display":"Alto","order":5}
-{"index":{"_id":"nivelInventario/high"}}
-{"name":"nivelInventario","code":"high","display":"Alto 2","order":6}
-{"index":{"_id":"empresa/cinetop"}}
-{"name":"empresa","code":"cinetop","display":"Cinetop","order":1813}
-{"index":{"_id":"subArea/taquilla"}}
-{"name":"subArea","code":"taquilla","display":"Taquilla","order":1814}
-{"index":{"_id":"subArea/dulceria"}}
-{"name":"subArea","code":"dulceria","display":"Dulcería","order":1815}
-{"index":{"_id":"subArea/cafeteria"}}
-{"name":"subArea","code":"cafeteria","display":"Cafetería","order":1816}
-{"index":{"_id":"subArea/lux"}}
-{"name":"subArea","code":"lux","display":"Lux","order":1817}
-{"index":{"_id":"subArea/staff"}}
-{"name":"subArea","code":"staff","display":"Staff","order":1818}
-{"index":{"_id":"servidor/azc"}}
-{"name":"servidor","code":"azc","display":"Azcapozalco","order":3}
-{"index":{"_id":"servidor/eca"}}
-{"name":"servidor","code":"eca","display":"Ecatepec","order":4}
-{"index":{"_id":"servidor/teq"}}
-{"name":"servidor","code":"teq","display":"Tequisquiapan","order":5}
-{"index":{"_id":"servidor/ate"}}
-{"name":"servidor","code":"ate","display":"Atemajac","order":6}
-{"index":{"_id":"userRole/azc"}}
-{"name":"userRole","code":"azc","display":"Azcapozalco","order":1}
-{"index":{"_id":"userRole/eca"}}
-{"name":"userRole","code":"eca","display":"Ecatepec","order":2}
-{"index":{"_id":"userRole/teq"}}
-{"name":"userRole","code":"teq","display":"Tequisquiapan","order":3}
-{"index":{"_id":"userRole/ate"}}
-{"name":"userRole","code":"ate","display":"Atemajac","order":4}
-{"index":{"_id":"userRole/general"}}
-{"name":"userRole","code":"general","display":"General","order":10}
-{"index":{"_id":"userRole/boletos"}}
-{"name":"userRole","code":"boletos","display":"Boletos","order":11,"partOf":""}
-{"index":{"_id":"userRole/cafeteria"}}
-{"name":"userRole","code":"cafeteria","display":"Cafetería","order":12}
-{"index":{"_id":"userRole/dulceria"}}
-{"name":"userRole","code":"dulceria","display":"Dulcería","order":13}
-{"index":{"_id":"userRole/accessPoint"}}
-{"name":"userRole","code":"accessPoint","display":"Acceso Películas","order":14}
-{"index":{"_id":"userRole/lux"}}
-{"name":"userRole","code":"lux","display":"Lux","order":15}
+{"index":{"_id":"motivoAgendaExcepcion/dano-equipo"}}
+{"name":"motivoAgendaExcepcion","code":"dano-equipo","display":"Daño en el Equipo","order":1}
+{"index":{"_id":"motivoAgendaExcepcion/dano-estructura"}}
+{"name":"motivoAgendaExcepcion","code":"dano-estructura","display":"Daño en la Estructura","order":2}
+{"index":{"_id":"motivoAgendaExcepcion/dia-concedido"}}
+{"name":"motivoAgendaExcepcion","code":"dia-concedido","display":"Día Concedido","order":3}
+{"index":{"_id":"motivoAgendaExcepcion/dia-festivo"}}
+{"name":"motivoAgendaExcepcion","code":"dia-festivo","display":"Día Festivo","order":4}
+{"index":{"_id":"motivoAgendaExcepcion/falla-sistema"}}
+{"name":"motivoAgendaExcepcion","code":"falla-sistema","display":"Falla en Sistema","order":5}
+{"index":{"_id":"motivoAgendaExcepcion/fuera-horario"}}
+{"name":"motivoAgendaExcepcion","code":"fuera-horario","display":"Fuera de Horario","order":6}
+{"index":{"_id":"motivoAgendaExcepcion/incapacidad"}}
+{"name":"motivoAgendaExcepcion","code":"incapacidad","display":"Incapacidad","order":7}
+{"index":{"_id":"motivoAgendaExcepcion/meteorologico"}}
+{"name":"motivoAgendaExcepcion","code":"meteorologico","display":"Meteorológico","order":8}
+{"index":{"_id":"motivoAgendaExcepcion/renuncia"}}
+{"name":"motivoAgendaExcepcion","code":"renuncia","display":"Renuncia","order":9}
+{"index":{"_id":"motivoAgendaExcepcion/vacaciones"}}
+{"name":"motivoAgendaExcepcion","code":"vacaciones","display":"Vacaciones","order":10}
+{"index":{"_id":"motivoAgendaExcepcion/otro"}}
+{"name":"motivoAgendaExcepcion","code":"otro","display":"Otro","order":11}

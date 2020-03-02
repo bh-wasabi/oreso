@@ -1,4 +1,4 @@
-{{#define type="doc" id="planFaltante"}}
+{{#define type="doc" id="planFormaPago"}}
 	{{param defaultDisplay="_name"}}
 	{{param defaultView="lista"}}
 	{{param pageStart="1"}}
@@ -17,8 +17,8 @@
 	{{param startOnOpen="base"}}
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="base.nombre"}}
-	{{param name="planFaltante"}}
-	{{param typeName="planFaltante"}}
+	{{param name="planFormaPago"}}
+	{{param typeName="planFormaPago"}}
 	{{action id="subdoc" condition="=false"}}
 	{{action id="subdoc2" condition="=false"}}
 	{{action id="subdoc3" condition="=false"}}
@@ -44,10 +44,11 @@
 	{{section id="_options" temp="true"}}
 	{{section id="_params" temp="true"}}
 	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
-		{{field id="codigo" label="Código" type="text" column="A"}}
-		{{field id="descripcion" label="Descripción" type="text" column="A"}}
-		{{field id="_cuenta" label="Ubicación" type="text" column="A"}}
-		{{field id="faltante" label="Faltante" type="number" format="#," column="A"}}
+		{{field id="uen" label="UEN" type="text" readOnly="true" column="A"}}
+		{{field id="agente" label="Agente" type="text" readOnly="true" column="A"}}
+		{{field id="caja" label="Caja" type="text" readOnly="true" column="A"}}
+		{{field id="metodo" label="Método Pago" type="text" readOnly="true" column="A"}}
+		{{field id="importe" label="Importe" type="number" format="currency" column="A"}}
 	{{/section}}
 	{{#report id="preliminar-encabezado"}}
 		{{#stack}}
@@ -73,11 +74,12 @@
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="planFaltante" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
-				{{row field="codigo" align="left"}}
-				{{row field="descripcion" align="left"}}
-				{{row field="_cuenta" align="left"}}
-				{{row field="faltante" align="left"}}
+			{{#record title="planFormaPago" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
+				{{row field="uen" align="left"}}
+				{{row field="agente" align="left"}}
+				{{row field="caja" align="left"}}
+				{{row field="metodo" align="left"}}
+				{{row field="importe" align="left"}}
 			{{/record}}
 		{{/stack}}
 	{{/report}}
@@ -94,7 +96,7 @@
 	{{/browser}}
 {{/define}}
 {{#markup}}
-	{{#page name="planFaltante"}}
+	{{#page name="planFormaPago"}}
 		{{row}}
 		{{row}}
 		{{#row}}
@@ -102,10 +104,10 @@
 				{{#row class="auto-form-row"}}
 					{{#col medium="100%" class="auto-form-col"}}
 						{{#h5 class="auto-form-h5"}}
-							planFaltante
+							planFormaPago
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="codigo, descripcion, _cuenta, faltante" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="uen, agente, caja, metodo, importe" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -113,29 +115,32 @@
 			{{/zone}}
 		{{/row}}
 	{{/page}}
-	{{#modal base id="base" name="planFaltante"}}
+	{{#modal base id="base" name="planFormaPago"}}
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
-				{{field codigo}}
-				{{field descripcion}}
-				{{field _cuenta}}
-				{{field faltante}}
+				{{field uen}}
+				{{field agente}}
+				{{field caja}}
+				{{field metodo}}
+				{{field importe}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
 	{{#template id="lista"}}
 		<div>{{_name}}</div>
 	{{/template}}
-	{{#template2 id="planFaltante"}}
-		<br>Código: {{codigo}}
-		<br>Descripción: {{descripcion}}
-		<br>Ubicación: {{_cuenta}}
-		<br>Faltante: {{number faltante "#,"}}
+	{{#template2 id="planFormaPago"}}
+		<br>UEN: {{uen}}
+		<br>Agente: {{agente}}
+		<br>Caja: {{caja}}
+		<br>Método Pago: {{metodo}}
+		<br>Importe: {{number importe "currency"}}
 	{{/template2}}
-	{{#template3 id="planFaltante"}}
-		{{#if codigo}}<br>Código: {{codigo}}{{/if}}
-		{{#if descripcion}}<br>Descripción: {{descripcion}}{{/if}}
-		{{#if _cuenta}}<br>Ubicación: {{_cuenta}}{{/if}}
-		{{#if faltante}}<br>Faltante: {{number faltante "#,"}}{{/if}}
+	{{#template3 id="planFormaPago"}}
+		{{#if uen}}<br>UEN: {{uen}}{{/if}}
+		{{#if agente}}<br>Agente: {{agente}}{{/if}}
+		{{#if caja}}<br>Caja: {{caja}}{{/if}}
+		{{#if metodo}}<br>Método Pago: {{metodo}}{{/if}}
+		{{#if importe}}<br>Importe: {{number importe "currency"}}{{/if}}
 	{{/template3}}
 {{/markup}}

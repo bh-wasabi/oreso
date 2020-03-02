@@ -1,4 +1,13 @@
 {{#define id="lote"}}  
+  {{#view id="lista"}}
+    {{#find}}
+      {{include field="_name"}}
+      {{search field="_name"}}
+      {{search field="base.fecha"}}
+      {{search field="base.ordenCompra"}}
+      {{search field="base.referencia"}}
+    {{/find}}
+  {{/view}}
   {{#section id="base"}}
     {{field id="nombre" type="expr" value="=@lote"}}
   {{/section}}

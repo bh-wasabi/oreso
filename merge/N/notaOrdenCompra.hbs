@@ -18,6 +18,7 @@
       {{#onChange}}
         {{set articulo="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).articulo"}}
         {{set codigo="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).codigo"}}
+        {{set codigoUpc="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).codigoUpc"}}
         {{set descripcion="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).descripcion"}}
       {{/onChange}}
     {{/field}}
@@ -35,6 +36,7 @@
   {{#grid id="articulos" section="articulos" keyField="cantidad" allowInsert="true" allowRemove="true"}}
     {{column field="aliasArticulo" label="Artículo" width="150"}}
     {{column field="codigo" label="Código" width="150" readOnly="true"}}
+    {{column field="codigoUpc" label="UPC" width="150" readOnly="true"}}
     {{column field="descripcion" label="Descripción" width="330"}}
     {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
     {{column field="valorUnitario" label="Costo Unitario" width="110" type="numeric" format="#,.##" required="true"}}

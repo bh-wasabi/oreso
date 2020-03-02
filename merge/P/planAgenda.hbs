@@ -31,10 +31,12 @@
       {{include field="base.color" as="color"}}
       {{include field="base.tipoRecurso" as="tipoRecurso"}}
       {{include field="base.tipoServicio" as="tipoServicio"}}
+      {{include field="base.clave" as="clave"}}
       {{sort field="base._recurso" direction="asc"}}
       {{filter field="base.estatus" eq="'afectado'"}}
       {{!-- {{filter field="base.area" eq="='area'"}} --}}
       {{filter field="base.tipoRecurso" eq="='espacio'"}}
+      {{filter condition="=sucursal" field="base.clave" eq="=sucursal"}}
     {{/find}}
     {{calc field="text" value="=fn('areaSubArea', @area, @subArea)"}}
   {{/view}}
@@ -65,7 +67,9 @@
       {{/onChange}}
     {{/field}}
     {{#field id="sucursal"}}
-      {{onChange clearFields="espacio"}}
+      {{#onChange clearFields="espacio"}}
+        {{set clave="=base.clave"}}
+      {{/onChange}}
     {{/field}}
     {{#field id="espacio"}}
       {{#editor alwaysLoad="true"}}

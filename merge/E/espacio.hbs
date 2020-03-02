@@ -8,15 +8,15 @@
   {{#view id="lista"}}
     {{#find}}
       {{include field="base.nombre"}}
-      {{include field="base.codigo"}}
+      {{include field="base.clave"}}
       {{include field="base._estatus"}}    
       {{include field="base._tipoEspacio"}}
       {{include field="base._area"}}
-      {{sort field="base.codigo" direction="asc"}}
+      {{sort field="base.clave" direction="asc"}}
       {{filter condition="=area" field="base.area" eq="=area"}}
       {{filter condition="=sucursal" field="base.sucursal" eq="=sucursal"}}
       {{search field="base.nombre"}}
-      {{search field="base.codigo"}}
+      {{search field="base.clave"}}
       {{search field="base.area"}}
     {{/find}}
   {{/view}}
@@ -36,7 +36,7 @@
   {{#template id="lista"}}
     <div>
       {{base.nombre}}
-      <span style="font-size:12px;float:right;">{{base.codigo}}</span>
+      <span style="font-size:12px;float:right;">{{base.clave}}</span>
       </br>
       <span style="font-size:12px;">{{base._tipoEspacio}} {{base._area}}</span>
       <span style="font-size:12px;float:right;">{{base._estatus}}</span>

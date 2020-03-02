@@ -18,6 +18,7 @@
       {{#onChange}}
         {{set articulo="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).articulo"}}
         {{set codigo="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).codigo"}}
+        {{set codigoUpc="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).codigoUpc"}}
         {{set descripcion="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).descripcion"}}
       {{/onChange}}
     {{/field}}
@@ -35,6 +36,7 @@
   {{#grid id="articulos" section="articulos" keyField="cantidad" allowInsert="false" allowRemove="false" applyFilter="referencia" allowSort="true" sortBy="referencia,descripcion"}}
     {{column field="referencia" label="Referencia" width="150" readOnly="true"}}
     {{column field="codigo" label="Código" width="150" readOnly="true"}}
+    {{column field="codigoUpc" label="UPC" width="150" readOnly="true"}}
     {{column field="descripcion" label="Artículo" width="350" readOnly="true"}}
     {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
     {{column field="valorUnitario" label="Costo Unitario" width="110" type="numeric" format="#,.##" required="true"}}
@@ -44,4 +46,23 @@
     {{column field="lote" width="100" required="true"}}
     {{column field="vencimiento" validateDate="true" width="100" required="true"}}
   {{/grid}}
+  {{#grid id="adjuntos" section="adjuntos" allowRemove="true" allowSort="true" sortBy="orden, fecha"}}
+    {{column field="nombre" width="400"}}
+    {{column field="tipo" width="200"}}
+    {{column field="fecha" width="100" readOnly="true"}}
+    {{column field="ext" width="100" readOnly="true"}}
+    {{column field="tamano" width="100" readOnly="true"}}
+    {{column field="orden" width="60"}}
+  {{/grid}}  
+
+  {{#cube id="articulos" section="articulos" name="=_name" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
+    {{row field="codigo" label="Código" width="250"}}
+    {{row field="descripcion" label="Descripción" width="350"}}
+    {{row field="codigoUpc" label="Código UPC"}}
+    {{sum field="cantidad" label="Cantidad" format="#,"}}
+    {{sum field="importe" label="Importe" format="currency"}}
+    {{sum field="iva" label="IVA" format="currency"}}
+    {{sum field="total" label="Total" format="currency"}}
+  {{/cube}}
+  {{action id="tool" condition="true" label="Analizar" type="viewCube" visibleMode="close" color="cyan" btnSolid="true" cube="articulos" items="=calc.mergeArraysByKey(articulos, _items, 'codigo')" fromSource="articulo" fromView="todo"}}
 {{/define}}

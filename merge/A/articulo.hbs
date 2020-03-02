@@ -5,12 +5,14 @@
       {{include field="base.codigo" as="codigo"}}
       {{include field="base._unidad" as="_unidad"}}
       {{include field="base.codigoUpc" as="codigoUpc"}}
-      {{include field="base.codigoLocal" as="codigoLocal"}}
+      {{!-- {{include field="base.codigoLocal" as="codigoLocal"}} --}}
       {{include field="base.modelo" as="modelo"}}
       {{include field="base.tamano" as="tamano"}}
       {{include field="base.color" as="color"}}
+      {{include field="base.marca" as="marca"}}
       {{include field="base.precioPublico" as="precioPublico"}}
       {{include field="base.unidad" as="unidad"}}
+      {{include field="base.descripcion2" as="descripcion2"}}
     {{/all}}
   {{/view}}
   {{#view id="lista"}}
@@ -25,10 +27,11 @@
       {{include field="base.cliente"}}
       {{sort field="_name" direction="asc"}}
       {{filter condition="=tipoArticulo" field="base.tipoArticulo" in="=tipoArticulo"}}
+      {{filter condition="=categoria" field="base.categoria" in="=categoria"}}
       {{search field="_name"}}
       {{search field="base.codigo"}}
       {{search field="base.codigoUpc"}}
-      {{search field="base.codigoLocal"}}
+      {{!-- {{search field="base.codigoLocal"}} --}}
       {{search field="base.codigoSku"}}
       {{search field="base._marca"}}
       {{search field="base._modelo"}}
@@ -39,8 +42,10 @@
   {{#view id="porCodigo"}}
     {{#find limit="-1"}}
       {{include field="base.codigo"}}
+      {{include field="base.codigoUpc"}}
       {{include field="_name"}}
       {{include field="base.precioLista"}}
+      {{include field="base.costoUnitario"}}
       {{filter field="base.codigo" gt="''"}}
     {{/find}}
   {{/view}}
@@ -50,12 +55,14 @@
       {{include field="base.codigoUpc"}}
       {{include field="_name"}}
       {{include field="base.precioLista"}}
+      {{include field="base.costoUnitario"}}
       {{filter field="base.codigoUpc" gt="''"}}
     {{/find}}
   {{/view}}
-  {{#view id="porCodigoSku"}}
+  {{!-- {{#view id="porCodigoSku"}}
     {{#find limit="-1"}}
       {{include field="base.codigo"}}
+      {{include field="base.codigoUpc"}}
       {{include field="base.codigoSku"}}
       {{include field="_name"}}
       {{include field="base.precioLista"}}
@@ -63,8 +70,8 @@
       {{filter field="base.codigoSku" gt="''"}}
       {{filter field="base.cliente" exists="=true"}}
     {{/find}}
-  {{/view}}
-  {{#view id="porCodigoLocal"}}
+  {{/view}} --}}
+  {{!-- {{#view id="porCodigoLocal"}}
     {{#find limit="-1"}}
       {{include field="base.codigo"}}
       {{include field="base.codigoLocal"}}
@@ -72,10 +79,11 @@
       {{include field="base.precioLista"}}
       {{filter field="base.codigoLocal" gt="''"}}
     {{/find}}
-  {{/view}}
+  {{/view}} --}}
 
   {{#section id="base"}}
     {{field id="nombre" type="expr" value="=@descripcion"}}
+    {{field id="descripcion2" type="expr" value="=calc.concat(@composicion,@modelo)"}}
     {{field id="tipoArticulo" defaultValue="_params.tipoArticulo" readOnly="true"}}
     {{field id="esInventariable" type="expr" value="=tipoArticulo=='inventariable'"}}
     {{field id="esServicio" type="expr" value="=tipoArticulo=='servicio'"}}
