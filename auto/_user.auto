@@ -82,10 +82,6 @@
 			{{#editor type="tags" preset="cfg.userRole" searchEnabled="false" searchTimeout="100" showSelectionControls="true" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="sucursal" label="Complejo" type="text" column="A" references="sucursal" modalColumn="A" labelModalClass="full-width"}}
-			{{#editor type="select" preset="cfg.sucursal" width="100%"}}
-			{{/editor}}
-		{{/field}}
 		{{#field id="estatus" label="Estatus" type="text" column="A" references="estatusUsuario" modalColumn="A" labelModalClass="full-width" defaultValue="'activo'"}}
 			{{#editor type="select" preset="cfg.estatusUsuario" width="100%"}}
 			{{/editor}}
@@ -172,7 +168,6 @@
 				{{row field="nombre" align="left"}}
 				{{row field="correo" align="left"}}
 				{{row field="nivelAcceso" align="left"}}
-				{{row field="sucursal" align="left"}}
 				{{row field="estatus" align="left"}}
 			{{/record}}
 		{{/stack}}
@@ -242,7 +237,7 @@
 							Datos Usuario
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="nombre, correo, nivelAcceso, sucursal, estatus" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="nombre, correo, nivelAcceso, estatus" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -282,7 +277,6 @@
 				{{field contrasena}}
 				{{field hash hide="true"}}
 				{{field nivelAcceso}}
-				{{field sucursal}}
 				{{field estatus}}
 			{{/fieldSet}}
 		{{/col}}
@@ -321,14 +315,12 @@
 		<br>Nombre: {{nombre}}
 		<br>Usuario / Correo: {{correo}}
 		<br>Nivel Acceso: {{_nivelAcceso}}
-		<br>Complejo: {{_sucursal}}
 		<br>Estatus: {{_estatus}}
 	{{/template2}}
 	{{#template3 id="_user"}}
 		{{#if nombre}}<br>Nombre: {{nombre}}{{/if}}
 		{{#if correo}}<br>Usuario / Correo: {{correo}}{{/if}}
 		{{#if nivelAcceso}}<br>Nivel Acceso: {{_nivelAcceso}}{{/if}}
-		{{#if sucursal}}<br>Complejo: {{_sucursal}}{{/if}}
 		{{#if estatus}}<br>Estatus: {{_estatus}}{{/if}}
 	{{/template3}}
 {{/markup}}

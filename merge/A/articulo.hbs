@@ -1,10 +1,72 @@
 {{#define id="articulo"}}  
   {{param name="=_params._tipoArticulo||'Artículo'"}}
+
+  {{#report id="existencias" fontSize="8" header="preliminar-encabezado" showStandarFooter="true" source="mov" view="existencias"}}
+    {{#stack}}
+      [.#if esCinetop.]
+      {{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
+      [.else.]
+      {{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
+      [./if.]
+    {{/stack}}
+    {{#stack}}
+      {{#record title="Artículo" titleStyle="title" layout="lightHorizontalLines" fontSize="8" section="base" headerStyle="field" margin="-10,0,0,10" widths="60,470"}}
+        {{row field="codigo" align="left"}}
+        {{row field="descripcion" align="left"}}
+        {{row field="estatus" align="left"}}
+      {{/record}}
+    {{/stack}}
+    {{#stack}}
+      {{row text="Existencias" fontSize="10" bold="true"}}
+      {{#table section="_items" fontSize="8" titleStyle="title" layout="lightHorizontalLines" headerStyle="field2" margin="-10,0,0,10" fontSize="8"}}
+        {{column field="_cuenta" label="Ubicación"}}
+        {{column field="lote" label="Lote"}}
+        {{column field="loteReferencia" label="Referencia"}}
+        {{column field="vencimiento" label="Caducidad" type="date" format="DD/MMM/YYYY"}}
+        {{column field="existencia" label="Existencia" type="number" format="#," align="right" total="sum"}}
+      {{/table}}
+    {{/stack}}
+  {{/report}}
+  
+  {{#report id="kardex" fontSize="8" header="preliminar-encabezado" showStandarFooter="true" source="mov" view="kardex"}}
+    {{#stack}}
+      [.#if esCinetop.]
+      {{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/cinetop.png"}}
+      [.else.]
+      {{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
+      [./if.]
+    {{/stack}}
+    {{#stack}}
+      {{#record title="Artículo" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="base" headerStyle="field" margin="-10,0,0,10" widths="80,400"}}
+        {{row field="codigo" align="left"}}
+        {{row field="descripcion" align="left"}}
+        {{row field="estatus" align="left"}}
+      {{/record}}
+    {{/stack}}
+    {{#stack}}
+      {{row text="Kardex" fontSize="10" bold="true"}}
+      {{row expr="=calc.concat('Desde:', moment(_query.desde).format('DD/MMM/YYYY'), '- Hasta:', moment(_query.hasta).format('DD/MMM/YYYY'))" fontSize="8" bold="true" margin="-10,0,0,10"}}
+      {{#table section="_items" fontSize="6" titleStyle="title" layout="lightHorizontalLines" headerStyle="field2" margin="-10,0,0,10" fontSize="8"}}
+        {{column field="movimiento" label="Movimiento" total="count"}}
+        {{column field="_usuario" label="Usuario"}}
+        {{column field="fecha" label="Fecha/Hora" type="date" format="DD/MMM/YYYY hh:mma"}}
+        {{column field="_cuenta" label="Ubicación"}}
+        {{column field="entrada" label="Entrada" type="number" format="#," align="right"}}
+        {{column field="salida" label="Salida" type="number" format="#," align="right"}}
+        {{column field="existencia" label="Existencia" type="number" format="#," align="right"}}
+        {{column field="_lote" label="Lote/Caducidad"}}
+        {{column field="costoUnitario" label="Costo Unitario" type="number" align="right" format="currency"}}
+        {{column field="costoTotal" label="Costo Total" type="number" align="right" format="currency"}}
+      {{/table}}
+    {{/stack}}
+  {{/report}}
+
   {{#view id="todo"}}
     {{#all flatten="true"}}
       {{include field="base.codigo" as="codigo"}}
       {{include field="base._unidad" as="_unidad"}}
       {{include field="base.codigoUpc" as="codigoUpc"}}
+      {{include field="base.codigoUpc2" as="codigoUpc2"}}
       {{!-- {{include field="base.codigoLocal" as="codigoLocal"}} --}}
       {{include field="base.modelo" as="modelo"}}
       {{include field="base.tamano" as="tamano"}}
@@ -12,6 +74,7 @@
       {{include field="base.marca" as="marca"}}
       {{include field="base.precioPublico" as="precioPublico"}}
       {{include field="base.unidad" as="unidad"}}
+      {{include field="base.cantidadEmpaque" as="cantidadEmpaque"}}
       {{include field="base.descripcion2" as="descripcion2"}}
     {{/all}}
   {{/view}}
@@ -81,6 +144,22 @@
     {{/find}}
   {{/view}} --}}
 
+  {{#action id="verKardex" hide="true" type="report-pdf" report="kardex" fileName="=_name" label="Kardex" color="brown" visibleMode="close"}}
+    {{ask field="desde" type="date" label="Desde"}}
+    {{ask field="hasta" type="date" label="Hasta"}}
+    {{param codigo="=base.codigo"}}
+  {{/action}}
+
+  {{#action id="verExistencias" hide="true" type="report-pdf" report="existencias" fileName="=_name" label="Existencias" color="brown" visibleMode="close"}}
+    {{param codigo="=base.codigo"}}
+  {{/action}}
+
+  {{action id="ver" condition="=true" type="menu" menu="reportes" label="Reportes" color="brown"}}
+  {{#menu id="reportes" color="brown"}}
+    {{item action="verExistencias" text="Existencias"}}
+    {{item action="verKardex" text="Kardex"}}
+  {{/menu}}  
+
   {{#section id="base"}}
     {{field id="nombre" type="expr" value="=@descripcion"}}
     {{field id="descripcion2" type="expr" value="=calc.concat(@composicion,@modelo)"}}
@@ -89,7 +168,7 @@
     {{field id="esServicio" type="expr" value="=tipoArticulo=='servicio'"}}
   {{/section}}
   {{action id="eliminar" hide="true"}}
-  {{action id="ver" condition="=true" type="openFolder" label="Adjuntos" items="=adjuntos" color="grey" visibleMode="close"}}
+  {{!-- {{action id="ver" condition="=true" type="openFolder" label="Adjuntos" items="=adjuntos" color="grey" visibleMode="close"}} --}}
   {{#grid id="adjuntos" section="adjuntos" allowRemove="true" allowSort="true" sortBy="orden, fecha"}}
     {{column field="nombre" width="400"}}
     {{column field="tipo" width="200"}}
@@ -108,6 +187,9 @@
     {{param tipoArticulo="servicio"}}
     {{param _tipoArticulo="Servicio"}}
   {{/browser}}  
+  {{#browser id="ver" view="lista" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%" showActions="preliminar, ver"}}
+    {{list itemTemplate="lista" allowSearch="true" allowRefresh="true"}}
+  {{/browser}}
 {{/define}}
 {{#markup}}
   {{#template id="lista"}}

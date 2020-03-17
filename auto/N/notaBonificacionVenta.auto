@@ -1,4 +1,4 @@
-{{#define type="doc" id="notaRetiroCapital"}}
+{{#define type="doc" id="notaBonificacionVenta"}}
 	{{param defaultDisplay="_name"}}
 	{{param defaultView="lista"}}
 	{{param pageStart="1"}}
@@ -17,8 +17,8 @@
 	{{param startOnOpen="base"}}
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="_name"}}
-	{{param name="=fn('dynamicName', 'Retiro Capital', @_created)"}}
-	{{param typeName="Retiro Capital"}}
+	{{param name="=fn('dynamicName', 'Bonificación Venta', @_created)"}}
+	{{param typeName="Bonificación Venta"}}
 	{{param group="General"}}
 	{{param fullWidth="true"}}
 	{{param modalSize="xwide"}}
@@ -84,10 +84,6 @@
 			{{#editor type="lookup" source="persona" view="responsablesAcademicos" searchEnabled="true" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="fechaEmision" label="Fecha Emisión" type="date" format="DD/MMM/YYYY" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD" generator="now"}}
-			{{#editor type="date" width="100%"}}
-			{{/editor}}
-		{{/field}}
 		{{#field id="estatus" label="Estatus" type="text" readOnly="true" column="A" references="estatusNota" modalHide="true" labelModalClass="full-width" defaultValue="'borrador'"}}
 			{{#editor type="select" preset="cfg.estatusNota" width="100%"}}
 			{{/editor}}
@@ -96,7 +92,7 @@
 			{{#editor type="text-area" height="300" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{field id="nombre" label="Nombre" hide="true" type="expr" value="=fn('dynamicName', 'Retiro Capital', @_created)"}}
+		{{field id="nombre" label="Nombre" hide="true" type="expr" value="=fn('dynamicName', 'Bonificación Venta', @_created)"}}
 	{{/section}}
 	{{#section id="aplicacion" type="array"}}
 		{{field id="lote" label="Lote" type="text" column="A"}}
@@ -128,6 +124,24 @@
 		{{field id="destino" label="Destino ID" type="text" readOnly="true" hide="true" column="A"}}
 		{{field id="_destino" label="Ubicación Destino" type="text" readOnly="true" column="A"}}
 	{{/section}}
+	{{#section id="adjuntos" type="array"}}
+		{{field id="id" label="ID" type="text" hide="true" column="A"}}
+		{{field id="url" label="URL" type="text" hide="true" column="A"}}
+		{{field id="nombre" label="Nombre" type="text" column="A" defaultValue="'url'"}}
+		{{#field id="tipo" label="Tipo" type="text" column="A" references="tipoAdjunto"}}
+			{{#editor type="select" preset="cfg.tipoAdjunto"}}
+			{{/editor}}
+		{{/field}}
+		{{field id="tamano" label="Tamaño (KB)" type="number" format="#" column="A"}}
+		{{#field id="fecha" label="Fecha" type="date" format="DD/MMM/YYYY" column="A" saveFormat="YYYY-MM-DD"}}
+			{{#editor type="date"}}
+			{{/editor}}
+		{{/field}}
+		{{field id="ext" label="Extensión" type="text" column="A"}}
+		{{field id="tipoMIME" label="Tipo MIME" type="text" hide="true" column="A"}}
+		{{field id="subTipoMIME" label="Sub Tipo MIME" type="text" hide="true" column="A"}}
+		{{field id="orden" label="Orden" type="number" hide="true" column="A"}}
+	{{/section}}
 	{{section id="resumen" temp="true"}}
 	{{#report id="preliminar-encabezado"}}
 		{{#stack}}
@@ -155,7 +169,6 @@
 		{{#stack}}
 			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="responsableAcademico" condition="esEstudiante" align="left"}}
-				{{row field="fechaEmision" align="left"}}
 				{{row field="estatus" align="left"}}
 				{{row field="comentarios" align="left"}}
 			{{/record}}
@@ -175,6 +188,17 @@
 				{{column field="referenciaPago"}}
 				{{column field="aliasDestino"}}
 				{{column field="_destino"}}
+			{{/table}}
+		{{/stack}}
+		{{#stack}}
+			{{#row text="Adjuntos" fontSize="10" bold="true" margin="-10,0,0,0"}}
+			{{/row}}
+			{{#table title="Adjuntos" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="adjuntos" headerStyle="field" margin="-10,0,0,10" removeEmptyCols="true"}}
+				{{column field="nombre"}}
+				{{column field="tipo"}}
+				{{column field="tamano"}}
+				{{column field="fecha"}}
+				{{column field="ext"}}
 			{{/table}}
 		{{/stack}}
 		{{#stack}}
@@ -254,7 +278,7 @@
 	{{/workflow}}
 {{/define}}
 {{#markup}}
-	{{#page name="Retiro Capital"}}
+	{{#page name="Bonificación Venta"}}
 		{{row}}
 		{{row}}
 		{{#row}}
@@ -265,7 +289,7 @@
 							Datos Generales
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="responsableAcademico, fechaEmision, estatus, comentarios" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="responsableAcademico, estatus, comentarios" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -288,7 +312,24 @@
 			{{/zone}}
 		{{/row}}
 		{{#row}}
-			{{#zone id="aplicacion" modalGrid="aplicacion"}}
+			{{#if context="adjuntos"}}
+				{{#zone id="adjuntos" modalGrid="adjuntos"}}
+					{{#row class="auto-form-row"}}
+						{{#col medium="100%" class="auto-form-col"}}
+							{{#h5 class="auto-form-h5"}}
+								Adjuntos
+							{{/h5}}
+							{{#div}}
+								{{table adjuntos class="auto-form-table" cols="nombre, tipo, tamano, fecha, ext" medium="50,20,10,10,10" removeEmptyCols="false" unlink="true"}}
+								{{br}}
+							{{/div}}
+						{{/col}}
+					{{/row}}
+				{{/zone}}
+			{{/if}}
+		{{/row}}
+		{{#row}}
+			{{#zone id="adjuntos" modalGrid="adjuntos"}}
 			{{/zone}}
 		{{/row}}
 	{{/page}}
@@ -296,25 +337,23 @@
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
 				{{field responsableAcademico}}
-				{{field fechaEmision}}
 				{{field estatus hide="true"}}
 				{{field comentarios}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
 	{{modal aplicacion id="aplicacion" name="Aplicación" grid="aplicacion" size="xwide" prev="base"}}
+	{{modal adjuntos id="adjuntos" name="Adjuntos" grid="adjuntos" size="wide"}}
 	{{#template id="lista"}}
 		<div>{{_name}}</div>
 	{{/template}}
-	{{#template2 id="notaRetiroCapital"}}
+	{{#template2 id="notaBonificacionVenta"}}
 		{{#if esEstudiante}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}
-		<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}
 		<br>Estatus: {{_estatus}}
 		<br>{{comentarios}}
 	{{/template2}}
-	{{#template3 id="notaRetiroCapital"}}
+	{{#template3 id="notaBonificacionVenta"}}
 		{{#if esEstudiante}}{{#if responsableAcademico}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}{{/if}}
-		{{#if fechaEmision}}<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}{{/if}}
 		{{#if estatus}}<br>Estatus: {{_estatus}}{{/if}}
 		{{#if comentarios}}<br>{{comentarios}}{{/if}}
 	{{/template3}}

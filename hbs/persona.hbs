@@ -134,6 +134,10 @@
     {{param persona="_id"}}
     {{param aliasOrigen="='AG'"}}
   {{/action}}
+  {{#action id="bonificacionVenta" source="notaBonificacionVenta" label="Bonificación Venta" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true" fromSource="mov" fromView="sugerirLiquidacion" toSection="aplicacion"}}
+    {{param aux="='cxc'"}}
+    {{param persona="_id"}}
+  {{/action}}
   {{#action id="devolucionVenta" source="notaDevolucionVenta" label="Devolución Venta" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
     {{param aliasDestino="='AG'"}}
   {{/action}}

@@ -48,19 +48,40 @@
     {{when tipoRecurso="espacio" return="=base._espacio"}}
   {{/function}}
   {{#function id="checkListTitulos"}}
-    {{default return="=calc.concatTab('Tipo','Fecha','Cliente final','# factura','# OC','Código Tecs','Grupo','Descripción','Sku','# Sucursal','Nombre sucursal','Unidad','Cantidad','Factor','Contenedor','Caja inicial','Caja final','Fecha Cita','# Cita','Observación')"}}
+    {{default return="=calc.concatTab('Tipo','FECHA','Cliente final','# factura','# OC','Código Tecs','Grupo','Descripción','Sku','# Sucursal','Nombre sucursal','Unidad','Cantidad','Factor','Caja inicial','Caja final','FECHA DE CITA','# Cita','OBSERVACIÓN')"}}
   {{/function}}
   {{#function id="checkList" multi="true"}}
     {{define type="param" id="item"}}
-    {{default return="=(item.neto)?calc.concatTab('Salida',calc.format('date', item.base.fechaEmision, 'DD/MM/YYYY'),item.persona.nombreCompleto,'',item.referencia,item.loteReferencia,item.codigo,item.descripcion,item.referencia2,item.aliasDestino,item._destino,'pzas',item.neto,'',item.contenedor,item.cajaInicial,item.cajaFinal,'','',''):null"}}
+    {{!-- {{default return="=(item.neto)?calc.concatTab('Salida',calc.format('date', item.base.fechaEmision, 'DD/MM/YYYY'),item.persona.nombreCompleto,'',item.referencia,item.loteReferencia,item.codigo,item.descripcion,item.referencia2,item.aliasDestino,item._destino,'pzas',item.neto,'',item.contenedor,item.cajaInicial,item.cajaFinal,'','',''):null"}} --}}
+    {{default return="=(item.entrada)?calc.concatTab('Salida',calc.format('date', item.base.fechaEmision, 'DD/MM/YYYY'),item.persona.nombreCompleto,'',item.referencia,item.loteReferencia,item.codigo,item.descripcion,item.referencia2,item.id,item._cuenta,'pzas',item.entrada,1,1,'','','',''):null"}}
   {{/function}}
-  {{#function id="felTitulos"}}
+  {{#function id="checkListExcel" multi="true"}}
+    {{define type="param" id="item"}}
+    {{default return="=(item.entrada)?{Tipo:'Salida',FECHA: moment(item.base.fechaEmision).format('YYYY-MM-DD'),'Cliente final':item.persona.nombreCompleto,'# factura':null,'# OC': item.referencia,'Código Tecs':item.loteReferencia,Grupo:item.codigo,'Descripción':item.descripcion,Sku:item.referencia2,'# Sucursal':item.id,'Nombre sucursal':item._cuenta,Unidad:'pzas',Cantidad:item.entrada,Factor:null,'Caja inicial':1,'Caja final':1}:null"}}
+  {{/function}}
+  {{#function id="felLiverpoolTitulos"}}
     {{define type="param" id="item"}}
     {{default return="=[calc.concat('NOMCAD', 'LIVERPOOL'),calc.concat('NUMEOC', item.ordenCompra),calc.concat('FECHOC', moment(item.fechaOrdenCompra).format('DD-MM-YYYY')),calc.concat('FECHEM', moment(item.fechaEmbarque).format('DD-MM-YYYY')),calc.concat('FECHCA', moment(item.fechaCancelacion).format('DD-MM-YYYY')),calc.concat('NUMDPT', item.departamento),calc.concat('NUMEMI', '134494'),calc.concat('EANENT', '00090'),calc.concat('NOMENT', 'BODEGA TULTITLAN'),calc.concat('PRDESG', item.logistica)]"}}
   {{/function}}
-  {{#function id="fel" multi="true"}}
+  {{#function id="felLiverpool" multi="true"}}
     {{define type="param" id="item"}}
     {{default return="=[calc.concat('CANTID', item.cantidad),calc.concat('CANTIP', item.cantidad),calc.concat('CVESKU', item.referencia2),calc.concat('DESCRI', item.descripcion2),calc.concat('CODUPC', item.codigoUpc),calc.concat('ESTILV', item.modelo),calc.concat('COLORV', item.color),calc.concat('TALLAV', item.tamano),calc.concat('PBRUDE', item.valorUnitario),calc.concat('PUNITN', item.precioPublico),calc.concat('PUNITR', null),calc.concat('UNIDAD', calc.upperCase(item.unidad))]"}}
+  {{/function}}
+  {{#function id="felSuburbiaTitulos"}}
+    {{define type="param" id="item"}}
+    {{default return="=[calc.concat('NOMCAD', 'SUBURBIA'),calc.concat('NUMEOC', item.ordenCompra),calc.concat('FECHOC', moment(item.fechaOrdenCompra).format('DD-MM-YYYY')),calc.concat('FECHEM', moment(item.fechaEmbarque).format('DD-MM-YYYY')),calc.concat('FECHCA', moment(item.fechaCancelacion).format('DD-MM-YYYY')),calc.concat('NUMDPT', item.departamento),calc.concat('NUMEMI', '134494'),calc.concat('EANENT', '00670'),calc.concat('NOMENT', ''),calc.concat('CALENT', ''),calc.concat('PAIENT', ''),calc.concat('PRDESG', item.logistica),calc.concat('DIAPAG', '90'),calc.concat('TIPMON', 'MXN')]"}}
+  {{/function}}
+  {{#function id="felSuburbia" multi="true"}}
+    {{define type="param" id="item"}}
+    {{default return="=[calc.concat('CANTID', item.cantidad),calc.concat('CANTIP', item.cantidad),calc.concat('CVESKU', item.referencia2),calc.concat('PIEPEM', item.cantidadEmpaque),calc.concat('DESCRI', item.descripcion2),calc.concat('CODUPC', item.codigoUpc2),calc.concat('CODDUN', item.codigoUpc2),calc.concat('ESTILV', item.modelo),calc.concat('COLORV', item.color),calc.concat('TALLAV', item.tamano),calc.concat('PBRUDE', item.valorUnitario),calc.concat('PUNITN', item.precioPublico),calc.concat('PUNITR', null),calc.concat('UNIDAD', calc.upperCase(item.unidad))]"}}
+  {{/function}}
+  {{#function id="felWalmartTitulos"}}
+    {{define type="param" id="item"}}
+    {{default return="=[calc.concat('NOMCAD', 'WAL MART'),calc.concat('NUMEOC', item.ordenCompra),calc.concat('FECHOC', moment(item.fechaOrdenCompra).format('DD-MM-YYYY')),calc.concat('NUMDPT', item.departamento),calc.concat('NUMEMI', '238421310'),calc.concat('EANENT', '7507003112097'),calc.concat('NOMENT', 'WAL-MART DC 7492'),calc.concat('DIAPAG', '90'),calc.concat('TIPMON', 'MXN')]"}}
+  {{/function}}
+  {{#function id="felWalmart" multi="true"}}
+    {{define type="param" id="item"}}
+    {{default return="=[calc.concat('CANTID', item.cantidad),calc.concat('CVESKU', item.referencia2),calc.concat('DESCRI', item.descripcion2),calc.concat('CODUPC', item.codigoUpc),calc.concat('PBRUDE', item.valorUnitario),calc.concat('UNIDAD', calc.upperCase(item.unidad))]"}}
   {{/function}}
   {{#transform id="copiarPersona"}}
     {{set id="=_id"}}

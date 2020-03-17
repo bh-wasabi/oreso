@@ -24,8 +24,8 @@
 	{{param modalSize="xwide"}}
 	{{param folioName="true"}}
 	{{param dynamicName="true"}}
-	{{param browserView="persona"}}
-	{{param itemTemplate="persona"}}
+	{{param browserView="lista"}}
+	{{param itemTemplate="mov"}}
 	{{param isNote="true"}}
 	{{param addResponsable="true"}}
 	{{param allowInsert="false"}}
@@ -85,6 +85,14 @@
 			{{/editor}}
 		{{/field}}
 		{{#field id="fechaEmision" label="Fecha Emisión" type="date" format="DD/MMM/YYYY" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD" generator="now"}}
+			{{#editor type="date" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="ordenCompra" label="Orden Compra" type="text" column="A" labelModalClass="full-width"}}
+			{{#editor case="upper" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="fechaOrdenCompra" label="Fecha Orden Compra" type="date" format="DD/MMM/YYYY" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD"}}
 			{{#editor type="date" width="100%"}}
 			{{/editor}}
 		{{/field}}
@@ -232,6 +240,8 @@
 			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="responsableAcademico" condition="esEstudiante" align="left"}}
 				{{row field="fechaEmision" align="left"}}
+				{{row field="ordenCompra" align="left"}}
+				{{row field="fechaOrdenCompra" align="left"}}
 				{{row field="diasCredito" align="left"}}
 				{{row field="vencimiento" align="left"}}
 				{{row field="estatus" align="left"}}
@@ -334,8 +344,8 @@
 		{{/find}}
 		{{editor display="_name"}}
 	{{/view}}
-	{{#browser id="lista" view="persona" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%"}}
-		{{list itemTemplate="persona" allowSearch="true" allowRefresh="true" allowEdit="false" allowInsert="false"}}
+	{{#browser id="lista" view="lista" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%"}}
+		{{list itemTemplate="mov" allowSearch="true" allowRefresh="true" allowEdit="false" allowInsert="false"}}
 	{{/browser}}
 	{{#workflow id="afectar" start="afectar"}}
 		{{#step id="afectar"}}
@@ -396,7 +406,7 @@
 							Datos Generales
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="responsableAcademico, fechaEmision, diasCredito, vencimiento, estatus, comentarios" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="responsableAcademico, fechaEmision, ordenCompra, fechaOrdenCompra, diasCredito, vencimiento, estatus, comentarios" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -479,6 +489,8 @@
 			{{#fieldSet}}
 				{{field responsableAcademico}}
 				{{field fechaEmision}}
+				{{field ordenCompra}}
+				{{field fechaOrdenCompra}}
 				{{field diasCredito}}
 				{{field vencimiento}}
 				{{field estatus hide="true"}}
@@ -508,6 +520,8 @@
 	{{#template2 id="notaPedido"}}
 		{{#if esEstudiante}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}
 		<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}
+		<br>Orden Compra: {{ordenCompra}}
+		<br>Fecha Orden Compra: {{date fechaOrdenCompra "DD/MMM/YYYY"}}
 		<br>Días Crédito: {{diasCredito}}
 		<br>Vencimiento: {{date vencimiento "DD/MMM/YYYY"}}
 		<br>Estatus: {{_estatus}}
@@ -516,6 +530,8 @@
 	{{#template3 id="notaPedido"}}
 		{{#if esEstudiante}}{{#if responsableAcademico}}<br>Médico Responsable: {{_responsableAcademico}}{{/if}}{{/if}}
 		{{#if fechaEmision}}<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}{{/if}}
+		{{#if ordenCompra}}<br>Orden Compra: {{ordenCompra}}{{/if}}
+		{{#if fechaOrdenCompra}}<br>Fecha Orden Compra: {{date fechaOrdenCompra "DD/MMM/YYYY"}}{{/if}}
 		{{#if diasCredito}}<br>Días Crédito: {{diasCredito}}{{/if}}
 		{{#if vencimiento}}<br>Vencimiento: {{date vencimiento "DD/MMM/YYYY"}}{{/if}}
 		{{#if estatus}}<br>Estatus: {{_estatus}}{{/if}}

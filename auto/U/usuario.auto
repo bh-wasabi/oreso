@@ -1,4 +1,4 @@
-{{#define type="doc" id="articuloLote"}}
+{{#define type="doc" id="usuario"}}
 	{{param defaultDisplay="_name"}}
 	{{param defaultView="lista"}}
 	{{param pageStart="1"}}
@@ -16,14 +16,13 @@
 	{{param pdfPageSize="letter"}}
 	{{param startOnOpen="base"}}
 	{{param baseName="Datos Generales"}}
-	{{param displayExpr="_name"}}
-	{{param name="=fn('folioName', 'Lote Artículos', @_created)"}}
-	{{param typeName="Lote Artículos"}}
+	{{param displayExpr="base.nombre"}}
+	{{param name="Usuario POS"}}
+	{{param typeName="Usuario POS"}}
 	{{param group="Registro"}}
 	{{param fullWidth="true"}}
-	{{param modalSize="xlong"}}
+	{{param modalSize="long"}}
 	{{param autoOpenEditors="true"}}
-	{{param folioName="true"}}
 	{{param autoAffect="node-direct"}}
 	{{param bannerTopTemplate="banner1"}}
 	{{action id="subdoc" condition="=false"}}
@@ -52,56 +51,28 @@
 	{{section id="_options" temp="true"}}
 	{{section id="_params" temp="true"}}
 	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
-		{{#field id="fechaEmision" label="Fecha Emisión" type="date" format="DD/MMM/YYYY" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD" generator="now"}}
-			{{#editor type="date" width="100%"}}
+		{{#field id="nombre" label="Nombre" type="text" column="A" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{field id="nombre" label="Nombre" hide="true" type="expr" value="=fn('folioName', 'Lote Artículos', @_created)"}}
-	{{/section}}
-	{{#section id="articulos" type="array"}}
-		{{#field id="codigo" label="Código" type="text" column="A"}}
-			{{#editor case="upper"}}
-			{{/editor}}
-			{{validator type="required"}}
-		{{/field}}
-		{{#field id="descripcion" label="Descripción" type="text" column="A"}}
-			{{validator type="required"}}
-		{{/field}}
-		{{#field id="estatus" label="Estatus" type="text" hide="true" column="A" references="estatusGeneral" defaultValue="'activo'"}}
-			{{#editor type="select" preset="cfg.estatusGeneral"}}
+		{{#field id="numero" label="Número" type="number" column="A" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{field id="precioLista" label="Precio Lista" type="number" format="currency" column="A"}}
-		{{field id="precioPublico" label="Precio Público" type="number" format="currency" column="A"}}
-		{{#field id="unidad" label="Unidad" type="text" column="A" references="unidad"}}
-			{{#editor type="select" preset="cfg.unidad"}}
+		{{#field id="contrasena" label="Contraseña" type="text" recordHide="true" column="A" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor mode="password" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{field id="cantidadEmpaque" label="Cantidad Empaque" type="number" column="A"}}
-		{{#field id="codigoSat" label="Código SAT" type="text" column="A"}}
-			{{#editor case="upper"}}
+		{{#field id="nivelAcceso" label="Nivel Acceso" type="text" column="A" references="userLevel" modalColumn="A" labelModalClass="full-width" defaultValue="'normal'"}}
+			{{#editor type="select" preset="cfg.userLevel" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{field id="marca" label="Marca" type="text" column="A"}}
-		{{field id="grupo" label="Grupo" type="text" column="A"}}
-		{{field id="modelo" label="Modelo" type="text" column="A"}}
-		{{field id="composicion" label="Composición" type="text" column="A"}}
-		{{field id="tamano" label="Tamaño" type="text" column="A"}}
-		{{field id="color" label="Color" type="text" column="A"}}
-		{{field id="temporada" label="Temporada" type="text" column="A"}}
-		{{#field id="codigoUpc" label="UPC" type="text" column="A"}}
-			{{#editor case="upper"}}
+		{{#field id="sucursal" label="Complejo" type="text" column="A" references="sucursal" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.sucursal" width="100%"}}
 			{{/editor}}
-			{{validator type="unique"}}
 		{{/field}}
-		{{#field id="codigoUpc2" label="UPC Alterno" type="text" column="A"}}
-			{{#editor case="upper"}}
-			{{/editor}}
-			{{validator type="unique"}}
-		{{/field}}
-		{{field id="cliente" label="Cliente Específico" type="text" column="A"}}
-		{{#field id="comentarios" label="Comentarios" type="text" column="A"}}
-			{{#editor type="text-area" height="100"}}
+		{{#field id="status" label="Estatus" type="text" column="A" references="status" modalColumn="A" labelModalClass="full-width" defaultValue="'activo'"}}
+			{{#editor type="select" preset="cfg.status" width="100%"}}
 			{{/editor}}
 		{{/field}}
 	{{/section}}
@@ -129,33 +100,13 @@
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
-				{{row field="fechaEmision" align="left"}}
+			{{#record title="Usuario POS" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
+				{{row field="nombre" align="left"}}
+				{{row field="numero" align="left"}}
+				{{row field="nivelAcceso" align="left"}}
+				{{row field="sucursal" align="left"}}
+				{{row field="status" align="left"}}
 			{{/record}}
-		{{/stack}}
-		{{#stack}}
-			{{#row text="Artículos" fontSize="10" bold="true" margin="-10,0,0,0"}}
-			{{/row}}
-			{{#table title="Artículos" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="articulos" headerStyle="field" margin="-10,0,0,10" removeEmptyCols="true"}}
-				{{column field="codigo"}}
-				{{column field="descripcion"}}
-				{{column field="precioLista"}}
-				{{column field="precioPublico"}}
-				{{column field="unidad"}}
-				{{column field="cantidadEmpaque"}}
-				{{column field="codigoSat"}}
-				{{column field="marca"}}
-				{{column field="grupo"}}
-				{{column field="modelo"}}
-				{{column field="composicion"}}
-				{{column field="tamano"}}
-				{{column field="color"}}
-				{{column field="temporada"}}
-				{{column field="codigoUpc"}}
-				{{column field="codigoUpc2"}}
-				{{column field="cliente"}}
-				{{column field="comentarios"}}
-			{{/table}}
 		{{/stack}}
 	{{/report}}
 	{{#view id="lista" name="Lista"}}
@@ -197,7 +148,7 @@
 	{{/workflow}}
 {{/define}}
 {{#markup}}
-	{{#page name="Lote Artículos"}}
+	{{#page name="Usuario POS"}}
 		{{row}}
 		{{row}}
 		{{#row}}
@@ -205,47 +156,44 @@
 				{{#row class="auto-form-row"}}
 					{{#col medium="100%" class="auto-form-col"}}
 						{{#h5 class="auto-form-h5"}}
-							Datos Generales
+							Usuario POS
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="fechaEmision" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="nombre, numero, nivelAcceso, sucursal, status" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
 				{{/row}}
 			{{/zone}}
 		{{/row}}
-		{{#row}}
-			{{#zone id="articulos" modalGrid="articulos"}}
-				{{#row class="auto-form-row"}}
-					{{#col medium="100%" class="auto-form-col"}}
-						{{#h5 class="auto-form-h5"}}
-							Artículos
-						{{/h5}}
-						{{#div}}
-							{{table articulos class="auto-form-table" cols="codigo, descripcion, precioLista, precioPublico, unidad, cantidadEmpaque, codigoSat, marca, grupo, modelo, composicion, tamano, color, temporada, codigoUpc, codigoUpc2, cliente, comentarios" removeEmptyCols="true" unlink="true"}}
-							{{br}}
-						{{/div}}
-					{{/col}}
-				{{/row}}
-			{{/zone}}
-		{{/row}}
 	{{/page}}
-	{{#modal base id="base" name="Datos Generales" size="xlong" next="articulos"}}
+	{{#modal base id="base" name="Usuario POS" size="long"}}
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
-				{{field fechaEmision}}
+				{{field nombre}}
+				{{field numero}}
+				{{field contrasena}}
+				{{field nivelAcceso}}
+				{{field sucursal}}
+				{{field status}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
-	{{modal articulos id="articulos" name="Artículos" grid="articulos" size="xxwide" prev="base"}}
 	{{#template id="lista"}}
 		<div>{{_name}}</div>
 	{{/template}}
-	{{#template2 id="articuloLote"}}
-		<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}
+	{{#template2 id="usuario"}}
+		<br>Nombre: {{nombre}}
+		<br>Número: {{numero}}
+		<br>Nivel Acceso: {{_nivelAcceso}}
+		<br>Complejo: {{_sucursal}}
+		<br>Estatus: {{_status}}
 	{{/template2}}
-	{{#template3 id="articuloLote"}}
-		{{#if fechaEmision}}<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}{{/if}}
+	{{#template3 id="usuario"}}
+		{{#if nombre}}<br>Nombre: {{nombre}}{{/if}}
+		{{#if numero}}<br>Número: {{numero}}{{/if}}
+		{{#if nivelAcceso}}<br>Nivel Acceso: {{_nivelAcceso}}{{/if}}
+		{{#if sucursal}}<br>Complejo: {{_sucursal}}{{/if}}
+		{{#if status}}<br>Estatus: {{_status}}{{/if}}
 	{{/template3}}
 {{/markup}}

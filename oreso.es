@@ -3718,3 +3718,7 @@
 {"name":"motivoAgendaExcepcion","code":"vacaciones","display":"Vacaciones","order":10}
 {"index":{"_id":"motivoAgendaExcepcion/otro"}}
 {"name":"motivoAgendaExcepcion","code":"otro","display":"Otro","order":11}
+{"index":{"_id":"status/active"}}
+{"name":"status","code":"active","display":"Activo","order":1}
+{"index":{"_id":"status/inactive"}}
+{"name":"status","code":"inactive","display":"Inactivo","order":2}

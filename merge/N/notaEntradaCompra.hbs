@@ -38,8 +38,8 @@
     {{column field="codigo" label="Código" width="150" readOnly="true"}}
     {{column field="codigoUpc" label="UPC" width="150" readOnly="true"}}
     {{column field="descripcion" label="Artículo" width="350" readOnly="true"}}
-    {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
-    {{column field="valorUnitario" label="Costo Unitario" width="110" type="numeric" format="#,.##" required="true"}}
+    {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#," readOnly="true"}}
+    {{column field="valorUnitario" label="Costo Unitario" width="110" type="numeric" format="#,.##" required="true" readOnly="true"}}
     {{column field="tasaIva" label="% IVA" width="50" type="numeric" format="#.##" defaultValue="16" readOnly="true"}}
     {{column field="aliasDestino" label="Destino" width="55" defaultValue="=_params.aliasDestino"}}
     {{column field="_destino" label="Ubicación" width="150" required="true"}}

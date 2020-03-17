@@ -85,7 +85,10 @@
 		{{#field id="codigoUpc" label="UPC" type="text" if="esInventariable" column="A" modalColumn="A" labelModalClass="full-width"}}
 			{{#editor case="upper" width="100%"}}
 			{{/editor}}
-			{{validator type="unique"}}
+		{{/field}}
+		{{#field id="codigoUpc2" label="UPC Alterno" type="text" if="esInventariable" column="A" modalColumn="A" labelModalClass="full-width"}}
+			{{#editor case="upper" width="100%"}}
+			{{/editor}}
 		{{/field}}
 		{{#field id="articuloPrecios" label="Precios" type="doc" column="A" references="articuloPrecios" modalColumn="B" labelModalClass="full-width" source="articuloPrecios"}}
 			{{#editor width="100%"}}
@@ -98,7 +101,6 @@
 		{{#field id="articuloPermisos" label="Permisos" type="doc" column="A" references="articuloPermisos" modalColumn="B" labelModalClass="full-width" source="articuloPermisos"}}
 			{{#editor width="100%"}}
 			{{/editor}}
-			{{validator type="unique"}}
 		{{/field}}
 		{{#field id="unidad" label="Unidad" type="text" if="esInventariable" column="A" references="unidad" modalColumn="A" labelModalClass="full-width"}}
 			{{#editor type="select" preset="cfg.unidad" width="100%"}}
@@ -106,6 +108,10 @@
 		{{/field}}
 		{{#field id="factor" label="Factor" type="number" if="esInventariable" column="A" modalColumn="A" labelModalClass="full-width" defaultValue="1"}}
 			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="codigoSat" label="Código SAT" type="text" column="A" labelModalClass="full-width"}}
+			{{#editor case="upper" width="100%"}}
 			{{/editor}}
 		{{/field}}
 		{{#field id="costoUnitario" label="Costo Unitario" type="number" format="currency" column="A" modalColumn="A" labelModalClass="full-width"}}
@@ -184,11 +190,13 @@
 				{{row field="precioPublico" condition="esInventariable" align="left"}}
 				{{row field="cantidadEmpaque" condition="esInventariable" align="left"}}
 				{{row field="codigoUpc" condition="esInventariable" align="left"}}
+				{{row field="codigoUpc2" condition="esInventariable" align="left"}}
 				{{row field="articuloPrecios" align="left"}}
 				{{row field="articuloNiveles" align="left"}}
 				{{row field="articuloPermisos" align="left"}}
 				{{row field="unidad" condition="esInventariable" align="left"}}
 				{{row field="factor" condition="esInventariable" align="left"}}
+				{{row field="codigoSat" align="left"}}
 				{{row field="costoUnitario" align="left"}}
 			{{/record}}
 		{{/stack}}
@@ -261,7 +269,7 @@
 							Artículo
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="codigo, descripcion, precioLista, precioPublico, cantidadEmpaque, codigoUpc, articuloPrecios, articuloNiveles, articuloPermisos, unidad, factor, costoUnitario" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="codigo, descripcion, precioLista, precioPublico, cantidadEmpaque, codigoUpc, codigoUpc2, articuloPrecios, articuloNiveles, articuloPermisos, unidad, factor, codigoSat, costoUnitario" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -300,8 +308,10 @@
 				{{field precioPublico}}
 				{{field cantidadEmpaque}}
 				{{field codigoUpc}}
+				{{field codigoUpc2}}
 				{{field unidad}}
 				{{field factor}}
+				{{field codigoSat}}
 				{{field costoUnitario}}
 				{{field comentarios}}
 			{{/fieldSet}}
@@ -333,11 +343,13 @@
 		{{#if esInventariable}}<br>Precio Público: {{number precioPublico "currency"}}{{/if}}
 		{{#if esInventariable}}<br>Cantidad Empaque: {{cantidadEmpaque}}{{/if}}
 		{{#if esInventariable}}<br>UPC: {{codigoUpc}}{{/if}}
+		{{#if esInventariable}}<br>UPC Alterno: {{codigoUpc2}}{{/if}}
 		<br>Precios: {{_articuloPrecios}}
 		<br>Niveles Inventario: {{_articuloNiveles}}
 		<br>Permisos: {{_articuloPermisos}}
 		{{#if esInventariable}}<br>Unidad: {{_unidad}}{{/if}}
 		{{#if esInventariable}}<br>Factor: {{factor}}{{/if}}
+		<br>Código SAT: {{codigoSat}}
 		<br>Costo Unitario: {{number costoUnitario "currency"}}
 		<br>Categoría: {{categoria}}
 		<br>Grupo: {{grupo}}
@@ -357,11 +369,13 @@
 		{{#if esInventariable}}{{#if precioPublico}}<br>Precio Público: {{number precioPublico "currency"}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if cantidadEmpaque}}<br>Cantidad Empaque: {{cantidadEmpaque}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if codigoUpc}}<br>UPC: {{codigoUpc}}{{/if}}{{/if}}
+		{{#if esInventariable}}{{#if codigoUpc2}}<br>UPC Alterno: {{codigoUpc2}}{{/if}}{{/if}}
 		{{#if articuloPrecios}}<br>Precios: {{_articuloPrecios}}{{/if}}
 		{{#if articuloNiveles}}<br>Niveles Inventario: {{_articuloNiveles}}{{/if}}
 		{{#if articuloPermisos}}<br>Permisos: {{_articuloPermisos}}{{/if}}
 		{{#if esInventariable}}{{#if unidad}}<br>Unidad: {{_unidad}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if factor}}<br>Factor: {{factor}}{{/if}}{{/if}}
+		{{#if codigoSat}}<br>Código SAT: {{codigoSat}}{{/if}}
 		{{#if costoUnitario}}<br>Costo Unitario: {{number costoUnitario "currency"}}{{/if}}
 		{{#if categoria}}<br>Categoría: {{categoria}}{{/if}}
 		{{#if grupo}}<br>Grupo: {{grupo}}{{/if}}

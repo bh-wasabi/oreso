@@ -1,0 +1,37 @@
+{{#define id="notaBonificacionVenta"}}
+  {{param attribute1="=_created.service"}}
+  {{param attribute2="=_created.subType"}}
+  {{param removeIfEmptySection="aplicacion"}}
+  {{param removeIfEmptyField="importe"}}
+  {{param startOnOpen="aplicacion"}}
+
+  {{#section id="aplicacion"}}
+    {{#field id="aliasDestino"}}
+      {{#onChange}}
+        {{set destino="=calc.getPreset('app.aliasTesoreria', aliasDestino).tesoreria"}}
+        {{set _destino="=calc.getPreset('app.aliasTesoreria', aliasDestino)._tesoreria"}}
+      {{/onChange}}
+    {{/field}}
+  {{/section}}
+
+  {{#grid id="aplicacion" section="aplicacion" keyField="importe" allowInsert="false" allowRemove="false" applyBaseColumn="saldo" applyTo="importe" applySuggest="saldo" applyValidate="true"}}
+    {{column field="referencia" label="Referencia" width="200"}}
+    {{column field="vencimiento" label="Vencimiento" validateDate="true" width="110"}}
+    {{!-- {{column field="ivaFactor" label="Factor IVA" width="80"}} --}}
+    {{column field="saldo" label="Saldo" width="150" type="numeric" format="#,.##" readOnly="true"}}
+    {{column field="importe" label="Importe" width="150" type="numeric" format="#,.##"}}
+    {{!-- {{column field="formaPago" label="Forma Pago" width="150"}}
+    {{column field="referenciaPago" label="Referencia Pago" width="150"}}
+    {{column field="aliasDestino" label="Destino" width="55" defaultValue="=_params.aliasDestino"}}
+    {{column field="_destino" label="Cuenta Tesorería" width="150" required="true"}} --}}
+  {{/grid}}
+  {{#grid id="adjuntos" section="adjuntos" allowRemove="true" allowSort="true" sortBy="orden, fecha"}}
+    {{column field="nombre" width="400"}}
+    {{column field="tipo" width="200"}}
+    {{column field="fecha" width="100" readOnly="true"}}
+    {{column field="ext" width="100" readOnly="true"}}
+    {{column field="tamano" width="100" readOnly="true"}}
+    {{column field="orden" width="60"}}
+  {{/grid}}
+  
+{{/define}}

@@ -24,8 +24,8 @@
 	{{param modalSize="xwide"}}
 	{{param folioName="true"}}
 	{{param dynamicName="true"}}
-	{{param browserView="persona"}}
-	{{param itemTemplate="persona"}}
+	{{param browserView="lista"}}
+	{{param itemTemplate="mov"}}
 	{{param isNote="true"}}
 	{{param addResponsable="true"}}
 	{{param allowInsert="false"}}
@@ -304,8 +304,8 @@
 		{{/find}}
 		{{editor display="_name"}}
 	{{/view}}
-	{{#browser id="lista" view="persona" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%"}}
-		{{list itemTemplate="persona" allowSearch="true" allowRefresh="true" allowEdit="false" allowInsert="false"}}
+	{{#browser id="lista" view="lista" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%"}}
+		{{list itemTemplate="mov" allowSearch="true" allowRefresh="true" allowEdit="false" allowInsert="false"}}
 	{{/browser}}
 	{{#workflow id="afectar" start="afectar"}}
 		{{#step id="afectar"}}

@@ -1,0 +1,23 @@
+{{#define id="usuario"}}
+  {{#view id="lista"}}
+    {{#find}}
+      {{include field="_name"}}
+      {{include field="base.numero"}}
+      {{include field="base.status"}}
+      {{filter condition="=sucursal" field="base.sucursal" in="=sucursal"}}
+      {{sort field="base.numero" direction="asc"}}
+      {{sort field="_name" direction="asc"}}
+      {{search field="_name"}}
+      {{search field="base.numero"}}
+    {{/find}}
+  {{/view}}
+{{/define}}
+{{#markup}}
+  {{#template id="lista"}}
+    <div>
+      {{_name}}
+      </br><span style="font-size:12px;">{{base.numero}}</span>
+      <span style="font-size:12px;float:right;">{{base._status}}</span>
+    </div>    
+  {{/template}}
+{{/markup}}

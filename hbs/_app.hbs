@@ -37,6 +37,16 @@
         {{item userRole="ate" text="Atemajac" name="Programación Salas - Atemajac" href="/_salas/agendas?sucursal=ate"}}
       {{/item}}
 [./if.]
+      {{item text="Artículos" href="/articulo/ver" beginGroup="true"}}
+      {{#item text="Movimientos Clientes" beginGroup="true"}}
+        {{item text="Pedidos" href="/notaPedido/lista"}}
+        {{item text="Devoluciones Pedidos" href="/notaDevolucionPedido/lista"}}
+        {{item text="Facturas" href="/notaFactura/lista"}}
+        {{item text="Bonificaciones Venta" href="/notaBonificacionVenta/lista"}}
+        {{item text="Devoluciones Venta" href="/notaDevolucionVenta/lista"}}
+        {{item text="Neteos" href="/notaNeteoCxc/lista"}}
+        {{item text="Cobros" href="/notaCobro/lista"}}
+      {{/item}}
       {{item text="Bitácora General" href="/nota/lista" beginGroup="true"}}
     {{/item}}
     {{#item text="Cuentas"}}
@@ -88,24 +98,25 @@
     {{/item}}
     {{#item text="Configuración"}}
       {{item text="Configuración General" href="/_app"}}
+      {{item text="Usuarios" href="/_user/lista"}}
 [.#if esCinetop.]
-      {{#item text="Usuarios"}}
-        {{item userRole="azc" text="Azcapozalco" name="Usuarios - Azcapozalco" href="/_user/lista?sucursal=azc"}}
-        {{item userRole="eca" text="Ecatepec" name="Usuarios - Ecatepec" href="/_user/lista?sucursal=eca"}}
-        {{item userRole="teq" text="Tequisquiapan" name="Usuarios - Tequisquiapan" href="/_user/lista?sucursal=teq"}}
-        {{item userRole="ate" text="Atemajac" name="Usuarios - Atemajac" href="/_user/lista?sucursal=ate"}}
+      {{#item text="Usuarios POS" beginGroup="true"}}
+        {{item userRole="azc" text="Azcapozalco" name="Usuarios POS - Azcapozalco" href="/usuario/lista?sucursal=azc"}}
+        {{item userRole="eca" text="Ecatepec" name="Usuarios POS - Ecatepec" href="/usuario/lista?sucursal=eca"}}
+        {{item userRole="teq" text="Tequisquiapan" name="Usuarios POS - Tequisquiapan" href="/usuario/lista?sucursal=teq"}}
+        {{item userRole="ate" text="Atemajac" name="Usuarios POS - Atemajac" href="/usuario/lista?sucursal=ate"}}
+        {{item text="Todos" name="Usuarios POS" href="/usuario/lista" beginGroup="true"}}
       {{/item}}
-      {{#item text="Dispositivos"}}
-        {{item userRole="azc" text="Azcapozalco" name="Dispositivos - Azcapozalco" href="/dispositivo/lista?sucursal=azc"}}
-        {{item userRole="eca" text="Ecatepec" name="Dispositivos - Ecatepec" href="/dispositivo/lista?sucursal=eca"}}
-        {{item userRole="teq" text="Tequisquiapan" name="Dispositivos - Tequisquiapan" href="/dispositivo/lista?sucursal=teq"}}
-        {{item userRole="ate" text="Atemajac" name="Dispositivos - Atemajac" href="/dispositivo/lista?sucursal=ate"}}
+      {{#item text="Dispositivos POS"}}
+        {{item userRole="azc" text="Azcapozalco" name="Dispositivos POS - Azcapozalco" href="/dispositivo/lista?sucursal=azc"}}
+        {{item userRole="eca" text="Ecatepec" name="Dispositivos POS - Ecatepec" href="/dispositivo/lista?sucursal=eca"}}
+        {{item userRole="teq" text="Tequisquiapan" name="Dispositivos POS - Tequisquiapan" href="/dispositivo/lista?sucursal=teq"}}
+        {{item userRole="ate" text="Atemajac" name="Dispositivos POS - Atemajac" href="/dispositivo/lista?sucursal=ate"}}
+        {{item text="Todos" name="Dispositivos POS" href="/dispositivo/lista" beginGroup="true"}}
       {{/item}}
       {{item text="Complejos" href="/sucursal/lista" beginGroup="true"}}
       {{item text="Espacios" href="/espacio/lista"}}
       {{item text="Planeación Agendas" href="/planAgenda/lista"}}
-[.else.]
-      {{item text="Usuarios" href="/_user/lista"}}
 [./if.]
     {{/item}}
     {{#item text="Usuario"}}
@@ -906,7 +917,14 @@
       {{/col}}
     {{/row}}
   {{/page}}
-
+  {{#template id="mov"}}
+      {{_name}}</span>
+      <span style="font-size:12px;float:right;">{{date _created.date "DD/MMM/YYYY h:mm a"}}</span><br>
+      {{#if persona}}
+      <span style="font-size:12px;">{{persona.nombreCompleto}}</span>
+      {{/if}}
+    <span style="font-size:12px;float:right;">{{base.ordenCompra}}</span>
+  {{/template}}
   {{#template id="persona"}}
     <div>
       {{_name}}</span>

@@ -9,6 +9,20 @@
   {{param startOnOpen="articulos"}}
 [./if.]
 
+  {{#view id="lista" name="Lista"}}
+    {{#find}}
+      {{include field="_name"}}
+      {{include field="_created"}}
+      {{include field="base"}}
+      {{include field="persona"}}
+      {{search field="_name"}}
+      {{search field="base.ordenCompra"}}
+      {{search field="persona.nombreCompleto"}}
+      {{sort field="_created.date" direction="desc"}}
+    {{/find}}
+    {{editor display="_name"}}
+  {{/view}}
+
   {{#section id="base"}}
     {{#field id="diasCredito"}}
       {{#onChange}}
@@ -141,7 +155,9 @@
   {{/cube}}
   {{action id="tool" condition="true" label="Analizar" type="viewCube" visibleMode="close" color="cyan" btnSolid="true" cube="articulos" items="=calc.mergeArraysByKey(articulos, _items, 'codigo')" fromSource="articulo" fromView="todo"}}
   
-  {{action id="tool2" condition="true" label="Descargar Checklist..." type="save-as" visibleMode="close" color="blue" btnSolid="true" fileName="=_name||'Pedido'" 
-    items="=[fn('checkListTitulos')].concat(fn('checkList', calc.mergeMasterDetail({persona, base}, calc.mergeArraysByKey(articulos, _items, 'codigo'))))" fromSource="articulo" fromView="todo"}}
+  {{!-- {{action id="tool2" condition="true" label="Descargar Checklist..." type="save-as" visibleMode="close" color="blue" btnSolid="true" fileName="=_name||'Pedido'" 
+    items="=[fn('checkListTitulos')].concat(fn('checkList', calc.mergeMasterDetail({persona, base}, calc.mergeArraysByKey(calc.joinPreset(calc.whereGreaterThan(inv, 'entrada', 0), 'app.aliasUbicacion', 'cuenta', 'ubicacion'), _items, 'codigo'))))" fromSource="articulo" fromView="todo"}} --}}
+  {{action id="tool2" condition="true" label="Descargar Checklist..." type="save-as-excel" visibleMode="close" color="blue" btnSolid="true" fileName="=_name||'Pedido'" 
+    items="=fn('checkListExcel', calc.mergeMasterDetail({persona, base}, calc.mergeArraysByKey(calc.joinPreset(calc.whereGreaterThan(inv, 'entrada', 0), 'app.aliasUbicacion', 'cuenta', 'ubicacion'), _items, 'codigo')))" fromSource="articulo" fromView="todo"}}    
   {{action id="tool4" condition="true" type="report-pdf" label="Reporte Bodega" report="preliminar2" fileName="=_name" visibleMode="close" color="grey" items="=calc.mapReduce(calc.mergeArraysByKey(inv, _items, 'codigo'), 'codigo,descripcion,codigoUpc,lote,loteReferencia,tamano,color,marca', 'salida')" fromSource="articulo" fromView="todo"}}
 {{/define}}

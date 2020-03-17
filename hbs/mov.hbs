@@ -1,4 +1,47 @@
 {{#define type="doc" id="mov"}}
+
+  {{#view id="existencias"}}
+    {{#pipeline}}
+      {{filter field="aux" eq="='inv'"}}
+      {{filter field="='codigo'" eq="=codigo"}}
+      {{group field="cuenta"}}
+      {{group field="_cuenta"}}
+      {{group field="lote"}}
+      {{group field="loteReferencia"}}
+      {{group field="vencimiento"}}
+      {{group field="cantidadFactor" type="sum" as="existencia"}}      
+    {{/pipeline}}
+    {{sort field="_cuenta" having="existencia"}}
+  {{/view}}
+  {{#view id="saldoInicialInv"}}
+    {{#pipeline}}
+      {{filter field="nota.date" lt="=desde"}}
+      {{filter field="aux" eq="='inv'"}}
+      {{filter field="='codigo'" eq="=codigo"}}
+      {{group field="cantidadFactor" type="sum"}}
+      {{group field="importeFactor" type="sum"}}
+    {{/pipeline}}
+  {{/view}}
+  {{#view id="kardex" before="saldoInicialInv"}}
+    {{#find limit="-1"}}
+      {{filter field="cantidad" neq="=0"}}
+      {{filter field="nota.date" gte="=desde"}}
+      {{filter field="nota.date" lt="=moment(hasta).add(1, 'day').format('YYYY-MM-DD')"}}
+      {{filter field="aux" eq="='inv'"}}
+      {{filter field="='codigo'" eq="=codigo"}}
+      {{sort field="nota.date" direction="asc"}}
+    {{/find}}
+    {{calc field="_usuario" value="=nota._user"}}
+    {{calc field="fecha" value="=nota.date"}}
+    {{calc field="entrada" value="=(cantidadFactor>0)?cantidadFactor:null"}}
+    {{calc field="salida" value="=(cantidadFactor<0)?-cantidadFactor:null"}}
+    {{calc field="movimiento" label="Movimiento" value="=@nota&&nota.name||'Cantidad Inicial'"}}
+    {{calc field="_lote" value="=calc.concat(@lote, calc.format('date', @vencimiento, 'DD/MMM/YYYY'), @loteReferencia)"}}
+    {{calc field="costoUnitario" value="=importe/cantidad"}}
+    {{calc field="costoTotal" value="=importeFactor"}}
+    {{acum field="existencia" type="sum" value="=cantidadFactor"}}
+  {{/view}}
+
   {{#view id="inv"}}
     {{#pipeline}}
       {{filter field="aux" eq="='inv'"}}

@@ -48,7 +48,6 @@
 			{{#editor case="upper"}}
 			{{/editor}}
 			{{validator type="required"}}
-			{{validator type="unique"}}
 		{{/field}}
 		{{#field id="descripcion" label="Descripción" type="text" column="A"}}
 			{{validator type="required"}}
@@ -64,6 +63,10 @@
 			{{/editor}}
 		{{/field}}
 		{{field id="cantidadEmpaque" label="Cantidad Empaque" type="number" column="A"}}
+		{{#field id="codigoSat" label="Código SAT" type="text" column="A"}}
+			{{#editor case="upper"}}
+			{{/editor}}
+		{{/field}}
 		{{field id="marca" label="Marca" type="text" column="A"}}
 		{{field id="grupo" label="Grupo" type="text" column="A"}}
 		{{field id="modelo" label="Modelo" type="text" column="A"}}
@@ -72,6 +75,11 @@
 		{{field id="color" label="Color" type="text" column="A"}}
 		{{field id="temporada" label="Temporada" type="text" column="A"}}
 		{{#field id="codigoUpc" label="UPC" type="text" column="A"}}
+			{{#editor case="upper"}}
+			{{/editor}}
+			{{validator type="unique"}}
+		{{/field}}
+		{{#field id="codigoUpc2" label="UPC Alterno" type="text" column="A"}}
 			{{#editor case="upper"}}
 			{{/editor}}
 			{{validator type="unique"}}
@@ -113,6 +121,7 @@
 				{{row field="precioPublico" align="left"}}
 				{{row field="unidad" align="left"}}
 				{{row field="cantidadEmpaque" align="left"}}
+				{{row field="codigoSat" align="left"}}
 				{{row field="marca" align="left"}}
 				{{row field="grupo" align="left"}}
 				{{row field="modelo" align="left"}}
@@ -121,6 +130,7 @@
 				{{row field="color" align="left"}}
 				{{row field="temporada" align="left"}}
 				{{row field="codigoUpc" align="left"}}
+				{{row field="codigoUpc2" align="left"}}
 				{{row field="cliente" align="left"}}
 				{{row field="comentarios" align="left"}}
 			{{/record}}
@@ -150,7 +160,7 @@
 							articulo2
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="codigo, descripcion, precioLista, precioPublico, unidad, cantidadEmpaque, marca, grupo, modelo, composicion, tamano, color, temporada, codigoUpc, cliente, comentarios" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="codigo, descripcion, precioLista, precioPublico, unidad, cantidadEmpaque, codigoSat, marca, grupo, modelo, composicion, tamano, color, temporada, codigoUpc, codigoUpc2, cliente, comentarios" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -167,6 +177,7 @@
 				{{field precioPublico}}
 				{{field unidad}}
 				{{field cantidadEmpaque}}
+				{{field codigoSat}}
 				{{field marca}}
 				{{field grupo}}
 				{{field modelo}}
@@ -175,6 +186,7 @@
 				{{field color}}
 				{{field temporada}}
 				{{field codigoUpc}}
+				{{field codigoUpc2}}
 				{{field cliente}}
 				{{field comentarios}}
 			{{/fieldSet}}
@@ -190,6 +202,7 @@
 		<br>Precio Público: {{number precioPublico "currency"}}
 		<br>Unidad: {{_unidad}}
 		<br>Cantidad Empaque: {{cantidadEmpaque}}
+		<br>Código SAT: {{codigoSat}}
 		<br>Marca: {{marca}}
 		<br>Grupo: {{grupo}}
 		<br>Modelo: {{modelo}}
@@ -198,6 +211,7 @@
 		<br>Color: {{color}}
 		<br>Temporada: {{temporada}}
 		<br>UPC: {{codigoUpc}}
+		<br>UPC Alterno: {{codigoUpc2}}
 		<br>Cliente Específico: {{cliente}}
 		<br>{{comentarios}}
 	{{/template2}}
@@ -208,6 +222,7 @@
 		{{#if precioPublico}}<br>Precio Público: {{number precioPublico "currency"}}{{/if}}
 		{{#if unidad}}<br>Unidad: {{_unidad}}{{/if}}
 		{{#if cantidadEmpaque}}<br>Cantidad Empaque: {{cantidadEmpaque}}{{/if}}
+		{{#if codigoSat}}<br>Código SAT: {{codigoSat}}{{/if}}
 		{{#if marca}}<br>Marca: {{marca}}{{/if}}
 		{{#if grupo}}<br>Grupo: {{grupo}}{{/if}}
 		{{#if modelo}}<br>Modelo: {{modelo}}{{/if}}
@@ -216,6 +231,7 @@
 		{{#if color}}<br>Color: {{color}}{{/if}}
 		{{#if temporada}}<br>Temporada: {{temporada}}{{/if}}
 		{{#if codigoUpc}}<br>UPC: {{codigoUpc}}{{/if}}
+		{{#if codigoUpc2}}<br>UPC Alterno: {{codigoUpc2}}{{/if}}
 		{{#if cliente}}<br>Cliente Específico: {{cliente}}{{/if}}
 		{{#if comentarios}}<br>{{comentarios}}{{/if}}
 	{{/template3}}

@@ -4,7 +4,23 @@
   {{param removeIfEmptySection="articulos"}}
   {{param removeIfEmptyField="cantidad"}}
   {{param startOnOpen="articulos"}}
-  {{action id="tool2" condition="true" label="Descargar FEL..." type="save-as" visibleMode="close" color="blue" btnSolid="true" fileName="=(_name||'Factura')+'.fel'" items="=[fn('felTitulos', base), fn('fel', calc.mapReduce(calc.mergeArraysByKey(articulos, _items, 'codigo'),'referencia2,descripcion2,codigoUpc,modelo,color,tamano,valorUnitario,precioPublico,unidad','cantidad'))]" flatten="true" fromSource="articulo" fromView="todo"}}
+  {{action id="tool2" condition="=persona.nombreCompleto=='Liverpool'" label="FEL Liverpool..." type="save-as" visibleMode="close" color="blue" btnSolid="true" fileName="=(_name||'Factura')+'.fel'" items="=[fn('felLiverpoolTitulos', base), fn('felLiverpool', calc.mapReduce(calc.mergeArraysByKey(articulos, _items, 'codigo'),'referencia2,descripcion2,codigoUpc,modelo,color,tamano,valorUnitario,precioPublico,unidad','cantidad'))]" flatten="true" fromSource="articulo" fromView="todo"}}
+  {{action id="tool3" condition="=persona.nombreCompleto=='Suburbia'" label="FEL Suburbia..." type="save-as" visibleMode="close" color="blue" btnSolid="true" fileName="=(_name||'Factura')+'.fel'" items="=[fn('felSuburbiaTitulos', base), fn('felSuburbia', calc.mapReduce(calc.mergeArraysByKey(articulos, _items, 'codigo'),'referencia2,descripcion2,cantidadEmpaque,codigoUpc2,modelo,color,tamano,valorUnitario,precioPublico,unidad','cantidad'))]" flatten="true" fromSource="articulo" fromView="todo"}}
+  {{action id="tool4" condition="=persona.nombreCompleto=='Walmart'" label="FEL Walmart..." type="save-as" visibleMode="close" color="blue" btnSolid="true" fileName="=(_name||'Factura')+'.fel'" items="=[fn('felWalmartTitulos', base), fn('felWalmart', calc.mapReduce(calc.mergeArraysByKey(articulos, _items, 'codigo'),'referencia2,descripcion2,codigoUpc,modelo,color,tamano,valorUnitario,precioPublico,unidad','cantidad'))]" flatten="true" fromSource="articulo" fromView="todo"}}
+
+  {{#view id="lista" name="Lista"}}
+    {{#find}}
+      {{include field="_name"}}
+      {{include field="_created"}}
+      {{include field="base"}}
+      {{include field="persona"}}
+      {{search field="_name"}}
+      {{search field="base.ordenCompra"}}
+      {{search field="persona.nombreCompleto"}}
+      {{sort field="_created.date" direction="desc"}}
+    {{/find}}
+    {{editor display="_name"}}
+  {{/view}}
 
   {{#section id="base"}}
     {{#field id="diasCredito"}}
