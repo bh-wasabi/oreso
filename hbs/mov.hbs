@@ -272,9 +272,11 @@
       {{group field="tasa" as="tasaIva"}}
       {{group field="referencia"}}
       {{group field="referencia2"}}
+      {{group field="orden"}}
       {{group field="cantidadFactor" type="sum" as="cantidad"}}
       {{group field="importeFactor" type="sum" as="importe"}}
-      {{!-- {{sort field="descripcion" direction="asc"}} --}}
+      {{sort field="referencia" direction="asc"}}
+      {{sort field="orden" direction="asc"}}
       {{match field="cantidad" gt="=0"}}
     {{/pipeline}}
     {{join source="articulo" view="lista" as="articulo" id="codigo" key="base.codigo"}}

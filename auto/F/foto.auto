@@ -17,8 +17,12 @@
 	{{param startOnOpen="base"}}
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="base.nombre"}}
-	{{param name="foto"}}
-	{{param typeName="foto"}}
+	{{param name="Foto"}}
+	{{param typeName="Foto"}}
+	{{param fullWidth="true"}}
+	{{param hideTitle="true"}}
+	{{param autoClose="true"}}
+	{{param autoOpenEditors="true"}}
 	{{action id="subdoc" condition="=false"}}
 	{{action id="subdoc2" condition="=false"}}
 	{{action id="subdoc3" condition="=false"}}
@@ -44,11 +48,14 @@
 	{{section id="_options" temp="true"}}
 	{{section id="_params" temp="true"}}
 	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
-		{{#field id="nombre" label="Nombre" type="text" column="A"}}
-			{{#editor case="capitalize"}}
+		{{#field id="nombre" label="Nombre" type="text" column="A" labelModalClass="full-width"}}
+			{{#editor case="capitalize" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{field id="url" label="URL" type="text" column="A"}}
+		{{#field id="url" label="URL" type="text" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
 	{{/section}}
 	{{#report id="preliminar-encabezado"}}
 		{{#stack}}
@@ -74,7 +81,7 @@
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="foto" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
+			{{#record title="Foto" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="nombre" align="left"}}
 				{{row field="url" align="left"}}
 			{{/record}}
@@ -93,18 +100,15 @@
 	{{/browser}}
 {{/define}}
 {{#markup}}
-	{{#page name="foto"}}
+	{{#page name="Foto"}}
 		{{row}}
 		{{row}}
 		{{#row}}
 			{{#zone id="base" modal="base"}}
 				{{#row class="auto-form-row"}}
 					{{#col medium="100%" class="auto-form-col"}}
-						{{#h5 class="auto-form-h5"}}
-							foto
-						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="nombre, url" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="nombre, url" class="auto-form-record auto-hide-title"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -112,7 +116,7 @@
 			{{/zone}}
 		{{/row}}
 	{{/page}}
-	{{#modal base id="base" name="foto"}}
+	{{#modal base id="base" name="Foto"}}
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
 				{{field nombre}}

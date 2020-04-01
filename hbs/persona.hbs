@@ -141,6 +141,7 @@
   {{#action id="devolucionVenta" source="notaDevolucionVenta" label="Devolución Venta" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
     {{param aliasDestino="='AG'"}}
   {{/action}}
+  {{action id="cargoCxc" source="notaCargoCxc" label="Cargo Diverso" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
   {{#action id="neteoCxc" source="notaNeteoCxc" label="Neteo" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true" fromSource="mov" fromView="sugerirNeteo" toSection="aplicacion"}}
     {{param aux="='cxc'"}}
     {{param persona="_id"}}

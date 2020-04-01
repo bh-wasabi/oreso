@@ -32,9 +32,9 @@
     {{field id="iva" type="calc" value="=importe*(tasaIva/100)"}}
     {{field id="total" type="calc" value="=importe+iva"}}
   {{/section}}
-  
-  {{#grid id="articulos" section="articulos" keyField="cantidad" allowInsert="false" allowRemove="false" applyFilter="referencia" allowSort="true" sortBy="referencia,descripcion"}}
+  {{#grid id="articulos" section="articulos" keyField="cantidad" allowInsert="false" allowRemove="false" applyFilter="referencia" allowSort="true" sortBy="referencia,orden"}}
     {{column field="referencia" label="Referencia" width="150" readOnly="true"}}
+    {{column field="orden" label="Orden" width="1" readOnly="true"}}
     {{column field="codigo" label="Código" width="150" readOnly="true"}}
     {{column field="codigoUpc" label="UPC" width="150" readOnly="true"}}
     {{column field="descripcion" label="Artículo" width="350" readOnly="true"}}

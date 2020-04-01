@@ -39,13 +39,13 @@
 [./if.]
       {{item text="Artículos" href="/articulo/ver" beginGroup="true"}}
       {{#item text="Movimientos Clientes" beginGroup="true"}}
-        {{item text="Pedidos" href="/notaPedido/lista"}}
-        {{item text="Devoluciones Pedidos" href="/notaDevolucionPedido/lista"}}
-        {{item text="Facturas" href="/notaFactura/lista"}}
-        {{item text="Bonificaciones Venta" href="/notaBonificacionVenta/lista"}}
-        {{item text="Devoluciones Venta" href="/notaDevolucionVenta/lista"}}
-        {{item text="Neteos" href="/notaNeteoCxc/lista"}}
-        {{item text="Cobros" href="/notaCobro/lista"}}
+        {{item text="Pedidos" href="/nota/lista?type=notaPedido"}}
+        {{item text="Devoluciones Pedidos" href="/nota/lista?type=notaDevolucionPedido"}}
+        {{item text="Facturas" href="/nota/lista?type=notaFactura"}}
+        {{item text="Bonificaciones Venta" href="/nota/lista?type=notaBonificacionVenta"}}
+        {{item text="Devoluciones Venta" href="/nota/lista?type=notaDevolucionVenta"}}
+        {{item text="Neteos" href="/nota/lista?type=notaNeteoCxc"}}
+        {{item text="Cobros" href="/nota/lista?type=notaCobro"}}
       {{/item}}
       {{item text="Bitácora General" href="/nota/lista" beginGroup="true"}}
     {{/item}}
@@ -718,8 +718,8 @@
     {{/field}}
     {{!-- {{field id="codigo" type="text" label="Código"}} --}}
     {{field id="descripcion" type="text" label="Descripción"}}
-    {{field id="precio" type="number" format="currency" label="Precio"}}
-    {{field id="orden" type="number" label="Orden"}}
+    {{!-- {{field id="precio" type="number" format="currency" label="Precio"}}
+    {{field id="orden" type="number" label="Orden"}} --}}
   {{/section}}
 
   {{#mapPreset source="articulo" view="porCodigo" toPreset="aliasArticulo"}}
@@ -783,8 +783,8 @@
     {{column field="articulo" width="150"}}
     {{!-- {{column field="codigo" width="120" readOnly="true"}} --}}
     {{column field="descripcion" width="300" readOnly="true"}}
-    {{column field="precio" width="120"}}
-    {{column field="orden" width="50"}}
+    {{!-- {{column field="precio" width="120"}}
+    {{column field="orden" width="50"}} --}}
   {{/grid}}
 
   {{#section id="mayor" type="array"}}

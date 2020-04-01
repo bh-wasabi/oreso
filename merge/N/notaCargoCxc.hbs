@@ -1,0 +1,21 @@
+{{#define id="notaCargoCxc"}}
+  {{param attribute1="=_created.service"}}
+  {{param attribute2="=_created.subType"}}
+  {{param removeIfEmptySection="aplicacion"}}
+  {{param removeIfEmptyField="importe"}}
+  {{param startOnOpen="aplicacion"}}
+
+  {{#grid id="aplicacion" section="aplicacion" keyField="importe" allowInsert="true" allowRemove="true"}}
+    {{column field="referencia" label="Referencia" width="200"}}
+    {{column field="vencimiento" label="Vencimiento" validateDate="true" width="110"}}
+    {{column field="importe" label="Importe" width="150" type="numeric" format="#,.##"}}
+  {{/grid}}
+  {{#grid id="adjuntos" section="adjuntos" allowRemove="true" allowSort="true" sortBy="orden, fecha"}}
+    {{column field="nombre" width="400"}}
+    {{column field="tipo" width="200"}}
+    {{column field="fecha" width="100" readOnly="true"}}
+    {{column field="ext" width="100" readOnly="true"}}
+    {{column field="tamano" width="100" readOnly="true"}}
+    {{column field="orden" width="60"}}
+  {{/grid}}
+{{/define}}

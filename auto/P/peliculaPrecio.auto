@@ -67,7 +67,19 @@
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="acuerdos" label="Acuerdos" type="number" column="A" labelModalClass="full-width"}}
+		{{#field id="acuerdo" label="Acuerdo" type="number" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="evento" label="Evento" type="number" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="cupon" label="Cupón" type="number" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="oferta" label="Oferta" type="number" column="A" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
@@ -116,7 +128,10 @@
 				{{row field="adultosMayores" align="left"}}
 				{{row field="ninos" align="left"}}
 				{{row field="estudiantes" align="left"}}
-				{{row field="acuerdos" align="left"}}
+				{{row field="acuerdo" align="left"}}
+				{{row field="evento" align="left"}}
+				{{row field="cupon" align="left"}}
+				{{row field="oferta" align="left"}}
 				{{row field="tipoPromocion" align="left"}}
 				{{row field="cantidadPromocion" condition="tienePromocion" align="left"}}
 				{{row field="precioPromocion" condition="tienePromocion" align="left"}}
@@ -144,7 +159,7 @@
 				{{#row class="auto-form-row"}}
 					{{#col medium="100%" class="auto-form-col"}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="publicoGeneral, adultosMayores, ninos, estudiantes, acuerdos, tipoPromocion, cantidadPromocion, precioPromocion" class="auto-form-record auto-hide-title"}}
+							{{record this widths="20%,80%" rows="publicoGeneral, adultosMayores, ninos, estudiantes, acuerdo, evento, cupon, oferta, tipoPromocion, cantidadPromocion, precioPromocion" class="auto-form-record auto-hide-title"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -159,7 +174,10 @@
 				{{field adultosMayores}}
 				{{field ninos}}
 				{{field estudiantes}}
-				{{field acuerdos}}
+				{{field acuerdo}}
+				{{field evento}}
+				{{field cupon}}
+				{{field oferta}}
 				{{field tipoPromocion}}
 				{{field cantidadPromocion}}
 				{{field precioPromocion}}
@@ -174,7 +192,10 @@
 		<br>Adultos Mayores: {{adultosMayores}}
 		<br>Niños: {{ninos}}
 		<br>Estudiantes: {{estudiantes}}
-		<br>Acuerdos: {{acuerdos}}
+		<br>Acuerdo: {{acuerdo}}
+		<br>Evento: {{evento}}
+		<br>Cupón: {{cupon}}
+		<br>Oferta: {{oferta}}
 		<br>Tipo de Promoción: {{_tipoPromocion}}
 		{{#if tienePromocion}}<br>Cantidad Promoción: {{cantidadPromocion}}{{/if}}
 		{{#if tienePromocion}}<br>Precio Promoción: {{precioPromocion}}{{/if}}
@@ -184,7 +205,10 @@
 		{{#if adultosMayores}}<br>Adultos Mayores: {{adultosMayores}}{{/if}}
 		{{#if ninos}}<br>Niños: {{ninos}}{{/if}}
 		{{#if estudiantes}}<br>Estudiantes: {{estudiantes}}{{/if}}
-		{{#if acuerdos}}<br>Acuerdos: {{acuerdos}}{{/if}}
+		{{#if acuerdo}}<br>Acuerdo: {{acuerdo}}{{/if}}
+		{{#if evento}}<br>Evento: {{evento}}{{/if}}
+		{{#if cupon}}<br>Cupón: {{cupon}}{{/if}}
+		{{#if oferta}}<br>Oferta: {{oferta}}{{/if}}
 		{{#if tipoPromocion}}<br>Tipo de Promoción: {{_tipoPromocion}}{{/if}}
 		{{#if tienePromocion}}{{#if cantidadPromocion}}<br>Cantidad Promoción: {{cantidadPromocion}}{{/if}}{{/if}}
 		{{#if tienePromocion}}{{#if precioPromocion}}<br>Precio Promoción: {{precioPromocion}}{{/if}}{{/if}}

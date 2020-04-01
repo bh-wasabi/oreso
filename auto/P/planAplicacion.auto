@@ -45,6 +45,7 @@
 	{{section id="_params" temp="true"}}
 	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
 		{{field id="lote" label="Lote" type="text" column="A"}}
+		{{field id="referencia" label="Referencia" type="text" column="A"}}
 		{{#field id="vencimiento" label="Fecha" type="text" column="A"}}
 			{{#editor case="YYYY-MM-DD"}}
 			{{/editor}}
@@ -99,6 +100,7 @@
 		{{#stack}}
 			{{#record title="planAplicacion" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="lote" align="left"}}
+				{{row field="referencia" align="left"}}
 				{{row field="vencimiento" align="left"}}
 				{{row field="ivaFactor" align="left"}}
 				{{row field="saldo" align="left"}}
@@ -136,7 +138,7 @@
 							planAplicacion
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="lote, vencimiento, ivaFactor, saldo, importe, formaPago, aliasOrigen, _origen, referenciaPago, aliasDestino, _destino" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="lote, referencia, vencimiento, ivaFactor, saldo, importe, formaPago, aliasOrigen, _origen, referenciaPago, aliasDestino, _destino" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -148,6 +150,7 @@
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
 				{{field lote}}
+				{{field referencia}}
 				{{field vencimiento}}
 				{{field ivaFactor}}
 				{{field saldo}}
@@ -166,6 +169,7 @@
 	{{/template}}
 	{{#template2 id="planAplicacion"}}
 		<br>Lote: {{lote}}
+		<br>Referencia: {{referencia}}
 		<br>Fecha: {{vencimiento}}
 		<br>Factor IVA: {{ivaFactor}}
 		<br>Saldo: {{number saldo "currency"}}
@@ -179,6 +183,7 @@
 	{{/template2}}
 	{{#template3 id="planAplicacion"}}
 		{{#if lote}}<br>Lote: {{lote}}{{/if}}
+		{{#if referencia}}<br>Referencia: {{referencia}}{{/if}}
 		{{#if vencimiento}}<br>Fecha: {{vencimiento}}{{/if}}
 		{{#if ivaFactor}}<br>Factor IVA: {{ivaFactor}}{{/if}}
 		{{#if saldo}}<br>Saldo: {{number saldo "currency"}}{{/if}}

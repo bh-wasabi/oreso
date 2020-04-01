@@ -155,6 +155,7 @@
 			{{#editor case="upper"}}
 			{{/editor}}
 		{{/field}}
+		{{field id="orden" label="Orden" type="number" column="A"}}
 		{{#field id="lote" label="Lote" type="text" column="A"}}
 			{{#editor case="upper"}}
 			{{/editor}}
@@ -248,6 +249,7 @@
 				{{column field="total"}}
 				{{column field="referencia"}}
 				{{column field="referencia2"}}
+				{{column field="orden"}}
 				{{column field="lote"}}
 				{{column field="vencimiento"}}
 				{{column field="comentarios"}}
@@ -381,7 +383,7 @@
 							Artículos
 						{{/h5}}
 						{{#div}}
-							{{table articulos class="auto-form-table" cols="aliasArticulo, codigo, codigoUpc, descripcion, categoria, grupo, familia, aliasOrigen, _origen, aliasDestino, _destino, uen, agente, caja, cantidad, costoUnitario, valorUnitario, tasaIva, descuentoLinea, descuentos, importe, iva, total, referencia, referencia2, lote, vencimiento, comentarios" removeEmptyCols="true" unlink="true"}}
+							{{table articulos class="auto-form-table" cols="aliasArticulo, codigo, codigoUpc, descripcion, categoria, grupo, familia, aliasOrigen, _origen, aliasDestino, _destino, uen, agente, caja, cantidad, costoUnitario, valorUnitario, tasaIva, descuentoLinea, descuentos, importe, iva, total, referencia, referencia2, orden, lote, vencimiento, comentarios" removeEmptyCols="true" unlink="true"}}
 							{{br}}
 						{{/div}}
 					{{/col}}

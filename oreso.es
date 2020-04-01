@@ -3722,3 +3722,19 @@
 {"name":"status","code":"active","display":"Activo","order":1}
 {"index":{"_id":"status/inactive"}}
 {"name":"status","code":"inactive","display":"Inactivo","order":2}
+{"index":{"_id":"cedis/7492"}}
+{"name":"cedis","code":"7492","display":"WALMART DC 7492","order":1862}
+{"index":{"_id":"cedis/7471"}}
+{"name":"cedis","code":"7471","display":"WALMART DC 7471","order":1863}
+{"index":{"_id":"cedis/7464"}}
+{"name":"cedis","code":"7464","display":"NVA WAL-MART DE MEX SRL CV ABS 7464","order":1864}
+{"index":{"_id":"cedis/00090"}}
+{"name":"cedis","code":"00090","display":"Liverpool - BODEGA TULTITLAN","order":1865}
+{"index":{"_id":"cedis/00670"}}
+{"name":"cedis","code":"00670","display":"Suburbia","order":1866}
+{"index":{"_id":"categoriaProveedor/238421"}}
+{"name":"categoriaProveedor","code":"238421","display":"Walmart - Lentes Sol","order":1867}
+{"index":{"_id":"categoriaProveedor/844936"}}
+{"name":"categoriaProveedor","code":"844936","display":"Walmart - Lentes Lectura","order":1868}
+{"index":{"_id":"categoriaProveedor/134494"}}
+{"name":"categoriaProveedor","code":"134494","display":"Liverpool / Suburbia (Ropa)","order":1869}

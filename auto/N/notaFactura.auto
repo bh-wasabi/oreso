@@ -84,47 +84,55 @@
 			{{#editor type="lookup" source="persona" view="responsablesAcademicos" searchEnabled="true" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="fechaEmision" label="Fecha Emisión" type="date" format="DD/MMM/YYYY" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD" generator="now"}}
+		{{#field id="fechaEmision" label="Fecha Emisión" type="date" format="DD/MMM/YYYY" column="A" modalColumn="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD" generator="now"}}
 			{{#editor type="date" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="ordenCompra" label="Orden Compra" type="text" column="A" labelModalClass="full-width"}}
+		{{#field id="ordenCompra" label="Orden Compra" type="text" column="A" modalColumn="A" labelModalClass="full-width"}}
 			{{#editor case="upper" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="fechaOrdenCompra" label="Fecha Orden Compra" type="date" format="DD/MMM/YYYY" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD"}}
+		{{#field id="fechaOrdenCompra" label="Fecha Orden Compra" type="date" format="DD/MMM/YYYY" column="A" modalColumn="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD"}}
 			{{#editor type="date" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="fechaEmbarque" label="Fecha Embarque" type="date" format="DD/MMM/YYYY" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD"}}
+		{{#field id="fechaEmbarque" label="Fecha Embarque" type="date" format="DD/MMM/YYYY" column="A" modalColumn="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD"}}
 			{{#editor type="date" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="fechaCancelacion" label="Fecha Cancelacion" type="date" format="DD/MMM/YYYY" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD"}}
+		{{#field id="fechaCancelacion" label="Fecha Cancelacion" type="date" format="DD/MMM/YYYY" column="A" modalColumn="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD"}}
 			{{#editor type="date" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="diasCredito" label="Días Crédito" type="number" column="A" labelModalClass="full-width"}}
+		{{#field id="diasCredito" label="Días Crédito" type="number" column="A" modalColumn="A" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="vencimiento" label="Vencimiento" type="date" format="DD/MMM/YYYY" readOnly="true" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD" generator="now"}}
+		{{#field id="vencimiento" label="Vencimiento" type="date" format="DD/MMM/YYYY" readOnly="true" column="A" modalColumn="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD" generator="now"}}
 			{{#editor type="date" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="departamento" label="Departamento" type="text" column="A" labelModalClass="full-width"}}
+		{{#field id="departamento" label="Departamento" type="text" column="A" modalColumn="B" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="logistica" label="% Logística" type="number" column="A" labelModalClass="full-width"}}
+		{{#field id="logistica" label="% Logística" type="number" column="A" modalColumn="B" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="estatus" label="Estatus" type="text" readOnly="true" column="A" references="estatusNota" modalHide="true" labelModalClass="full-width" defaultValue="'borrador'"}}
+		{{#field id="cedis" label="CEDIS" type="text" column="A" references="cedis" modalColumn="B" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.cedis" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="categoriaProveedor" label="Categoría Proveedor" type="text" column="A" references="categoriaProveedor" modalColumn="B" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.categoriaProveedor" width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="estatus" label="Estatus" type="text" readOnly="true" column="A" references="estatusNota" modalColumn="B" modalHide="true" labelModalClass="full-width" defaultValue="'borrador'"}}
 			{{#editor type="select" preset="cfg.estatusNota" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="comentarios" label="Comentarios" type="text" column="A" labelModalClass="full-width"}}
+		{{#field id="comentarios" label="Comentarios" type="text" column="A" modalColumn="B" labelModalClass="full-width"}}
 			{{#editor type="text-area" height="110" width="100%"}}
 			{{/editor}}
 		{{/field}}
@@ -180,6 +188,7 @@
 			{{#editor case="upper"}}
 			{{/editor}}
 		{{/field}}
+		{{field id="orden" label="Orden" type="number" column="A"}}
 		{{#field id="lote" label="Lote" type="text" column="A"}}
 			{{#editor case="upper"}}
 			{{/editor}}
@@ -264,6 +273,8 @@
 				{{row field="vencimiento" align="left"}}
 				{{row field="departamento" align="left"}}
 				{{row field="logistica" align="left"}}
+				{{row field="cedis" align="left"}}
+				{{row field="categoriaProveedor" align="left"}}
 				{{row field="estatus" align="left"}}
 				{{row field="comentarios" align="left"}}
 			{{/record}}
@@ -297,6 +308,7 @@
 				{{column field="total"}}
 				{{column field="referencia"}}
 				{{column field="referencia2"}}
+				{{column field="orden"}}
 				{{column field="lote"}}
 				{{column field="vencimiento"}}
 				{{column field="comentarios"}}
@@ -426,7 +438,7 @@
 							Datos Generales
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="responsableAcademico, fechaEmision, ordenCompra, fechaOrdenCompra, fechaEmbarque, fechaCancelacion, diasCredito, vencimiento, departamento, logistica, estatus, comentarios" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="responsableAcademico, fechaEmision, ordenCompra, fechaOrdenCompra, fechaEmbarque, fechaCancelacion, diasCredito, vencimiento, departamento, logistica, cedis, categoriaProveedor, estatus, comentarios" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -441,7 +453,7 @@
 							Artículos
 						{{/h5}}
 						{{#div}}
-							{{table articulos class="auto-form-table" cols="aliasArticulo, codigo, codigoUpc, descripcion, categoria, grupo, familia, aliasOrigen, _origen, aliasDestino, _destino, uen, agente, caja, cantidad, costoUnitario, valorUnitario, tasaIva, descuentoLinea, descuentos, importe, iva, total, referencia, referencia2, lote, vencimiento, comentarios" removeEmptyCols="true" unlink="true"}}
+							{{table articulos class="auto-form-table" cols="aliasArticulo, codigo, codigoUpc, descripcion, categoria, grupo, familia, aliasOrigen, _origen, aliasDestino, _destino, uen, agente, caja, cantidad, costoUnitario, valorUnitario, tasaIva, descuentoLinea, descuentos, importe, iva, total, referencia, referencia2, orden, lote, vencimiento, comentarios" removeEmptyCols="true" unlink="true"}}
 							{{br}}
 						{{/div}}
 					{{/col}}
@@ -504,8 +516,8 @@
 			{{/zone}}
 		{{/row}}
 	{{/page}}
-	{{#modal base id="base" name="Datos Generales" size="xlong" next="articulos"}}
-		{{#col medium="100%" vertical="100%"}}
+	{{#modal base id="base" name="Datos Generales" size="xwide" next="articulos"}}
+		{{#col medium="50%" vertical="50%"}}
 			{{#fieldSet}}
 				{{field responsableAcademico}}
 				{{field fechaEmision}}
@@ -515,8 +527,14 @@
 				{{field fechaCancelacion}}
 				{{field diasCredito}}
 				{{field vencimiento}}
+			{{/fieldSet}}
+		{{/col}}
+		{{#col medium="50%" vertical="50%"}}
+			{{#fieldSet}}
 				{{field departamento}}
 				{{field logistica}}
+				{{field cedis}}
+				{{field categoriaProveedor}}
 				{{field estatus hide="true"}}
 				{{field comentarios}}
 			{{/fieldSet}}
@@ -552,6 +570,8 @@
 		<br>Vencimiento: {{date vencimiento "DD/MMM/YYYY"}}
 		<br>Departamento: {{departamento}}
 		<br>% Logística: {{logistica}}
+		<br>CEDIS: {{_cedis}}
+		<br>Categoría Proveedor: {{_categoriaProveedor}}
 		<br>Estatus: {{_estatus}}
 		<br>{{comentarios}}
 	{{/template2}}
@@ -566,6 +586,8 @@
 		{{#if vencimiento}}<br>Vencimiento: {{date vencimiento "DD/MMM/YYYY"}}{{/if}}
 		{{#if departamento}}<br>Departamento: {{departamento}}{{/if}}
 		{{#if logistica}}<br>% Logística: {{logistica}}{{/if}}
+		{{#if cedis}}<br>CEDIS: {{_cedis}}{{/if}}
+		{{#if categoriaProveedor}}<br>Categoría Proveedor: {{_categoriaProveedor}}{{/if}}
 		{{#if estatus}}<br>Estatus: {{_estatus}}{{/if}}
 		{{#if comentarios}}<br>{{comentarios}}{{/if}}
 	{{/template3}}

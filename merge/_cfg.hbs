@@ -61,7 +61,7 @@
   {{/function}}
   {{#function id="felLiverpoolTitulos"}}
     {{define type="param" id="item"}}
-    {{default return="=[calc.concat('NOMCAD', 'LIVERPOOL'),calc.concat('NUMEOC', item.ordenCompra),calc.concat('FECHOC', moment(item.fechaOrdenCompra).format('DD-MM-YYYY')),calc.concat('FECHEM', moment(item.fechaEmbarque).format('DD-MM-YYYY')),calc.concat('FECHCA', moment(item.fechaCancelacion).format('DD-MM-YYYY')),calc.concat('NUMDPT', item.departamento),calc.concat('NUMEMI', '134494'),calc.concat('EANENT', '00090'),calc.concat('NOMENT', 'BODEGA TULTITLAN'),calc.concat('PRDESG', item.logistica)]"}}
+    {{default return="=[calc.concat('NOMCAD', 'LIVERPOOL'),calc.concat('NUMEOC', item.ordenCompra),calc.concat('FECHOC', moment(item.fechaOrdenCompra).format('DD-MM-YYYY')),calc.concat('FECHEM', moment(item.fechaEmbarque).format('DD-MM-YYYY')),calc.concat('FECHCA', moment(item.fechaCancelacion).format('DD-MM-YYYY')),calc.concat('NUMDPT', item.departamento),calc.concat('NUMEMI', item.categoriaProveedor),calc.concat('EANENT', item.cedis),calc.concat('NOMENT', item._cedis),calc.concat('PRDESG', item.logistica)]"}}
   {{/function}}
   {{#function id="felLiverpool" multi="true"}}
     {{define type="param" id="item"}}
@@ -69,7 +69,7 @@
   {{/function}}
   {{#function id="felSuburbiaTitulos"}}
     {{define type="param" id="item"}}
-    {{default return="=[calc.concat('NOMCAD', 'SUBURBIA'),calc.concat('NUMEOC', item.ordenCompra),calc.concat('FECHOC', moment(item.fechaOrdenCompra).format('DD-MM-YYYY')),calc.concat('FECHEM', moment(item.fechaEmbarque).format('DD-MM-YYYY')),calc.concat('FECHCA', moment(item.fechaCancelacion).format('DD-MM-YYYY')),calc.concat('NUMDPT', item.departamento),calc.concat('NUMEMI', '134494'),calc.concat('EANENT', '00670'),calc.concat('NOMENT', ''),calc.concat('CALENT', ''),calc.concat('PAIENT', ''),calc.concat('PRDESG', item.logistica),calc.concat('DIAPAG', '90'),calc.concat('TIPMON', 'MXN')]"}}
+    {{default return="=[calc.concat('NOMCAD', 'SUBURBIA'),calc.concat('NUMEOC', item.ordenCompra),calc.concat('FECHOC', moment(item.fechaOrdenCompra).format('DD-MM-YYYY')),calc.concat('FECHEM', moment(item.fechaEmbarque).format('DD-MM-YYYY')),calc.concat('FECHCA', moment(item.fechaCancelacion).format('DD-MM-YYYY')),calc.concat('NUMDPT', item.departamento),calc.concat('NUMEMI', item.categoriaProveedor),calc.concat('EANENT', item.cedis),calc.concat('NOMENT', item._cedis),calc.concat('CALENT', ''),calc.concat('PAIENT', ''),calc.concat('PRDESG', item.logistica),calc.concat('DIAPAG', '90'),calc.concat('TIPMON', 'MXN')]"}}
   {{/function}}
   {{#function id="felSuburbia" multi="true"}}
     {{define type="param" id="item"}}
@@ -77,7 +77,7 @@
   {{/function}}
   {{#function id="felWalmartTitulos"}}
     {{define type="param" id="item"}}
-    {{default return="=[calc.concat('NOMCAD', 'WAL MART'),calc.concat('NUMEOC', item.ordenCompra),calc.concat('FECHOC', moment(item.fechaOrdenCompra).format('DD-MM-YYYY')),calc.concat('NUMDPT', item.departamento),calc.concat('NUMEMI', '238421310'),calc.concat('EANENT', '7507003112097'),calc.concat('NOMENT', 'WAL-MART DC 7492'),calc.concat('DIAPAG', '90'),calc.concat('TIPMON', 'MXN')]"}}
+    {{default return="=[calc.concat('NOMCAD', 'WAL MART'),calc.concat('NUMEOC', item.ordenCompra),calc.concat('FECHOC', moment(item.fechaOrdenCompra).format('DD-MM-YYYY')),calc.concat('NUMDPT', item.departamento),calc.concat('NUMEMI', item.categoriaProveedor),calc.concat('EANENT', item.cedis),calc.concat('NOMENT', item._cedis),calc.concat('DIAPAG', '90'),calc.concat('TIPMON', 'MXN')]"}}
   {{/function}}
   {{#function id="felWalmart" multi="true"}}
     {{define type="param" id="item"}}

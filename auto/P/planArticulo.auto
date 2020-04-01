@@ -93,6 +93,7 @@
 			{{#editor case="upper"}}
 			{{/editor}}
 		{{/field}}
+		{{field id="orden" label="Orden" type="number" column="A"}}
 		{{#field id="lote" label="Lote" type="text" column="A"}}
 			{{#editor case="upper"}}
 			{{/editor}}
@@ -153,6 +154,7 @@
 				{{row field="total" align="left"}}
 				{{row field="referencia" align="left"}}
 				{{row field="referencia2" align="left"}}
+				{{row field="orden" align="left"}}
 				{{row field="lote" align="left"}}
 				{{row field="vencimiento" align="left"}}
 				{{row field="comentarios" align="left"}}
@@ -183,7 +185,7 @@
 							planArticulo
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="aliasArticulo, codigo, codigoUpc, descripcion, categoria, grupo, familia, aliasOrigen, _origen, aliasDestino, _destino, uen, agente, caja, cantidad, costoUnitario, valorUnitario, tasaIva, descuentoLinea, descuentos, importe, iva, total, referencia, referencia2, lote, vencimiento, comentarios" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="aliasArticulo, codigo, codigoUpc, descripcion, categoria, grupo, familia, aliasOrigen, _origen, aliasDestino, _destino, uen, agente, caja, cantidad, costoUnitario, valorUnitario, tasaIva, descuentoLinea, descuentos, importe, iva, total, referencia, referencia2, orden, lote, vencimiento, comentarios" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -215,6 +217,7 @@
 				{{field descuentoLinea}}
 				{{field referencia}}
 				{{field referencia2}}
+				{{field orden}}
 				{{field lote}}
 				{{field vencimiento}}
 				{{field comentarios}}
@@ -250,6 +253,7 @@
 		<br>Total: {{number total "currency"}}
 		<br>Referencia: {{referencia}}
 		<br>Referencia 2: {{referencia2}}
+		<br>Orden: {{orden}}
 		<br>Lote: {{lote}}
 		<br>Fecha: {{vencimiento}}
 		<br>{{comentarios}}
@@ -280,6 +284,7 @@
 		{{#if total}}<br>Total: {{number total "currency"}}{{/if}}
 		{{#if referencia}}<br>Referencia: {{referencia}}{{/if}}
 		{{#if referencia2}}<br>Referencia 2: {{referencia2}}{{/if}}
+		{{#if orden}}<br>Orden: {{orden}}{{/if}}
 		{{#if lote}}<br>Lote: {{lote}}{{/if}}
 		{{#if vencimiento}}<br>Fecha: {{vencimiento}}{{/if}}
 		{{#if comentarios}}<br>{{comentarios}}{{/if}}

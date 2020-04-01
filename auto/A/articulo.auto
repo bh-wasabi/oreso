@@ -62,6 +62,10 @@
 			{{/editor}}
 			{{validator type="required"}}
 		{{/field}}
+		{{#field id="foto" label="Fotografía" type="doc" column="B" references="foto" modalColumn="A" labelModalClass="full-width" source="foto"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
 		{{#field id="estatus" label="Estatus" type="text" hide="true" column="A" references="estatusGeneral" modalColumn="A" labelModalClass="full-width" defaultValue="'activo'"}}
 			{{#editor type="select" preset="cfg.estatusGeneral" width="100%"}}
 			{{/editor}}
@@ -183,9 +187,10 @@
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Artículo" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
+			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="codigo" align="left"}}
 				{{row field="descripcion" align="left"}}
+				{{row field="foto" align="left"}}
 				{{row field="precioLista" align="left"}}
 				{{row field="precioPublico" condition="esInventariable" align="left"}}
 				{{row field="cantidadEmpaque" condition="esInventariable" align="left"}}
@@ -266,10 +271,18 @@
 				{{#row class="auto-form-row"}}
 					{{#col medium="100%" class="auto-form-col"}}
 						{{#h5 class="auto-form-h5"}}
-							Artículo
+							Datos Generales
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="codigo, descripcion, precioLista, precioPublico, cantidadEmpaque, codigoUpc, codigoUpc2, articuloPrecios, articuloNiveles, articuloPermisos, unidad, factor, codigoSat, costoUnitario" class="auto-form-record"}}
+							{{#row}}
+								{{#col vertical="70%" medium="70%" class="auto-form-col-a"}}
+									{{record this widths="20%,80%" rows="codigo, descripcion, precioLista, precioPublico, cantidadEmpaque, codigoUpc, codigoUpc2, articuloPrecios, articuloNiveles, articuloPermisos, unidad, factor, codigoSat, costoUnitario" class="auto-form-record"}}
+								{{/col}}
+								{{#col vertical="30%" medium="30%" class="auto-form-col-b"}}
+									{{#img class="auto-form-img" src="{{foto.base.url}}"}}
+									{{/img}}
+								{{/col}}
+							{{/row}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -299,11 +312,12 @@
 			{{/zone}}
 		{{/row}}
 	{{/page}}
-	{{#modal base id="base" name="Artículo" size="full"}}
+	{{#modal base id="base" name="Datos Generales" size="full"}}
 		{{#col medium="50%" vertical="50%"}}
 			{{#fieldSet}}
 				{{field codigo}}
 				{{field descripcion}}
+				{{field foto}}
 				{{field precioLista}}
 				{{field precioPublico}}
 				{{field cantidadEmpaque}}
@@ -339,6 +353,7 @@
 	{{#template2 id="articulo"}}
 		<br>Código: {{codigo}}
 		<br>Descripción: {{descripcion}}
+		<br>Fotografía: {{_foto}}
 		<br>Precio Lista: {{number precioLista "currency"}}
 		{{#if esInventariable}}<br>Precio Público: {{number precioPublico "currency"}}{{/if}}
 		{{#if esInventariable}}<br>Cantidad Empaque: {{cantidadEmpaque}}{{/if}}
@@ -365,6 +380,7 @@
 	{{#template3 id="articulo"}}
 		{{#if codigo}}<br>Código: {{codigo}}{{/if}}
 		{{#if descripcion}}<br>Descripción: {{descripcion}}{{/if}}
+		{{#if foto}}<br>Fotografía: {{_foto}}{{/if}}
 		{{#if precioLista}}<br>Precio Lista: {{number precioLista "currency"}}{{/if}}
 		{{#if esInventariable}}{{#if precioPublico}}<br>Precio Público: {{number precioPublico "currency"}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if cantidadEmpaque}}<br>Cantidad Empaque: {{cantidadEmpaque}}{{/if}}{{/if}}

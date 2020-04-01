@@ -33,8 +33,8 @@ var wasabiHost = 'demo.enlanube.io'
 wasabiHost = 'oreso.enlanube.io'
 //wasabiHost = 'cinetop.enlanube.io'
 
-// ssh -i "oreso.pem" ec2-user@oreso.enlanube.io
 // ssh -i "dev-cinetop.pem" ec2-user@cinetop.enlanube.io
+// ssh -i "oreso.pem" ec2-user@oreso.enlanube.io
 
 var logo = 'https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png';
 var logo3 = 'https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png';

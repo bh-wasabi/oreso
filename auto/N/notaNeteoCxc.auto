@@ -100,6 +100,7 @@
 	{{/section}}
 	{{#section id="aplicacion" type="array"}}
 		{{field id="lote" label="Lote" type="text" column="A"}}
+		{{field id="referencia" label="Referencia" type="text" column="A"}}
 		{{#field id="vencimiento" label="Fecha" type="text" column="A"}}
 			{{#editor case="YYYY-MM-DD"}}
 			{{/editor}}
@@ -165,6 +166,7 @@
 			{{/row}}
 			{{#table title="Aplicación" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="aplicacion" headerStyle="field" margin="-10,0,0,10" removeEmptyCols="true"}}
 				{{column field="lote"}}
+				{{column field="referencia"}}
 				{{column field="vencimiento"}}
 				{{column field="ivaFactor"}}
 				{{column field="saldo"}}
@@ -280,7 +282,7 @@
 							Aplicación
 						{{/h5}}
 						{{#div}}
-							{{table aplicacion class="auto-form-table" cols="lote, vencimiento, ivaFactor, saldo, importe, formaPago, aliasOrigen, _origen, referenciaPago, aliasDestino, _destino" removeEmptyCols="true" unlink="true"}}
+							{{table aplicacion class="auto-form-table" cols="lote, referencia, vencimiento, ivaFactor, saldo, importe, formaPago, aliasOrigen, _origen, referenciaPago, aliasDestino, _destino" removeEmptyCols="true" unlink="true"}}
 							{{br}}
 						{{/div}}
 					{{/col}}
