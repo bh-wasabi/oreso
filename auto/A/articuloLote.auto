@@ -94,11 +94,6 @@
 			{{/editor}}
 			{{validator type="unique"}}
 		{{/field}}
-		{{#field id="codigoUpc2" label="UPC Alterno" type="text" column="A"}}
-			{{#editor case="upper"}}
-			{{/editor}}
-			{{validator type="unique"}}
-		{{/field}}
 		{{field id="cliente" label="Cliente Específico" type="text" column="A"}}
 		{{#field id="comentarios" label="Comentarios" type="text" column="A"}}
 			{{#editor type="text-area" height="100"}}
@@ -152,7 +147,6 @@
 				{{column field="color"}}
 				{{column field="temporada"}}
 				{{column field="codigoUpc"}}
-				{{column field="codigoUpc2"}}
 				{{column field="cliente"}}
 				{{column field="comentarios"}}
 			{{/table}}
@@ -223,7 +217,7 @@
 							Artículos
 						{{/h5}}
 						{{#div}}
-							{{table articulos class="auto-form-table" cols="codigo, descripcion, precioLista, precioPublico, unidad, cantidadEmpaque, codigoSat, marca, grupo, modelo, composicion, tamano, color, temporada, codigoUpc, codigoUpc2, cliente, comentarios" removeEmptyCols="true" unlink="true"}}
+							{{table articulos class="auto-form-table" cols="codigo, descripcion, precioLista, precioPublico, unidad, cantidadEmpaque, codigoSat, marca, grupo, modelo, composicion, tamano, color, temporada, codigoUpc, cliente, comentarios" removeEmptyCols="true" unlink="true"}}
 							{{br}}
 						{{/div}}
 					{{/col}}

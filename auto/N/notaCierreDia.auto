@@ -180,6 +180,10 @@
 			{{/editor}}
 		{{/field}}
 		{{field id="comentarios" label="Comentarios" type="text" column="A"}}
+		{{#field id="loteEspecifico" label="Lote Específico" type="text" column="A"}}
+			{{#editor case="upper"}}
+			{{/editor}}
+		{{/field}}
 	{{/section}}
 	{{#section id="materiales" type="array"}}
 		{{#field id="aliasArticulo" label="Artículo" type="text" column="A"}}
@@ -241,6 +245,10 @@
 			{{/editor}}
 		{{/field}}
 		{{field id="comentarios" label="Comentarios" type="text" column="A"}}
+		{{#field id="loteEspecifico" label="Lote Específico" type="text" column="A"}}
+			{{#editor case="upper"}}
+			{{/editor}}
+		{{/field}}
 	{{/section}}
 	{{#section id="inv" type="array"}}
 		{{field id="codigo" label="Código" type="text" column="A"}}
@@ -342,6 +350,7 @@
 				{{column field="lote"}}
 				{{column field="vencimiento"}}
 				{{column field="comentarios"}}
+				{{column field="loteEspecifico"}}
 			{{/table}}
 		{{/stack}}
 		{{#stack condition="=materiales"}}
@@ -377,6 +386,7 @@
 				{{column field="lote"}}
 				{{column field="vencimiento"}}
 				{{column field="comentarios"}}
+				{{column field="loteEspecifico"}}
 			{{/table}}
 		{{/stack}}
 		{{#stack condition="=inv"}}
@@ -525,7 +535,7 @@
 								Ventas
 							{{/h5}}
 							{{#div}}
-								{{table ventas class="auto-form-table" cols="aliasArticulo, codigo, codigoUpc, descripcion, categoria, grupo, familia, aliasOrigen, _origen, aliasDestino, _destino, uen, agente, caja, cantidad, costoUnitario, valorUnitario, tasaIva, descuentoLinea, descuentos, importe, iva, total, referencia, referencia2, orden, lote, vencimiento, comentarios" removeEmptyCols="true" unlink="true"}}
+								{{table ventas class="auto-form-table" cols="aliasArticulo, codigo, codigoUpc, descripcion, categoria, grupo, familia, aliasOrigen, _origen, aliasDestino, _destino, uen, agente, caja, cantidad, costoUnitario, valorUnitario, tasaIva, descuentoLinea, descuentos, importe, iva, total, referencia, referencia2, orden, lote, vencimiento, comentarios, loteEspecifico" removeEmptyCols="true" unlink="true"}}
 								{{br}}
 							{{/div}}
 						{{/col}}
@@ -542,7 +552,7 @@
 								Materiales
 							{{/h5}}
 							{{#div}}
-								{{table materiales class="auto-form-table" cols="aliasArticulo, codigo, codigoUpc, descripcion, categoria, grupo, familia, aliasOrigen, _origen, aliasDestino, _destino, uen, agente, caja, cantidad, costoUnitario, valorUnitario, tasaIva, descuentoLinea, descuentos, importe, iva, total, referencia, referencia2, orden, lote, vencimiento, comentarios" removeEmptyCols="true" unlink="true"}}
+								{{table materiales class="auto-form-table" cols="aliasArticulo, codigo, codigoUpc, descripcion, categoria, grupo, familia, aliasOrigen, _origen, aliasDestino, _destino, uen, agente, caja, cantidad, costoUnitario, valorUnitario, tasaIva, descuentoLinea, descuentos, importe, iva, total, referencia, referencia2, orden, lote, vencimiento, comentarios, loteEspecifico" removeEmptyCols="true" unlink="true"}}
 								{{br}}
 							{{/div}}
 						{{/col}}

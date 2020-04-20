@@ -103,6 +103,10 @@
 			{{/editor}}
 		{{/field}}
 		{{field id="comentarios" label="Comentarios" type="text" column="A"}}
+		{{#field id="loteEspecifico" label="Lote Específico" type="text" column="A"}}
+			{{#editor case="upper"}}
+			{{/editor}}
+		{{/field}}
 	{{/section}}
 	{{#report id="preliminar-encabezado"}}
 		{{#stack}}
@@ -158,6 +162,7 @@
 				{{row field="lote" align="left"}}
 				{{row field="vencimiento" align="left"}}
 				{{row field="comentarios" align="left"}}
+				{{row field="loteEspecifico" align="left"}}
 			{{/record}}
 		{{/stack}}
 	{{/report}}
@@ -185,7 +190,7 @@
 							planArticulo
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="aliasArticulo, codigo, codigoUpc, descripcion, categoria, grupo, familia, aliasOrigen, _origen, aliasDestino, _destino, uen, agente, caja, cantidad, costoUnitario, valorUnitario, tasaIva, descuentoLinea, descuentos, importe, iva, total, referencia, referencia2, orden, lote, vencimiento, comentarios" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="aliasArticulo, codigo, codigoUpc, descripcion, categoria, grupo, familia, aliasOrigen, _origen, aliasDestino, _destino, uen, agente, caja, cantidad, costoUnitario, valorUnitario, tasaIva, descuentoLinea, descuentos, importe, iva, total, referencia, referencia2, orden, lote, vencimiento, comentarios, loteEspecifico" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -221,6 +226,7 @@
 				{{field lote}}
 				{{field vencimiento}}
 				{{field comentarios}}
+				{{field loteEspecifico}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
@@ -257,6 +263,7 @@
 		<br>Lote: {{lote}}
 		<br>Fecha: {{vencimiento}}
 		<br>{{comentarios}}
+		<br>Lote Específico: {{loteEspecifico}}
 	{{/template2}}
 	{{#template3 id="planArticulo"}}
 		{{#if aliasArticulo}}<br>Artículo: {{aliasArticulo}}{{/if}}
@@ -288,5 +295,6 @@
 		{{#if lote}}<br>Lote: {{lote}}{{/if}}
 		{{#if vencimiento}}<br>Fecha: {{vencimiento}}{{/if}}
 		{{#if comentarios}}<br>{{comentarios}}{{/if}}
+		{{#if loteEspecifico}}<br>Lote Específico: {{loteEspecifico}}{{/if}}
 	{{/template3}}
 {{/markup}}

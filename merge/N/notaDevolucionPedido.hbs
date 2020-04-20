@@ -38,6 +38,7 @@
   
   {{#grid id="articulos" applyFilter="referencia" keyField="cantidad" section="articulos" allowInsert="false" allowRemove="false" allowSort="true" sortBy="referencia,descripcion"}}
 [.#if esOreso.]
+    {{column field="aliasArticulo" label="Artículo" width="150"}}
     {{column field="referencia" label="Orden Compra" width="150" readOnly="true"}}
     {{column field="referencia2" label="SKU" width="150" readOnly="true"}}
 [.else.]

@@ -90,10 +90,6 @@
 			{{#editor case="upper" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="codigoUpc2" label="UPC Alterno" type="text" if="esInventariable" column="A" modalColumn="A" labelModalClass="full-width"}}
-			{{#editor case="upper" width="100%"}}
-			{{/editor}}
-		{{/field}}
 		{{#field id="articuloPrecios" label="Precios" type="doc" column="A" references="articuloPrecios" modalColumn="B" labelModalClass="full-width" source="articuloPrecios"}}
 			{{#editor width="100%"}}
 			{{/editor}}
@@ -195,7 +191,6 @@
 				{{row field="precioPublico" condition="esInventariable" align="left"}}
 				{{row field="cantidadEmpaque" condition="esInventariable" align="left"}}
 				{{row field="codigoUpc" condition="esInventariable" align="left"}}
-				{{row field="codigoUpc2" condition="esInventariable" align="left"}}
 				{{row field="articuloPrecios" align="left"}}
 				{{row field="articuloNiveles" align="left"}}
 				{{row field="articuloPermisos" align="left"}}
@@ -276,7 +271,7 @@
 						{{#with base}}
 							{{#row}}
 								{{#col vertical="70%" medium="70%" class="auto-form-col-a"}}
-									{{record this widths="20%,80%" rows="codigo, descripcion, precioLista, precioPublico, cantidadEmpaque, codigoUpc, codigoUpc2, articuloPrecios, articuloNiveles, articuloPermisos, unidad, factor, codigoSat, costoUnitario" class="auto-form-record"}}
+									{{record this widths="20%,80%" rows="codigo, descripcion, precioLista, precioPublico, cantidadEmpaque, codigoUpc, articuloPrecios, articuloNiveles, articuloPermisos, unidad, factor, codigoSat, costoUnitario" class="auto-form-record"}}
 								{{/col}}
 								{{#col vertical="30%" medium="30%" class="auto-form-col-b"}}
 									{{#img class="auto-form-img" src="{{foto.base.url}}"}}
@@ -322,7 +317,6 @@
 				{{field precioPublico}}
 				{{field cantidadEmpaque}}
 				{{field codigoUpc}}
-				{{field codigoUpc2}}
 				{{field unidad}}
 				{{field factor}}
 				{{field codigoSat}}
@@ -358,7 +352,6 @@
 		{{#if esInventariable}}<br>Precio Público: {{number precioPublico "currency"}}{{/if}}
 		{{#if esInventariable}}<br>Cantidad Empaque: {{cantidadEmpaque}}{{/if}}
 		{{#if esInventariable}}<br>UPC: {{codigoUpc}}{{/if}}
-		{{#if esInventariable}}<br>UPC Alterno: {{codigoUpc2}}{{/if}}
 		<br>Precios: {{_articuloPrecios}}
 		<br>Niveles Inventario: {{_articuloNiveles}}
 		<br>Permisos: {{_articuloPermisos}}
@@ -385,7 +378,6 @@
 		{{#if esInventariable}}{{#if precioPublico}}<br>Precio Público: {{number precioPublico "currency"}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if cantidadEmpaque}}<br>Cantidad Empaque: {{cantidadEmpaque}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if codigoUpc}}<br>UPC: {{codigoUpc}}{{/if}}{{/if}}
-		{{#if esInventariable}}{{#if codigoUpc2}}<br>UPC Alterno: {{codigoUpc2}}{{/if}}{{/if}}
 		{{#if articuloPrecios}}<br>Precios: {{_articuloPrecios}}{{/if}}
 		{{#if articuloNiveles}}<br>Niveles Inventario: {{_articuloNiveles}}{{/if}}
 		{{#if articuloPermisos}}<br>Permisos: {{_articuloPermisos}}{{/if}}

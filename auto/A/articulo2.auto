@@ -79,11 +79,6 @@
 			{{/editor}}
 			{{validator type="unique"}}
 		{{/field}}
-		{{#field id="codigoUpc2" label="UPC Alterno" type="text" column="A"}}
-			{{#editor case="upper"}}
-			{{/editor}}
-			{{validator type="unique"}}
-		{{/field}}
 		{{field id="cliente" label="Cliente Específico" type="text" column="A"}}
 		{{#field id="comentarios" label="Comentarios" type="text" column="A"}}
 			{{#editor type="text-area" height="100"}}
@@ -130,7 +125,6 @@
 				{{row field="color" align="left"}}
 				{{row field="temporada" align="left"}}
 				{{row field="codigoUpc" align="left"}}
-				{{row field="codigoUpc2" align="left"}}
 				{{row field="cliente" align="left"}}
 				{{row field="comentarios" align="left"}}
 			{{/record}}
@@ -160,7 +154,7 @@
 							articulo2
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="codigo, descripcion, precioLista, precioPublico, unidad, cantidadEmpaque, codigoSat, marca, grupo, modelo, composicion, tamano, color, temporada, codigoUpc, codigoUpc2, cliente, comentarios" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="codigo, descripcion, precioLista, precioPublico, unidad, cantidadEmpaque, codigoSat, marca, grupo, modelo, composicion, tamano, color, temporada, codigoUpc, cliente, comentarios" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -186,7 +180,6 @@
 				{{field color}}
 				{{field temporada}}
 				{{field codigoUpc}}
-				{{field codigoUpc2}}
 				{{field cliente}}
 				{{field comentarios}}
 			{{/fieldSet}}
@@ -211,7 +204,6 @@
 		<br>Color: {{color}}
 		<br>Temporada: {{temporada}}
 		<br>UPC: {{codigoUpc}}
-		<br>UPC Alterno: {{codigoUpc2}}
 		<br>Cliente Específico: {{cliente}}
 		<br>{{comentarios}}
 	{{/template2}}
@@ -231,7 +223,6 @@
 		{{#if color}}<br>Color: {{color}}{{/if}}
 		{{#if temporada}}<br>Temporada: {{temporada}}{{/if}}
 		{{#if codigoUpc}}<br>UPC: {{codigoUpc}}{{/if}}
-		{{#if codigoUpc2}}<br>UPC Alterno: {{codigoUpc2}}{{/if}}
 		{{#if cliente}}<br>Cliente Específico: {{cliente}}{{/if}}
 		{{#if comentarios}}<br>{{comentarios}}{{/if}}
 	{{/template3}}

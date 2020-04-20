@@ -653,11 +653,11 @@
     {{/field}}
     {{field id="orden" type="number" label="Orden"}}
   {{/section}}
-  {{#grid id="aliasUbicacion" section="aliasUbicacion" allowInsert="true" allowRemove="true" allowSort="true" sortBy="persona,orden,id"}}
-    {{column field="id" width="200"}}
-    {{column field="persona" width="350"}}
-    {{column field="ubicacion" width="350"}}
-    {{column field="orden" width="50"}}
+  {{#grid id="aliasUbicacion" section="aliasUbicacion" allowInsert="true" allowRemove="true" allowSort="true" sortBy="persona,ubicacion"}}
+    {{column field="persona" width="150"}}
+    {{column field="ubicacion" width="300"}}
+    {{column field="id" width="100"}}
+    {{!-- {{column field="orden" width="50"}} --}}
   {{/grid}}
 
   {{#section id="grupoUbicacion" type="array"}}
@@ -730,6 +730,7 @@
     {{set codigoUpc="=base.codigoUpc"}}
     {{set precio="=base.precioLista"}}
     {{set costoUnitario="=base.costoUnitario"}}
+    {{set esArticulo="=true"}}
   {{/mapPreset}}
 
   {{#mapPreset source="articulo" view="porCodigoUpc" toPreset="aliasArticulo"}}
@@ -740,6 +741,7 @@
     {{set codigoUpc="=base.codigoUpc"}}
     {{set precio="=base.precioLista"}}
     {{set costoUnitario="=base.costoUnitario"}}
+    {{set esArticulo="=true"}}
   {{/mapPreset}}
 
   {{!-- {{#mapPreset source="articulo" view="porCodigoSku" toPreset="aliasArticulo"}}
@@ -775,6 +777,7 @@
     {{set descripcion="=descripcion"}}
     {{set precio="=precio"}}
     {{set costoUnitario="=costoUnitario"}}
+    {{set esAlias="=true"}}
   {{/mapPreset}}
 
   {{#grid id="aliasArticulo2" section="aliasArticulo2" allowInsert="true" allowRemove="true" allowSort="true" sortBy="persona,orden,id"}}
@@ -836,7 +839,7 @@
         {{#zone id="aliasUbicacion" modalGrid="aliasUbicacion"}}
           {{br}}
           {{#h5}}Alias Ubicaciones{{/h5}}
-          {{table aliasUbicacion cols="id,persona,ubicacion" medium="20%,40%,40%"}}
+          {{table aliasUbicacion cols="persona,ubicacion,id" medium="40%,40%,20%"}}
         {{/zone}}
       {{/col}}
     {{/row}}
@@ -1164,7 +1167,7 @@
   {{modal color id="color" grid="color" name="Colores/Sabores" size="long"}}
   {{modal temporada id="temporada" grid="temporada" name="Temporadas" size="long"}} --}}
   {{modal aliasArticulo2 id="aliasArticulo2" grid="aliasArticulo2" name="Alias Artículos" size="xwide"}}
-  {{modal aliasUbicacion id="aliasUbicacion" grid="aliasUbicacion" name="Alias Ubicaciones" size="xwide"}}
+  {{modal aliasUbicacion id="aliasUbicacion" grid="aliasUbicacion" name="Alias Ubicaciones" size="xxlong"}}
   {{modal grupoUbicacion id="grupoUbicacion" grid="grupoUbicacion" name="Grupos Ubicaciones" size="xwide"}}
   {{modal aliasTesoreria id="aliasTesoreria" grid="aliasTesoreria" name="Alias Tesorería" size="xwide"}}
   {{modal mayor id="mayor" grid="mayor" name="Mayor" size="xwide"}}

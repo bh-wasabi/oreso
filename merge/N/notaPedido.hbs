@@ -153,6 +153,13 @@
     {{sum field="neto" label="Neto" format="#,"}}
     {{sum field="importeNeto" label="Importe Neto" format="currency"}}
   {{/cube}}
+
+  {{#grid id="porDestino" allowInsert="false" allowRemove="false" allowSort="true" sortBy="referencia,descripcion" exportToExcel="true"}}
+    {{column field="cantidad" label="Cantidad" width="150" format="#," summaryType="sum" summaryFormat="fixedPoint" summaryPrecision="0"}}
+    {{column field="aliasDestino" label="Destino" width="100"}}
+    {{column field="_destino" label="Ubicación Destino" width="250"}}
+  {{/grid}}
+
   {{action id="tool" condition="true" label="Analizar" type="viewCube" visibleMode="close" color="cyan" btnSolid="true" cube="articulos" items="=calc.mergeArraysByKey(articulos, _items, 'codigo')" fromSource="articulo" fromView="todo"}}
   
   {{!-- {{action id="tool2" condition="true" label="Descargar Checklist..." type="save-as" visibleMode="close" color="blue" btnSolid="true" fileName="=_name||'Pedido'" 
@@ -160,4 +167,5 @@
   {{action id="tool2" condition="true" label="Descargar Checklist..." type="save-as-excel" visibleMode="close" color="blue" btnSolid="true" fileName="=_name||'Pedido'" 
     items="=fn('checkListExcel', calc.mergeMasterDetail({persona, base}, calc.mergeArraysByKey(calc.joinPreset(calc.whereGreaterThan(inv, 'entrada', 0), 'app.aliasUbicacion', 'cuenta', 'ubicacion'), _items, 'codigo')))" fromSource="articulo" fromView="todo"}}    
   {{action id="tool4" condition="true" type="report-pdf" label="Reporte Bodega" report="preliminar2" fileName="=_name" visibleMode="close" color="grey" items="=calc.mapReduce(calc.mergeArraysByKey(inv, _items, 'codigo'), 'codigo,descripcion,codigoUpc,lote,loteReferencia,tamano,color,marca', 'salida')" fromSource="articulo" fromView="todo"}}
+  {{action id="porDestino" label="por Destino" type="viewGrid" visibleMode="close" color="cyan" grid="porDestino" items="=calc.mapReduce(articulos, 'aliasDestino,_destino','cantidad')"}}
 {{/define}}

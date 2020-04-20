@@ -25,6 +25,11 @@
         {{set _destino="=calc.getPresetPersona('app.aliasUbicacion', aliasDestino, _doc.persona.id)._ubicacion"}}
       {{/onChange}}
     {{/field}}
+    {{#field id="loteEspecifico"}}
+      {{#editor type="select" source="mov" view="loteEspecifico" alwaysLoad="true" sendSearchValue="true" value="lote" display="loteVencimiento"}}
+        {{param codigo="=codigo"}}
+      {{/editor}}
+    {{/field}}    
   {{/section}}
   
   {{#grid id="articulos" section="articulos" keyField="cantidad" allowInsert="true" allowRemove="true"}}
@@ -36,6 +41,7 @@
     {{column field="aliasDestino" label="Destino" width="55" defaultValue="=_params.aliasDestino"}}
     {{column field="_destino" label="Ubicación" width="150" required="true"}}
     {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
+    {{column field="loteEspecifico" label="Lote Especifico" width="110" validateDuplicate="true"}}
   {{/grid}}
   {{#grid id="adjuntos" section="adjuntos" allowRemove="true" allowSort="true" sortBy="orden, fecha"}}
     {{column field="nombre" width="400"}}

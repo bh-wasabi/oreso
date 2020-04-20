@@ -19,6 +19,11 @@
         {{set _origen="=calc.getPresetPersona('app.aliasUbicacion', aliasOrigen, _doc.persona.id)._ubicacion"}}
       {{/onChange}}
     {{/field}}
+    {{#field id="loteEspecifico"}}
+      {{#editor type="select" source="mov" view="loteEspecifico" alwaysLoad="true" sendSearchValue="true" value="lote" display="loteVencimiento"}}
+        {{param codigo="=codigo"}}
+      {{/editor}}
+    {{/field}}    
   {{/section}}
   
   {{#grid id="articulos" section="articulos" keyField="cantidad" allowInsert="true" allowRemove="true"}}
@@ -28,5 +33,6 @@
     {{column field="aliasOrigen" label="Origen" width="55" defaultValue="=_params.aliasOrigen"}}
     {{column field="_origen" label="Ubicación" width="150" required="true"}}
     {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
+    {{column field="loteEspecifico" label="Lote Especifico" width="110" validateDuplicate="true"}}
   {{/grid}}
 {{/define}}

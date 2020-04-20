@@ -1,5 +1,18 @@
 {{#define type="doc" id="mov"}}
 
+  {{#view id="loteEspecifico" distinct="true"}}
+    {{#pipeline}}
+      {{filter field="aux" eq="='inv'"}}
+      {{filter field="='codigo'" eq="=codigo"}}
+      {{group field="lote"}}
+      {{group field="vencimiento"}}
+      {{group field="cantidadFactor" type="sum" as="cantidad"}}
+      {{sort field="_id.vencimiento" direction="asc"}}
+      {{match field="cantidad" gt="=0"}}
+    {{/pipeline}}
+    {{calc field="loteVencimiento" type="expr" value="=calc.concat(lote, '-', vencimiento)"}}
+    {{editor display="loteVencimiento"}}
+  {{/view}}
   {{#view id="existencias"}}
     {{#pipeline}}
       {{filter field="aux" eq="='inv'"}}
@@ -311,6 +324,7 @@
       {{group field="tasa" as="tasaIva"}}
       {{group field="referencia"}}
       {{group field="referencia2"}}
+      {{group field="referencia3" as="aliasArticulo"}}
       {{group field="cantidadFactor" type="sum" as="cantidad"}}
       {{!-- {{sort field="descripcion" direction="asc"}} --}}
       {{match field="cantidad" gt="=0"}}
@@ -331,6 +345,7 @@
       {{group field="tasa" as="tasaIva"}}
       {{group field="referencia"}}
       {{group field="referencia2"}}
+      {{group field="referencia3" as="aliasArticulo"}}
       {{group field="cantidadFactor" type="sum" as="cantidad"}}
       {{!-- {{sort field="descripcion" direction="asc"}} --}}
       {{match field="cantidad" gt="=0"}}

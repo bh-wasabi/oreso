@@ -63,25 +63,25 @@
     {{define type="param" id="item"}}
     {{default return="=[calc.concat('NOMCAD', 'LIVERPOOL'),calc.concat('NUMEOC', item.ordenCompra),calc.concat('FECHOC', moment(item.fechaOrdenCompra).format('DD-MM-YYYY')),calc.concat('FECHEM', moment(item.fechaEmbarque).format('DD-MM-YYYY')),calc.concat('FECHCA', moment(item.fechaCancelacion).format('DD-MM-YYYY')),calc.concat('NUMDPT', item.departamento),calc.concat('NUMEMI', item.categoriaProveedor),calc.concat('EANENT', item.cedis),calc.concat('NOMENT', item._cedis),calc.concat('PRDESG', item.logistica)]"}}
   {{/function}}
-  {{#function id="felLiverpool" multi="true"}}
-    {{define type="param" id="item"}}
-    {{default return="=[calc.concat('CANTID', item.cantidad),calc.concat('CANTIP', item.cantidad),calc.concat('CVESKU', item.referencia2),calc.concat('DESCRI', item.descripcion2),calc.concat('CODUPC', item.codigoUpc),calc.concat('ESTILV', item.modelo),calc.concat('COLORV', item.color),calc.concat('TALLAV', item.tamano),calc.concat('PBRUDE', item.valorUnitario),calc.concat('PUNITN', item.precioPublico),calc.concat('PUNITR', null),calc.concat('UNIDAD', calc.upperCase(item.unidad))]"}}
-  {{/function}}
   {{#function id="felSuburbiaTitulos"}}
     {{define type="param" id="item"}}
     {{default return="=[calc.concat('NOMCAD', 'SUBURBIA'),calc.concat('NUMEOC', item.ordenCompra),calc.concat('FECHOC', moment(item.fechaOrdenCompra).format('DD-MM-YYYY')),calc.concat('FECHEM', moment(item.fechaEmbarque).format('DD-MM-YYYY')),calc.concat('FECHCA', moment(item.fechaCancelacion).format('DD-MM-YYYY')),calc.concat('NUMDPT', item.departamento),calc.concat('NUMEMI', item.categoriaProveedor),calc.concat('EANENT', item.cedis),calc.concat('NOMENT', item._cedis),calc.concat('CALENT', ''),calc.concat('PAIENT', ''),calc.concat('PRDESG', item.logistica),calc.concat('DIAPAG', '90'),calc.concat('TIPMON', 'MXN')]"}}
-  {{/function}}
-  {{#function id="felSuburbia" multi="true"}}
-    {{define type="param" id="item"}}
-    {{default return="=[calc.concat('CANTID', item.cantidad),calc.concat('CANTIP', item.cantidad),calc.concat('CVESKU', item.referencia2),calc.concat('PIEPEM', item.cantidadEmpaque),calc.concat('DESCRI', item.descripcion2),calc.concat('CODUPC', item.codigoUpc2),calc.concat('CODDUN', item.codigoUpc2),calc.concat('ESTILV', item.modelo),calc.concat('COLORV', item.color),calc.concat('TALLAV', item.tamano),calc.concat('PBRUDE', item.valorUnitario),calc.concat('PUNITN', item.precioPublico),calc.concat('PUNITR', null),calc.concat('UNIDAD', calc.upperCase(item.unidad))]"}}
   {{/function}}
   {{#function id="felWalmartTitulos"}}
     {{define type="param" id="item"}}
     {{default return="=[calc.concat('NOMCAD', 'WAL MART'),calc.concat('NUMEOC', item.ordenCompra),calc.concat('FECHOC', moment(item.fechaOrdenCompra).format('DD-MM-YYYY')),calc.concat('NUMDPT', item.departamento),calc.concat('NUMEMI', item.categoriaProveedor),calc.concat('EANENT', item.cedis),calc.concat('NOMENT', item._cedis),calc.concat('DIAPAG', '90'),calc.concat('TIPMON', 'MXN')]"}}
   {{/function}}
+  {{#function id="felLiverpool" multi="true"}}
+    {{define type="param" id="item"}}
+    {{default return="=[calc.concat('CANTID', item.cantidad),calc.concat('CANTIP', item.cantidad),calc.concat('CVESKU', item.referencia2),calc.concat('DESCRI', item.descripcion2),calc.concat('CODUPC', item.aliasArticulo),calc.concat('ESTILV', item.modelo),calc.concat('COLORV', item.color),calc.concat('TALLAV', item.tamano),calc.concat('PBRUDE', item.valorUnitario),calc.concat('PUNITN', item.precioPublico),calc.concat('PUNITR', null),calc.concat('UNIDAD', calc.upperCase(item.unidad))]"}}
+  {{/function}}
+  {{#function id="felSuburbia" multi="true"}}
+    {{define type="param" id="item"}}
+    {{default return="=[calc.concat('CANTID', item.cantidad),calc.concat('CANTIP', item.cantidad),calc.concat('CVESKU', item.referencia2),calc.concat('PIEPEM', item.cantidadEmpaque),calc.concat('DESCRI', item.descripcion2),calc.concat('CODUPC', item.aliasArticulo),calc.concat('CODDUN', item.aliasArticulo),calc.concat('ESTILV', item.modelo),calc.concat('COLORV', item.color),calc.concat('TALLAV', item.tamano),calc.concat('PBRUDE', item.valorUnitario),calc.concat('PUNITN', item.precioPublico),calc.concat('PUNITR', null),calc.concat('UNIDAD', calc.upperCase(item.unidad))]"}}
+  {{/function}}
   {{#function id="felWalmart" multi="true"}}
     {{define type="param" id="item"}}
-    {{default return="=[calc.concat('CANTID', item.cantidad),calc.concat('CVESKU', item.referencia2),calc.concat('DESCRI', item.descripcion2),calc.concat('CODUPC', item.codigoUpc),calc.concat('PBRUDE', item.valorUnitario),calc.concat('UNIDAD', calc.upperCase(item.unidad))]"}}
+    {{default return="=[calc.concat('CANTID', item.cantidad),calc.concat('CVESKU', item.referencia2),calc.concat('DESCRI', item.descripcion2),calc.concat('CODUPC', item.aliasArticulo),calc.concat('PBRUDE', item.valorUnitario),calc.concat('UNIDAD', calc.upperCase(item.unidad))]"}}
   {{/function}}
   {{#transform id="copiarPersona"}}
     {{set id="=_id"}}

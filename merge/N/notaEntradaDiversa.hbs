@@ -8,10 +8,10 @@
   {{#section id="articulos"}}
     {{#field id="aliasArticulo"}}
       {{#onChange}}
-        {{set articulo="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).articulo"}}
-        {{set codigo="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).codigo"}}
-        {{set codigoUpc="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).codigoUpc"}}
-        {{set descripcion="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id).descripcion"}}
+        {{set articulo="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id, {esArticulo: true}).articulo"}}
+        {{set codigo="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id, {esArticulo: true}).codigo"}}
+        {{set codigoUpc="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id, {esArticulo: true}).codigoUpc"}}
+        {{set descripcion="=calc.getPresetPersona('app.aliasArticulo', aliasArticulo, _doc.persona.id, {esArticulo: true}).descripcion"}}
       {{/onChange}}
     {{/field}}
     {{#field id="aliasDestino"}}
