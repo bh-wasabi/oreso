@@ -46,6 +46,10 @@
 	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
 		{{field id="lote" label="Lote" type="text" column="A"}}
 		{{field id="referencia" label="Referencia" type="text" column="A"}}
+		{{#field id="fechaEmision" label="Fecha Emisión" type="text" column="A"}}
+			{{#editor case="YYYY-MM-DD"}}
+			{{/editor}}
+		{{/field}}
 		{{#field id="vencimiento" label="Fecha" type="text" column="A"}}
 			{{#editor case="YYYY-MM-DD"}}
 			{{/editor}}
@@ -73,6 +77,10 @@
 		{{/field}}
 		{{field id="destino" label="Destino ID" type="text" readOnly="true" hide="true" column="A"}}
 		{{field id="_destino" label="Ubicación Destino" type="text" readOnly="true" column="A"}}
+		{{#field id="motivo" label="Motivo" type="text" column="A" references="motivo"}}
+			{{#editor type="select" preset="cfg.motivo"}}
+			{{/editor}}
+		{{/field}}
 	{{/section}}
 	{{#report id="preliminar-encabezado"}}
 		{{#stack}}
@@ -101,6 +109,7 @@
 			{{#record title="planAplicacion" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="lote" align="left"}}
 				{{row field="referencia" align="left"}}
+				{{row field="fechaEmision" align="left"}}
 				{{row field="vencimiento" align="left"}}
 				{{row field="ivaFactor" align="left"}}
 				{{row field="saldo" align="left"}}
@@ -111,6 +120,7 @@
 				{{row field="referenciaPago" align="left"}}
 				{{row field="aliasDestino" align="left"}}
 				{{row field="_destino" align="left"}}
+				{{row field="motivo" align="left"}}
 			{{/record}}
 		{{/stack}}
 	{{/report}}
@@ -138,7 +148,7 @@
 							planAplicacion
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="lote, referencia, vencimiento, ivaFactor, saldo, importe, formaPago, aliasOrigen, _origen, referenciaPago, aliasDestino, _destino" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="lote, referencia, fechaEmision, vencimiento, ivaFactor, saldo, importe, formaPago, aliasOrigen, _origen, referenciaPago, aliasDestino, _destino, motivo" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -151,6 +161,7 @@
 			{{#fieldSet}}
 				{{field lote}}
 				{{field referencia}}
+				{{field fechaEmision}}
 				{{field vencimiento}}
 				{{field ivaFactor}}
 				{{field saldo}}
@@ -161,6 +172,7 @@
 				{{field referenciaPago}}
 				{{field aliasDestino}}
 				{{field _destino}}
+				{{field motivo}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
@@ -170,6 +182,7 @@
 	{{#template2 id="planAplicacion"}}
 		<br>Lote: {{lote}}
 		<br>Referencia: {{referencia}}
+		<br>Fecha Emisión: {{fechaEmision}}
 		<br>Fecha: {{vencimiento}}
 		<br>Factor IVA: {{ivaFactor}}
 		<br>Saldo: {{number saldo "currency"}}
@@ -180,10 +193,12 @@
 		<br>Referencia Pago: {{referenciaPago}}
 		<br>Destino: {{aliasDestino}}
 		<br>Ubicación Destino: {{_destino}}
+		<br>Motivo: {{_motivo}}
 	{{/template2}}
 	{{#template3 id="planAplicacion"}}
 		{{#if lote}}<br>Lote: {{lote}}{{/if}}
 		{{#if referencia}}<br>Referencia: {{referencia}}{{/if}}
+		{{#if fechaEmision}}<br>Fecha Emisión: {{fechaEmision}}{{/if}}
 		{{#if vencimiento}}<br>Fecha: {{vencimiento}}{{/if}}
 		{{#if ivaFactor}}<br>Factor IVA: {{ivaFactor}}{{/if}}
 		{{#if saldo}}<br>Saldo: {{number saldo "currency"}}{{/if}}
@@ -194,5 +209,6 @@
 		{{#if referenciaPago}}<br>Referencia Pago: {{referenciaPago}}{{/if}}
 		{{#if aliasDestino}}<br>Destino: {{aliasDestino}}{{/if}}
 		{{#if _destino}}<br>Ubicación Destino: {{_destino}}{{/if}}
+		{{#if motivo}}<br>Motivo: {{_motivo}}{{/if}}
 	{{/template3}}
 {{/markup}}

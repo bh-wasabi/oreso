@@ -7,6 +7,7 @@
 
   {{#grid id="aplicacion" section="aplicacion" keyField="importe" allowInsert="true" allowRemove="true"}}
     {{column field="referencia" label="Referencia" width="200"}}
+    {{column field="fechaEmision" label="Fecha Emisión" validateDate="true" width="110"}}
     {{column field="vencimiento" label="Vencimiento" validateDate="true" width="110"}}
     {{column field="importe" label="Importe" width="150" type="numeric" format="#,.##"}}
   {{/grid}}

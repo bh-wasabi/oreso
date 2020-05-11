@@ -27,6 +27,7 @@
 	{{param browserView="lista"}}
 	{{param itemTemplate="mov"}}
 	{{param isNote="true"}}
+	{{param noteReference="=base.ordenCompra"}}
 	{{param addResponsable="true"}}
 	{{param allowInsert="false"}}
 	{{param tempSections="resumen"}}
@@ -38,6 +39,7 @@
 	{{param allowDraft="true"}}
 	{{param isAction="true"}}
 	{{param autoExportItems="=calc.joinPreset(calc.whereGreaterThan(inv, 'entrada', 0), 'app.aliasUbicacion', 'cuenta', 'ubicacion')"}}
+	{{param validateEmptyMov="true"}}
 	{{action id="fix-user" type="add-subdoc" transform="copiarNota" source="notaAjusteUsuario" label="Ajustar Usuario" btnFlat="true" color="grey" superUser="true" visibleMode="close" onlyPost="true"}}
 	{{action id="subdoc" condition="=false"}}
 	{{action id="subdoc2" condition="=false"}}
@@ -91,16 +93,9 @@
 		{{#field id="ordenCompra" label="Orden Compra" type="text" column="A" labelModalClass="full-width"}}
 			{{#editor case="upper" width="100%"}}
 			{{/editor}}
+			{{validator type="required"}}
 		{{/field}}
 		{{#field id="fechaOrdenCompra" label="Fecha Orden Compra" type="date" format="DD/MMM/YYYY" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD"}}
-			{{#editor type="date" width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="diasCredito" label="Días Crédito" type="number" column="A" labelModalClass="full-width"}}
-			{{#editor width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="vencimiento" label="Vencimiento" type="date" format="DD/MMM/YYYY" readOnly="true" column="A" labelModalClass="full-width" saveFormat="YYYY-MM-DD" generator="now"}}
 			{{#editor type="date" width="100%"}}
 			{{/editor}}
 		{{/field}}
@@ -150,11 +145,15 @@
 		{{field id="cantidad" label="Cantidad" type="number" format="#,.##" column="A"}}
 		{{field id="costoUnitario" label="Costo Unitario" type="number" format="currency" column="A"}}
 		{{field id="valorUnitario" label="Valor Unitario" type="number" format="currency" column="A"}}
+		{{field id="precioPublico" label="Precio Público" type="number" format="currency" column="A"}}
 		{{field id="tasaIva" label="% IVA" type="number" format="#.##" column="A"}}
-		{{field id="descuentoLinea" label="% Desc" type="number" format="#.##" column="A"}}
+		{{field id="retencionIva" label="Retención IVA" type="number" column="A"}}
+		{{field id="retencionIsr" label="Retención ISR" type="number" format="currency" column="A"}}
+		{{field id="descuentoLinea" label="% Desc" type="number" format="currency" column="A"}}
 		{{field id="descuentos" label="Descuentos" type="calc" format="currency" column="A"}}
 		{{field id="importe" label="Importe" type="calc" format="currency" column="A"}}
 		{{field id="iva" label="IVA" type="calc" format="currency" column="A"}}
+		{{field id="retenciones" label="Retenciones" type="calc" format="currency" column="A"}}
 		{{field id="total" label="Total" type="calc" format="currency" column="A"}}
 		{{#field id="referencia" label="Orden Compra" type="text" column="A"}}
 			{{#editor case="upper"}}
@@ -173,11 +172,15 @@
 			{{#editor case="YYYY-MM-DD"}}
 			{{/editor}}
 		{{/field}}
-		{{field id="comentarios" label="Comentarios" type="text" column="A"}}
+		{{#field id="motivo" label="Motivo" type="text" column="A" references="motivo"}}
+			{{#editor type="select" preset="cfg.motivo"}}
+			{{/editor}}
+		{{/field}}
 		{{#field id="loteEspecifico" label="Lote Específico" type="text" column="A"}}
 			{{#editor case="upper"}}
 			{{/editor}}
 		{{/field}}
+		{{field id="comentarios" label="Comentarios" type="text" column="A"}}
 	{{/section}}
 	{{#section id="inv" type="array"}}
 		{{field id="codigo" label="Código" type="text" column="A"}}
@@ -247,8 +250,6 @@
 				{{row field="fechaEmision" align="left"}}
 				{{row field="ordenCompra" align="left"}}
 				{{row field="fechaOrdenCompra" align="left"}}
-				{{row field="diasCredito" align="left"}}
-				{{row field="vencimiento" align="left"}}
 				{{row field="estatus" align="left"}}
 				{{row field="comentarios" align="left"}}
 			{{/record}}
@@ -274,19 +275,24 @@
 				{{column field="cantidad"}}
 				{{column field="costoUnitario"}}
 				{{column field="valorUnitario"}}
+				{{column field="precioPublico"}}
 				{{column field="tasaIva"}}
+				{{column field="retencionIva"}}
+				{{column field="retencionIsr"}}
 				{{column field="descuentoLinea"}}
 				{{column field="descuentos"}}
 				{{column field="importe"}}
 				{{column field="iva"}}
+				{{column field="retenciones"}}
 				{{column field="total"}}
 				{{column field="referencia"}}
 				{{column field="referencia2"}}
 				{{column field="orden"}}
 				{{column field="lote"}}
 				{{column field="vencimiento"}}
-				{{column field="comentarios"}}
+				{{column field="motivo"}}
 				{{column field="loteEspecifico"}}
+				{{column field="comentarios"}}
 			{{/table}}
 		{{/stack}}
 		{{#stack condition="=inv"}}
@@ -413,7 +419,7 @@
 							Datos Generales
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="responsableAcademico, fechaEmision, ordenCompra, fechaOrdenCompra, diasCredito, vencimiento, estatus, comentarios" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="responsableAcademico, fechaEmision, ordenCompra, fechaOrdenCompra, estatus, comentarios" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -428,7 +434,7 @@
 							Artículos
 						{{/h5}}
 						{{#div}}
-							{{table articulos class="auto-form-table" cols="aliasArticulo, codigo, codigoUpc, descripcion, categoria, grupo, familia, aliasOrigen, _origen, aliasDestino, _destino, uen, agente, caja, cantidad, costoUnitario, valorUnitario, tasaIva, descuentoLinea, descuentos, importe, iva, total, referencia, referencia2, orden, lote, vencimiento, comentarios, loteEspecifico" removeEmptyCols="true" unlink="true"}}
+							{{table articulos class="auto-form-table" cols="aliasArticulo, codigo, codigoUpc, descripcion, categoria, grupo, familia, aliasOrigen, _origen, aliasDestino, _destino, uen, agente, caja, cantidad, costoUnitario, valorUnitario, precioPublico, tasaIva, retencionIva, retencionIsr, descuentoLinea, descuentos, importe, iva, retenciones, total, referencia, referencia2, orden, lote, vencimiento, motivo, loteEspecifico, comentarios" removeEmptyCols="true" unlink="true"}}
 							{{br}}
 						{{/div}}
 					{{/col}}
@@ -498,8 +504,6 @@
 				{{field fechaEmision}}
 				{{field ordenCompra}}
 				{{field fechaOrdenCompra}}
-				{{field diasCredito}}
-				{{field vencimiento}}
 				{{field estatus hide="true"}}
 				{{field comentarios}}
 			{{/fieldSet}}
@@ -529,8 +533,6 @@
 		<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}
 		<br>Orden Compra: {{ordenCompra}}
 		<br>Fecha Orden Compra: {{date fechaOrdenCompra "DD/MMM/YYYY"}}
-		<br>Días Crédito: {{diasCredito}}
-		<br>Vencimiento: {{date vencimiento "DD/MMM/YYYY"}}
 		<br>Estatus: {{_estatus}}
 		<br>{{comentarios}}
 	{{/template2}}
@@ -539,8 +541,6 @@
 		{{#if fechaEmision}}<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}{{/if}}
 		{{#if ordenCompra}}<br>Orden Compra: {{ordenCompra}}{{/if}}
 		{{#if fechaOrdenCompra}}<br>Fecha Orden Compra: {{date fechaOrdenCompra "DD/MMM/YYYY"}}{{/if}}
-		{{#if diasCredito}}<br>Días Crédito: {{diasCredito}}{{/if}}
-		{{#if vencimiento}}<br>Vencimiento: {{date vencimiento "DD/MMM/YYYY"}}{{/if}}
 		{{#if estatus}}<br>Estatus: {{_estatus}}{{/if}}
 		{{#if comentarios}}<br>{{comentarios}}{{/if}}
 	{{/template3}}

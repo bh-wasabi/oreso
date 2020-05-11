@@ -9,6 +9,11 @@
   {{param startOnOpen="articulos"}}
 [./if.]
 
+[.#if esOreso.]
+  {{action id="machote" label="Machote" type="viewGrid" visibleMode="close" color="cyan" grid="machote" items="=calc.mapReduce(articulos, 'aliasArticulo,codigo,referencia2,descripcion,valorUnitario','neto,subTotal,descuentos,importe,iva,total')"}}
+[./if.]
+
+  {{action id="afectar" error="=(!base.ordenCompra)?'Falta Indicar la Orden Compra':null"}}
   {{#view id="lista" name="Lista"}}
     {{#find}}
       {{include field="_name"}}
@@ -16,8 +21,8 @@
       {{include field="base"}}
       {{include field="persona"}}
       {{search field="_name"}}
-      {{search field="base.ordenCompra"}}
       {{search field="persona.nombreCompleto"}}
+      {{search field="base.ordenCompra"}}
       {{sort field="_created.date" direction="desc"}}
     {{/find}}
     {{editor display="_name"}}
@@ -31,7 +36,7 @@
     {{/field}}
   {{/section}}
 
-  {{#section id="articulos"}}
+  {{#section id="articulos" forceCalcOrder="true"}}
     {{#field id="aliasArticulo"}}
       {{#onChange}}
 [.#if esOreso.]      
@@ -59,17 +64,35 @@
         {{set _destino="=calc.getPresetPersona('app.aliasUbicacion', aliasDestino, _doc.persona.id)._ubicacion"}}
       {{/onChange}}
     {{/field}}
-    {{field id="importe" type="calc" value="=valorUnitario*cantidad"}}
-    {{field id="iva" type="calc" value="=importe*(tasaIva/100)"}}
-    {{field id="total" type="calc" value="=importe+iva"}}
-    {{field id="faltante" type="calc" value="=_missing||0"}}
-    {{field id="neto" type="calc" value="=cantidad-faltante"}}
-    {{field id="importeNeto" type="calc" value="=valorUnitario*neto"}}
+    {{field calcOrder="1" id="faltante" type="calc" value="=_missing||0"}}
+    {{field calcOrder="2" id="neto" type="calc" value="=cantidad-faltante"}}
+    {{field calcOrder="3" id="subTotal" type="calc" value="=valorUnitario*neto"}}
+    {{field calcOrder="4" id="descuentos" type="calc" value="=subTotal*(descuentoLinea/100)"}}
+    {{field calcOrder="5" id="importe" type="calc" value="=subTotal-descuentos"}}
+    {{field calcOrder="6" id="iva" type="calc" value="=importe*(tasaIva/100)"}}
+    {{field calcOrder="7" id="total" type="calc" value="=importe+iva"}}
   {{/section}}
   
-  {{#grid id="articulos" section="articulos" keyField="cantidad" allowInsert="true" allowRemove="true" allowSort="true"}}  {{!-- sortBy="_destino, codigo" --}}
+  {{#grid id="machote" section="articulos" allowInsert="false" allowRemove="false" allowSort="true" sortBy="referencia,descripcion" exportToExcel="true"}}
     {{column field="aliasArticulo" label="Artículo" width="150"}}
-    {{column field="codigo" label="Código" width="150"}}
+    {{column field="referencia2" label="SKU" width="150"}}
+    {{column field="codigo" label="Código" width="150" required="true"}}
+    {{column field="descripcion" label="Descripción" width="350"}}
+    {{column field="valorUnitario" label="Precio Unitario"}}
+    {{column field="neto" label="Neto" format="#," summaryType="sum" summaryFormat="fixedPoint" summaryPrecision="0"}}
+    {{column field="subTotal" label="Sub total" format="currency" summaryType="sum" summaryFormat="fixedPoint" summaryPrecision="2"}}
+    {{column field="descuentos" label="Descuentos" format="currency" summaryType="sum" summaryFormat="fixedPoint" summaryPrecision="2"}}
+    {{column field="importe" label="Importe" format="currency" summaryType="sum" summaryFormat="fixedPoint" summaryPrecision="2"}}
+    {{column field="iva" label="IVA" format="currency" summaryType="sum" summaryFormat="fixedPoint" summaryPrecision="2"}}
+    {{column field="total" label="Total" format="currency" summaryType="sum" summaryFormat="fixedPoint" summaryPrecision="2"}}
+  {{/grid}}
+
+  {{#grid id="articulos" section="articulos" keyField="cantidad" allowInsert="true" allowRemove="true" allowSort="true"}}  {{!-- sortBy="_destino, codigo" --}}
+[.#if esOreso.]
+    {{column field="referencia" label="Orden Compra" width="150"}}
+[./if.]
+    {{column field="aliasArticulo" label="Artículo" width="150"}}
+    {{column field="codigo" label="Código" width="150" required="true"}}
     {{column field="descripcion" label="Descripción" width="300"}}
     {{column field="aliasOrigen" label="Origen" width="55" defaultValue="=_params.aliasOrigen"}}
     {{column field="_origen" label="Ubicación" width="150" required="true"}}
@@ -77,9 +100,10 @@
     {{column field="_destino" label="Ubicación" width="150" required="true"}}
     {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
     {{column field="valorUnitario" label="Precio Unitario" width="110" type="numeric" format="#,.##" required="true"}}
+    {{column field="precioPublico" label="Precio Público" width="110" type="numeric" format="#,.##" required="true"}}
+    {{column field="descuentoLinea" label="% Desc" width="55" type="numeric" format="#.##"}}
     {{column field="tasaIva" label="% IVA" width="45" type="numeric" format="#.##" defaultValue="16"}}
 [.#if esOreso.]
-    {{column field="referencia" label="Orden Compra" width="150"}}
     {{column field="referencia2" label="SKU" width="150"}}
 [.else.]
     {{column field="referencia" label="Referencia" width="150"}}
@@ -151,11 +175,11 @@
     {{sum field="cantidad" label="Cantidad" format="#,"}}
     {{sum field="faltante" label="Faltante" format="#,"}}
     {{sum field="neto" label="Neto" format="#,"}}
-    {{sum field="importeNeto" label="Importe Neto" format="currency"}}
+    {{sum field="subTotal" label="Sub Total" format="currency"}}
   {{/cube}}
 
   {{#grid id="porDestino" allowInsert="false" allowRemove="false" allowSort="true" sortBy="referencia,descripcion" exportToExcel="true"}}
-    {{column field="cantidad" label="Cantidad" width="150" format="#," summaryType="sum" summaryFormat="fixedPoint" summaryPrecision="0"}}
+    {{column field="neto" label="Neto" width="150" format="#," summaryType="sum" summaryFormat="fixedPoint" summaryPrecision="0"}}
     {{column field="aliasDestino" label="Destino" width="100"}}
     {{column field="_destino" label="Ubicación Destino" width="250"}}
   {{/grid}}
@@ -167,5 +191,5 @@
   {{action id="tool2" condition="true" label="Descargar Checklist..." type="save-as-excel" visibleMode="close" color="blue" btnSolid="true" fileName="=_name||'Pedido'" 
     items="=fn('checkListExcel', calc.mergeMasterDetail({persona, base}, calc.mergeArraysByKey(calc.joinPreset(calc.whereGreaterThan(inv, 'entrada', 0), 'app.aliasUbicacion', 'cuenta', 'ubicacion'), _items, 'codigo')))" fromSource="articulo" fromView="todo"}}    
   {{action id="tool4" condition="true" type="report-pdf" label="Reporte Bodega" report="preliminar2" fileName="=_name" visibleMode="close" color="grey" items="=calc.mapReduce(calc.mergeArraysByKey(inv, _items, 'codigo'), 'codigo,descripcion,codigoUpc,lote,loteReferencia,tamano,color,marca', 'salida')" fromSource="articulo" fromView="todo"}}
-  {{action id="porDestino" label="por Destino" type="viewGrid" visibleMode="close" color="cyan" grid="porDestino" items="=calc.mapReduce(articulos, 'aliasDestino,_destino','cantidad')"}}
+  {{action id="porDestino" label="por Destino" type="viewGrid" visibleMode="close" color="cyan" grid="porDestino" items="=calc.mapReduce(articulos, 'aliasDestino,_destino','neto')"}}
 {{/define}}

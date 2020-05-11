@@ -85,7 +85,11 @@
     {{/find}}
   {{/view}} --}}
   {{#action id="ordenCompra" source="notaOrdenCompra" label="Orden Compra" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
-    {{param aliasDestino="='AG'"}}
+    {{!-- {{param aliasDestino="='AG'"}} --}}
+  {{/action}}
+  {{#action id="cancelacionOrdenCompra" source="notaCancelacionOrdenCompra" label="Cancelación Orden Compra" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true" fromSource="mov" fromView="sugerirCompra" toSection="articulos"}}
+    {{param persona="_id"}}
+    {{!-- {{param aliasDestino="='AG'"}} --}}
   {{/action}}
   {{#action id="entradaCompra" source="notaEntradaCompra" label="Entrada Compra" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true" fromSource="mov" fromView="sugerirCompra" toSection="articulos"}}
     {{param persona="_id"}}
@@ -126,7 +130,7 @@
   {{#action id="pedido" source="notaPedido" label="Pedido" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
     {{param aliasOrigen="='AG'"}}
   {{/action}}
-  {{#action id="devolucionPedido" source="notaDevolucionPedido" label="Devolución Pedido" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true" fromSource="mov" fromView="sugerirDevolucionPedido" toSection="articulos"}}
+  {{#action id="cancelacionPedido" source="notaCancelacionPedido" label="Cancelación Pedido" transform="copiar" hide="true" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true" fromSource="mov" fromView="sugerirCancelacionPedido" toSection="articulos"}}
     {{param persona="_id"}}
     {{param aliasDestino="='AG'"}}
   {{/action}}

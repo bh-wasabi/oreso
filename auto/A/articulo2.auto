@@ -68,6 +68,8 @@
 			{{/editor}}
 		{{/field}}
 		{{field id="marca" label="Marca" type="text" column="A"}}
+		{{field id="estilo" label="Estilo" type="text" column="A"}}
+		{{field id="familia" label="Familia" type="text" column="A"}}
 		{{field id="grupo" label="Grupo" type="text" column="A"}}
 		{{field id="modelo" label="Modelo" type="text" column="A"}}
 		{{field id="composicion" label="Composición" type="text" column="A"}}
@@ -118,6 +120,8 @@
 				{{row field="cantidadEmpaque" align="left"}}
 				{{row field="codigoSat" align="left"}}
 				{{row field="marca" align="left"}}
+				{{row field="estilo" align="left"}}
+				{{row field="familia" align="left"}}
 				{{row field="grupo" align="left"}}
 				{{row field="modelo" align="left"}}
 				{{row field="composicion" align="left"}}
@@ -154,7 +158,7 @@
 							articulo2
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="codigo, descripcion, precioLista, precioPublico, unidad, cantidadEmpaque, codigoSat, marca, grupo, modelo, composicion, tamano, color, temporada, codigoUpc, cliente, comentarios" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="codigo, descripcion, precioLista, precioPublico, unidad, cantidadEmpaque, codigoSat, marca, estilo, familia, grupo, modelo, composicion, tamano, color, temporada, codigoUpc, cliente, comentarios" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -173,6 +177,8 @@
 				{{field cantidadEmpaque}}
 				{{field codigoSat}}
 				{{field marca}}
+				{{field estilo}}
+				{{field familia}}
 				{{field grupo}}
 				{{field modelo}}
 				{{field composicion}}
@@ -197,6 +203,8 @@
 		<br>Cantidad Empaque: {{cantidadEmpaque}}
 		<br>Código SAT: {{codigoSat}}
 		<br>Marca: {{marca}}
+		<br>Estilo: {{estilo}}
+		<br>Familia: {{familia}}
 		<br>Grupo: {{grupo}}
 		<br>Modelo: {{modelo}}
 		<br>Composición: {{composicion}}
@@ -216,6 +224,8 @@
 		{{#if cantidadEmpaque}}<br>Cantidad Empaque: {{cantidadEmpaque}}{{/if}}
 		{{#if codigoSat}}<br>Código SAT: {{codigoSat}}{{/if}}
 		{{#if marca}}<br>Marca: {{marca}}{{/if}}
+		{{#if estilo}}<br>Estilo: {{estilo}}{{/if}}
+		{{#if familia}}<br>Familia: {{familia}}{{/if}}
 		{{#if grupo}}<br>Grupo: {{grupo}}{{/if}}
 		{{#if modelo}}<br>Modelo: {{modelo}}{{/if}}
 		{{#if composicion}}<br>Composición: {{composicion}}{{/if}}

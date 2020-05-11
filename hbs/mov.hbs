@@ -10,7 +10,7 @@
       {{sort field="_id.vencimiento" direction="asc"}}
       {{match field="cantidad" gt="=0"}}
     {{/pipeline}}
-    {{calc field="loteVencimiento" type="expr" value="=calc.concat(lote, '-', vencimiento)"}}
+    {{calc field="loteVencimiento" type="expr" value="=lote"}}
     {{editor display="loteVencimiento"}}
   {{/view}}
   {{#view id="existencias"}}
@@ -79,8 +79,10 @@
     {{column field="_cuenta" label="Ubicación"}}
     {{row field="codigo" label="Código" width="200"}}  
     {{row field="articulo.base.marca" label="Marca" width="100"}}  
-    {{row field="articulo.base.tamano" label="Tamaño" width="100"}}  
     {{row field="articulo.base.color" label="Color" width="100"}}      
+    {{row field="articulo.base.tamano" label="Tamaño" width="100"}}  
+    {{row field="articulo.base.estilo" label="Estilo" width="100"}}  
+    {{row field="articulo.base.familia" label="Familia" width="100"}}  
     {{row field="articulo._name" label="Descripción" width="100"}}  
     {{row field="_lote" label="Lote"}}
     {{row field="loteInfo.base.ordenCompra" label="Orden Compra"}}
@@ -109,8 +111,10 @@
     {{column field="referencia" label="Referencia"}}
     {{column field="_cuenta" label="Ubicación"}}
     {{row field="articulo.base.marca" label="Marca" width="100"}}  
-    {{row field="articulo.base.tamano" label="Tamaño" width="100"}}  
     {{row field="articulo.base.color" label="Color" width="100"}}
+    {{row field="articulo.base.tamano" label="Tamaño" width="100"}}  
+    {{row field="articulo.base.estilo" label="Estilo" width="100"}}  
+    {{row field="articulo.base.familia" label="Familia" width="100"}}  
     {{row field="articulo.base.cliente" label="Cliente" width="200"}}
     {{row field="articulo._name" label="Descripción" width="100"}}  
     {{sum field="cantidad" label="Cantidad" format="#,"}}
@@ -275,14 +279,15 @@
       {{match field="saldo" neq="=0"}}
     {{/pipeline}}
     {{!-- {{calc field="importe" value="=(saldo<0)?saldo:null"}} --}}
-  {{/view}}  
+  {{/view}}
+
   {{#view id="sugerirCompra"}}
     {{#pipeline}}
       {{filter field="aux" eq="='comprasPorRecibir'"}}
       {{filter field="='cuenta'" eq="=persona"}}
       {{group field="codigo" as="codigo"}}
       {{group field="descripcion" as="descripcion"}}
-      {{group field="tasa" as="tasaIva"}}
+      {{!-- {{group field="tasa" as="tasaIva"}} --}}
       {{group field="referencia"}}
       {{group field="referencia2"}}
       {{group field="orden"}}
@@ -321,6 +326,7 @@
       {{group field="cuenta" as="origen"}}
       {{group field="_cuenta" as="_origen"}}
       {{group field="precio" as="valorUnitario"}}
+      {{group field="precio2" as="precioPublico"}}
       {{group field="tasa" as="tasaIva"}}
       {{group field="referencia"}}
       {{group field="referencia2"}}
@@ -330,7 +336,7 @@
       {{match field="cantidad" gt="=0"}}
     {{/pipeline}}
   {{/view}}  
-  {{#view id="sugerirDevolucionPedido"}}
+  {{#view id="sugerirCancelacionPedido"}}
     {{#pipeline}}
       {{filter field="aux" eq="='inv'"}}
       {{filter field="persona.id" eq="=persona"}}
@@ -342,6 +348,7 @@
       {{!-- {{group field="origen" as="destino"}}
       {{group field="_origen" as="_destino"}} --}}
       {{group field="precio" as="valorUnitario"}}
+      {{group field="precio2" as="precioPublico"}}
       {{group field="tasa" as="tasaIva"}}
       {{group field="referencia"}}
       {{group field="referencia2"}}
@@ -351,4 +358,72 @@
       {{match field="cantidad" gt="=0"}}
     {{/pipeline}}
   {{/view}}  
+  {{#view id="ingresos"}}
+    {{#find limit="-1"}}
+      {{include field="referencia"}}
+      {{include field="referencia2"}}
+      {{include field="nota.name"}}
+      {{include field="nota.date"}}
+      {{include field="persona.nombreCompleto"}}
+      {{include field="_destino"}}
+      {{include field="importe"}}
+      {{filter field="aux" eq="='tesoreria'"}}
+      {{filter field="factor" eq="=1"}}
+    {{/find}}
+  {{/view}}
+  {{#cube id="ingresos" name="Ingresos" view="ingresos" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
+    {{column field="nota.date" type="date" label="Año" groupInterval="year"}}
+    {{column field="nota.date" type="date" label="Mes" groupInterval="month"}}
+    {{column field="nota.date" type="date" label="Día" groupInterval="day"}}
+    {{row field="persona.nombreCompleto" label="Origen" width="200"}}
+    {{row field="referencia" label="Referencia" width="200"}}
+    {{row field="referencia2" label="Referencia Pago" width="100"}}
+    {{row field="_destino" label="Destino" width="200"}}
+    {{sum field="importe" label="Importe" format="currency"}}
+  {{/cube}}
+  {{#view id="egresos"}}
+    {{#find limit="-1"}}
+      {{include field="referencia"}}
+      {{include field="referencia2"}}
+      {{include field="nota.name"}}
+      {{include field="nota.date"}}
+      {{include field="persona.nombreCompleto"}}
+      {{include field="_origen"}}
+      {{include field="importe"}}
+      {{filter field="aux" eq="='tesoreria'"}}
+      {{filter field="factor" eq="=-1"}}
+    {{/find}}
+  {{/view}}
+  {{#cube id="egresos" name="Egresos" view="egresos" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
+    {{column field="nota.date" type="date" label="Año" groupInterval="year"}}
+    {{column field="nota.date" type="date" label="Mes" groupInterval="month"}}
+    {{column field="nota.date" type="date" label="Día" groupInterval="day"}}
+    {{row field="_origen" label="Origen" width="200"}}
+    {{row field="referencia" label="Referencia" width="200"}}
+    {{row field="referencia2" label="Referencia Pago" width="100"}}
+    {{row field="persona.nombreCompleto" label="Destino" width="200"}}
+    {{sum field="importe" label="Importe" format="currency"}}
+  {{/cube}}
+  {{#view id="movimientos"}}
+    {{#find limit="-1"}}
+      {{include field="referencia"}}
+      {{include field="referencia2"}}
+      {{include field="nota.name"}}
+      {{include field="nota.date"}}
+      {{include field="persona.nombreCompleto"}}
+      {{include field="_destino"}}
+      {{include field="importe"}}
+      {{filter field="aux" eq="='tesoreria'"}}
+    {{/find}}
+  {{/view}}
+  {{#cube id="movimientos" name="Movimientos" view="movimientos" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
+    {{column field="nota.date" type="date" label="Año" groupInterval="year"}}
+    {{column field="nota.date" type="date" label="Mes" groupInterval="month"}}
+    {{column field="nota.date" type="date" label="Día" groupInterval="day"}}
+    {{row field="persona.nombreCompleto" label="Origen" width="200"}}
+    {{row field="referencia" label="Referencia" width="200"}}
+    {{row field="referencia2" label="Referencia Pago" width="100"}}
+    {{row field="_destino" label="Destino" width="200"}}
+    {{sum field="importe" label="Importe" format="currency"}}
+  {{/cube}}
 {{/define}}

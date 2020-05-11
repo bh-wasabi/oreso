@@ -25,7 +25,12 @@
     {{#item text="Ver"}} 
       {{item text="Contabilidad" newTab="true" href="/_contabilidad/cubo?_name=Contabilidad&_title=Contabilidad"}}
       {{item text="Inventario" newTab="true" href="/_inv/cubo?_name=Inventario&_title=Inventario"}}
-      {{item text="Tesorería" newTab="true" href="/_tesoreria/cubo?_name=Tesorería&_title=Tesorería"}}
+      {{#item text="Tesoreria"}}
+        {{item text="Saldos" newTab="true" href="/_tesoreria/cubo?_name=Saldos Tesorería&_title=Saldos Tesorería" beginGroup="true"}}
+        {{item text="Ingresos" newTab="true" href="/_ingresos/cubo?_name=Ingresos&_title=Ingresos"}}
+        {{item text="Egresos" newTab="true" href="/_egresos/cubo?_name=Egresos&_title=Egresos"}}
+        {{item text="Movimientos" newTab="true" href="/_movimientos/cubo?_name=Movimientos&_title=Movimientos"}}
+      {{/item}}
       {{item text="Cuentas por Cobrar" newTab="true" href="/_cxc/cubo?_name=Cuentas por Cobrar&_title=Cuentas por Cobrar" beginGroup="true"}}
       {{item text="Cuentas por Pagar" newTab="true" href="/_cxp/cubo?_name=Cuentas por Pagar&_title=Cuentas por Pagar"}}
       {{item text="Compras por Recibir" newTab="true" href="/_comprasPorRecibir/cubo?_name=Compras por Recibir&_title=Compras por Recibir"}}
@@ -40,12 +45,18 @@
       {{item text="Artículos" href="/articulo/ver" beginGroup="true"}}
       {{#item text="Movimientos Clientes" beginGroup="true"}}
         {{item text="Pedidos" href="/nota/lista?type=notaPedido"}}
-        {{item text="Devoluciones Pedidos" href="/nota/lista?type=notaDevolucionPedido"}}
+        {{item text="Cancelaciones Pedidos" href="/nota/lista?type=notaCancelacionPedido"}}
         {{item text="Facturas" href="/nota/lista?type=notaFactura"}}
         {{item text="Bonificaciones Venta" href="/nota/lista?type=notaBonificacionVenta"}}
         {{item text="Devoluciones Venta" href="/nota/lista?type=notaDevolucionVenta"}}
         {{item text="Neteos" href="/nota/lista?type=notaNeteoCxc"}}
         {{item text="Cobros" href="/nota/lista?type=notaCobro"}}
+      {{/item}}
+      {{#item text="Movimientos Proveedores"}}
+        {{item text="Ordenes Compra" href="/nota/lista?type=notaOrdenCompra"}}
+        {{item text="Cancelaciones Ordenes Compra" href="/nota/lista?type=notaCancelacionOrdenCompra"}}
+        {{item text="Entradas Compra" href="/nota/lista?type=notaEntradaCompra"}}
+        {{item text="Devoluciones Compra" href="/nota/lista?type=notaDevolucionCompra"}}
       {{/item}}
       {{item text="Bitácora General" href="/nota/lista" beginGroup="true"}}
     {{/item}}
@@ -646,17 +657,17 @@
       {{editor case="upper"}}
     {{/field}}
     {{#field id="persona" type="text" label="Sujeto"}}
-      {{editor type="lookup" source="persona" view="clientesProveedores" searchEnabled="true"}}
+      {{editor type="lookup" source="persona" view="clientes" searchEnabled="true"}}
     {{/field}}
     {{#field id="ubicacion" type="text" label="Ubicación"}}
       {{editor type="lookup" source="persona" view="ubicaciones" searchEnabled="true"}}
     {{/field}}
     {{field id="orden" type="number" label="Orden"}}
   {{/section}}
-  {{#grid id="aliasUbicacion" section="aliasUbicacion" allowInsert="true" allowRemove="true" allowSort="true" sortBy="persona,ubicacion"}}
+  {{#grid id="aliasUbicacion" section="aliasUbicacion" allowInsert="true" allowRemove="true" allowSort="true" sortBy="persona,id,ubicacion"}}
+    {{column field="id" width="100"}}
     {{column field="persona" width="150"}}
     {{column field="ubicacion" width="300"}}
-    {{column field="id" width="100"}}
     {{!-- {{column field="orden" width="50"}} --}}
   {{/grid}}
 
@@ -691,7 +702,7 @@
       {{editor case="upper"}}
     {{/field}}
     {{#field id="persona" type="text" label="Sujeto"}}
-      {{editor type="lookup" source="persona" view="clientesProveedores" searchEnabled="true"}}
+      {{editor type="lookup" source="persona" view="clientes" searchEnabled="true"}}
     {{/field}}
     {{#field id="articulo" type="text" label="Artículo"}}
       {{editor type="lookup" source="articulo" view="lista" searchEnabled="true"}}
@@ -706,7 +717,7 @@
       {{editor case="upper"}}
     {{/field}}
     {{#field id="persona" type="text" label="Sujeto"}}
-      {{editor type="lookup" source="persona" view="clientesProveedores" searchEnabled="true"}}
+      {{editor type="lookup" source="persona" view="clientes" searchEnabled="true"}}
     {{/field}}
     {{#field id="articulo" type="text" label="Artículo"}}
       {{editor type="lookup" source="articulo" view="porCodigo" searchEnabled="true" display="base.codigo"}}
@@ -839,7 +850,7 @@
         {{#zone id="aliasUbicacion" modalGrid="aliasUbicacion"}}
           {{br}}
           {{#h5}}Alias Ubicaciones{{/h5}}
-          {{table aliasUbicacion cols="persona,ubicacion,id" medium="40%,40%,20%"}}
+          {{table aliasUbicacion cols="id,persona,ubicacion" medium="20%,40%,40%"}}
         {{/zone}}
       {{/col}}
     {{/row}}

@@ -126,7 +126,15 @@
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
+		{{#field id="familia" label="Familia" type="text" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
 		{{#field id="marca" label="Marca" type="text" column="A" modalColumn="B" detach="Clasificadores" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
+		{{#field id="estilo" label="Estilo" type="text" column="A" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
@@ -198,6 +206,8 @@
 				{{row field="factor" condition="esInventariable" align="left"}}
 				{{row field="codigoSat" align="left"}}
 				{{row field="costoUnitario" align="left"}}
+				{{row field="familia" align="left"}}
+				{{row field="estilo" align="left"}}
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
@@ -271,7 +281,7 @@
 						{{#with base}}
 							{{#row}}
 								{{#col vertical="70%" medium="70%" class="auto-form-col-a"}}
-									{{record this widths="20%,80%" rows="codigo, descripcion, precioLista, precioPublico, cantidadEmpaque, codigoUpc, articuloPrecios, articuloNiveles, articuloPermisos, unidad, factor, codigoSat, costoUnitario" class="auto-form-record"}}
+									{{record this widths="20%,80%" rows="codigo, descripcion, precioLista, precioPublico, cantidadEmpaque, codigoUpc, articuloPrecios, articuloNiveles, articuloPermisos, unidad, factor, codigoSat, costoUnitario, familia, estilo" class="auto-form-record"}}
 								{{/col}}
 								{{#col vertical="30%" medium="30%" class="auto-form-col-b"}}
 									{{#img class="auto-form-img" src="{{foto.base.url}}"}}
@@ -321,6 +331,8 @@
 				{{field factor}}
 				{{field codigoSat}}
 				{{field costoUnitario}}
+				{{field familia}}
+				{{field estilo}}
 				{{field comentarios}}
 			{{/fieldSet}}
 		{{/col}}
@@ -361,7 +373,9 @@
 		<br>Costo Unitario: {{number costoUnitario "currency"}}
 		<br>Categoría: {{categoria}}
 		<br>Grupo: {{grupo}}
+		<br>Familia: {{familia}}
 		<br>Marca: {{marca}}
+		<br>Estilo: {{estilo}}
 		{{#if esInventariable}}<br>Modelo: {{modelo}}{{/if}}
 		{{#if esInventariable}}<br>Composición: {{composicion}}{{/if}}
 		{{#if esInventariable}}<br>Tamaño: {{tamano}}{{/if}}
@@ -387,7 +401,9 @@
 		{{#if costoUnitario}}<br>Costo Unitario: {{number costoUnitario "currency"}}{{/if}}
 		{{#if categoria}}<br>Categoría: {{categoria}}{{/if}}
 		{{#if grupo}}<br>Grupo: {{grupo}}{{/if}}
+		{{#if familia}}<br>Familia: {{familia}}{{/if}}
 		{{#if marca}}<br>Marca: {{marca}}{{/if}}
+		{{#if estilo}}<br>Estilo: {{estilo}}{{/if}}
 		{{#if esInventariable}}{{#if modelo}}<br>Modelo: {{modelo}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if composicion}}<br>Composición: {{composicion}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if tamano}}<br>Tamaño: {{tamano}}{{/if}}{{/if}}

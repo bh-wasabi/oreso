@@ -3738,3 +3738,81 @@
 {"name":"categoriaProveedor","code":"844936","display":"Walmart - Lentes Lectura","order":1868}
 {"index":{"_id":"categoriaProveedor/134494"}}
 {"name":"categoriaProveedor","code":"134494","display":"Liverpool / Suburbia (Ropa)","order":1869}
+{"index":{"_id":"motivo/1"}}
+{"name":"motivo","code":"1","display":"AJUSTE DE PRECIO","order":1}
+{"index":{"_id":"motivo/2"}}
+{"name":"motivo","code":"2","display":"AMPLIACIÓN","order":2}
+{"index":{"_id":"motivo/3"}}
+{"name":"motivo","code":"3","display":"APORTACION APERTURA DE TIENDA","order":3}
+{"index":{"_id":"motivo/4"}}
+{"name":"motivo","code":"4","display":"APORTACION POR REBAJA","order":4}
+{"index":{"_id":"motivo/5"}}
+{"name":"motivo","code":"5","display":"BONIFICACIÓN 3X2 ROPA INTERIOR","order":1874}
+{"index":{"_id":"motivo/6"}}
+{"name":"motivo","code":"6","display":"BONIFICACIONES 10%","order":1875}
+{"index":{"_id":"motivo/7"}}
+{"name":"motivo","code":"7","display":"BONIFICACIONES 6%","order":1876}
+{"index":{"_id":"motivo/8"}}
+{"name":"motivo","code":"8","display":"BONIFICACIONES RECUPERACION MARGEN","order":1877}
+{"index":{"_id":"motivo/9"}}
+{"name":"motivo","code":"9","display":"CEDIS 2.2289%","order":1878}
+{"index":{"_id":"motivo/10"}}
+{"name":"motivo","code":"10","display":"CEDIS 3%","order":1879}
+{"index":{"_id":"motivo/11"}}
+{"name":"motivo","code":"11","display":"CEDIS 5.9973%","order":1880}
+{"index":{"_id":"motivo/12"}}
+{"name":"motivo","code":"12","display":"CEDIS 6%","order":1881}
+{"index":{"_id":"motivo/13"}}
+{"name":"motivo","code":"13","display":"COMISION POR DEPOSITO BANCARIO","order":1882}
+{"index":{"_id":"motivo/14"}}
+{"name":"motivo","code":"14","display":"DEMOSTRADORAS","order":1883}
+{"index":{"_id":"motivo/15"}}
+{"name":"motivo","code":"15","display":"DESCUENTO O PAGO POR DIFERENCIA EN CANTIDADES O PRECIOS","order":1884}
+{"index":{"_id":"motivo/16"}}
+{"name":"motivo","code":"16","display":"DESCUENTOS POR BAJO DESPLAZAMIENTO","order":1885}
+{"index":{"_id":"motivo/17"}}
+{"name":"motivo","code":"17","display":"DEVOLUCION LIVERPOOL","order":1886}
+{"index":{"_id":"motivo/18"}}
+{"name":"motivo","code":"18","display":"DEVOLUCION SUBURBIA","order":1887}
+{"index":{"_id":"motivo/19"}}
+{"name":"motivo","code":"19","display":"DEVOLUCION WALMART","order":1888}
+{"index":{"_id":"motivo/20"}}
+{"name":"motivo","code":"20","display":"DIFERENCIA EN FACTURA","order":1889}
+{"index":{"_id":"motivo/21"}}
+{"name":"motivo","code":"21","display":"DISTRIBUCIÓN   1.3%","order":1890}
+{"index":{"_id":"motivo/22"}}
+{"name":"motivo","code":"22","display":"ETIQUETA HU","order":1891}
+{"index":{"_id":"motivo/23"}}
+{"name":"motivo","code":"23","display":"ETIQUETAS SUBURBIA CARTON/ADHERIBLES","order":1892}
+{"index":{"_id":"motivo/24"}}
+{"name":"motivo","code":"24","display":"FALTANTE CAJA DE LENTES","order":1893}
+{"index":{"_id":"motivo/25"}}
+{"name":"motivo","code":"25","display":"FILL RATE 10%","order":1894}
+{"index":{"_id":"motivo/26"}}
+{"name":"motivo","code":"26","display":"FILL RATE 5%","order":1895}
+{"index":{"_id":"motivo/27"}}
+{"name":"motivo","code":"27","display":"FLETE REGRESO","order":1896}
+{"index":{"_id":"motivo/28"}}
+{"name":"motivo","code":"28","display":"MESES SIN  INTERESES","order":1897}
+{"index":{"_id":"motivo/29"}}
+{"name":"motivo","code":"29","display":"MULTA POR NO ASISTIR A CITA","order":1898}
+{"index":{"_id":"motivo/30"}}
+{"name":"motivo","code":"30","display":"PUBLICIDAD  1.5%","order":1899}
+{"index":{"_id":"motivo/31"}}
+{"name":"motivo","code":"31","display":"REBAJA LENTES DE SOL","order":1900}
+{"index":{"_id":"motivo/32"}}
+{"name":"motivo","code":"32","display":"REBATE 2%","order":1901}
+{"index":{"_id":"motivo/33"}}
+{"name":"motivo","code":"33","display":"REBATE 8%","order":1902}
+{"index":{"_id":"motivo/34"}}
+{"name":"motivo","code":"34","display":"RECHAZO","order":1903}
+{"index":{"_id":"motivo/35"}}
+{"name":"motivo","code":"35","display":"RECUPERACIÓN DE VAD","order":1904}
+{"index":{"_id":"motivo/36"}}
+{"name":"motivo","code":"36","display":"RED","order":1905}
+{"index":{"_id":"motivo/37"}}
+{"name":"motivo","code":"37","display":"REDONDEO","order":1906}
+{"index":{"_id":"motivo/38"}}
+{"name":"motivo","code":"38","display":"RENTA DE UNIDAD LOGISTICA","order":1907}
+{"index":{"_id":"motivo/39"}}
+{"name":"motivo","code":"39","display":"USO PORTAL","order":1908}

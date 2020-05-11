@@ -8,8 +8,13 @@
   {{action id="tool2" condition="=persona.nombreCompleto=='Liverpool'" label="FEL Liverpool..." type="save-as" visibleMode="close" color="blue" btnSolid="true" fileName="=(_name||'Factura')+'.fel'" items="=[fn('felLiverpoolTitulos', base), fn('felLiverpool', calc.mapReduce(calc.mergeArraysByKey(articulos, _items, 'codigo'),'aliasArticulo,referencia2,descripcion2,codigoUpc,modelo,color,tamano,valorUnitario,precioPublico,unidad','cantidad'))]" flatten="true" fromSource="articulo" fromView="todo"}}
   {{action id="tool3" condition="=persona.nombreCompleto=='Suburbia'" label="FEL Suburbia..." type="save-as" visibleMode="close" color="blue" btnSolid="true" fileName="=(_name||'Factura')+'.fel'" items="=[fn('felSuburbiaTitulos', base), fn('felSuburbia', calc.mapReduce(calc.mergeArraysByKey(articulos, _items, 'codigo'),'aliasArticulo,referencia2,descripcion2,cantidadEmpaque,modelo,color,tamano,valorUnitario,precioPublico,unidad','cantidad'))]" flatten="true" fromSource="articulo" fromView="todo"}}
   {{action id="tool4" condition="=persona.nombreCompleto=='Walmart'" label="FEL Walmart..." type="save-as" visibleMode="close" color="blue" btnSolid="true" fileName="=(_name||'Factura')+'.fel'" items="=[fn('felWalmartTitulos', base), fn('felWalmart', calc.mapReduce(calc.mergeArraysByKey(articulos, _items, 'codigo'),'aliasArticulo,referencia2,descripcion2,codigoUpc,modelo,color,tamano,valorUnitario,precioPublico,unidad','cantidad'))]" flatten="true" fromSource="articulo" fromView="todo"}}
-  {{action id="machote" label="Machote" type="viewGrid" visibleMode="close" color="cyan" grid="machote" items="=calc.mapReduce(articulos, 'aliasArticulo,codigo,referencia2,descripcion,valorUnitario','cantidad,subTotal,descuentos,importe,iva,total')"}}
 [./if.]
+
+  {{#transform id="copiarFactura"}}
+    {{update section="contexto" value="=contexto"}}
+    {{update section="persona" transform="copiarPersona"}}
+    {{update section="articulos" value="=calc.joinArraysByKey(articulos, inv, 'codigo')"}}
+  {{/transform}}  
 
   {{#view id="lista" name="Lista"}}
     {{#find}}
@@ -64,27 +69,14 @@
 [.else.]
     {{column field="referencia" label="Referencia" width="150" readOnly="true"}}
 [./if.]
-    {{column field="codigo" label="Código" width="150" readOnly="true"}}
-    {{column field="descripcion" label="Artículo" width="350" readOnly="true"}}
+    {{column field="codigo" label="Código" width="150" readOnly="true" required="true"}}
+    {{column field="descripcion" label="Artículo" width="250" readOnly="true" required="true"}}
     {{column field="_origen" label="Ubicación" width="250" readOnly="true"}}
     {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
     {{column field="valorUnitario" label="Precio Unitario" width="110" type="numeric" format="#,.##" required="true"}}
-    {{column field="descuentoLinea" label="% Desc" width="55" type="numeric" format="#.##"}}
+    {{column field="precioPublico" label="Precio Público" width="110" type="numeric" format="#,.##" required="true"}}
+    {{column field="descuentoLinea" label="% Desc" width="55" type="numeric" format="#.##" required="true"}}
     {{column field="tasaIva" label="% IVA" width="50" type="numeric" format="#.##" defaultValue="16" readOnly="true"}}
-  {{/grid}}
-
-  {{#grid id="machote" section="articulos" allowInsert="false" allowRemove="false" allowSort="true" sortBy="referencia,descripcion" exportToExcel="true"}}
-    {{column field="aliasArticulo" label="Artículo" width="150"}}
-    {{column field="referencia2" label="SKU" width="150"}}
-    {{column field="codigo" label="Código" width="150"}}
-    {{column field="descripcion" label="Artículo" width="350"}}
-    {{column field="valorUnitario" label="Precio Unitario"}}
-    {{column field="cantidad" label="Cantidad" format="#," summaryType="sum" summaryFormat="fixedPoint" summaryPrecision="0"}}
-    {{column field="subTotal" label="Sub total" format="currency" summaryType="sum" summaryFormat="fixedPoint" summaryPrecision="2"}}
-    {{column field="descuentos" label="Descuentos" format="currency" summaryType="sum" summaryFormat="fixedPoint" summaryPrecision="2"}}
-    {{column field="importe" label="Importe" format="currency" summaryType="sum" summaryFormat="fixedPoint" summaryPrecision="2"}}
-    {{column field="iva" label="IVA" format="currency" summaryType="sum" summaryFormat="fixedPoint" summaryPrecision="2"}}
-    {{column field="total" label="Total" format="currency" summaryType="sum" summaryFormat="fixedPoint" summaryPrecision="2"}}
   {{/grid}}
 
   {{#grid id="adjuntos" section="adjuntos" allowRemove="true" allowSort="true" sortBy="orden, fecha"}}
@@ -125,6 +117,9 @@
   {{/grid}}   --}}
 
   {{action id="tool" condition="true" label="Analizar" type="viewCube" visibleMode="close" color="cyan" btnSolid="true" cube="articulos" items="=calc.mergeArraysByKey(articulos, _items, 'codigo')" fromSource="articulo" fromView="todo"}}
+  {{#action id="devolucionVenta" source="notaDevolucionVenta" label="Devolución Venta" transform="copiarFactura" type="add-subdoc" visibleMode="close" color="deep-orange" onlyPost="true"}}
+    {{param aliasDestino="='AG'"}}
+  {{/action}}
   {{#action id="preliminar" type="report-pdf" label="Preliminar" report="preliminar" title="=_name" fileName="=_name" visibleMode="close" color="grey"}}
     {{ask field="_export" type="select" label="Formato" keys="pdf,xlsx,csv" names="PDF,Excel,CSV" value="pdf"}}
   {{/action}}

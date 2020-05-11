@@ -25,16 +25,19 @@
     {{/field}}
     {{field id="importe" type="calc" value="=valorUnitario*cantidad"}}
     {{field id="iva" type="calc" value="=importe*(tasaIva/100)"}}
+    {{field id="retenciones" type="calc" value="=retencionIva+retencionIsr"}}
     {{field id="total" type="calc" value="=importe+iva"}}
   {{/section}}
   
   {{#grid id="articulos" section="articulos" keyField="cantidad" allowInsert="true" allowRemove="true"}}
     {{column field="aliasArticulo" label="Artículo" width="150"}}
-    {{column field="codigo" label="Código" width="150"}}
-    {{column field="descripcion" label="Descripción" width="330"}}
+    {{column field="codigo" label="Código" width="150" required="true"}}
+    {{column field="descripcion" label="Descripción" width="330" required="true"}}
     {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
     {{column field="valorUnitario" label="Costo Unitario" width="110" type="numeric" format="#,.##" required="true"}}
     {{column field="tasaIva" label="% IVA" width="50" type="numeric" format="#.##" defaultValue="16"}}
+    {{column field="retencionIva" label="Retención IVA" width="110" type="numeric" format="#.##"}}
+    {{column field="retencionIsr" label="Retención ISR" width="110" type="numeric" format="#.##"}}
     {{column field="referencia2" label="Referencia Proveedor" width="200"}}
     {{column field="comentarios" label="Comentarios" width="250"}}
   {{/grid}}

@@ -34,7 +34,7 @@
   {{/grid}}
 
   {{#grid id="ventas" section="ventas" keyField="cantidad" allowInsert="true" allowRemove="true"}}
-    {{column field="codigo" label="Código" width="150"}}
+    {{column field="codigo" label="Código" width="150" required="true"}}
     {{column field="descripcion" label="Descripción" width="330"}}
     {{column field="uen" label="UEN" width="200"}}
     {{column field="categoria" label="Categoría" width="200"}}
@@ -47,7 +47,7 @@
     {{column field="tasaIva" label="% IVA" width="50" type="numeric" format="#.##" defaultValue="16"}}
   {{/grid}}
   {{#grid id="materiales" section="materiales" keyField="cantidad" allowInsert="true" allowRemove="true"}}
-    {{column field="codigo" label="Código" width="150"}}
+    {{column field="codigo" label="Código" width="150" required="true"}}
     {{column field="descripcion" label="Descripción" width="330"}}
     {{column field="categoria" label="Categoría" width="200"}}
     {{column field="unidad" label="Unidad" width="100"}}

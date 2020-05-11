@@ -16,7 +16,7 @@
     {{field id="nombre" type="expr" value="=@descripcion"}}
     {{field id="descripcion2" type="expr" value="=calc.concat(@composicion,@modelo)"}}
   {{/section}}  
-  {{#grid id="articulos" section="articulos" allowInsert="true" allowRemove="true"}}
+  {{#grid id="articulos" section="articulos" allowInsert="true" allowRemove="true" allowSort="true" sortBy="codigo"}}
     {{column field="codigo" label="Código" width="150"}}
     {{column field="descripcion" label="Descripción" width="200"}}
     {{column field="precioLista" label="Precio Lista" width="100"}}
@@ -26,6 +26,7 @@
     {{column field="codigoSat" label="Código SAT" width="100"}}
     {{column field="marca" label="Marca" width="100"}}
     {{column field="estilo" label="Estilo" width="100"}}
+    {{column field="familia" label="Familia" width="100"}}
     {{column field="modelo" label="Modelo" width="100"}}
     {{column field="composicion" label="Composición" width="100"}}
     {{column field="tamano" label="Tamaño" width="100"}}

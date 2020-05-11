@@ -36,8 +36,8 @@
   
   {{#grid id="articulos" section="articulos" keyField="cantidad" allowInsert="true" allowRemove="true"}}
     {{column field="aliasArticulo" label="Artículo" width="150"}}
-    {{column field="codigo" label="Código" width="150"}}
-    {{column field="codigoUpc" label="UPC" width="150" readOnly="true"}}
+    {{column field="codigo" label="Código" width="150" required="true"}}
+    {{!-- {{column field="codigoUpc" label="UPC" width="150" readOnly="true"}} --}}
     {{column field="descripcion" label="Descripción" width="330"}}
     {{column field="aliasDestino" label="Destino" width="55" defaultValue="=_params.aliasDestino"}}
     {{column field="_destino" label="Ubicación" width="150" required="true"}}
@@ -48,5 +48,6 @@
     {{column field="lote" width="100" required="true"}}
     {{column field="vencimiento" validateDate="true" width="100" required="true"}}
     {{column field="referencia" label="Referencia" width="150"}}
+    {{column field="motivo" label="Motivo" width="150"}}
   {{/grid}}
 {{/define}}

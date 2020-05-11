@@ -1,4 +1,4 @@
-{{#define id="notaOrdenCompra"}}
+{{#define id="notaCancelacionOrdenCompra"}}
   {{param attribute1="=_created.service"}}
   {{param attribute2="=_created.subType"}}
   {{param removeIfEmptySection="articulos"}}
@@ -26,14 +26,14 @@
     {{field id="iva" type="calc" value="=importe*(tasaIva/100)"}}
     {{field id="total" type="calc" value="=importe+iva"}}
   {{/section}}
-
-  {{#grid id="articulos" section="articulos" keyField="cantidad" allowInsert="true" allowRemove="true"}}
-    {{column field="aliasArticulo" label="Artículo" width="150"}}
+  
+  {{#grid id="articulos" applyFilter="referencia" section="articulos" keyField="cantidad" allowInsert="false" allowRemove="false"}}
+    {{column field="referencia" label="Referencia" width="150" readOnly="true"}}
+    {{column field="orden" label="Orden" width="1" readOnly="true"}}
     {{column field="codigo" label="Código" width="150" readOnly="true" required="true"}}
     {{column field="codigoUpc" label="UPC" width="150" readOnly="true"}}
-    {{column field="descripcion" label="Descripción" width="330"}}
-    {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
-    {{column field="valorUnitario" label="FOB" width="110" type="numeric" format="#,.##"}}
-    {{column field="referencia" label="Referencia" width="150"}}
+    {{column field="descripcion" label="Artículo" width="250" readOnly="true"}}
+    {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#," readOnly="true"}}
+    {{column field="valorUnitario" label="FOB" width="110" type="numeric" format="#,.##" required="true"}}
   {{/grid}}
 {{/define}}

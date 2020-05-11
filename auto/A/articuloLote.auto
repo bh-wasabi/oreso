@@ -56,6 +56,10 @@
 			{{#editor type="date" width="100%"}}
 			{{/editor}}
 		{{/field}}
+		{{#field id="nombreLote" label="Nombre Lote" type="text" column="A" labelModalClass="full-width"}}
+			{{#editor width="100%"}}
+			{{/editor}}
+		{{/field}}
 		{{field id="nombre" label="Nombre" hide="true" type="expr" value="=fn('folioName', 'Lote Artículos', @_created)"}}
 	{{/section}}
 	{{#section id="articulos" type="array"}}
@@ -83,6 +87,8 @@
 			{{/editor}}
 		{{/field}}
 		{{field id="marca" label="Marca" type="text" column="A"}}
+		{{field id="estilo" label="Estilo" type="text" column="A"}}
+		{{field id="familia" label="Familia" type="text" column="A"}}
 		{{field id="grupo" label="Grupo" type="text" column="A"}}
 		{{field id="modelo" label="Modelo" type="text" column="A"}}
 		{{field id="composicion" label="Composición" type="text" column="A"}}
@@ -126,6 +132,7 @@
 		{{#stack}}
 			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="fechaEmision" align="left"}}
+				{{row field="nombreLote" align="left"}}
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
@@ -140,6 +147,8 @@
 				{{column field="cantidadEmpaque"}}
 				{{column field="codigoSat"}}
 				{{column field="marca"}}
+				{{column field="estilo"}}
+				{{column field="familia"}}
 				{{column field="grupo"}}
 				{{column field="modelo"}}
 				{{column field="composicion"}}
@@ -202,7 +211,7 @@
 							Datos Generales
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="fechaEmision" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="fechaEmision, nombreLote" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -217,7 +226,7 @@
 							Artículos
 						{{/h5}}
 						{{#div}}
-							{{table articulos class="auto-form-table" cols="codigo, descripcion, precioLista, precioPublico, unidad, cantidadEmpaque, codigoSat, marca, grupo, modelo, composicion, tamano, color, temporada, codigoUpc, cliente, comentarios" removeEmptyCols="true" unlink="true"}}
+							{{table articulos class="auto-form-table" cols="codigo, descripcion, precioLista, precioPublico, unidad, cantidadEmpaque, codigoSat, marca, estilo, familia, grupo, modelo, composicion, tamano, color, temporada, codigoUpc, cliente, comentarios" removeEmptyCols="true" unlink="true"}}
 							{{br}}
 						{{/div}}
 					{{/col}}
@@ -229,6 +238,7 @@
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
 				{{field fechaEmision}}
+				{{field nombreLote}}
 			{{/fieldSet}}
 		{{/col}}
 	{{/modal}}
@@ -238,8 +248,10 @@
 	{{/template}}
 	{{#template2 id="articuloLote"}}
 		<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}
+		<br>Nombre Lote: {{nombreLote}}
 	{{/template2}}
 	{{#template3 id="articuloLote"}}
 		{{#if fechaEmision}}<br>Fecha Emisión: {{date fechaEmision "DD/MMM/YYYY"}}{{/if}}
+		{{#if nombreLote}}<br>Nombre Lote: {{nombreLote}}{{/if}}
 	{{/template3}}
 {{/markup}}

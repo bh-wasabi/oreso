@@ -15,8 +15,8 @@
   {{/section}}
   
   {{#grid id="articulos" section="articulos" keyField="cantidad" allowInsert="false" allowRemove="false" allowSort="true" sortBy="referencia,descripcion"}}
-    {{column field="codigo" label="Código" width="150" readOnly="true"}}
-    {{column field="descripcion" label="Artículo" width="350" readOnly="true"}}
+    {{column field="codigo" label="Código" width="150" readOnly="true" required="true"}}
+    {{column field="descripcion" label="Artículo" width="250" readOnly="true"}}
     {{column field="_origen" label="Origen" width="150" readOnly="true"}}
     {{column field="aliasDestino" label="Destino" width="55" defaultValue="=_params.aliasDestino"}}
     {{column field="_destino" label="Ubicación" width="150" required="true"}}

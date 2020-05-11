@@ -35,11 +35,11 @@
   {{#grid id="articulos" section="articulos" keyField="cantidad" allowInsert="false" allowRemove="false" applyFilter="referencia" allowSort="true" sortBy="referencia,orden"}}
     {{column field="referencia" label="Referencia" width="150" readOnly="true"}}
     {{column field="orden" label="Orden" width="1" readOnly="true"}}
-    {{column field="codigo" label="Código" width="150" readOnly="true"}}
+    {{column field="codigo" label="Código" width="150" readOnly="true" required="true"}}
     {{column field="codigoUpc" label="UPC" width="150" readOnly="true"}}
-    {{column field="descripcion" label="Artículo" width="350" readOnly="true"}}
+    {{column field="descripcion" label="Artículo" width="250" readOnly="true"}}
     {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#," readOnly="true"}}
-    {{column field="valorUnitario" label="Costo Unitario" width="110" type="numeric" format="#,.##" required="true" readOnly="true"}}
+    {{column field="valorUnitario" label="Costo Unitario" width="110" type="numeric" format="#,.##" required="true"}}
     {{column field="tasaIva" label="% IVA" width="50" type="numeric" format="#.##" defaultValue="16" readOnly="true"}}
     {{column field="aliasDestino" label="Destino" width="55" defaultValue="=_params.aliasDestino"}}
     {{column field="_destino" label="Ubicación" width="150" required="true"}}
@@ -57,7 +57,7 @@
 
   {{#cube id="articulos" section="articulos" name="=_name" allowSortingBySummary="true" allowSorting="true" allowFiltering="true" exportToExcel="true" allowExpandAll="true" showColumnGrandTotals="true"}}
     {{row field="codigo" label="Código" width="250"}}
-    {{row field="descripcion" label="Descripción" width="350"}}
+    {{row field="descripcion" label="Descripción" width="350" required="true"}}
     {{row field="codigoUpc" label="Código UPC"}}
     {{sum field="cantidad" label="Cantidad" format="#,"}}
     {{sum field="importe" label="Importe" format="currency"}}

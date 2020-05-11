@@ -25,7 +25,7 @@
   
   {{#grid id="articulos" section="articulos" keyField="cantidad" allowInsert="true" allowRemove="true"}}
     {{column field="aliasArticulo" label="Artículo" width="150"}}
-    {{column field="codigo" label="Código" width="150"}}
+    {{column field="codigo" label="Código" width="150" required="true"}}
     {{column field="codigoUpc" label="UPC" width="150" readOnly="true"}}
     {{column field="descripcion" label="Descripción" width="330"}}
     {{column field="aliasDestino" label="Destino" width="55" defaultValue="=_params.aliasDestino"}}

@@ -133,11 +133,15 @@
 		{{field id="cantidad" label="Cantidad" type="number" format="#,.##" column="A"}}
 		{{field id="costoUnitario" label="Costo Unitario" type="number" format="currency" column="A"}}
 		{{field id="valorUnitario" label="Valor Unitario" type="number" format="currency" column="A"}}
+		{{field id="precioPublico" label="Precio Público" type="number" format="currency" column="A"}}
 		{{field id="tasaIva" label="% IVA" type="number" format="#.##" column="A"}}
-		{{field id="descuentoLinea" label="% Desc" type="number" format="#.##" column="A"}}
+		{{field id="retencionIva" label="Retención IVA" type="number" column="A"}}
+		{{field id="retencionIsr" label="Retención ISR" type="number" format="currency" column="A"}}
+		{{field id="descuentoLinea" label="% Desc" type="number" format="currency" column="A"}}
 		{{field id="descuentos" label="Descuentos" type="calc" format="currency" column="A"}}
 		{{field id="importe" label="Importe" type="calc" format="currency" column="A"}}
 		{{field id="iva" label="IVA" type="calc" format="currency" column="A"}}
+		{{field id="retenciones" label="Retenciones" type="calc" format="currency" column="A"}}
 		{{field id="total" label="Total" type="calc" format="currency" column="A"}}
 		{{#field id="referencia" label="Referencia" type="text" column="A"}}
 			{{#editor case="upper"}}
@@ -156,11 +160,15 @@
 			{{#editor case="YYYY-MM-DD"}}
 			{{/editor}}
 		{{/field}}
-		{{field id="comentarios" label="Comentarios" type="text" column="A"}}
+		{{#field id="motivo" label="Motivo" type="text" column="A" references="motivo"}}
+			{{#editor type="select" preset="cfg.motivo"}}
+			{{/editor}}
+		{{/field}}
 		{{#field id="loteEspecifico" label="Lote Específico" type="text" column="A"}}
 			{{#editor case="upper"}}
 			{{/editor}}
 		{{/field}}
+		{{field id="comentarios" label="Comentarios" type="text" column="A"}}
 	{{/section}}
 	{{#section id="inv" type="array"}}
 		{{field id="codigo" label="Código" type="text" column="A"}}
@@ -235,19 +243,24 @@
 				{{column field="cantidad"}}
 				{{column field="costoUnitario"}}
 				{{column field="valorUnitario"}}
+				{{column field="precioPublico"}}
 				{{column field="tasaIva"}}
+				{{column field="retencionIva"}}
+				{{column field="retencionIsr"}}
 				{{column field="descuentoLinea"}}
 				{{column field="descuentos"}}
 				{{column field="importe"}}
 				{{column field="iva"}}
+				{{column field="retenciones"}}
 				{{column field="total"}}
 				{{column field="referencia"}}
 				{{column field="referencia2"}}
 				{{column field="orden"}}
 				{{column field="lote"}}
 				{{column field="vencimiento"}}
-				{{column field="comentarios"}}
+				{{column field="motivo"}}
 				{{column field="loteEspecifico"}}
+				{{column field="comentarios"}}
 			{{/table}}
 		{{/stack}}
 		{{#stack condition="=inv"}}
@@ -378,7 +391,7 @@
 							Artículos
 						{{/h5}}
 						{{#div}}
-							{{table articulos class="auto-form-table" cols="aliasArticulo, codigo, codigoUpc, descripcion, categoria, grupo, familia, aliasOrigen, _origen, aliasDestino, _destino, uen, agente, caja, cantidad, costoUnitario, valorUnitario, tasaIva, descuentoLinea, descuentos, importe, iva, total, referencia, referencia2, orden, lote, vencimiento, comentarios, loteEspecifico" removeEmptyCols="true" unlink="true"}}
+							{{table articulos class="auto-form-table" cols="aliasArticulo, codigo, codigoUpc, descripcion, categoria, grupo, familia, aliasOrigen, _origen, aliasDestino, _destino, uen, agente, caja, cantidad, costoUnitario, valorUnitario, precioPublico, tasaIva, retencionIva, retencionIsr, descuentoLinea, descuentos, importe, iva, retenciones, total, referencia, referencia2, orden, lote, vencimiento, motivo, loteEspecifico, comentarios" removeEmptyCols="true" unlink="true"}}
 							{{br}}
 						{{/div}}
 					{{/col}}
