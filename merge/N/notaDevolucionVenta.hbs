@@ -29,7 +29,9 @@
         {{set _destino="=calc.getPresetPersona('app.aliasUbicacion', aliasDestino, _doc.persona.id)._ubicacion"}}
       {{/onChange}}
     {{/field}}
-    {{field id="importe" type="calc" value="=valorUnitario*cantidad"}}
+    {{field id="subTotal" type="calc" value="=valorUnitario*cantidad"}}
+    {{field id="descuentos" type="calc" value="=subTotal*(descuentoLinea/100)"}}
+    {{field id="importe" type="calc" value="=subTotal-descuentos"}}
     {{field id="iva" type="calc" value="=importe*(tasaIva/100)"}}
     {{field id="total" type="calc" value="=importe+iva"}}
   {{/section}}
@@ -43,6 +45,8 @@
     {{column field="_destino" label="Ubicación" width="150" required="true"}}
     {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
     {{column field="valorUnitario" label="Precio Unitario" width="110" type="numeric" format="#,.##"}}
+    {{column field="precioPublico" label="Precio Público" width="110" type="numeric" format="#,.##" required="true"}}
+    {{column field="descuentoLinea" label="% Desc" width="55" type="numeric" format="#.##" required="true"}}
     {{column field="tasaIva" label="% IVA" width="50" type="numeric" format="#.##" defaultValue="16"}}
     {{column field="costoUnitario" label="Costo Unitario" width="110" type="numeric" format="#,.##" required="true"}}
     {{column field="lote" width="100" required="true"}}

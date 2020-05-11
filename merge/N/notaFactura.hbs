@@ -12,7 +12,7 @@
 
   {{#transform id="copiarFactura"}}
     {{update section="contexto" value="=contexto"}}
-    {{update section="persona" transform="copiarPersona"}}
+    {{update section="persona" value="=persona"}}
     {{update section="articulos" value="=calc.joinArraysByKey(articulos, inv, 'codigo')"}}
   {{/transform}}  
 
