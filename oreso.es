@@ -3572,8 +3572,8 @@
 {"name":"tipoAdjunto","code":"doc","display":"Documento","order":2}
 {"index":{"_id":"tipoArticulo/inventariable"}}
 {"name":"tipoArticulo","code":"inventariable","display":"Inventariable","order":1}
-{"index":{"_id":"tipoArticulo/servicio"}}
-{"name":"tipoArticulo","code":"servicio","display":"Servicio","order":2}
+{"index":{"_id":"tipoArticulo/concepto"}}
+{"name":"tipoArticulo","code":"concepto","display":"Concepto","order":2}
 {"index":{"_id":"tipoCertificado/cedulaProfesional"}}
 {"name":"tipoCertificado","code":"cedulaProfesional","display":"Cedula Profesional","order":1}
 {"index":{"_id":"tipoCertificado/diploma"}}
@@ -3624,10 +3624,10 @@
 {"name":"tipoPromocion","code":"no","display":"No","order":1}
 {"index":{"_id":"tipoPromocion/volume"}}
 {"name":"tipoPromocion","code":"volume","display":"Volumen","order":2}
-{"index":{"_id":"tipoProveedor/gastos"}}
-{"name":"tipoProveedor","code":"gastos","display":"Gastos","order":1}
-{"index":{"_id":"tipoProveedor/compras"}}
-{"name":"tipoProveedor","code":"compras","display":"Compras","order":2}
+{"index":{"_id":"tipoProveedor/importacion"}}
+{"name":"tipoProveedor","code":"importacion","display":"Importación","order":1}
+{"index":{"_id":"tipoProveedor/local"}}
+{"name":"tipoProveedor","code":"local","display":"Local","order":2}
 {"index":{"_id":"tipoRecurso/espacio"}}
 {"name":"tipoRecurso","code":"espacio","display":"Espacio","order":99}
 {"index":{"_id":"unidad/pieza"}}
@@ -3816,3 +3816,17 @@
 {"name":"motivo","code":"38","display":"RENTA DE UNIDAD LOGISTICA","order":1907}
 {"index":{"_id":"motivo/39"}}
 {"name":"motivo","code":"39","display":"USO PORTAL","order":1908}
+{"index":{"_id":"motivo/40"}}
+{"name":"motivo","code":"40","display":"FILLRATE","order":1909}
+{"index":{"_id":"motivo/41"}}
+{"name":"motivo","code":"41","display":"DEVOLUCIONES LIVERPOOL MAIDENFORM","order":1910}
+{"index":{"_id":"motivo/42"}}
+{"name":"motivo","code":"42","display":"DEVOLUCIONES LIVERPOOL ICON","order":1911}
+{"index":{"_id":"motivo/43"}}
+{"name":"motivo","code":"43","display":"BONIFICACIONES","order":1912}
+{"index":{"_id":"tipoAcreedor/gastos"}}
+{"name":"tipoAcreedor","code":"gastos","display":"Gastos","order":1}
+{"index":{"_id":"tipoAcreedor/empleado"}}
+{"name":"tipoAcreedor","code":"empleado","display":"Empleado","order":2}
+{"index":{"_id":"tipoAcreedor/logistica"}}
+{"name":"tipoAcreedor","code":"logistica","display":"Logística","order":3}

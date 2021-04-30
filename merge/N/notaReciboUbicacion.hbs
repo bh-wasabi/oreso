@@ -5,6 +5,9 @@
   {{param removeIfEmptyField="cantidad"}}
   {{param startOnOpen="articulos"}}
 
+  {{action id="tool2" condition="true" label="Descargar..." type="save-as" visibleMode="close" color="blue" btnSolid="true" fileName="=_name" 
+    items="=[fn('checkListTitulos')].concat(fn('descargarEntrada', calc.mergeMasterDetail({persona, base}, calc.mergeArraysByKey(calc.joinPreset(calc.whereGreaterThan(inv, 'entrada', 0), 'app.aliasUbicacion', 'cuenta', 'ubicacion'), _items, 'codigo'))))" fromSource="articulo" fromView="todo"}}
+
   {{#section id="articulos"}}
     {{#field id="aliasDestino"}}
       {{#onChange}}

@@ -51,7 +51,7 @@
 	{{section id="_params" temp="true"}}
 	{{#section id="base" removeFalses="true" forceTable="false" disableAdd="false" temp="false"}}
 		{{#field id="diaSemana" label="Día Semana" type="array" column="A" references="diaSemana" labelModalClass="full-width"}}
-			{{#editor type="tags" preset="cfg.diaSemana" searchEnabled="false" searchTimeout="100" showSelectionControls="true" width="100%"}}
+			{{#editor type="tags" preset="cfg.diaSemana" searchEnabled="true" searchTimeout="100" showSelectionControls="true" width="100%"}}
 			{{/editor}}
 			{{validator type="required"}}
 		{{/field}}
@@ -81,9 +81,9 @@
 	{{/section}}
 	{{#report id="preliminar-encabezado"}}
 		{{#stack}}
-			{{#columns margin="20" widths="85,150,*"}}
+			{{#columns margin="20" widths="100,150,*"}}
 				{{#column}}
-					{{row image="logo" alignment="left" imageWidth="75" margin="0,-15,0,0"}}
+					{{row image="logo" alignment="left" imageWidth="90" margin="0,-15,0,0"}}
 				{{/column}}
 				{{#column margin="0,-10,0,0"}}
 					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
@@ -92,8 +92,7 @@
 					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
 				{{/column}}
 				{{#column}}
-					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
-					{{/row}}
+					{{row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
 				{{/column}}
 			{{/columns}}
 		{{/stack}}

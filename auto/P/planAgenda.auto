@@ -89,7 +89,7 @@
 			{{/editor}}
 		{{/field}}
 		{{#field id="seleccionarEspecialidad" label="Especialidades del Prestador Servicios" type="array" recordHide="true" if="esPrestadorServicios" column="A" references="especialidad" detach="Recurso" labelModalClass="full-width"}}
-			{{#editor type="tags" preset="cfg.especialidad" searchEnabled="false" searchTimeout="100" showSelectionControls="false" width="100%"}}
+			{{#editor type="tags" preset="cfg.especialidad" searchEnabled="true" searchTimeout="100" showSelectionControls="false" width="100%"}}
 			{{/editor}}
 		{{/field}}
 		{{#field id="especialidad" label="Especialidad" type="text" if="esPrestadorServicios" column="A" references="especialidad" detach="Recurso" labelModalClass="full-width"}}
@@ -169,9 +169,9 @@
 	{{section id="resumen" temp="true"}}
 	{{#report id="preliminar-encabezado"}}
 		{{#stack}}
-			{{#columns margin="20" widths="85,150,*"}}
+			{{#columns margin="20" widths="100,150,*"}}
 				{{#column}}
-					{{row image="logo" alignment="left" imageWidth="75" margin="0,-15,0,0"}}
+					{{row image="logo" alignment="left" imageWidth="90" margin="0,-15,0,0"}}
 				{{/column}}
 				{{#column margin="0,-10,0,0"}}
 					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
@@ -180,8 +180,8 @@
 					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
 				{{/column}}
 				{{#column}}
-					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
-					{{/row}}
+					{{row image="_barcode" alignment="right" imageWidth="100" margin="0,-15,0,0"}}
+					{{row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
 				{{/column}}
 			{{/columns}}
 		{{/stack}}
@@ -189,9 +189,9 @@
 			{{#columns margin="30,-20,0,30"}}
 				{{#column}}
 					{{#record layout="lightHorizontalLines" section="persona" headerStyle="field" margin="-10,5,5,5" widths="80,180" fontSize="6"}}
-						{{row field="nombreCompleto" label="Paciente"}}
-						{{row expr="=calc.concat3(_genero, calc.format('date', fechaNacimiento, 'DD/MMM/YYYY')+' ('+_edadActual+')')" label="Género / Fecha Nacimiento"}}
+						{{row field="nombreCompleto" label="Nombre"}}
 						{{row field="clave" label="Expediente / CURP"}}
+						{{row expr="=calc.concat3(_genero, calc.format('date', fechaNacimiento, 'DD/MMM/YYYY')+' ('+_edadActual+')')" label="Género / Fecha Nacimiento"}}
 						{{row expr="=calc.concat3(_created._service, calc.format('date', _updated.date, 'DD/MMM/YYYY h:mma'))" label="Servicio / Fecha Atención"}}
 						{{row expr="=calc.concat3(base.solicitud.base._solicitante, base.solicitud.base._especialidad)" label="Solicitante / Especialidad"}}
 					{{/record}}
@@ -206,7 +206,7 @@
 			{{/columns}}
 		{{/stack}}
 	{{/report}}
-	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true" pageMargins="30,130,30,40"}}
+	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true" pageMargins="30,120,30,40"}}
 		{{#stack}}
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
 		{{/stack}}

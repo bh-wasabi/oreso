@@ -165,7 +165,7 @@
     {{field id="descripcion2" type="expr" value="=calc.concat(@composicion,@modelo)"}}
     {{field id="tipoArticulo" defaultValue="_params.tipoArticulo" readOnly="true"}}
     {{field id="esInventariable" type="expr" value="=tipoArticulo=='inventariable'"}}
-    {{field id="esServicio" type="expr" value="=tipoArticulo=='servicio'"}}
+    {{field id="esConcepto" type="expr" value="=tipoArticulo=='concepto'"}}
   {{/section}}
   {{action id="eliminar" hide="true"}}
   {{!-- {{action id="ver" condition="=true" type="openFolder" label="Adjuntos" items="=adjuntos" color="grey" visibleMode="close"}} --}}
@@ -182,10 +182,10 @@
     {{param tipoArticulo="inventariable"}}
     {{param _tipoArticulo="Inventariable"}}
   {{/browser}}
-  {{#browser id="servicios" view="lista" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%"}}
+  {{#browser id="conceptos" view="lista" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%"}}
     {{list itemTemplate="lista" allowSearch="true" allowRefresh="true" allowEdit="true" allowInsert="true"}}
-    {{param tipoArticulo="servicio"}}
-    {{param _tipoArticulo="Servicio"}}
+    {{param tipoArticulo="concepto"}}
+    {{param _tipoArticulo="Concepto"}}
   {{/browser}}  
   {{#browser id="ver" view="lista" showDoc="true" docOrientation="vertical" docPosition="75%" zoom="80%" showActions="preliminar, ver"}}
     {{list itemTemplate="lista" allowSearch="true" allowRefresh="true"}}

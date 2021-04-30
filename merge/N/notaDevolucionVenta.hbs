@@ -5,6 +5,9 @@
   {{param removeIfEmptyField="cantidad"}}
   {{param startOnOpen="articulos"}}
 
+  {{action id="tool2" condition="true" label="Descargar..." type="save-as" visibleMode="close" color="blue" btnSolid="true" fileName="=_name" 
+    items="=[fn('checkListTitulos')].concat(fn('descargarEntrada', calc.mergeMasterDetail({persona, base}, calc.mergeArraysByKey(calc.joinPreset(calc.whereGreaterThan(inv, 'entrada', 0), 'app.aliasUbicacion', 'cuenta', 'ubicacion'), _items, 'codigo'))))" fromSource="articulo" fromView="todo"}}
+
   {{#section id="base"}}
     {{#field id="diasCredito"}}
       {{#onChange}}
@@ -46,9 +49,12 @@
     {{column field="cantidad" label="Cantidad" width="65" type="numeric" format="#,"}}
     {{column field="valorUnitario" label="Precio Unitario" width="110" type="numeric" format="#,.##"}}
     {{column field="precioPublico" label="Precio Público" width="110" type="numeric" format="#,.##" required="true"}}
-    {{column field="descuentoLinea" label="% Desc" width="55" type="numeric" format="#.##" required="true"}}
+    {{column field="descuentoLinea" label="% Desc" width="55" type="numeric" format="#.##"}}
     {{column field="tasaIva" label="% IVA" width="50" type="numeric" format="#.##" defaultValue="16"}}
     {{column field="costoUnitario" label="Costo Unitario" width="110" type="numeric" format="#,.##" required="true"}}
+[.#if esOreso.]    
+    {{column field="loteReferencia" label="Tecsmart" width="150" readOnly="true"}}
+[./if.]    
     {{column field="lote" width="100" required="true"}}
     {{column field="vencimiento" validateDate="true" width="100" required="true"}}
     {{column field="referencia" label="Referencia" width="150"}}

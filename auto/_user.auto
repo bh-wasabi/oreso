@@ -79,7 +79,7 @@
 			{{/editor}}
 		{{/field}}
 		{{#field id="rolesAcceso" label="Roles Acceso" type="array" recordHide="true" column="A" references="userRole" modalColumn="B" labelModalClass="full-width"}}
-			{{#editor type="tags" preset="cfg.userRole" searchEnabled="false" searchTimeout="100" showSelectionControls="true" width="100%"}}
+			{{#editor type="tags" preset="cfg.userRole" searchEnabled="true" searchTimeout="100" showSelectionControls="true" width="100%"}}
 			{{/editor}}
 		{{/field}}
 		{{#field id="estatus" label="Estatus" type="text" column="A" references="estatusUsuario" modalColumn="A" labelModalClass="full-width" defaultValue="'activo'"}}
@@ -128,7 +128,7 @@
 			{{/editor}}
 		{{/field}}
 		{{#field id="idioma" label="Idiomas" type="array" column="A" references="idioma" modalColumn="B" labelModalClass="full-width"}}
-			{{#editor type="tags" preset="cfg.idioma" searchEnabled="false" searchTimeout="100" showSelectionControls="false" width="100%"}}
+			{{#editor type="tags" preset="cfg.idioma" searchEnabled="true" searchTimeout="100" showSelectionControls="false" width="100%"}}
 			{{/editor}}
 		{{/field}}
 		{{#field id="estudios" label="Estudios Académicos" type="docs" column="A" references="prestadorServiciosEstudios" modalColumn="B" labelModalClass="full-width" source="prestadorServiciosEstudios"}}
@@ -142,9 +142,9 @@
 	{{/section}}
 	{{#report id="preliminar-encabezado"}}
 		{{#stack}}
-			{{#columns margin="20" widths="85,150,*"}}
+			{{#columns margin="20" widths="100,150,*"}}
 				{{#column}}
-					{{row image="logo" alignment="left" imageWidth="75" margin="0,-15,0,0"}}
+					{{row image="logo" alignment="left" imageWidth="90" margin="0,-15,0,0"}}
 				{{/column}}
 				{{#column margin="0,-10,0,0"}}
 					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
@@ -153,8 +153,7 @@
 					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
 				{{/column}}
 				{{#column}}
-					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
-					{{/row}}
+					{{row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
 				{{/column}}
 			{{/columns}}
 		{{/stack}}

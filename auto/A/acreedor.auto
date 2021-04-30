@@ -1,4 +1,4 @@
-{{#define type="doc" id="cliente"}}
+{{#define type="doc" id="acreedor"}}
 	{{param defaultDisplay="_name"}}
 	{{param defaultView="lista"}}
 	{{param pageStart="1"}}
@@ -17,8 +17,8 @@
 	{{param startOnOpen="base"}}
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="base.nombre"}}
-	{{param name="Cliente"}}
-	{{param typeName="Cliente"}}
+	{{param name="Acreedor"}}
+	{{param typeName="Acreedor"}}
 	{{param group="Registro"}}
 	{{param fullWidth="true"}}
 	{{param modalSize="xlong"}}
@@ -55,8 +55,8 @@
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="tipoCliente" label="Tipo Cliente" type="text" column="A" references="tipoCliente" labelModalClass="full-width"}}
-			{{#editor type="select" preset="cfg.tipoCliente" width="100%"}}
+		{{#field id="tipoAcreedor" label="Tipo Acreedor" type="text" column="A" references="tipoAcreedor" labelModalClass="full-width"}}
+			{{#editor type="select" preset="cfg.tipoAcreedor" width="100%"}}
 			{{/editor}}
 		{{/field}}
 		{{#field id="tipoPersona" label="Tipo Persona" type="text" column="A" references="tipoPersona" labelModalClass="full-width" defaultValue="'personaMoral'"}}
@@ -69,11 +69,11 @@
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="personaMoral" label="Persona Moral" type="doc" if="esPersonaMoral" column="A" references="personaMoral" labelModalClass="full-width" source="personaMoral"}}
+		{{#field id="formaContacto" label="Forma Contacto" type="doc" column="A" references="formaContacto" labelModalClass="full-width" source="formaContacto"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="formaContacto" label="Forma Contacto" type="doc" column="A" references="formaContacto" labelModalClass="full-width" source="formaContacto"}}
+		{{#field id="personaMoral" label="Persona Moral" type="doc" if="esPersonaMoral" column="A" references="personaMoral" labelModalClass="full-width" source="personaMoral"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
@@ -129,11 +129,11 @@
 		{{#stack}}
 			{{#record title="Datos Generales" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="nombre" align="left"}}
-				{{row field="tipoCliente" align="left"}}
+				{{row field="tipoAcreedor" align="left"}}
 				{{row field="tipoPersona" align="left"}}
 				{{row field="personaFisica" condition="esPersonaFisica" align="left"}}
-				{{row field="personaMoral" condition="esPersonaMoral" align="left"}}
 				{{row field="formaContacto" align="left"}}
+				{{row field="personaMoral" condition="esPersonaMoral" align="left"}}
 				{{row field="direccion" align="left"}}
 				{{row field="contacto" align="left"}}
 			{{/record}}
@@ -148,11 +148,6 @@
 				{{column field="fecha"}}
 				{{column field="ext"}}
 			{{/table}}
-		{{/stack}}
-		{{#stack}}
-			{{#record title="Adjuntos" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="adjuntos" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
-				{{row field="adjuntos" align="left"}}
-			{{/record}}
 		{{/stack}}
 	{{/report}}
 	{{#view id="lista" name="Lista"}}
@@ -194,7 +189,7 @@
 	{{/workflow}}
 {{/define}}
 {{#markup}}
-	{{#page name="Cliente"}}
+	{{#page name="Acreedor"}}
 		{{row}}
 		{{row}}
 		{{#row}}
@@ -205,7 +200,7 @@
 							Datos Generales
 						{{/h5}}
 						{{#with base}}
-							{{record this widths="20%,80%" rows="nombre, tipoCliente, tipoPersona, personaFisica, personaMoral, formaContacto, direccion, contacto" class="auto-form-record"}}
+							{{record this widths="20%,80%" rows="nombre, tipoAcreedor, tipoPersona, personaFisica, formaContacto, personaMoral, direccion, contacto" class="auto-form-record"}}
 							{{br}}
 						{{/with}}
 					{{/col}}
@@ -226,17 +221,6 @@
 							{{/div}}
 						{{/col}}
 					{{/row}}
-					{{#row class="auto-form-row"}}
-						{{#col medium="100%" class="auto-form-col"}}
-							{{#h5 class="auto-form-h5"}}
-								Adjuntos
-							{{/h5}}
-							{{#with adjuntos}}
-								{{record this widths="20%,80%" rows="adjuntos" class="auto-form-record"}}
-								{{br}}
-							{{/with}}
-						{{/col}}
-					{{/row}}
 				{{/zone}}
 			{{/if}}
 		{{/row}}
@@ -245,11 +229,11 @@
 		{{#col medium="100%" vertical="100%"}}
 			{{#fieldSet}}
 				{{field nombre}}
-				{{field tipoCliente}}
+				{{field tipoAcreedor}}
 				{{field tipoPersona}}
 				{{field personaFisica}}
-				{{field personaMoral}}
 				{{field formaContacto}}
+				{{field personaMoral}}
 				{{field direccion}}
 				{{field contacto}}
 			{{/fieldSet}}
@@ -259,23 +243,23 @@
 	{{#template id="lista"}}
 		<div>{{_name}}</div>
 	{{/template}}
-	{{#template2 id="cliente"}}
+	{{#template2 id="acreedor"}}
 		<br>Nombre: {{nombre}}
-		<br>Tipo Cliente: {{_tipoCliente}}
+		<br>Tipo Acreedor: {{_tipoAcreedor}}
 		<br>Tipo Persona: {{_tipoPersona}}
 		{{#if esPersonaFisica}}<br>Persona Física: {{_personaFisica}}{{/if}}
-		{{#if esPersonaMoral}}<br>Persona Moral: {{_personaMoral}}{{/if}}
 		<br>Forma Contacto: {{_formaContacto}}
+		{{#if esPersonaMoral}}<br>Persona Moral: {{_personaMoral}}{{/if}}
 		<br>Dirección: {{_direccion}}
 		<br>Contactos: {{_contacto}}
 	{{/template2}}
-	{{#template3 id="cliente"}}
+	{{#template3 id="acreedor"}}
 		{{#if nombre}}<br>Nombre: {{nombre}}{{/if}}
-		{{#if tipoCliente}}<br>Tipo Cliente: {{_tipoCliente}}{{/if}}
+		{{#if tipoAcreedor}}<br>Tipo Acreedor: {{_tipoAcreedor}}{{/if}}
 		{{#if tipoPersona}}<br>Tipo Persona: {{_tipoPersona}}{{/if}}
 		{{#if esPersonaFisica}}{{#if personaFisica}}<br>Persona Física: {{_personaFisica}}{{/if}}{{/if}}
-		{{#if esPersonaMoral}}{{#if personaMoral}}<br>Persona Moral: {{_personaMoral}}{{/if}}{{/if}}
 		{{#if formaContacto}}<br>Forma Contacto: {{_formaContacto}}{{/if}}
+		{{#if esPersonaMoral}}{{#if personaMoral}}<br>Persona Moral: {{_personaMoral}}{{/if}}{{/if}}
 		{{#if direccion}}<br>Dirección: {{_direccion}}{{/if}}
 		{{#if contacto}}<br>Contactos: {{_contacto}}{{/if}}
 	{{/template3}}

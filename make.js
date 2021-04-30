@@ -1,4 +1,5 @@
 var fs = require('fs');
+var recursive = require('recursive-readdir');
 var https = require('https')
 var async = require('async');
 var moment = require('moment');
@@ -13,6 +14,7 @@ var makeCfg = require('../make/js/makeCfg');
 //var MD5 = require('md5');
 //var replaceExt = require('replace-ext');
 var params = '';
+var logoSaludNess;
 var subProyect;
 // const { decisionTable } = require('js-feel')();
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
@@ -30,11 +32,15 @@ var makeToken = "58c41f52-6fcb-43c2-82a0-760b435d344a";
 
 // host
 var wasabiHost = 'demo.enlanube.io'
+//wasabiHost = 'jaim3.enlanube.io'
 wasabiHost = 'oreso.enlanube.io'
 //wasabiHost = 'cinetop.enlanube.io'
 
 // ssh -i "dev-cinetop.pem" ec2-user@cinetop.enlanube.io
+// ssh -i "jheffes2.pem" ec2-user@jaim3.enlanube.io
 // ssh -i "oreso.pem" ec2-user@oreso.enlanube.io
+
+// mongoexport --host oreso.enlanube.io --db demo --collection notaPedido --out notaPedido.json -u "admin" -p "55c60ab0-d48a-4016-97c7-b6ca56ee6ff3" --port 31544 --authenticationMechanism SCRAM-SHA-256
 
 var logo = 'https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png';
 var logo3 = 'https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png';
@@ -52,7 +58,9 @@ subProyect = 'oreso';
 var logo2;
 
 var proyectId = 'oreso';
+var proyectId2 = proyectId;
 var filename = proyectId+'-metadata.xlsx';
+var imageWidth = 90;
 
 if (filename&&filename.substr(-1)=='.'){
   filename+='xlsx'
@@ -62,6 +70,7 @@ var esHost = 'http://demo5.enlanube.io:3000/es'
 
 var forceList = [];
 var ignoreList = [];
+var useMD5 = wasabiHost!='demo.enlanube.io';
 
 var getFileExt = function(filename){
   return filename && filename.split('.').pop();
@@ -99,7 +108,8 @@ var getFileName = function(filename){
 // }
 
 
-var makeOne = function(path, filename, callback){
+var makeOne = function(path, filename, options, callback){
+  options = options || {};
   if (path.substr(0,5)==='auto/'){
     path = 'auto';
   } else if (path.substr(0,6)==='merge/'){
@@ -148,27 +158,31 @@ var makeOne = function(path, filename, callback){
         if (makeToken){
           url+='&makeToken='+makeToken;
         }
-        var req = https.request({ 
-          host: wasabiHost, 
-          port: 443,
-          path: url,
-          method: 'POST',
-          timeout: 360000,
-        }, function(res){
-          if (path==='auto' && res.statusCode==200){
-            var hbsName = 'merge/'+name.slice(5).split('.')[0]+'.hbs';
-            forceList.push(hbsName);
-            // console.log(forceList)
-          }
-          if (res.statusCode!=201){
-            console.log('make...', res.statusCode, filename)  
-          }        
-          callback(res.statusCode);
-        }).on('error', function(err){
-          err && console.error('request', err);
-        });
-        req.write(data);
-        req.end();
+        if (options.bulk){
+          callback(null, {url, data});
+        } else {
+          var req = https.request({ 
+            host: wasabiHost, 
+            port: 443,
+            path: url,
+            method: 'POST',
+            timeout: 360000,
+          }, function(res){
+            if (path==='auto' && res.statusCode==200){
+              var hbsName = 'merge/'+name.slice(5).split('.')[0]+'.hbs';
+              forceList.push(hbsName);
+              // console.log(forceList)
+            }
+            if (res.statusCode!=201){
+              console.log('make...', res.statusCode, filename)  
+            }        
+            callback(res.statusCode);
+          }).on('error', function(err){
+            err && console.error('request', err);
+          });
+          req.write(data);
+          req.end();          
+        }
       } else callback();
     } else callback();
   } else callback();
@@ -186,51 +200,109 @@ var doRestart = function(){
   req.end();
 }
 
+var doEnd = function(callback){
+  var req = https.request({ 
+    host: wasabiHost, 
+    port: 443,
+    path: '/hbs/end?makeToken='+makeToken,
+    method: 'GET',
+  }, function(err){
+    callback(err);
+  });
+  req.end();
+}
+
+
+// var makePath = function(path, callback){
+//   var restart;
+//   var bulk = false;
+//   var items = [];
+//   fs.readdir('./'+path, function(err, files){
+//     // creo que no tiene que ir en serie en este punto
+//     // async.eachSeries(files, function(file, callback) {
+
+//     var fn = (wasabiHost==='demo.enlanube.io')?'eachSeries':'each';
+//     //fn = 'eachSeries';
+//     //console.log(fn, path+'...')
+//     async[fn](files, function(file, callback) {
+//       if (path){
+//         file = path+'/'+file;
+//       }
+//       fs.stat(file, function(err, stat) {
+//         if (stat && stat.isDirectory()){ //&& path.substr(0,3)==='hbs'){
+//           makePath(file, function(err, res) {
+//             callback();
+//           })
+//         } else {
+//           // console.log(file)
+//           makeOne(path, file, {bulk}, function(statusCode, item){
+//             if (statusCode==202){
+//               restart = true;
+//             } else 
+//             if (bulk&&item){
+//               items.push(item)
+//             }
+//             callback();
+//           })          
+//         }
+//       })
+//     }, function(err){
+//       if (bulk){
+//         console.log('items..', path, items.length);  
+//       }      
+//       callback(restart);
+//     })
+//   })
+// }
+
 var makePath = function(path, callback){
   var restart;
-  fs.readdir('./'+path, function(err, files){
+  var bulk = false;
+  var items = [];
+  recursive(path, function (err, files) {
+    //console.log('files...', path,files&&files.length)
+    var chunks = _.chunk(files, 100);
     // creo que no tiene que ir en serie en este punto
     // async.eachSeries(files, function(file, callback) {
-
-    var fn = (wasabiHost==='demo.enlanube.io')?'eachSeries':'each';
-    //fn = 'eachSeries';
-    //console.log(fn, path+'...')
-    async[fn](files, function(file, callback) {
-      if (path){
-        file = path+'/'+file;
-      }
-      fs.stat(file, function(err, stat) {
-        if (stat && stat.isDirectory()){ //&& path.substr(0,3)==='hbs'){
-          makePath(file, function(err, res) {
-            callback();
-          })
-        } else {
-          // console.log(file)
-          makeOne(path, file, function(statusCode){
-            if (statusCode==202){
-              restart = true;
-            }
-            callback();
-          })          
-        }
-      })
+    async.each(chunks, function(chunk, callback){
+      //console.log('chunk...', chunk&&chunk.length)
+      var fn = (wasabiHost==='demo.enlanube.io')?'eachSeries':'each';
+      async[fn](chunk, function(file, callback) {
+        makeOne(path, file, {bulk}, function(statusCode, item){
+          if (statusCode==202){
+            restart = true;
+          } else 
+          if (bulk&&item){
+            items.push(item)
+          }
+          callback();
+        })          
+      }, function(err){
+        if (bulk){
+          console.log('items..', path, items.length);  
+        }      
+        callback(restart);
+      })      
     }, function(err){
-      callback(restart);
+      callback(err);
     })
   })
 }
+
 
 var genAuto = function(proyectId, callback){
   // callback();
   if (proyectId){
     var paso1 = moment();
     var buf = fs.readFileSync(filename);
+    console.log('start...', moment().diff(paso1)/1000+'s')
     var wb = XLSX.read(buf, {type:'buffer'});
-    codeSystem.generate(wb, proyectId, filename, subProyect, esHost+'/'+proyectId, function(err, codeSystem){
-      console.log('codeSystem...', moment().diff(paso1)+'ms')
-      docSystem.generate(wb, proyectId, filename, subProyect, logo3, headers, codeSystem, {imageWidth: 75}, function(err){
-        console.log('hbs generated...', moment().diff(paso1)+'ms')
-        console.log(proyectId+'.es generated...')
+    console.log('read...', moment().diff(paso1)/1000+'s')
+    codeSystem.generate(wasabiHost, wb, proyectId, filename, subProyect, esHost+'/'+proyectId2, {useMD5}, function(err, codeSystem){
+      console.log('codeSystem...', moment().diff(paso1)/1000+'s')
+      docSystem.generate(wasabiHost, wb, proyectId, filename, subProyect, logo3, headers, codeSystem, {imageWidth: imageWidth, logoSaludNess: logoSaludNess, useMD5: useMD5}, function(err){
+        console.log('hbs generated...', moment().diff(paso1)/1000+'s')
+        //console.log(proyectId+'.es generated...')
         callback(null, codeSystem);
       })
     })
@@ -238,9 +310,10 @@ var genAuto = function(proyectId, callback){
 }
 
 console.log('host', wasabiHost)
+  var start = moment();
 // if (filename){
-//   makeOne('auto', 'auto/auto_'+filename, function(){
-//     makeOne('', filename, function(){
+//   makeOne('auto', 'auto/auto_'+filename, null, function(){
+//     makeOne('', filename, null, function(){
 //       // restart();
 //     })
 //   })
@@ -252,10 +325,16 @@ console.log('host', wasabiHost)
 //     makeCfg.make('config', proyectId, 'install/'+proyectId+'-03-cfg.sql', function(){  
       genAuto(proyectId, function(err, codeSystem){
         makePath('hbs', function(){
+          console.log('make hbs...', moment().diff(start)/1000+'s')
           makePath('auto', function(){      
+            console.log('make auto...', moment().diff(start)/1000+'s')
             // makePath('bpmn', function(){
               // makePath('dmn', function(restart){
                 makePath('merge', function(){
+                  doEnd(function(err){
+                    console.log('end...', moment().diff(start)/1000+'s')
+                    return process.exit();
+                  });
                   // if (restart){
                   //   console.log('restart in 1/2 second...')
                   //   setTimeout(function(){doRestart();}, 150);

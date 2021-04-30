@@ -74,7 +74,7 @@
 			{{#editor type="select" preset="cfg.tipoArticulo" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="precioLista" label="Precio Lista" type="number" format="currency" column="A" modalColumn="A" labelModalClass="full-width"}}
+		{{#field id="precioLista" label="Precio Lista" type="number" format="currency" if="esInventariable" column="A" modalColumn="A" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
@@ -91,14 +91,6 @@
 			{{/editor}}
 		{{/field}}
 		{{#field id="articuloPrecios" label="Precios" type="doc" column="A" references="articuloPrecios" modalColumn="B" labelModalClass="full-width" source="articuloPrecios"}}
-			{{#editor width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="articuloNiveles" label="Niveles Inventario" type="doc" column="A" references="articuloNiveles" modalColumn="B" labelModalClass="full-width" source="articuloNiveles"}}
-			{{#editor width="100%"}}
-			{{/editor}}
-		{{/field}}
-		{{#field id="articuloPermisos" label="Permisos" type="doc" column="A" references="articuloPermisos" modalColumn="B" labelModalClass="full-width" source="articuloPermisos"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
@@ -130,11 +122,11 @@
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="marca" label="Marca" type="text" column="A" modalColumn="B" detach="Clasificadores" labelModalClass="full-width"}}
+		{{#field id="marca" label="Marca" type="text" if="esInventariable" column="A" modalColumn="B" detach="Clasificadores" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{#field id="estilo" label="Estilo" type="text" column="A" labelModalClass="full-width"}}
+		{{#field id="estilo" label="Estilo" type="text" if="esInventariable" column="A" labelModalClass="full-width"}}
 			{{#editor width="100%"}}
 			{{/editor}}
 		{{/field}}
@@ -169,9 +161,9 @@
 	{{/section}}
 	{{#report id="preliminar-encabezado"}}
 		{{#stack}}
-			{{#columns margin="20" widths="85,150,*"}}
+			{{#columns margin="20" widths="100,150,*"}}
 				{{#column}}
-					{{row image="logo" alignment="left" imageWidth="75" margin="0,-15,0,0"}}
+					{{row image="logo" alignment="left" imageWidth="90" margin="0,-15,0,0"}}
 				{{/column}}
 				{{#column margin="0,-10,0,0"}}
 					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
@@ -180,8 +172,7 @@
 					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
 				{{/column}}
 				{{#column}}
-					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
-					{{/row}}
+					{{row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
 				{{/column}}
 			{{/columns}}
 		{{/stack}}
@@ -195,26 +186,24 @@
 				{{row field="codigo" align="left"}}
 				{{row field="descripcion" align="left"}}
 				{{row field="foto" align="left"}}
-				{{row field="precioLista" align="left"}}
+				{{row field="precioLista" condition="esInventariable" align="left"}}
 				{{row field="precioPublico" condition="esInventariable" align="left"}}
 				{{row field="cantidadEmpaque" condition="esInventariable" align="left"}}
 				{{row field="codigoUpc" condition="esInventariable" align="left"}}
 				{{row field="articuloPrecios" align="left"}}
-				{{row field="articuloNiveles" align="left"}}
-				{{row field="articuloPermisos" align="left"}}
 				{{row field="unidad" condition="esInventariable" align="left"}}
 				{{row field="factor" condition="esInventariable" align="left"}}
 				{{row field="codigoSat" align="left"}}
 				{{row field="costoUnitario" align="left"}}
 				{{row field="familia" align="left"}}
-				{{row field="estilo" align="left"}}
+				{{row field="estilo" condition="esInventariable" align="left"}}
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
 			{{#record title="Clasificadores" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="base" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
 				{{row field="categoria" align="left"}}
 				{{row field="grupo" align="left"}}
-				{{row field="marca" align="left"}}
+				{{row field="marca" condition="esInventariable" align="left"}}
 				{{row field="modelo" condition="esInventariable" align="left"}}
 				{{row field="composicion" condition="esInventariable" align="left"}}
 				{{row field="tamano" condition="esInventariable" align="left"}}
@@ -281,7 +270,7 @@
 						{{#with base}}
 							{{#row}}
 								{{#col vertical="70%" medium="70%" class="auto-form-col-a"}}
-									{{record this widths="20%,80%" rows="codigo, descripcion, precioLista, precioPublico, cantidadEmpaque, codigoUpc, articuloPrecios, articuloNiveles, articuloPermisos, unidad, factor, codigoSat, costoUnitario, familia, estilo" class="auto-form-record"}}
+									{{record this widths="20%,80%" rows="codigo, descripcion, precioLista, precioPublico, cantidadEmpaque, codigoUpc, articuloPrecios, unidad, factor, codigoSat, costoUnitario, familia, estilo" class="auto-form-record"}}
 								{{/col}}
 								{{#col vertical="30%" medium="30%" class="auto-form-col-b"}}
 									{{#img class="auto-form-img" src="{{foto.base.url}}"}}
@@ -339,8 +328,6 @@
 		{{#col medium="50%" vertical="50%"}}
 			{{#fieldSet}}
 				{{field articuloPrecios}}
-				{{field articuloNiveles}}
-				{{field articuloPermisos}}
 				{{field categoria}}
 				{{field grupo}}
 				{{field marca}}
@@ -360,13 +347,11 @@
 		<br>Código: {{codigo}}
 		<br>Descripción: {{descripcion}}
 		<br>Fotografía: {{_foto}}
-		<br>Precio Lista: {{number precioLista "currency"}}
+		{{#if esInventariable}}<br>Precio Lista: {{number precioLista "currency"}}{{/if}}
 		{{#if esInventariable}}<br>Precio Público: {{number precioPublico "currency"}}{{/if}}
 		{{#if esInventariable}}<br>Cantidad Empaque: {{cantidadEmpaque}}{{/if}}
 		{{#if esInventariable}}<br>UPC: {{codigoUpc}}{{/if}}
 		<br>Precios: {{_articuloPrecios}}
-		<br>Niveles Inventario: {{_articuloNiveles}}
-		<br>Permisos: {{_articuloPermisos}}
 		{{#if esInventariable}}<br>Unidad: {{_unidad}}{{/if}}
 		{{#if esInventariable}}<br>Factor: {{factor}}{{/if}}
 		<br>Código SAT: {{codigoSat}}
@@ -374,8 +359,8 @@
 		<br>Categoría: {{categoria}}
 		<br>Grupo: {{grupo}}
 		<br>Familia: {{familia}}
-		<br>Marca: {{marca}}
-		<br>Estilo: {{estilo}}
+		{{#if esInventariable}}<br>Marca: {{marca}}{{/if}}
+		{{#if esInventariable}}<br>Estilo: {{estilo}}{{/if}}
 		{{#if esInventariable}}<br>Modelo: {{modelo}}{{/if}}
 		{{#if esInventariable}}<br>Composición: {{composicion}}{{/if}}
 		{{#if esInventariable}}<br>Tamaño: {{tamano}}{{/if}}
@@ -388,13 +373,11 @@
 		{{#if codigo}}<br>Código: {{codigo}}{{/if}}
 		{{#if descripcion}}<br>Descripción: {{descripcion}}{{/if}}
 		{{#if foto}}<br>Fotografía: {{_foto}}{{/if}}
-		{{#if precioLista}}<br>Precio Lista: {{number precioLista "currency"}}{{/if}}
+		{{#if esInventariable}}{{#if precioLista}}<br>Precio Lista: {{number precioLista "currency"}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if precioPublico}}<br>Precio Público: {{number precioPublico "currency"}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if cantidadEmpaque}}<br>Cantidad Empaque: {{cantidadEmpaque}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if codigoUpc}}<br>UPC: {{codigoUpc}}{{/if}}{{/if}}
 		{{#if articuloPrecios}}<br>Precios: {{_articuloPrecios}}{{/if}}
-		{{#if articuloNiveles}}<br>Niveles Inventario: {{_articuloNiveles}}{{/if}}
-		{{#if articuloPermisos}}<br>Permisos: {{_articuloPermisos}}{{/if}}
 		{{#if esInventariable}}{{#if unidad}}<br>Unidad: {{_unidad}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if factor}}<br>Factor: {{factor}}{{/if}}{{/if}}
 		{{#if codigoSat}}<br>Código SAT: {{codigoSat}}{{/if}}
@@ -402,8 +385,8 @@
 		{{#if categoria}}<br>Categoría: {{categoria}}{{/if}}
 		{{#if grupo}}<br>Grupo: {{grupo}}{{/if}}
 		{{#if familia}}<br>Familia: {{familia}}{{/if}}
-		{{#if marca}}<br>Marca: {{marca}}{{/if}}
-		{{#if estilo}}<br>Estilo: {{estilo}}{{/if}}
+		{{#if esInventariable}}{{#if marca}}<br>Marca: {{marca}}{{/if}}{{/if}}
+		{{#if esInventariable}}{{#if estilo}}<br>Estilo: {{estilo}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if modelo}}<br>Modelo: {{modelo}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if composicion}}<br>Composición: {{composicion}}{{/if}}{{/if}}
 		{{#if esInventariable}}{{#if tamano}}<br>Tamaño: {{tamano}}{{/if}}{{/if}}

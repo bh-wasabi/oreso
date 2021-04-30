@@ -1,10 +1,11 @@
 {{#define type="_cfg" id="_cfg"}}
 	{{#config id="board"}}
 		{{item board="clientes" display="Clientes" order="1" service="clientes" serviceName="Clientes" docPosition="0.75" type="persona" folder="persona" view="lista" params="tipo=cliente" template="verPersona" showActions="pedido, cancelacionPedido, factura, bonificacionVenta, cobro, cargoCxc, neteoCxc"}}
-		{{item board="proveedores" display="Proveedores" order="2" service="proveedores" serviceName="Proveedores" docPosition="0.75" type="persona" folder="persona" view="lista" params="tipo=proveedor" template="verPersona" showActions="ordenCompra, cancelacionOrdenCompra, entradaCompra, devolucionCompra, gasto, devolucionGasto, pago, neteoCxp"}}
-		{{item board="tesoreria" display="Tesoreria" order="3" service="tesoreria" serviceName="Tesoreria" beginGroup="true" docPosition="0.75" type="persona" folder="persona" view="lista" params="tipo=tesoreria" template="verPersona" showActions="dispersion"}}
-		{{item board="ubicaciones" display="Ubicaciones" order="4" service="ubicaciones" serviceName="Ubicaciones" docPosition="0.75" type="persona" folder="persona" view="lista" params="tipo=ubicacion" template="verPersona" showActions="reciboUbicacion, entradaDiversa, salidaMerma, salidaAjuste, traspaso"}}
-		{{item board="socios" display="Socios" order="6" service="socios" serviceName="Socios" beginGroup="true" docPosition="0.75" type="persona" folder="persona" view="lista" params="tipo=socio" template="verPersona" showActions="aportacionCapital, retiroCapital"}}
+		{{item board="proveedores" display="Proveedores" order="2" service="proveedores" serviceName="Proveedores" docPosition="0.75" type="persona" folder="persona" view="lista" params="tipo=proveedor" template="verPersona" showActions="ordenCompra, cancelacionOrdenCompra, entradaCompra, devolucionCompra, pago, neteoCxp"}}
+		{{item board="acreedores" display="Acreedores" order="3" service="acreedores" serviceName="Acreedores" docPosition="0.75" type="persona" folder="persona" view="lista" params="tipo=acreedor" template="verPersona" showActions="gasto, devolucionGasto, pago, neteoCxp"}}
+		{{item board="tesoreria" display="Tesoreria" order="4" service="tesoreria" serviceName="Tesoreria" beginGroup="true" docPosition="0.75" type="persona" folder="persona" view="lista" params="tipo=tesoreria" template="verPersona" showActions="dispersion"}}
+		{{item board="ubicaciones" display="Ubicaciones" order="5" service="ubicaciones" serviceName="Ubicaciones" docPosition="0.75" type="persona" folder="persona" view="lista" params="tipo=ubicacion" template="verPersona" showActions="reciboUbicacion, entradaDiversa, salidaMerma, salidaAjuste, traspaso"}}
+		{{item board="socios" display="Socios" order="7" service="socios" serviceName="Socios" beginGroup="true" docPosition="0.75" type="persona" folder="persona" view="lista" params="tipo=socio" template="verPersona" showActions="aportacionCapital, retiroCapital"}}
 	{{/config}}
 	{{#config id="widget"}}
 		{{item widget="datosGeneralesPersona" display="Datos Generales" order="1" heightRatio="2" widthRatio="3"}}
@@ -53,6 +54,7 @@
 		{{item widget="opcionesArticulo" display="Opciones" order="44" heightRatio="2" widthRatio="2"}}
 	{{/config}}
 	{{#config id="boardList"}}
+		{{item id="acreedores" nombre="Acreedores / Acreedores"}}
 		{{item id="clientes" nombre="Clientes / Clientes"}}
 		{{item id="proveedores" nombre="Proveedores / Proveedores"}}
 		{{item id="socios" nombre="Socios / Socios"}}
@@ -60,7 +62,7 @@
 		{{item id="ubicaciones" nombre="Ubicaciones / Ubicaciones"}}
 	{{/config}}
 	{{#config id="actionList"}}
-		{{item id="notaAportacionCapital" nombre="Aportación Capital"}}
+		{{item id="notaAportacionCapital" nombre="Aportación"}}
 		{{item id="notaBonificacionVenta" nombre="Bonificación Venta"}}
 		{{item id="notaCancelacionOrdenCompra" nombre="Cancelación Orden Compra"}}
 		{{item id="notaCancelacionPedido" nombre="Cancelación Pedido"}}
@@ -81,7 +83,7 @@
 		{{item id="notaPago" nombre="Pago"}}
 		{{item id="notaPedido" nombre="Pedido"}}
 		{{item id="notaReciboUbicacion" nombre="Recibo de Ubicación"}}
-		{{item id="notaRetiroCapital" nombre="Retiro Capital"}}
+		{{item id="notaRetiroCapital" nombre="Retiro"}}
 		{{item id="notaSalidaDiversa" nombre="Salida Diversa"}}
 		{{item id="notaTraspaso" nombre="Traspaso"}}
 	{{/config}}
@@ -415,6 +417,263 @@
 		{{item id="high" nombre="Alto"}}
 		{{item id="high" nombre="Alto 2"}}
 	{{/config}}
+	{{#config id="pais"}}
+		{{item id="AF" nombre="Afganistán"}}
+		{{item id="AL" nombre="Albania"}}
+		{{item id="DE" nombre="Alemania"}}
+		{{item id="AD" nombre="Andorra"}}
+		{{item id="AO" nombre="Angola"}}
+		{{item id="AI" nombre="Anguila"}}
+		{{item id="AQ" nombre="Antártida"}}
+		{{item id="AG" nombre="Antigua y Barbuda"}}
+		{{item id="SA" nombre="Arabia Saudí"}}
+		{{item id="DZ" nombre="Argelia"}}
+		{{item id="AR" nombre="Argentina"}}
+		{{item id="AM" nombre="Armenia"}}
+		{{item id="AW" nombre="Aruba"}}
+		{{item id="AU" nombre="Australia"}}
+		{{item id="AT" nombre="Austria"}}
+		{{item id="AZ" nombre="Azerbaiyán"}}
+		{{item id="BS" nombre="Bahamas"}}
+		{{item id="BD" nombre="Bangladés"}}
+		{{item id="BB" nombre="Barbados"}}
+		{{item id="BH" nombre="Baréin"}}
+		{{item id="BE" nombre="Bélgica"}}
+		{{item id="BZ" nombre="Belice"}}
+		{{item id="BJ" nombre="Benín"}}
+		{{item id="BM" nombre="Bermudas"}}
+		{{item id="BY" nombre="Bielorrusia"}}
+		{{item id="BO" nombre="Bolivia"}}
+		{{item id="BA" nombre="Bosnia y Herzegovina"}}
+		{{item id="BW" nombre="Botsuana"}}
+		{{item id="BR" nombre="Brasil"}}
+		{{item id="BN" nombre="Brunéi"}}
+		{{item id="BG" nombre="Bulgaria"}}
+		{{item id="BF" nombre="Burkina Faso"}}
+		{{item id="BI" nombre="Burundi"}}
+		{{item id="BT" nombre="Bután"}}
+		{{item id="CV" nombre="Cabo Verde"}}
+		{{item id="KH" nombre="Camboya"}}
+		{{item id="CM" nombre="Camerún"}}
+		{{item id="CA" nombre="Canadá"}}
+		{{item id="IC" nombre="Canarias"}}
+		{{item id="BQ" nombre="Caribe neerlandés"}}
+		{{item id="QA" nombre="Catar"}}
+		{{item id="EA" nombre="Ceuta y Melilla"}}
+		{{item id="TD" nombre="Chad"}}
+		{{item id="CZ" nombre="Chequia"}}
+		{{item id="CL" nombre="Chile"}}
+		{{item id="CN" nombre="China"}}
+		{{item id="CY" nombre="Chipre"}}
+		{{item id="VA" nombre="Ciudad del Vaticano"}}
+		{{item id="CO" nombre="Colombia"}}
+		{{item id="KM" nombre="Comoras"}}
+		{{item id="KP" nombre="Corea del Norte"}}
+		{{item id="KR" nombre="Corea del Sur"}}
+		{{item id="CR" nombre="Costa Rica"}}
+		{{item id="CI" nombre="Côte d’Ivoire"}}
+		{{item id="HR" nombre="Croacia"}}
+		{{item id="CU" nombre="Cuba"}}
+		{{item id="CW" nombre="Curazao"}}
+		{{item id="DG" nombre="Diego García"}}
+		{{item id="DK" nombre="Dinamarca"}}
+		{{item id="DM" nombre="Dominica"}}
+		{{item id="EC" nombre="Ecuador"}}
+		{{item id="EG" nombre="Egipto"}}
+		{{item id="SV" nombre="El Salvador"}}
+		{{item id="AE" nombre="Emiratos Árabes Unidos"}}
+		{{item id="ER" nombre="Eritrea"}}
+		{{item id="SK" nombre="Eslovaquia"}}
+		{{item id="SI" nombre="Eslovenia"}}
+		{{item id="ES" nombre="España"}}
+		{{item id="US" nombre="Estados Unidos"}}
+		{{item id="EE" nombre="Estonia"}}
+		{{item id="ET" nombre="Etiopía"}}
+		{{item id="EZ" nombre="Eurozone"}}
+		{{item id="PH" nombre="Filipinas"}}
+		{{item id="FI" nombre="Finlandia"}}
+		{{item id="FJ" nombre="Fiyi"}}
+		{{item id="FR" nombre="Francia"}}
+		{{item id="GA" nombre="Gabón"}}
+		{{item id="GM" nombre="Gambia"}}
+		{{item id="GE" nombre="Georgia"}}
+		{{item id="GH" nombre="Ghana"}}
+		{{item id="GI" nombre="Gibraltar"}}
+		{{item id="GD" nombre="Granada"}}
+		{{item id="GR" nombre="Grecia"}}
+		{{item id="GL" nombre="Groenlandia"}}
+		{{item id="GP" nombre="Guadalupe"}}
+		{{item id="GU" nombre="Guam"}}
+		{{item id="GT" nombre="Guatemala"}}
+		{{item id="GF" nombre="Guayana Francesa"}}
+		{{item id="GG" nombre="Guernesey"}}
+		{{item id="GN" nombre="Guinea"}}
+		{{item id="GQ" nombre="Guinea Ecuatorial"}}
+		{{item id="GW" nombre="Guinea-Bisáu"}}
+		{{item id="GY" nombre="Guyana"}}
+		{{item id="HT" nombre="Haití"}}
+		{{item id="HN" nombre="Honduras"}}
+		{{item id="HU" nombre="Hungría"}}
+		{{item id="IN" nombre="India"}}
+		{{item id="ID" nombre="Indonesia"}}
+		{{item id="IQ" nombre="Irak"}}
+		{{item id="IR" nombre="Irán"}}
+		{{item id="IE" nombre="Irlanda"}}
+		{{item id="AC" nombre="Isla de la Ascensión"}}
+		{{item id="IM" nombre="Isla de Man"}}
+		{{item id="CX" nombre="Isla de Navidad"}}
+		{{item id="NF" nombre="Isla Norfolk"}}
+		{{item id="IS" nombre="Islandia"}}
+		{{item id="AX" nombre="Islas Åland"}}
+		{{item id="KY" nombre="Islas Caimán"}}
+		{{item id="CC" nombre="Islas Cocos"}}
+		{{item id="CK" nombre="Islas Cook"}}
+		{{item id="FO" nombre="Islas Feroe"}}
+		{{item id="GS" nombre="Islas Georgia del Sur y Sandwich del Sur"}}
+		{{item id="FK" nombre="Islas Malvinas"}}
+		{{item id="MP" nombre="Islas Marianas del Norte"}}
+		{{item id="MH" nombre="Islas Marshall"}}
+		{{item id="PN" nombre="Islas Pitcairn"}}
+		{{item id="SB" nombre="Islas Salomón"}}
+		{{item id="TC" nombre="Islas Turcas y Caicos"}}
+		{{item id="UM" nombre="Islas Ultramarinas Menores de Estados Unidos"}}
+		{{item id="VG" nombre="Islas Vírgenes Británicas"}}
+		{{item id="VI" nombre="Islas Vírgenes de EE. UU."}}
+		{{item id="IL" nombre="Israel"}}
+		{{item id="IT" nombre="Italia"}}
+		{{item id="JM" nombre="Jamaica"}}
+		{{item id="JP" nombre="Japón"}}
+		{{item id="JE" nombre="Jersey"}}
+		{{item id="JO" nombre="Jordania"}}
+		{{item id="KZ" nombre="Kazajistán"}}
+		{{item id="KE" nombre="Kenia"}}
+		{{item id="KG" nombre="Kirguistán"}}
+		{{item id="KI" nombre="Kiribati"}}
+		{{item id="XK" nombre="Kosovo"}}
+		{{item id="KW" nombre="Kuwait"}}
+		{{item id="LA" nombre="Laos"}}
+		{{item id="LS" nombre="Lesoto"}}
+		{{item id="LV" nombre="Letonia"}}
+		{{item id="LB" nombre="Líbano"}}
+		{{item id="LR" nombre="Liberia"}}
+		{{item id="LY" nombre="Libia"}}
+		{{item id="LI" nombre="Liechtenstein"}}
+		{{item id="LT" nombre="Lituania"}}
+		{{item id="LU" nombre="Luxemburgo"}}
+		{{item id="MK" nombre="Macedonia"}}
+		{{item id="MG" nombre="Madagascar"}}
+		{{item id="MY" nombre="Malasia"}}
+		{{item id="MW" nombre="Malaui"}}
+		{{item id="MV" nombre="Maldivas"}}
+		{{item id="ML" nombre="Mali"}}
+		{{item id="MT" nombre="Malta"}}
+		{{item id="MA" nombre="Marruecos"}}
+		{{item id="MQ" nombre="Martinica"}}
+		{{item id="MU" nombre="Mauricio"}}
+		{{item id="MR" nombre="Mauritania"}}
+		{{item id="YT" nombre="Mayotte"}}
+		{{item id="MX" nombre="México"}}
+		{{item id="FM" nombre="Micronesia"}}
+		{{item id="MD" nombre="Moldavia"}}
+		{{item id="MC" nombre="Mónaco"}}
+		{{item id="MN" nombre="Mongolia"}}
+		{{item id="ME" nombre="Montenegro"}}
+		{{item id="MS" nombre="Montserrat"}}
+		{{item id="MZ" nombre="Mozambique"}}
+		{{item id="MM" nombre="Myanmar (Birmania)"}}
+		{{item id="NA" nombre="Namibia"}}
+		{{item id="NR" nombre="Nauru"}}
+		{{item id="NP" nombre="Nepal"}}
+		{{item id="NI" nombre="Nicaragua"}}
+		{{item id="NE" nombre="Níger"}}
+		{{item id="NG" nombre="Nigeria"}}
+		{{item id="NU" nombre="Niue"}}
+		{{item id="NO" nombre="Noruega"}}
+		{{item id="NC" nombre="Nueva Caledonia"}}
+		{{item id="NZ" nombre="Nueva Zelanda"}}
+		{{item id="OM" nombre="Omán"}}
+		{{item id="NL" nombre="Países Bajos"}}
+		{{item id="PK" nombre="Pakistán"}}
+		{{item id="PW" nombre="Palaos"}}
+		{{item id="PA" nombre="Panamá"}}
+		{{item id="PG" nombre="Papúa Nueva Guinea"}}
+		{{item id="PY" nombre="Paraguay"}}
+		{{item id="PE" nombre="Perú"}}
+		{{item id="PF" nombre="Polinesia Francesa"}}
+		{{item id="PL" nombre="Polonia"}}
+		{{item id="PT" nombre="Portugal"}}
+		{{item id="PR" nombre="Puerto Rico"}}
+		{{item id="HK" nombre="RAE de Hong Kong (China)"}}
+		{{item id="MO" nombre="RAE de Macao (China)"}}
+		{{item id="GB" nombre="Reino Unido"}}
+		{{item id="CF" nombre="República Centroafricana"}}
+		{{item id="CG" nombre="República del Congo"}}
+		{{item id="CD" nombre="República Democrática del Congo"}}
+		{{item id="DO" nombre="República Dominicana"}}
+		{{item id="RE" nombre="Reunión"}}
+		{{item id="RW" nombre="Ruanda"}}
+		{{item id="RO" nombre="Rumanía"}}
+		{{item id="RU" nombre="Rusia"}}
+		{{item id="EH" nombre="Sáhara Occidental"}}
+		{{item id="WS" nombre="Samoa"}}
+		{{item id="AS" nombre="Samoa Americana"}}
+		{{item id="BL" nombre="San Bartolomé"}}
+		{{item id="KN" nombre="San Cristóbal y Nieves"}}
+		{{item id="SM" nombre="San Marino"}}
+		{{item id="MF" nombre="San Martín"}}
+		{{item id="PM" nombre="San Pedro y Miquelón"}}
+		{{item id="VC" nombre="San Vicente y las Granadinas"}}
+		{{item id="SH" nombre="Santa Elena"}}
+		{{item id="LC" nombre="Santa Lucía"}}
+		{{item id="ST" nombre="Santo Tomé y Príncipe"}}
+		{{item id="SN" nombre="Senegal"}}
+		{{item id="RS" nombre="Serbia"}}
+		{{item id="SC" nombre="Seychelles"}}
+		{{item id="SL" nombre="Sierra Leona"}}
+		{{item id="SG" nombre="Singapur"}}
+		{{item id="SX" nombre="Sint Maarten"}}
+		{{item id="SY" nombre="Siria"}}
+		{{item id="SO" nombre="Somalia"}}
+		{{item id="LK" nombre="Sri Lanka"}}
+		{{item id="SZ" nombre="Suazilandia"}}
+		{{item id="ZA" nombre="Sudáfrica"}}
+		{{item id="SD" nombre="Sudán"}}
+		{{item id="SS" nombre="Sudán del Sur"}}
+		{{item id="SE" nombre="Suecia"}}
+		{{item id="CH" nombre="Suiza"}}
+		{{item id="SR" nombre="Surinam"}}
+		{{item id="SJ" nombre="Svalbard y Jan Mayen"}}
+		{{item id="TH" nombre="Tailandia"}}
+		{{item id="TW" nombre="Taiwán"}}
+		{{item id="TZ" nombre="Tanzania"}}
+		{{item id="TJ" nombre="Tayikistán"}}
+		{{item id="IO" nombre="Territorio Británico del Océano Índico"}}
+		{{item id="TF" nombre="Territorios Australes Franceses"}}
+		{{item id="PS" nombre="Territorios Palestinos"}}
+		{{item id="TL" nombre="Timor-Leste"}}
+		{{item id="TG" nombre="Togo"}}
+		{{item id="TK" nombre="Tokelau"}}
+		{{item id="TO" nombre="Tonga"}}
+		{{item id="TT" nombre="Trinidad y Tobago"}}
+		{{item id="TA" nombre="Tristán de Acuña"}}
+		{{item id="TN" nombre="Túnez"}}
+		{{item id="TM" nombre="Turkmenistán"}}
+		{{item id="TR" nombre="Turquía"}}
+		{{item id="TV" nombre="Tuvalu"}}
+		{{item id="UA" nombre="Ucrania"}}
+		{{item id="UG" nombre="Uganda"}}
+		{{item id="UN" nombre="United Nations"}}
+		{{item id="UY" nombre="Uruguay"}}
+		{{item id="UZ" nombre="Uzbekistán"}}
+		{{item id="VU" nombre="Vanuatu"}}
+		{{item id="VE" nombre="Venezuela"}}
+		{{item id="VN" nombre="Vietnam"}}
+		{{item id="WF" nombre="Wallis y Futuna"}}
+		{{item id="YE" nombre="Yemen"}}
+		{{item id="DJ" nombre="Yibuti"}}
+		{{item id="ZM" nombre="Zambia"}}
+		{{item id="ZW" nombre="Zimbabue"}}
+	{{/config}}
 	{{#config id="peliculaFormato"}}
 		{{item id="2d" nombre="2D"}}
 		{{item id="3d" nombre="3D"}}
@@ -471,7 +730,7 @@
 	{{/config}}
 	{{#config id="tipoArticulo"}}
 		{{item id="inventariable" nombre="Inventariable"}}
-		{{item id="servicio" nombre="Servicio"}}
+		{{item id="concepto" nombre="Concepto"}}
 	{{/config}}
 	{{#config id="tipoCertificado"}}
 		{{item id="cedulaProfesional" nombre="Cedula Profesional"}}
@@ -513,8 +772,8 @@
 		{{item id="volume" nombre="Volumen"}}
 	{{/config}}
 	{{#config id="tipoProveedor"}}
-		{{item id="gastos" nombre="Gastos"}}
-		{{item id="compras" nombre="Compras"}}
+		{{item id="importacion" nombre="Importación"}}
+		{{item id="local" nombre="Local"}}
 	{{/config}}
 	{{#config id="tipoRecurso"}}
 		{{item id="espacio" nombre="Espacio"}}
@@ -631,6 +890,15 @@
 		{{item id="37" nombre="REDONDEO"}}
 		{{item id="38" nombre="RENTA DE UNIDAD LOGISTICA"}}
 		{{item id="39" nombre="USO PORTAL"}}
+		{{item id="40" nombre="FILLRATE"}}
+		{{item id="41" nombre="DEVOLUCIONES LIVERPOOL MAIDENFORM"}}
+		{{item id="42" nombre="DEVOLUCIONES LIVERPOOL ICON"}}
+		{{item id="43" nombre="BONIFICACIONES"}}
+	{{/config}}
+	{{#config id="tipoAcreedor"}}
+		{{item id="gastos" nombre="Gastos"}}
+		{{item id="empleado" nombre="Empleado"}}
+		{{item id="logistica" nombre="Logística"}}
 	{{/config}}
 	{{#function id="date" paramType="text" returnType="json"}}
 		{{define type="param" id="date"}}
@@ -640,10 +908,11 @@
 	{{#function id="board" paramType="text" returnType="json"}}
 		{{define type="param" id="board"}}
 		{{when board="clientes" push="{\"board\":\"clientes\",\"display\":\"Clientes\",\"order\":1,\"service\":\"clientes\",\"serviceName\":\"Clientes\",\"docPosition\":0.75,\"type\":\"persona\",\"folder\":\"persona\",\"view\":\"lista\",\"params\":\"tipo=cliente\",\"template\":\"verPersona\",\"showActions\":\"pedido, cancelacionPedido, factura, bonificacionVenta, cobro, cargoCxc, neteoCxc\"}"}}
-		{{when board="proveedores" push="{\"board\":\"proveedores\",\"display\":\"Proveedores\",\"order\":2,\"service\":\"proveedores\",\"serviceName\":\"Proveedores\",\"docPosition\":0.75,\"type\":\"persona\",\"folder\":\"persona\",\"view\":\"lista\",\"params\":\"tipo=proveedor\",\"template\":\"verPersona\",\"showActions\":\"ordenCompra, cancelacionOrdenCompra, entradaCompra, devolucionCompra, gasto, devolucionGasto, pago, neteoCxp\"}"}}
-		{{when board="tesoreria" push="{\"board\":\"tesoreria\",\"display\":\"Tesoreria\",\"order\":3,\"service\":\"tesoreria\",\"serviceName\":\"Tesoreria\",\"beginGroup\":true,\"docPosition\":0.75,\"type\":\"persona\",\"folder\":\"persona\",\"view\":\"lista\",\"params\":\"tipo=tesoreria\",\"template\":\"verPersona\",\"showActions\":\"dispersion\"}"}}
-		{{when board="ubicaciones" push="{\"board\":\"ubicaciones\",\"display\":\"Ubicaciones\",\"order\":4,\"service\":\"ubicaciones\",\"serviceName\":\"Ubicaciones\",\"docPosition\":0.75,\"type\":\"persona\",\"folder\":\"persona\",\"view\":\"lista\",\"params\":\"tipo=ubicacion\",\"template\":\"verPersona\",\"showActions\":\"reciboUbicacion, entradaDiversa, salidaMerma, salidaAjuste, traspaso\"}"}}
-		{{when board="socios" push="{\"board\":\"socios\",\"display\":\"Socios\",\"order\":6,\"service\":\"socios\",\"serviceName\":\"Socios\",\"beginGroup\":true,\"docPosition\":0.75,\"type\":\"persona\",\"folder\":\"persona\",\"view\":\"lista\",\"params\":\"tipo=socio\",\"template\":\"verPersona\",\"showActions\":\"aportacionCapital, retiroCapital\"}"}}
+		{{when board="proveedores" push="{\"board\":\"proveedores\",\"display\":\"Proveedores\",\"order\":2,\"service\":\"proveedores\",\"serviceName\":\"Proveedores\",\"docPosition\":0.75,\"type\":\"persona\",\"folder\":\"persona\",\"view\":\"lista\",\"params\":\"tipo=proveedor\",\"template\":\"verPersona\",\"showActions\":\"ordenCompra, cancelacionOrdenCompra, entradaCompra, devolucionCompra, pago, neteoCxp\"}"}}
+		{{when board="acreedores" push="{\"board\":\"acreedores\",\"display\":\"Acreedores\",\"order\":3,\"service\":\"acreedores\",\"serviceName\":\"Acreedores\",\"docPosition\":0.75,\"type\":\"persona\",\"folder\":\"persona\",\"view\":\"lista\",\"params\":\"tipo=acreedor\",\"template\":\"verPersona\",\"showActions\":\"gasto, devolucionGasto, pago, neteoCxp\"}"}}
+		{{when board="tesoreria" push="{\"board\":\"tesoreria\",\"display\":\"Tesoreria\",\"order\":4,\"service\":\"tesoreria\",\"serviceName\":\"Tesoreria\",\"beginGroup\":true,\"docPosition\":0.75,\"type\":\"persona\",\"folder\":\"persona\",\"view\":\"lista\",\"params\":\"tipo=tesoreria\",\"template\":\"verPersona\",\"showActions\":\"dispersion\"}"}}
+		{{when board="ubicaciones" push="{\"board\":\"ubicaciones\",\"display\":\"Ubicaciones\",\"order\":5,\"service\":\"ubicaciones\",\"serviceName\":\"Ubicaciones\",\"docPosition\":0.75,\"type\":\"persona\",\"folder\":\"persona\",\"view\":\"lista\",\"params\":\"tipo=ubicacion\",\"template\":\"verPersona\",\"showActions\":\"reciboUbicacion, entradaDiversa, salidaMerma, salidaAjuste, traspaso\"}"}}
+		{{when board="socios" push="{\"board\":\"socios\",\"display\":\"Socios\",\"order\":7,\"service\":\"socios\",\"serviceName\":\"Socios\",\"beginGroup\":true,\"docPosition\":0.75,\"type\":\"persona\",\"folder\":\"persona\",\"view\":\"lista\",\"params\":\"tipo=socio\",\"template\":\"verPersona\",\"showActions\":\"aportacionCapital, retiroCapital\"}"}}
 	{{/function}}
 	{{#function id="boardRole" paramType="text" returnType="json"}}
 		{{define type="param" id="board"}}
@@ -742,7 +1011,7 @@
 		{{when document="notaDevolucionGasto" push="{\"document\":\"notaDevolucionGasto\",\"order\":4,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxp\",\"amount\":\"=retencionIva\",\"reference\":\"=calc.concat(_created.name, _created.folio)\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"credit\":\"retencionIva\"}"}}
 		{{when document="notaDevolucionGasto" push="{\"document\":\"notaDevolucionGasto\",\"order\":5,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxp\",\"amount\":\"=retencionIsr\",\"reference\":\"=calc.concat(_created.name, _created.folio)\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"credit\":\"retencionIsr\"}"}}
 		{{when document="notaCancelacionPedido" push="{\"document\":\"notaCancelacionPedido\",\"order\":1,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"inv\",\"code\":\"=codigo\",\"description\":\"=descripcion\",\"quantity\":\"=cantidad\",\"rate\":\"=tasaIva\",\"price\":\"=valorUnitario\",\"price2\":\"=precioPublico\",\"reference\":\"=referencia\",\"reference2\":\"=referencia2\",\"reference3\":\"=aliasArticulo\",\"getCost\":true,\"from\":\"=origen\",\"fromName\":\"=_origen\",\"to\":\"=destino\",\"toName\":\"=_destino\",\"debit\":\"inventario\",\"credit\":\"inventario\"}"}}
-		{{when document="notaDevolucionVenta" push="{\"document\":\"notaDevolucionVenta\",\"order\":1,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"include\":\"oreso\",\"aux\":\"inv\",\"code\":\"=codigo\",\"description\":\"=descripcion\",\"quantity\":\"=cantidad\",\"amount\":\"=costoUnitario*cantidad\",\"lot\":\"=lote\",\"lotReference\":\"=(lote&&calc.substr(lote,lote.indexOf('-')+1,6)||'')+calc.substr(codigoUpc,-6)\",\"expiration\":\"=vencimiento\",\"to\":\"=destino\",\"toName\":\"=_destino\",\"debit\":\"inventario\",\"credit\":\"costoVentas\"}"}}
+		{{when document="notaDevolucionVenta" push="{\"document\":\"notaDevolucionVenta\",\"order\":1,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"include\":\"oreso\",\"aux\":\"inv\",\"code\":\"=codigo\",\"description\":\"=descripcion\",\"quantity\":\"=cantidad\",\"amount\":\"=costoUnitario*cantidad\",\"lot\":\"=lote\",\"lotReference\":\"=loteReferencia\",\"expiration\":\"=vencimiento\",\"to\":\"=destino\",\"toName\":\"=_destino\",\"debit\":\"inventario\",\"credit\":\"costoVentas\"}"}}
 		{{when document="notaDevolucionVenta" push="{\"document\":\"notaDevolucionVenta\",\"order\":2,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxc\",\"amount\":\"=importe\",\"reference\":\"=calc.concat(_created.name, _created.folio)\",\"reason\":\"=motivo\",\"reasonName\":\"=_motivo\",\"expiration\":\"=base.vencimiento\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"ventas\",\"credit\":\"clientes\"}"}}
 		{{when document="notaDevolucionVenta" push="{\"document\":\"notaDevolucionVenta\",\"order\":3,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxc\",\"amount\":\"=iva\",\"rate\":\"=tasaIva\",\"reference\":\"=calc.concat(_created.name, _created.folio)\",\"reason\":\"=motivo\",\"reasonName\":\"=_motivo\",\"expiration\":\"=base.vencimiento\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"debit\":\"ivaPorPagar\",\"credit\":\"clientes\"}"}}
 		{{when document="notaDispersion" push="{\"document\":\"notaDispersion\",\"order\":1,\"path\":\"aplicacion\",\"condition1\":\"=importe\",\"aux\":\"tesoreria\",\"amount\":\"=importe\",\"from\":\"=persona.id\",\"fromName\":\"=persona.nombreCompleto\",\"to\":\"=destino\",\"toName\":\"=_destino\",\"debit\":\"bancos\",\"credit\":\"bancos\"}"}}
@@ -752,8 +1021,8 @@
 		{{when document="notaEntradaCompra" push="{\"document\":\"notaEntradaCompra\",\"order\":5,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxp\",\"amount\":\"=iva\",\"rate\":\"=tasaIva\",\"reference\":\"=calc.concat(_created.name, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"debit\":\"ivaAFavor\",\"credit\":\"proveedores\"}"}}
 		{{when document="notaEntradaDiversa" push="{\"document\":\"notaEntradaDiversa\",\"order\":1,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"include\":\"oreso\",\"aux\":\"inv\",\"code\":\"=codigo\",\"description\":\"=descripcion\",\"quantity\":\"=cantidad\",\"amount\":\"=importe\",\"lot\":\"=lote\",\"lotReference\":\"=(lote&&calc.substr(lote,lote.indexOf('-')+1,6)||'')+calc.substr(codigoUpc,-6)\",\"expiration\":\"=vencimiento\",\"to\":\"=destino\",\"toName\":\"=_destino\",\"debit\":\"inventario\",\"credit\":\"ajustes\"}"}}
 		{{when document="notaFactura" push="{\"document\":\"notaFactura\",\"order\":1,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"inv\",\"code\":\"=codigo\",\"description\":\"=descripcion\",\"quantity\":\"=cantidad\",\"rate\":\"=tasaIva\",\"price\":\"=valorUnitario\",\"price2\":\"=precioPublico\",\"reference\":\"=referencia\",\"reference2\":\"=referencia2\",\"reference3\":\"=aliasArticulo\",\"getCost\":true,\"from\":\"=origen\",\"fromName\":\"=_origen\",\"debit\":\"costoVentas\",\"credit\":\"inventario\"}"}}
-		{{when document="notaFactura" push="{\"document\":\"notaFactura\",\"order\":2,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxc\",\"amount\":\"=importe\",\"reference\":\"=calc.concat(_created.name, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"debit\":\"clientes\",\"credit\":\"ventas\"}"}}
-		{{when document="notaFactura" push="{\"document\":\"notaFactura\",\"order\":3,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxc\",\"amount\":\"=iva\",\"rate\":\"=tasaIva\",\"reference\":\"=calc.concat(_created.name, _created.folio)\",\"expiration\":\"=base.vencimiento\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"debit\":\"clientes\",\"credit\":\"ivaPorPagar\"}"}}
+		{{when document="notaFactura" push="{\"document\":\"notaFactura\",\"order\":2,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxc\",\"amount\":\"=importe\",\"reference\":\"=calc.concat(_created.name, _created.folio, '-', base.referencia)\",\"expiration\":\"=base.vencimiento\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"debit\":\"clientes\",\"credit\":\"ventas\"}"}}
+		{{when document="notaFactura" push="{\"document\":\"notaFactura\",\"order\":3,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxc\",\"amount\":\"=iva\",\"rate\":\"=tasaIva\",\"reference\":\"=calc.concat(_created.name, _created.folio, '-', base.referencia)\",\"expiration\":\"=base.vencimiento\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"debit\":\"clientes\",\"credit\":\"ivaPorPagar\"}"}}
 		{{when document="notaGasto" push="{\"document\":\"notaGasto\",\"order\":1,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"gastos\",\"code\":\"=codigo\",\"description\":\"=descripcion\",\"quantity\":\"=cantidad\",\"amount\":\"=valorUnitario*cantidad\",\"reference2\":\"=referencia2\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"debit\":\"gastos\"}"}}
 		{{when document="notaGasto" push="{\"document\":\"notaGasto\",\"order\":2,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxp\",\"amount\":\"=importe\",\"reference\":\"=calc.concat(_created.name, _created.folio)\",\"reference2\":\"=referencia2\",\"expiration\":\"=base.vencimiento\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"credit\":\"proveedores\"}"}}
 		{{when document="notaGasto" push="{\"document\":\"notaGasto\",\"order\":3,\"path\":\"articulos\",\"condition1\":\"=cantidad\",\"aux\":\"cxp\",\"amount\":\"=iva\",\"rate\":\"=tasaIva\",\"reference\":\"=calc.concat(_created.name, _created.folio)\",\"reference2\":\"=referencia2\",\"expiration\":\"=base.vencimiento\",\"to\":\"=persona.id\",\"toName\":\"=persona.nombreCompleto\",\"debit\":\"ivaAFavor\",\"credit\":\"proveedores\"}"}}

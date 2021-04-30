@@ -17,7 +17,7 @@
 	{{param startOnOpen="base"}}
 	{{param baseName="Datos Generales"}}
 	{{param displayExpr="_name"}}
-	{{param name="=fn('dynamicName', 'Pago', @_created)"}}
+	{{param name="=fn('dynamicServiceName', 'Pago', @_created)"}}
 	{{param typeName="Pago"}}
 	{{param group="General"}}
 	{{param fullWidth="true"}}
@@ -97,7 +97,7 @@
 			{{#editor type="text-area" height="300" width="100%"}}
 			{{/editor}}
 		{{/field}}
-		{{field id="nombre" label="Nombre" hide="true" type="expr" value="=fn('dynamicName', 'Pago', @_created)"}}
+		{{field id="nombre" label="Nombre" hide="true" type="expr" value="=fn('dynamicServiceName', 'Pago', @_created)"}}
 	{{/section}}
 	{{#section id="aplicacion" type="array"}}
 		{{field id="lote" label="Lote" type="text" column="A"}}
@@ -159,9 +159,9 @@
 	{{section id="resumen" temp="true"}}
 	{{#report id="preliminar-encabezado"}}
 		{{#stack}}
-			{{#columns margin="20" widths="85,150,*"}}
+			{{#columns margin="20" widths="100,150,*"}}
 				{{#column}}
-					{{row image="logo" alignment="left" imageWidth="75" margin="0,-15,0,0"}}
+					{{row image="logo" alignment="left" imageWidth="90" margin="0,-15,0,0"}}
 				{{/column}}
 				{{#column margin="0,-10,0,0"}}
 					{{row text="Grupo Oreso" alignment="left" fontSize="6" color="grey"}}
@@ -170,13 +170,12 @@
 					{{row text="Teléfono +52 (55) 5580 6118" alignment="left" fontSize="6" color="grey"}}
 				{{/column}}
 				{{#column}}
-					{{#row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
-					{{/row}}
+					{{row text="=_name" alignment="right" fontSize="10" bold="true" color="#2b7b47"}}
 				{{/column}}
 			{{/columns}}
 		{{/stack}}
 	{{/report}}
-	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true"}}
+	{{#report id="preliminar" fontSize="8" header="preliminar-encabezado" showStandarFooter="true" barcode="=persona.clave"}}
 		{{#stack}}
 			{{image id="logo" url="https://s3.amazonaws.com/mx-imagenes/logos/grupo-oreso.png"}}
 		{{/stack}}
@@ -189,7 +188,7 @@
 			{{/record}}
 		{{/stack}}
 		{{#stack}}
-			{{#row text="Aplicación" fontSize="10" bold="true" margin="-10,0,0,0"}}
+			{{#row text="Aplicación" fontSize="10" bold="true" margin="-10,0,0,0" condition="=!_.isEmpty(aplicacion)"}}
 			{{/row}}
 			{{#table title="Aplicación" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="aplicacion" headerStyle="field" margin="-10,0,0,10" removeEmptyCols="true"}}
 				{{column field="lote"}}
@@ -209,7 +208,7 @@
 			{{/table}}
 		{{/stack}}
 		{{#stack}}
-			{{#row text="Adjuntos" fontSize="10" bold="true" margin="-10,0,0,0"}}
+			{{#row text="Adjuntos" fontSize="10" bold="true" margin="-10,0,0,0" condition="=!_.isEmpty(adjuntos)"}}
 			{{/row}}
 			{{#table title="Adjuntos" titleStyle="title" layout="lightHorizontalLines" fontSize="7" section="adjuntos" headerStyle="field" margin="-10,0,0,10" removeEmptyCols="true"}}
 				{{column field="nombre"}}
@@ -220,21 +219,41 @@
 			{{/table}}
 		{{/stack}}
 		{{#stack}}
-			{{#record title="Firmas" titleStyle="title" layout="lightHorizontalLines" fontSize="8" section="_stamp" headerStyle="field" margin="-10,0,0,10" widths="100,450"}}
-				{{row expr="=_created._user" label="Elabora"}}
-				{{row expr="=_created._turn" label="Turno Elabora"}}
-				{{row expr="=_created._identification" label="Especialidad Elabora"}}
-				{{row expr="=''" label="Firma Elabora"}}
-				{{row condition="=!base.esEstudiante" expr="=_created._responsable" label="Responsable"}}
-				{{row condition="=!base.esEstudiante" expr="=_created._responsableId" label="Especialidad Responsable"}}
-				{{row condition="=!base.esEstudiante" expr="=''" label="Firma Responsable"}}
-				{{row condition="=base.esEstudiante" expr="=base._responsableAcademico" label="Médico Responsable"}}
-				{{row condition="=base.esEstudiante" expr="=base._identificacionResponsableAcademico" label="Especialidad Médico Responsable"}}
-				{{row condition="=base.esEstudiante" expr="=''" label="Firma Médico Responsable"}}
-				{{row condition="=calc.in(_created.service, ['inventarios','farmacia','almacen','ceye'])" expr="=''" label="Transporte / Recibe"}}
-				{{row field="text" label="Cadena Original"}}
-				{{row field="signature" label="Sello Digital"}}
-			{{/record}}
+			{{#columns widths="425,25,100"}}
+				{{#column}}
+					{{#record title="Firmas" titleStyle="title" layout="lightHorizontalLines" fontSize="8" section="_stamp" headerStyle="field" margin="-10,0,0,10" widths="100,325"}}
+						{{row expr="=_created._user" label="Elabora"}}
+						{{row expr="=_created._turn" label="Turno Elabora"}}
+						{{row expr="=_created._identification" label="Especialidad Elabora"}}
+						{{row expr="=''" label="Firma Elabora"}}
+						{{row condition="=!base.esEstudiante" expr="=_created._responsable" label="Responsable"}}
+						{{row condition="=!base.esEstudiante" expr="=_created._responsableId" label="Especialidad Responsable"}}
+						{{row condition="=!base.esEstudiante" expr="=''" label="Firma Responsable"}}
+						{{row condition="=base.esEstudiante" expr="=base._responsableAcademico" label="Médico Responsable"}}
+						{{row condition="=base.esEstudiante" expr="=base._identificacionResponsableAcademico" label="Especialidad Médico Responsable"}}
+						{{row condition="=base.esEstudiante" expr="=''" label="Firma Médico Responsable"}}
+						{{row condition="=calc.in(_created.service, ['inventarios','farmacia','almacen','ceye'])" expr="=''" label="Transporte / Recibe"}}
+						{{row field="text" label="Cadena Original"}}
+						{{row field="signature" label="Sello Digital"}}
+					{{/record}}
+				{{/column}}
+				{{#column}}
+					{{row}}
+				{{/column}}
+				{{#column}}
+					{{#record title="QR's" titleStyle="title" layout="lightHorizontalLines" fontSize="6" section="_stamp" headerStyle="field" margin="-10,0,0,10" widths="50,50"}}
+						{{row qr="=calc.concatHost('doc', 'persona', persona.id)" label="=fn('_tipoExpediente', persona.tipoExpediente)" qrFit="50" condition="=(persona.id)?true:false"}}
+						{{row}}
+						{{row qr="=calc.concatHost('doc', '_user', _created.user)" label="Elabora" qrFit="50"}}
+						{{row condition="=(_created.responsable&&!base.esEstudiante)?true:false"}}
+						{{row qr="=calc.concatHost('doc', '_user', _created.responsable)" label="Responsable" qrFit="50" condition="=(_created.responsable&&!base.esEstudiante)?true:false"}}
+						{{row condition="=(_created.responsableAcademico&&base.esEstudiante)?true:false"}}
+						{{row qr="=calc.concatHost('doc', '_user', _created.responsableAcademico)" label="Médico Responsable" qrFit="50" condition="=(_created.responsableAcademico&&base.esEstudiante)?true:false"}}
+						{{row condition="=(persona.id)?true:false"}}
+						{{row qr="=calc.concatHost('doc', _type, _id)" label="Nota" qrFit="50"}}
+					{{/record}}
+				{{/column}}
+			{{/columns}}
 		{{/stack}}
 	{{/report}}
 	{{#view id="lista" name="Lista"}}

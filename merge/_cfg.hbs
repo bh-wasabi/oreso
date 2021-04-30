@@ -1,18 +1,48 @@
 {{#define id="_cfg" type="cfg" name="Configuración Interna"}} 
+  {{#function id="_tipoExpediente"}}
+    {{define type="param" id="tipo"}}
+    {{when tipo="paciente" return="Paciente"}}
+    {{when tipo="cliente" return="Cliente"}}
+    {{when tipo="proveedor" return="Proveedor"}}
+    {{when tipo="_user" return="Usuario"}}
+    {{when tipo="ubicacion" return="Ubicación"}}
+    {{when tipo="comite" return="Comité"}}
+    {{when tipo="empleado" return="Empleado"}}
+    {{when tipo="colaborador" return="Colaborador"}}
+    {{when tipo="alumno" return="Alumno"}}
+    {{when tipo="acreedor" return="Acreedor"}}
+    {{when tipo="socioNegocios" return="Socio Negocios"}}
+    {{when tipo="agente" return="Agente"}}
+    {{when tipo="involucrado" return="Involucrado"}}
+    {{when tipo="almacen" return="Almacén"}}
+    {{when tipo="tesoreria" return="Resorería"}}
+    {{when tipo="socio" return="Socio"}}
+    {{when tipo="empresa" return="Empresa"}}
+    {{when tipo="entidad" return="Entidad"}}
+    {{when tipo="individuo" return="Individuo"}}
+    {{when tipo="sucursal" return="Sucursal"}}
+    {{when tipo="demanda" return="Demanda"}}
+    {{default return="=tipo"}}
+  {{/function}}
+  {{#function id="folioServiceName"}}
+    {{define type="param" id="name"}}
+    {{define type="param" id="created"}}
+    {{default return="=@created.service=='ver'?calc.concat(@name, @created.folio):calc.concat(@name, (@created.board==='telemedicina')?@created._board:'', @created._service, @created.folio)"}}
+  {{/function}}
   {{#function id="dynamicName"}}
     {{define type="param" id="name"}}
     {{define type="param" id="created"}}
     {{default return="=calc.concat(@created.name||@name, @created.folio)"}}
   {{/function}}
+  {{#function id="dynamicServiceName"}}
+    {{define type="param" id="name"}}
+    {{define type="param" id="created"}}
+    {{default return="=@created.subType?calc.concat(@created.name, @created.folio):fn('folioServiceName', name, created)"}}
+  {{/function}}
   {{#function id="folioName"}}
     {{define type="param" id="name"}}
     {{define type="param" id="created"}}
-    {{default return="=calc.concat(@name, @created.folio)"}}
-  {{/function}}
-  {{#function id="folioServiceName"}}
-    {{define type="param" id="name"}}
-    {{define type="param" id="created"}}
-    {{default return="=calc.concat(@name, @created._service, @created.folio)"}}
+    {{default return="=calc.concat(@name, (@created.board==='telemedicina')?@created._board:'', @created.folio)"}}
   {{/function}}
   {{#function id="areaSubArea"}}
     {{define type="param" id="area"}}
@@ -58,6 +88,14 @@
   {{#function id="checkListExcel" multi="true"}}
     {{define type="param" id="item"}}
     {{default return="=(item.entrada)?{Tipo:'Salida',FECHA: moment(item.base.fechaEmision).format('YYYY-MM-DD'),'Cliente final':item.persona.nombreCompleto,'# factura':null,'# OC': item.referencia,'Código Tecs':item.loteReferencia,Grupo:item.codigo,'Descripción':item.descripcion,Sku:item.referencia2,'# Sucursal':item.id,'Nombre sucursal':item._cuenta,Unidad:'pzas',Cantidad:item.entrada,Factor:null,'Caja inicial':1,'Caja final':1}:null"}}
+  {{/function}}
+  {{#function id="descargarSalida" multi="true"}}
+    {{define type="param" id="item"}}
+    {{default return="=(item.salida)?calc.concatTab('Salida',calc.format('date', item.base.fechaEmision, 'DD/MM/YYYY'),item.persona.nombreCompleto,'',calc.format('date', item.base.fechaEmision, 'YYMMDD'),item.loteReferencia,item.codigo,item.descripcion,item.referencia2,item.id,item._cuenta,'pzas',item.salida,1,1,'','','',''):null"}}
+  {{/function}}
+  {{#function id="descargarEntrada" multi="true"}}
+    {{define type="param" id="item"}}
+    {{default return="=(item.entrada)?calc.concatTab('Entrada',calc.format('date', item.base.fechaEmision, 'DD/MM/YYYY'),item.persona.nombreCompleto,'',calc.format('date', item.base.fechaEmision, 'YYMMDD'),item.loteReferencia,item.codigo,item.descripcion,item.referencia2,item.id,item._cuenta,'pzas',item.entrada,1,1,'','','',''):null"}}
   {{/function}}
   {{#function id="felLiverpoolTitulos"}}
     {{define type="param" id="item"}}
